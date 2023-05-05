@@ -1,5 +1,16 @@
 import { useState } from 'react'
 
+import { BasicExample }  from './components/form'
+
+export const App = () => {
+   return (
+     <>
+     <BasicExample />
+     </>
+   );
+}
+
+{ /*
 import Login from './components/login'
 
 export const App = () => {
@@ -10,7 +21,6 @@ export const App = () => {
    );
 }
 
-{ /*
 export const App = () => {
    return (
      <>
