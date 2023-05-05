@@ -1,17 +1,23 @@
 import { useState } from 'react'
 
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Login from './components/login'
 
-export default const App = () => {
+export const App = () => {
+   return (
+     <>
+     <Login />
+     </>
+   );
+}
+
+{ /*
+export const App = () => {
    return (
      <>
      <h1>Hello world!</h1>
      </>
    );
 }
-{ /*
 function App() {
   const [count, setCount] = useState(0)
 
@@ -40,7 +46,7 @@ function App() {
     </>
   )
 }
-export default App
 
 */ }
 
+export default App
