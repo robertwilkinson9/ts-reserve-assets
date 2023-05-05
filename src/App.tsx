@@ -4,7 +4,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-const App = () => {
+export default const App = () => {
    return (
      <>
      <h1>Hello world!</h1>
@@ -40,6 +40,7 @@ function App() {
     </>
   )
 }
+export default App
+
 */ }
 
-export default App
