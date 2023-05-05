@@ -4,7 +4,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-function App() {
+const App = () => {
    return (
      <>
      <h1>Hello world!</h1>
