@@ -1,5 +1,23 @@
-import { useState } from 'react'
+import React, { useState } from "react";
 
+import { Header } from './components/header'
+import { Calendar } from './components/calendar'
+//import { Login } from './components/login'
+import { Login } from './components/combined'
+
+export const App = () => {
+   return (
+     <>
+     <Header />
+     <h4> Login </h4>
+     <Login />
+     <h4> Calendar </h4>
+     <Calendar />
+     </>
+   );
+}
+
+{ /* 
 import { BasicExample }  from './components/form'
 
 export const App = () => {
@@ -9,9 +27,11 @@ export const App = () => {
      </>
    );
 }
+*/ }
 
 { /*
 import Login from './components/login'
+import Login from './components/combined'
 
 export const App = () => {
    return (
@@ -20,7 +40,9 @@ export const App = () => {
      </>
    );
 }
+*/ }
 
+{ /*
 export const App = () => {
    return (
      <>

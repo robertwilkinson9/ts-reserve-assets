@@ -26,6 +26,4 @@ export const BasicExample = () => {
   );
 }
 
-{ /*
-export default BasicExample;
-*/ }
+export default BasicExample
