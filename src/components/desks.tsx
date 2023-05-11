@@ -1,8 +1,3 @@
-{ /*
-import React, { useState } from "react";
-*/ }
-
-import React from 'react'
 import Select from 'react-select'
 
 type DeskEmail = {
@@ -14,12 +9,12 @@ const desk2deskemail = (input: string): DeskEmail => {
   return {desk: input, email: ""};
 }
 
-type Select = {
+type Select_type = {
   value: string,
   label: string,
 };
 
-const desk2select = (input: string): Select => {
+const desk2select = (input: string): Select_type => {
   return {value: input, label: input};
 }
 
@@ -36,8 +31,8 @@ function emptydesks(desks: string[]): DeskEmail[] {
 const emptieddesks = emptydesks(desks)
 console.log(emptieddesks);
 
-function desks_select(desks: string[]): Select[] {
-  const select_desks: Select[] = [];
+function desks_select(desks: string[]): Select_type[] {
+  const select_desks: Select_type[] = [];
   desks.forEach(item => select_desks.push(desk2select(item)));
   console.log(select_desks);
   return select_desks;
