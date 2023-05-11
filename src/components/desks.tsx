@@ -1,51 +1,78 @@
 { /*
 import React, { useState } from "react";
-// import "react-datepicker/dist/react-datepicker.css";
 */ }
+
+import React from 'react'
+import Select from 'react-select'
 
 type DeskEmail = {
   desk: string,
   email: string,
 };
 
-const desks: DeskEmail[] = [ {desk: "2f27", email: ""} , {desk: "2f26", email: ""} , {desk: "2f25", email: ""} ];
-
-//const desks: string[] = [ "2f27", "2f26", "2f25"];
-console.log(desks);
-
-// const emptydesks: DeskEmail[] = desks.forEach(item => {desk:item, email: ""}});
-//let emptydesks: DeskEmail[];
-
-//desks.forEach(item => emptydesks.push({desk:item, email: ""}));
-
-
-export const emptydesks = (desks: DeskEmail[]): DeskEmail[] => {
-  desks.foreach(item => {item.email = ""});
+const desk2deskemail = (input: string): DeskEmail => {
+  return {desk: input, email: ""};
 }
-console.log(emptydesks(desks));
 
-
-{ /*
-
-emptydesks: DeskEmail[] =
-[
-  {
-   desk: "2f27",
-   email: ""
-  },
-  {
-   desk: "2f27",
-   email: ""
-  }
-];
-
-export const Desks = () => {
-  const [desks, setDesks] = useState(new Date());
-  return (
-    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-  );
+type Select = {
+  value: string,
+  label: string,
 };
 
-export default Desk
+const desk2select = (input: string): Select => {
+  return {value: input, label: input};
+}
 
+const desks: string[] = [ "2f27", "2f26", "2f25", "2f24"];
+console.log(desks);
+
+function emptydesks(desks: string[]): DeskEmail[] {
+  const edesks: DeskEmail[] = [];
+  desks.forEach(item => edesks.push(desk2deskemail(item)));
+  console.log(edesks);
+  return edesks;
+}
+
+const emptieddesks = emptydesks(desks)
+console.log(emptieddesks);
+
+function desks_select(desks: string[]): Select[] {
+  const select_desks: Select[] = [];
+  desks.forEach(item => select_desks.push(desk2select(item)));
+  console.log(select_desks);
+  return select_desks;
+}
+
+const select_desk_list = desks_select(desks)
+console.log(select_desk_list);
+
+export const Desks = () => {
+    return (
+        <>
+        <h4>Desks</h4>
+{ /*
+        <div className="col-md-4 d-flex align-items-center" style={borderClass}>
+            <label className="mb-0 font-weight-bold" style={labelFont}>Technology</label>
+                <Select
+                    styles={{
+                      control: (baseStyles, state) => ({
+                        ...baseStyles,
+                        borderColor: state.isFocused ? 'grey' : 'red',
+                      }),
+                    options={select_desk_list}
+                />
+                    styles={styles}
+                    defaultValue={select_desk_list.find(x => x.value === "2f27")},
+                    placeholder="None Selected",
 */ }
+        <div className="col-md-4 d-flex align-items-center">
+            <label className="mb-0 font-weight-bold">Desk</label>
+                <Select options={select_desk_list} />
+        </div>
+        </>
+    );
+};
+
+export default Desks;
+
+

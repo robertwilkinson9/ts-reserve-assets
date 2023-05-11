@@ -1,9 +1,12 @@
+{ /*
 import React, { useState } from "react";
+*/ }
 
 import { Header } from './components/header'
-import { Calendar } from './components/calendar'
 //import { Login } from './components/login'
 import { Login } from './components/combined'
+import { Calendar } from './components/calendar'
+import { Desks } from './components/desks'
 
 export const App = () => {
    return (
@@ -13,6 +16,7 @@ export const App = () => {
      <Login />
      <h4> Calendar </h4>
      <Calendar />
+     <Desks />
      </>
    );
 }

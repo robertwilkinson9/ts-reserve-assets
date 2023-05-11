@@ -38,6 +38,9 @@ export const Login = () =>{
         initialState
     );
 
+    console.log("Values from form are ");
+    console.log(values);
+
     // a submit function that will execute upon form submission
     async function loginUserCallback() {
         // send "values" to database
