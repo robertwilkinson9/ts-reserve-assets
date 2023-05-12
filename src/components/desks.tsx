@@ -18,6 +18,12 @@ const desk2select = (input: string): Select_type => {
   return {value: input, label: input};
 }
 
+{ /*
+// gf07 - 43
+// ff08 - 33
+// 2f07 - 27
+*/ }
+
 const desks: string[] = [ "2f27", "2f26", "2f25", "2f24"];
 console.log(desks);
 

@@ -11,8 +11,10 @@ import { AddEmail } from './components/addemail'
 
 export const App = () => {
    const [startDate, setStartDate] = useState<Date|null>(new Date());
-   console.log("startDate starts at ");
-   console.log(startDate.toLocaleDateString());
+   if (startDate) {
+     console.log("startDate starts at ");
+     console.log(startDate.toLocaleDateString());
+   }
 
    return (
      <>
