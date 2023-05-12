@@ -8,6 +8,7 @@ import { Header } from './components/header'
 import { Calendar } from './components/calendar'
 import { Desks } from './components/desks'
 import { AddEmail } from './components/addemail'
+import { ProcessData } from './components/processdata'
 
 export const App = () => {
    const [startDate, setStartDate] = useState<Date|null>(new Date());
@@ -33,6 +34,7 @@ export const App = () => {
 */ }
      <Desks />
      <AddEmail />
+     <ProcessData start={startDate}/>
      </>
    );
 }
