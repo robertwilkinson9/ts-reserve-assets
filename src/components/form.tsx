@@ -4,18 +4,21 @@ import Button from 'react-bootstrap/Button';
 
 import Form from 'react-bootstrap/Form';
 import { Calendar } from './calendar'
+import { Floor } from './floor'
 import { Desks } from './desks'
 import { AddEmail } from './addemail'
 
 export interface InputFormProps {
    start: Date | null;
    datesetter: React.Dispatch<React.SetStateAction<Date | null>>
+   floorsetter: React.Dispatch<React.SetStateAction<number | null>>
 }
 
-export const InputForm = ({start, datesetter}: InputFormProps) => {
+export const InputForm = ({start, datesetter, floorsetter}: InputFormProps) => {
   return (
     <Form>
      <Calendar start={start} setter={datesetter} />
+     <Floor floorsetter={floorsetter}/>
      <Desks />
      <AddEmail />
 { /*

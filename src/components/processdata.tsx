@@ -5,20 +5,27 @@ import { useState } from "react";
 
 export interface ProcessDataProps {
    start: Date | null;
+   floor: number | null;
 }
 
-export const ProcessData = ({ start } : ProcessDataProps) => {
-  let sstr = "null"
+const Floor = ["Ground", "First", "Second"];
+ 
+export const ProcessData = ({ start, floor } : ProcessDataProps) => {
   let sdstr = "No start date available"
   if (start) {
+    let sstr = "null"
     sstr = start.toLocaleDateString();
-//    sstr = start.toString();
     sdstr = `start date is ${sstr}`;
+  }
+  let fstr = "No Floor";
+  if (floor === 0 || floor === 1 || floor === 2) {
+    fstr = Floor[floor] + " floor";
   }
   return (
     <>
     <h4> ProcessData </h4>
     <p>{sdstr}</p>
+    <p>{fstr}</p>
     </>
   );
 };
