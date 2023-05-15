@@ -1,9 +1,24 @@
+{ /*
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+*/ }
 
-export const BasicExample = () => {
+import Form from 'react-bootstrap/Form';
+import { Calendar } from './calendar'
+import { Desks } from './desks'
+import { AddEmail } from './addemail'
+
+export interface InputFormProps {
+   start: Date | null;
+   datesetter: React.Dispatch<React.SetStateAction<Date | null>>
+}
+
+export const InputForm = ({start, datesetter}: InputFormProps) => {
   return (
     <Form>
+     <Calendar start={start} setter={datesetter} />
+     <Desks />
+     <AddEmail />
+{ /*
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control type="email" placeholder="Enter email" />
@@ -22,8 +37,9 @@ export const BasicExample = () => {
       <Button variant="primary" type="submit">
         Submit
       </Button>
+*/ }
     </Form>
   );
 }
 
-export default BasicExample
+export default InputForm;
