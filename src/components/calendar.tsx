@@ -5,6 +5,9 @@ import { useState } from "react";
 
 import DatePicker from "react-datepicker";
 
+import { registerLocale, getDefaultLocale, setDefaultLocale } from  "react-datepicker";
+import enGB from 'date-fns/locale/en-GB';
+
 import "react-datepicker/dist/react-datepicker.css";
 
 // CSS Modules, react-datepicker-cssmodules.css
@@ -17,10 +20,21 @@ export interface CalendarProps {
 
 export const Calendar = (props: CalendarProps) => {
 //  const [startDate, setStartDate] = useState<Date|null>(new Date());
-  return (
+//  console.log("startDate starts at ");
+//  console.log(startDate.toLocaleDateString());
+
+registerLocale('en-GB', enGB)
+
+console.log("BEFORE ... ");
+console.log(getDefaultLocale);
+
+setDefaultLocale('en-GB');
+console.log("FTER ... ");
+console.log(getDefaultLocale);
+ return (
     <>
     <h4> Calendar </h4>
-    <DatePicker selected={props.start} onChange={(date) => props.setter(date)} />
+    <DatePicker locale="en-GB" dateFormat="P" selected={props.start} onChange={(date) => props.setter(date)} />
     </>
   );
 };
