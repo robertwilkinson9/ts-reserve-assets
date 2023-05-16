@@ -50,22 +50,6 @@ console.log(select_desk_list);
 export const Desks = () => {
     return (
         <>
-        <h4>Desks</h4>
-{ /*
-        <div className="col-md-4 d-flex align-items-center" style={borderClass}>
-            <label className="mb-0 font-weight-bold" style={labelFont}>Technology</label>
-                <Select
-                    styles={{
-                      control: (baseStyles, state) => ({
-                        ...baseStyles,
-                        borderColor: state.isFocused ? 'grey' : 'red',
-                      }),
-                    options={select_desk_list}
-                />
-                    styles={styles}
-                    defaultValue={select_desk_list.find(x => x.value === "2f27")},
-                    placeholder="None Selected",
-*/ }
         <div className="col-md-4 d-flex align-items-center">
             <label className="mb-0 font-weight-bold">Desk</label>
                 <Select options={select_desk_list} />

@@ -1,0 +1,11 @@
+#floor_radios input {
+    float: left;
+}
+
+#floor_radios label {
+    float: left;
+}
+
+#floor_radios label + input {
+    clear: both;
+}
