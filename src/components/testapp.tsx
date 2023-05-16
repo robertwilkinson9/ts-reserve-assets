@@ -1,33 +1,62 @@
-import { useState } from "react";
+{ /*
 
-import RadioButtonGroup from "./inputs/RadioButtonGroup";
+I think that this should work as in the demo at 
+https://codesandbox.io/s/custom-radio-button-group-cu5f4l?file=/src/components/inputs/RadioButtonGroup.tsx
+
+However, my buttons do not work - I think it is something to do with 
+
+create-react-app -> vite change??
+
+I changed src/main.tsx to use this instead of App ands it did not work either ... :-(
+
+I will look at another way to sort out my buttons
+
+*/ }
+
+import { useEffect, useState } from "react";
+import styled from "styled-components";
+import RadioButtonGroup from "./inputs/RadioButtonGroup.tsx";
+
+const PageLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+  min-height: 10vh;
+`;
 
 export const Testapp = () => {
   const drinks = [
-     {
-       label: "Coffee",
-       name: "drink-types",
-     },
-     {
-       label: "Tea",
-       name: "drink-types",
-     },
+    {
+      label: "Coffee",
+      name: "button-types"
+    },
+    {
+      label: "Tea",
+      name: "button-types"
+    }
   ];
 
-  const [selectedValue, setSelectedValue] = useState<String>(drinks[0].label); 
-     
-  function drinkSelectionHandler(event: React.ChangeEvent<HTMLInputElement>) {
-     setSelectedValue(event.target.value);
+  const [selectedValue, setSelectedValue] = useState<String>(drinks[0].label);
+
+  function radioGroupHandler(event: React.ChangeEvent<HTMLInputElement>) {
+    setSelectedValue(event.target.value);
   }
-     
-  console.log(`selected value is ${selectedValue}`);
-   return (
+
+  useEffect(() => {
+    console.log(selectedValue);
+  }, [selectedValue]);
+
+  return (
+    <PageLayout>
       <RadioButtonGroup
-         label="Select your drink:"
-         options={drinks}
-         onChange={drinkSelectionHandler}
+        label="Select your drink:"
+        options={drinks}
+        onChange={radioGroupHandler}
       />
-   );
+    </PageLayout>
+  );
 };
-    
+
 export default Testapp;

@@ -1,28 +1,24 @@
 import styled from "styled-components";
+import { InputElementProps } from "./InputInterface";
 import { Label, Radio } from "./InputStyles";
-import { RadioButtonOption } from "./InputInterface";
+// import { DisabledIcon } from "src/styled-components/Icons";
 
 const Wrapper = styled.div`
-   display: flex;
-   gap: 0.5rem;
-   align-items: center;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
 `;
 
-const RadioButton = ({
-   label, 
-   disabled = false, 
-   key = null,
-}: RadioButtonOption) => {
-   return (
-       <Wrapper key={key}>
-          <input 
-             type="radio" 
-             id={id} 
-             disabled={disabled} 
-          />
-          <Label htmlFor={id} disabled={disabled}>{label}</Label>
-       </Wrapper>
-   );
+const RadioButton = ({ label, id, disabled, ...rest }: InputElementProps) => {
+  return (
+    <Wrapper>
+      <Radio id={id} type="radio" disabled={disabled} {...rest} />
+      <Label htmlFor={id} disabled={disabled}>
+        <span>{label}</span>
+        {/* disabled && <DisabledIcon small /> */}
+      </Label>
+    </Wrapper>
+  );
 };
 
 export default RadioButton;
