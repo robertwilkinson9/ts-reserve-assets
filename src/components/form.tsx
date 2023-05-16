@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import { Calendar } from './calendar'
 import { Floor } from './floor'
 import { Desks } from './desks'
+import { Testapp } from './testapp'
 import { AddEmail } from './addemail'
 
 export interface InputFormProps {
@@ -18,6 +19,7 @@ export const InputForm = ({start, datesetter, floorsetter}: InputFormProps) => {
   return (
     <Form>
      <Calendar start={start} setter={datesetter} />
+     <Testapp />
      <Floor floorsetter={floorsetter}/>
      <Desks />
      <AddEmail />
