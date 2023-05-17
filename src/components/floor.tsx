@@ -13,7 +13,7 @@ export const Floor = ({floorsetter}: FloorProps) => {
 
   return (
     <>
-    <div style={{paddingBottom: "100px"}} className="col-md-4 d-flex align-items-center lower_margin" id="floor_radios" >
+    <div style={{paddingBottom: "120px"}} className="col-md-4 d-flex align-items-center lower_margin" id="floor_radios" >
       <label className="mb-0 font-weight-bold">Floor</label>
       <input type="radio" value="0" id="ground" onChange={handleChange} name="floor" />
       <label htmlFor="ground" className="red">Ground</label>
