@@ -18,7 +18,7 @@ export const App = () => {
     console.log(startDate.toLocaleDateString());
   }
 
-  const [floor, setFloor] = useState<number|null>(null);
+  const [floor, setFloor] = useState<number|null>(0);
   console.log(`floor starts at ${floor}`);
 
   registerLocale('en-GB', enGB)
@@ -27,7 +27,7 @@ export const App = () => {
    return (
      <>
      <Header />
-     <InputForm start={startDate} datesetter={setStartDate} floorsetter={setFloor} />
+     <InputForm start={startDate} datesetter={setStartDate} floor={floor} floorsetter={setFloor} />
      <ProcessData start={startDate} floor={floor} />
      </>
    );

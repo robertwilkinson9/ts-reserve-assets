@@ -18,11 +18,6 @@ const desk2select = (input: string): Select_type => {
   return {value: input, label: input};
 }
 
-{ /*
-// gf07 - 43
-// ff08 - 33
-// 2f07 - 27
-*/ }
 
 const desks: string[] = [ "2f27", "2f26", "2f25", "2f24"];
 console.log(desks);
@@ -47,7 +42,49 @@ function desks_select(desks: string[]): Select_type[] {
 const select_desk_list = desks_select(desks)
 console.log(select_desk_list);
 
-export const Desks = () => {
+export interface DesksProps {
+  floor: number | null;
+}
+
+export const Desks = ({ floor } : DesksProps) => {
+   console.log(`Floor number is ${floor}`);
+
+{ /*
+// gf07 - 43
+// ff08 - 33
+// 2f07 - 27
+*/ }
+
+   let select_desk_list = [];
+   if (floor === 0) {
+// gf07 - 43
+     const istart = 7;
+     const ilast = 43;
+     for (let i = istart; i <= ilast; i++) {
+       let d = "";
+       if (i < 10) {
+         d = `gf0${i}`;
+       } else {
+         d = `gf${i}`;
+       }
+       console.log(d);
+       select_desk_list.push(d);
+     }
+   } else if (floor == 1) {
+// ff08 - 33
+     const istart = 7;
+     const ilast = 33;
+     console.log(`start ${istart} last ${ilast}`);
+   } else if (floor == 2) {
+// 2f07 - 27
+     const istart = 7;
+     const ilast = 27;
+     console.log(`start ${istart} last ${ilast}`);
+   } else {
+     console.log(`Bad floor ${floor}`);
+     alert(`Bad floor ${floor}`);
+   }
+
     return (
         <>
         <div className="col-md-4 d-flex align-items-center">

@@ -10,20 +10,21 @@ import { Desks } from './desks'
 import { AddEmail } from './addemail'
 
 export interface InputFormProps {
-   start: Date | null;
-   datesetter: React.Dispatch<React.SetStateAction<Date | null>>
-   floorsetter: React.Dispatch<React.SetStateAction<number | null>>
+  start: Date | null;
+  datesetter: React.Dispatch<React.SetStateAction<Date | null>>;
+  floor: number | null;
+  floorsetter: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
-export const InputForm = ({start, datesetter, floorsetter}: InputFormProps) => {
+export const InputForm = ({start, datesetter, floor, floorsetter}: InputFormProps) => {
   return (
     <Form>
      <Calendar start={start} setter={datesetter} />
 { /*
      <Testapp />
 */ }
-     <Floor floorsetter={floorsetter}/>
-     <Desks />
+     <Floor floor={floor} floorsetter={floorsetter}/>
+     <Desks floor={floor} />
      <AddEmail />
 { /*
       <Form.Group className="mb-3" controlId="formBasicEmail">
