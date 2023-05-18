@@ -45,7 +45,10 @@ console.log(select_desk_list);
 
 const desks_select = (desks: string[]): Select_type[] => {
   const select_desks: Select_type[] = [];
+  console.log("DESKS");
+  console.log(desks);
   desks.forEach(item => select_desks.push(desk2select(item)));
+  console.log("SELECT_DESKS");
   console.log(select_desks);
   return select_desks;
 }
@@ -53,17 +56,6 @@ const desks_select = (desks: string[]): Select_type[] => {
 export interface DesksProps {
   floor: number | null;
 }
-
-{
-/*
-interface LBProps {
-  istart: number;
-  ilast: number;
-  prefix: string;
-}
-
-const listbuild = ({istart, ilast, prefix}: LBProps) => {
-*/ }
 
 const listbuild = (istart:number, ilast:number, prefix: string) => {
   let desks: string[] = [];
@@ -91,10 +83,7 @@ export const Desks = ({ floor } : DesksProps) => {
 // 2f07 - 27
 */ }
 
-{ /*
    let select_desk_list: Select_type[] = [];
-   let desks: string[] = [];
-*/}
    let desks: string[] = [];
    if (floor === 0) {
      const istart = 7;
@@ -123,20 +112,23 @@ export const Desks = ({ floor } : DesksProps) => {
      const istart = 7;
      const ilast = 33;
      console.log(`start ${istart} last ${ilast}`);
-     let desks = listbuild(istart, ilast, "ff");
+     desks = listbuild(istart, ilast, "ff");
      console.log(desks);
    } else if (floor == 2) {
 // 2f07 - 27
      const istart = 7;
      const ilast = 27;
      console.log(`start ${istart} last ${ilast}`);
-     let desks = listbuild(istart, ilast, "2f");
+     desks = listbuild(istart, ilast, "2f");
      console.log(desks);
    } else {
      console.log(`Bad floor ${floor}`);
      alert(`Bad floor ${floor}`);
    }
-   const select_desk_list: Select_type[] = desks_select(desks)
+   console.log("xDESKS");
+   console.log(desks);
+   select_desk_list = desks_select(desks)
+   console.log("SELECT_DESK_LIST");
    console.log(select_desk_list);
 
    return (
