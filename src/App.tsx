@@ -19,7 +19,7 @@ export const App = () => {
   }
 
   const [floor, setFloor] = useState<number|null>(0);
-  console.log(`floor starts at ${floor}`);
+  const [desk, setDesk] = useState<string|null>(null);
 
   registerLocale('en-GB', enGB)
   setDefaultLocale('en-GB');
@@ -27,8 +27,8 @@ export const App = () => {
    return (
      <>
      <Header />
-     <InputForm start={startDate} datesetter={setStartDate} floor={floor} floorsetter={setFloor} />
-     <ProcessData start={startDate} floor={floor} />
+     <InputForm start={startDate} datesetter={setStartDate} floor={floor} floorsetter={setFloor} desksetter={setDesk} />
+     <ProcessData start={startDate} floor={floor} desk={desk} />
      </>
    );
 }

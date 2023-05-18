@@ -6,11 +6,12 @@ import { useState } from "react";
 export interface ProcessDataProps {
    start: Date | null;
    floor: number | null;
+   desk: string | null;
 }
 
 const Floor = ["Ground", "First", "Second"];
  
-export const ProcessData = ({ start, floor } : ProcessDataProps) => {
+export const ProcessData = ({ start, floor, desk } : ProcessDataProps) => {
   let sdstr = "No start date available"
   if (start) {
     let sstr = "null"
@@ -26,6 +27,7 @@ export const ProcessData = ({ start, floor } : ProcessDataProps) => {
     <h4> ProcessData </h4>
     <p>{sdstr}</p>
     <p>{fstr}</p>
+    <p>{desk}</p>
     </>
   );
 };

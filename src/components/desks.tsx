@@ -51,6 +51,7 @@ const desks_select = (desks: string[]): Select_type[] => {
 
 export interface DesksProps {
   floor: number | null;
+  desksetter: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 const listbuild = (istart:number, ilast:number, prefix: string) => {
@@ -70,8 +71,8 @@ const listbuild = (istart:number, ilast:number, prefix: string) => {
   return desks;
 }
    
-export const Desks = ({ floor } : DesksProps) => {
-   console.log(`Floor number is ${floor}`);
+export const Desks = ({ floor, desksetter } : DesksProps) => {
+   console.log(`desksetter is ${desksetter}`);
 
 { /*
 // gf07 - 43
@@ -108,7 +109,7 @@ export const Desks = ({ floor } : DesksProps) => {
      <>
      <div className="col-md-4 d-flex align-items-center">
        <label className="mb-0 font-weight-bold">Desk</label>
-         <Select options={select_desk_list} />
+         <Select options={select_desk_list} onChange={(choice) => desksetter(choice!.value)}/>
      </div>
      </>
    );
