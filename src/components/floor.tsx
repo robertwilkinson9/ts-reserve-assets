@@ -1,4 +1,4 @@
-import './floor.css';
+// import './floor.css';
 
 export interface FloorProps {
    floor : number | null;

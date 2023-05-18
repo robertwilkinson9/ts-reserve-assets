@@ -107,7 +107,11 @@ export const Desks = ({ floor, desksetter } : DesksProps) => {
 
    return (
      <>
+{ /*
      <div className="col-md-4 d-flex align-items-center">
+     <div className="d-flex align-items-center">
+*/ }
+     <div id="deskPulldown">
        <label className="mb-0 font-weight-bold">Desk</label>
          <Select options={select_desk_list} onChange={(choice) => desksetter(choice!.value)}/>
      </div>

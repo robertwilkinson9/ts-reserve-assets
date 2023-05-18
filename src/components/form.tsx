@@ -1,14 +1,17 @@
 { /*
-import Button from 'react-bootstrap/Button';
 import { Testapp } from './testapp'
 */ }
 
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 import { Calendar } from './calendar'
 import { Floor } from './floor'
 import { Desks } from './desks'
 import { AddEmail } from './addemail'
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+{ /*
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
@@ -20,18 +23,16 @@ import { AddEmail } from './addemail'
 //    console.log(`EMAIL you entered was: ${email}`)
 //    alert("EMAIL you entered")
   }
+*/ }
 
 { /*
-  const handleChange = (event: MouseEventHandler<HTMLButtonElement>): void => {
-//  const handleChange = (event: React.MouseEventHandler<HTMLButtonElement>): void => {
-//  const handleChange = (event: React.ChangeEvent<MouseEvent<Element, MouseEvent>>): void => {
-//  const handleChange = (event: React.ChangeEvent<MouseEvent<Element, MouseEvent>>): void => {
-//  const handleChange = (event: React.ChangeEvent<MouseEvent<HTMLButtonElement, MouseEvent>>): void => {
-//    if (event.target.id === "due") {
-    console.log("WHATTTTT!!");
-    console.log("event -> ", event);
-  };
+const clickHandler = (completesetter: any) => {
 */ }
+const clickHandler = (completesetter: React.Dispatch<React.SetStateAction<boolean>>) => {
+  console.log("ZZZZZAARGGHH - submitting");
+  console.log("completesetter is a ", typeof(completesetter));
+  completesetter(true);
+};
 
 export interface InputFormProps {
   start: Date | null;
@@ -41,15 +42,19 @@ export interface InputFormProps {
   desksetter: React.Dispatch<React.SetStateAction<string | null>>;
   email: string | null;
   emailsetter: React.Dispatch<React.SetStateAction<string | null>>;
+  completesetter: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const InputForm = ({start, datesetter, floor, floorsetter, desksetter, email, emailsetter}: InputFormProps) => {
+export const InputForm = ({start, datesetter, floor, floorsetter, desksetter, email, emailsetter, completesetter}: InputFormProps) => {
+  console.log(`completesetter is #{completesetter}`);
   return (
     <>
 { /*
      <Form id="emailForm">
-*/ }
+   <Form.Group className="mb-3" controlId="formBasicEmail">
      <Form onSubmit={handleSubmit} id="emailForm">
+*/ }
+     <Form id="emailForm">
      <Calendar start={start} setter={datesetter} />
 { /*
      <Testapp />
@@ -57,12 +62,9 @@ export const InputForm = ({start, datesetter, floor, floorsetter, desksetter, em
      <Floor floor={floor} floorsetter={floorsetter}/>
      <Desks floor={floor} desksetter={desksetter} />
      <AddEmail email={email} emailsetter={emailsetter} />
-     <button type="submit" value="submit" form="emailForm" onClick={() => {
-       console.log("AARGGHH");
-       console.log(`EMAIL is #{email}`);
-     }} >Book Desk</button>
+     <Button type="submit" variant="primary" size="lg" value="submit" form="emailForm" onClick={() => {clickHandler(completesetter)}} >Book Desk</Button>
 { /*
-     <button type="submit" value="submit" form="emailForm" onClick={handleChange} >Book Desk</button>
+     </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control type="email" placeholder="Enter email" />

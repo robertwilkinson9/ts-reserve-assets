@@ -22,17 +22,19 @@ export const App = () => {
   const [desk, setDesk] = useState<string|null>(null);
   const [email, setEmail] = useState<string|null>(null);
 //  const [email, setEmail] = useState<string|null>("NOBODY@nowhere.com");
+  const [complete, setComplete] = useState<boolean>(false);
 
   registerLocale('en-GB', enGB)
   setDefaultLocale('en-GB');
 
-   return (
-     <>
-     <Header />
-     <InputForm start={startDate} datesetter={setStartDate} floor={floor} floorsetter={setFloor} desksetter={setDesk} email={email} emailsetter={setEmail} />
-     <ProcessData start={startDate} floor={floor} desk={desk} email={email} />
-     </>
-   );
+  if (complete) {console.log("Form is complete - we can SUBMIT IT XXX"); }
+  return (
+    <>
+    <Header />
+    <InputForm start={startDate} datesetter={setStartDate} floor={floor} floorsetter={setFloor} desksetter={setDesk} email={email} emailsetter={setEmail} completesetter={setComplete} />
+    <ProcessData start={startDate} floor={floor} desk={desk} email={email} />
+    </>
+  );
 }
 
 export default App
