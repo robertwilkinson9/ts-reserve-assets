@@ -45,11 +45,7 @@ console.log(select_desk_list);
 
 const desks_select = (desks: string[]): Select_type[] => {
   const select_desks: Select_type[] = [];
-  console.log("DESKS");
-  console.log(desks);
   desks.forEach(item => select_desks.push(desk2select(item)));
-  console.log("SELECT_DESKS");
-  console.log(select_desks);
   return select_desks;
 }
 
@@ -61,6 +57,7 @@ const listbuild = (istart:number, ilast:number, prefix: string) => {
   let desks: string[] = [];
   for (let i = istart; i <= ilast; i++) {
     let d = "";
+// sprintf?
     if (i < 10) {
          d = `${prefix}0${i}`;
     } else {
@@ -70,7 +67,6 @@ const listbuild = (istart:number, ilast:number, prefix: string) => {
        desks.push(d);
     }
      
-  console.log(desks);
   return desks;
 }
    
@@ -88,39 +84,17 @@ export const Desks = ({ floor } : DesksProps) => {
    if (floor === 0) {
      const istart = 7;
      const ilast = 43;
-{ /*
-     for (let i = istart; i <= ilast; i++) {
-       let d = "";
-       if (i < 10) {
-         d = `gf0${i}`;
-       } else {
-         d = `gf${i}`;
-       }
-       console.log(d);
-       desks.push(d);
-     }
-     
-     console.log(desks);
-     const desks = listbuild({istart: {istart}, ilast: {ilast}, prefix: "gf"});
-     const desks = listbuild(istart, ilast, "gf");
-     select_desk_list: Select_type[] = desks_select(desks)
-*/}
-     let desks = listbuild(istart, ilast, "gf");
-     console.log(desks);
+     desks = listbuild(istart, ilast, "gf");
    } else if (floor == 1) {
-// ff08 - 33
      const istart = 7;
      const ilast = 33;
      console.log(`start ${istart} last ${ilast}`);
      desks = listbuild(istart, ilast, "ff");
-     console.log(desks);
    } else if (floor == 2) {
-// 2f07 - 27
      const istart = 7;
      const ilast = 27;
      console.log(`start ${istart} last ${ilast}`);
      desks = listbuild(istart, ilast, "2f");
-     console.log(desks);
    } else {
      console.log(`Bad floor ${floor}`);
      alert(`Bad floor ${floor}`);
@@ -142,5 +116,3 @@ export const Desks = ({ floor } : DesksProps) => {
 };
 
 export default Desks;
-
-
