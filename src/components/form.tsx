@@ -21,6 +21,18 @@ import { AddEmail } from './addemail'
 //    alert("EMAIL you entered")
   }
 
+{ /*
+  const handleChange = (event: MouseEventHandler<HTMLButtonElement>): void => {
+//  const handleChange = (event: React.MouseEventHandler<HTMLButtonElement>): void => {
+//  const handleChange = (event: React.ChangeEvent<MouseEvent<Element, MouseEvent>>): void => {
+//  const handleChange = (event: React.ChangeEvent<MouseEvent<Element, MouseEvent>>): void => {
+//  const handleChange = (event: React.ChangeEvent<MouseEvent<HTMLButtonElement, MouseEvent>>): void => {
+//    if (event.target.id === "due") {
+    console.log("WHATTTTT!!");
+    console.log("event -> ", event);
+  };
+*/ }
+
 export interface InputFormProps {
   start: Date | null;
   datesetter: React.Dispatch<React.SetStateAction<Date | null>>;
@@ -45,8 +57,12 @@ export const InputForm = ({start, datesetter, floor, floorsetter, desksetter, em
      <Floor floor={floor} floorsetter={floorsetter}/>
      <Desks floor={floor} desksetter={desksetter} />
      <AddEmail email={email} emailsetter={emailsetter} />
-     <button type="submit" value="submit" form="emailForm" onClick={() => {console.log("AARGGHH")}} >Book Desk</button>
+     <button type="submit" value="submit" form="emailForm" onClick={() => {
+       console.log("AARGGHH");
+       console.log(`EMAIL is #{email}`);
+     }} >Book Desk</button>
 { /*
+     <button type="submit" value="submit" form="emailForm" onClick={handleChange} >Book Desk</button>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control type="email" placeholder="Enter email" />
