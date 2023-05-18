@@ -20,6 +20,8 @@ export const App = () => {
 
   const [floor, setFloor] = useState<number|null>(0);
   const [desk, setDesk] = useState<string|null>(null);
+//  const [email, setEmail] = useState<string|null>(null);
+  const [email, setEmail] = useState<string|null>("NOBODY@nowhere.com");
 
   registerLocale('en-GB', enGB)
   setDefaultLocale('en-GB');
@@ -27,8 +29,8 @@ export const App = () => {
    return (
      <>
      <Header />
-     <InputForm start={startDate} datesetter={setStartDate} floor={floor} floorsetter={setFloor} desksetter={setDesk} />
-     <ProcessData start={startDate} floor={floor} desk={desk} />
+     <InputForm start={startDate} datesetter={setStartDate} floor={floor} floorsetter={setFloor} desksetter={setDesk} emailsetter={setEmail} />
+     <ProcessData start={startDate} floor={floor} desk={desk} email={email} />
      </>
    );
 }

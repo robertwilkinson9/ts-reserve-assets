@@ -13,6 +13,7 @@ export const useForm = (callback: any, initialState = {}) => {
     // onSubmit
     const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        console.log(event);
         await callback(); // triggering the callback
     };
 
@@ -24,7 +25,13 @@ export const useForm = (callback: any, initialState = {}) => {
     };
 }
 
-export const AddEmail = () =>{
+export interface AddEmailProps {
+  setter: React.Dispatch<React.SetStateAction<string | null>>;
+}
+
+export const AddEmail = ({setter} : AddEmailProps) =>{
+    console.log("SETTER is")
+    console.log(setter)
 
  // defining the initial state for the form
     const initialState = {

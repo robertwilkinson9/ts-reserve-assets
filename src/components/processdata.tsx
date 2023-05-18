@@ -7,11 +7,12 @@ export interface ProcessDataProps {
    start: Date | null;
    floor: number | null;
    desk: string | null;
+   email: string | null;
 }
 
 const Floor = ["Ground", "First", "Second"];
  
-export const ProcessData = ({ start, floor, desk } : ProcessDataProps) => {
+export const ProcessData = ({ start, floor, desk, email } : ProcessDataProps) => {
   let sdstr = "No start date available"
   if (start) {
     let sstr = "null"
@@ -28,6 +29,7 @@ export const ProcessData = ({ start, floor, desk } : ProcessDataProps) => {
     <p>{sdstr}</p>
     <p>{fstr}</p>
     <p>{desk}</p>
+    <p>{email}</p>
     </>
   );
 };
