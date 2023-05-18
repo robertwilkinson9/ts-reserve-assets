@@ -79,7 +79,6 @@ export const Desks = ({ floor } : DesksProps) => {
 // 2f07 - 27
 */ }
 
-   let select_desk_list: Select_type[] = [];
    let desks: string[] = [];
    if (floor === 0) {
      const istart = 7;
@@ -99,9 +98,9 @@ export const Desks = ({ floor } : DesksProps) => {
      console.log(`Bad floor ${floor}`);
      alert(`Bad floor ${floor}`);
    }
-   console.log("xDESKS");
-   console.log(desks);
-   select_desk_list = desks_select(desks)
+//   console.log("xDESKS");
+//   console.log(desks);
+   const select_desk_list: Select_type[] = desks_select(desks)
    console.log("SELECT_DESK_LIST");
    console.log(select_desk_list);
 
