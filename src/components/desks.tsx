@@ -1,5 +1,15 @@
 import Select from 'react-select'
 
+type Select_type = {
+  value: string,
+  label: string,
+};
+
+const desk2select = (input: string): Select_type => {
+  return {value: input, label: input};
+}
+
+{ /*
 type DeskEmail = {
   desk: string,
   email: string,
@@ -22,16 +32,6 @@ function emptydesks(desks: string[]): DeskEmail[] {
 const emptieddesks = emptydesks(desks)
 console.log(emptieddesks);
 
-type Select_type = {
-  value: string,
-  label: string,
-};
-
-const desk2select = (input: string): Select_type => {
-  return {value: input, label: input};
-}
-
-{ /*
 function desks_select(desks: string[]): Select_type[] {
   const select_desks: Select_type[] = [];
   desks.forEach(item => select_desks.push(desk2select(item)));
@@ -54,6 +54,34 @@ export interface DesksProps {
   floor: number | null;
 }
 
+{
+/*
+interface LBProps {
+  istart: number;
+  ilast: number;
+  prefix: string;
+}
+
+const listbuild = ({istart, ilast, prefix}: LBProps) => {
+*/ }
+
+const listbuild = (istart:number, ilast:number, prefix: string) => {
+  let desks: string[] = [];
+  for (let i = istart; i <= ilast; i++) {
+    let d = "";
+    if (i < 10) {
+         d = `${prefix}0${i}`;
+    } else {
+         d = `${prefix}${i}`;
+       }
+       console.log(d);
+       desks.push(d);
+    }
+     
+  console.log(desks);
+  return desks;
+}
+   
 export const Desks = ({ floor } : DesksProps) => {
    console.log(`Floor number is ${floor}`);
 
@@ -63,12 +91,15 @@ export const Desks = ({ floor } : DesksProps) => {
 // 2f07 - 27
 */ }
 
-   let desks: string[] = [];
+{ /*
    let select_desk_list: Select_type[] = [];
+   let desks: string[] = [];
+*/}
+   let desks: string[] = [];
    if (floor === 0) {
-// gf07 - 43
      const istart = 7;
      const ilast = 43;
+{ /*
      for (let i = istart; i <= ilast; i++) {
        let d = "";
        if (i < 10) {
@@ -81,31 +112,41 @@ export const Desks = ({ floor } : DesksProps) => {
      }
      
      console.log(desks);
-     select_desk_list = desks_select(desks)
-     console.log(select_desk_list);
+     const desks = listbuild({istart: {istart}, ilast: {ilast}, prefix: "gf"});
+     const desks = listbuild(istart, ilast, "gf");
+     select_desk_list: Select_type[] = desks_select(desks)
+*/}
+     let desks = listbuild(istart, ilast, "gf");
+     console.log(desks);
    } else if (floor == 1) {
 // ff08 - 33
      const istart = 7;
      const ilast = 33;
      console.log(`start ${istart} last ${ilast}`);
+     let desks = listbuild(istart, ilast, "ff");
+     console.log(desks);
    } else if (floor == 2) {
 // 2f07 - 27
      const istart = 7;
      const ilast = 27;
      console.log(`start ${istart} last ${ilast}`);
+     let desks = listbuild(istart, ilast, "2f");
+     console.log(desks);
    } else {
      console.log(`Bad floor ${floor}`);
      alert(`Bad floor ${floor}`);
    }
+   const select_desk_list: Select_type[] = desks_select(desks)
+   console.log(select_desk_list);
 
-    return (
-        <>
-        <div className="col-md-4 d-flex align-items-center">
-            <label className="mb-0 font-weight-bold">Desk</label>
-                <Select options={select_desk_list} />
-        </div>
-        </>
-    );
+   return (
+     <>
+     <div className="col-md-4 d-flex align-items-center">
+       <label className="mb-0 font-weight-bold">Desk</label>
+         <Select options={select_desk_list} />
+     </div>
+     </>
+   );
 };
 
 export default Desks;
