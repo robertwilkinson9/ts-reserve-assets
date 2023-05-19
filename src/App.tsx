@@ -21,13 +21,18 @@ export const App = () => {
   const [floor, setFloor] = useState<number|null>(0);
   const [desk, setDesk] = useState<string|null>(null);
   const [email, setEmail] = useState<string|null>(null);
-//  const [email, setEmail] = useState<string|null>("NOBODY@nowhere.com");
   const [complete, setComplete] = useState<boolean>(false);
 
   registerLocale('en-GB', enGB)
   setDefaultLocale('en-GB');
 
-  if (complete) {console.log("Form is complete - we can SUBMIT IT XXX"); }
+  if (complete) {
+    console.log("Form is complete - we can SUBMIT IT XXX");
+    console.log("Date is ", startDate);
+    console.log("Desk  is ", desk);
+    console.log("Email is ", email);
+  }
+
   return (
     <>
     <Header />
