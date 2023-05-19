@@ -27,11 +27,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 { /*
 const clickHandler = (completesetter: any) => {
-*/ }
 const clickHandler = (completesetter: React.Dispatch<React.SetStateAction<boolean>>) => {
   console.log("ZZZZZAARGGHH - submitting");
   console.log("completesetter is a ", typeof(completesetter));
   completesetter(true);
+};
+*/ }
+
+//const handleBRClick = (event: React.MouseEvent<HTMLElement>, myText: string) => {
+const handleBRClick = (event: React.MouseEvent<HTMLElement>, myText: string, completesetter: React.Dispatch<React.SetStateAction<boolean>>) => {
+  console.log(myText);
+  console.log("completesetter is a ", typeof(completesetter));
+  completesetter(true);
+  console.log(event);
 };
 
 export interface InputFormProps {
@@ -46,7 +54,9 @@ export interface InputFormProps {
 }
 
 export const InputForm = ({start, datesetter, floor, floorsetter, desksetter, email, emailsetter, completesetter}: InputFormProps) => {
-  console.log(`completesetter is #{completesetter}`);
+  console.log("completesetter is ",completesetter);
+//  const buttonText = "Book Desk";
+  const buttonText = "Bork Desk";
   return (
     <>
 { /*
@@ -58,12 +68,25 @@ export const InputForm = ({start, datesetter, floor, floorsetter, desksetter, em
      <Calendar start={start} setter={datesetter} />
 { /*
      <Testapp />
+       type="submit" 
+       variant="primary"
+       size="lg"
+       value="submit"
+       form="emailForm"
 */ }
      <Floor floor={floor} floorsetter={floorsetter}/>
      <Desks floor={floor} desksetter={desksetter} />
      <AddEmail email={email} emailsetter={emailsetter} />
-     <Button type="submit" variant="primary" size="lg" value="submit" form="emailForm" onClick={() => {clickHandler(completesetter)}} >Book Desk</Button>
+     <Button 
+       onClick={(e) => {
+         handleBRClick(e, buttonText, completesetter);
+       }}
+     >
+      {buttonText}
+     </Button>
 { /*
+     <Button type="submit" variant="primary" size="lg" value="submit" form="emailForm" onClick={() => {console.log("WOWSER")}} >Book Desk</Button>
+     <Button type="submit" variant="primary" size="lg" value="submit" form="emailForm" onClick={() => {clickHandler(completesetter)}} >Book Desk</Button>
      </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>

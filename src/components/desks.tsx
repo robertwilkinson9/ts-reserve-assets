@@ -64,7 +64,7 @@ const listbuild = (istart:number, ilast:number, prefix: string) => {
     } else {
          d = `${prefix}${i}`;
        }
-       console.log(d);
+//       console.log(d);
        desks.push(d);
     }
      
@@ -72,7 +72,7 @@ const listbuild = (istart:number, ilast:number, prefix: string) => {
 }
    
 export const Desks = ({ floor, desksetter } : DesksProps) => {
-   console.log(`desksetter is ${desksetter}`);
+//   console.log(`desksetter is ${desksetter}`);
 
 { /*
 // gf07 - 43
@@ -88,29 +88,23 @@ export const Desks = ({ floor, desksetter } : DesksProps) => {
    } else if (floor == 1) {
      const istart = 7;
      const ilast = 33;
-     console.log(`start ${istart} last ${ilast}`);
+//     console.log(`start ${istart} last ${ilast}`);
      desks = listbuild(istart, ilast, "ff");
    } else if (floor == 2) {
      const istart = 7;
      const ilast = 27;
-     console.log(`start ${istart} last ${ilast}`);
+//     console.log(`start ${istart} last ${ilast}`);
      desks = listbuild(istart, ilast, "2f");
    } else {
      console.log(`Bad floor ${floor}`);
      alert(`Bad floor ${floor}`);
    }
-//   console.log("xDESKS");
-//   console.log(desks);
    const select_desk_list: Select_type[] = desks_select(desks)
-   console.log("SELECT_DESK_LIST");
-   console.log(select_desk_list);
+//   console.log("SELECT_DESK_LIST");
+//   console.log(select_desk_list);
 
    return (
      <>
-{ /*
-     <div className="col-md-4 d-flex align-items-center">
-     <div className="d-flex align-items-center">
-*/ }
      <div id="deskPulldown">
        <label className="mb-0 font-weight-bold">Desk</label>
          <Select options={select_desk_list} onChange={(choice) => desksetter(choice!.value)}/>
