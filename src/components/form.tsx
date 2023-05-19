@@ -53,9 +53,10 @@ export const InputForm = ({start, datesetter, floor, floorsetter, desksetter, em
        value="submit"
        form="emailForm"
          handleBRClick(e, buttonText, completesetter);
+       onClick={(e) => {
 */ }
      <Button 
-       onClick={(e) => {
+       onClick={() => {
          handleBRClick(completesetter);
        }}
      >

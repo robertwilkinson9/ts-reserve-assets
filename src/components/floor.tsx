@@ -1,5 +1,7 @@
 // import './floor.css';
 
+import { Radio, RadioGroup} from 'react-radio-group'
+
 export interface FloorProps {
    floor : number | null;
    floorsetter: React.Dispatch<React.SetStateAction<number | null>>
@@ -12,6 +14,7 @@ interface ButtonProps {
 const Button0 = ({cb} : ButtonProps) => {
       return (
         <>
+{ /*
         <div style={{paddingBottom: "120px"}} className="col-md-4 d-flex align-items-center lower_margin" id="floor_radios" >
           <label className="mb-0 font-weight-bold">Floor</label>
           <input type="radio" value="0" id="ground" onChange={cb} name="floor" defaultChecked/>
@@ -21,6 +24,19 @@ const Button0 = ({cb} : ButtonProps) => {
           <input type="radio" value="2" id="second" onChange={cb} name="floor" />
           <label htmlFor="second">Second</label>
         </div>
+*/ }
+         <RadioGroup name="Floor" defaultValue="0" onChange={cb}>
+            <div className="radio-button-background">
+                <Radio value="0" className="radio-button" />Ground Floor
+            </div>
+            <div className="radio-button-background">
+                <Radio value="1" className="radio-button" />First Floor
+            </div>
+            <div className="radio-button-background">
+                <Radio value="2" className="radio-button" />Second Floor
+            </div>
+          </RadioGroup>
+
         </>
       );
 };
@@ -28,6 +44,7 @@ const Button0 = ({cb} : ButtonProps) => {
 const Button1 = ({cb} : ButtonProps) => {
       return (
         <>
+{ /*
         <div style={{paddingBottom: "120px"}} className="col-md-4 d-flex align-items-center lower_margin" id="floor_radios" >
           <label className="mb-0 font-weight-bold">Floor</label>
           <input type="radio" value="0" id="ground" onChange={cb} name="floor" />
@@ -37,13 +54,30 @@ const Button1 = ({cb} : ButtonProps) => {
           <input type="radio" value="2" id="second" onChange={cb} name="floor" />
           <label htmlFor="second">Second</label>
         </div>
+*/ }
+         <RadioGroup name="Floor" defaultValue="1" onChange={cb}>
+            <div className="radio-button-background">
+                <Radio value="0" className="radio-button" />Ground Floor
+            </div>
+            <div className="radio-button-background">
+                <Radio value="1" className="radio-button" />First Floor
+            </div>
+            <div className="radio-button-background">
+                <Radio value="2" className="radio-button" />Second Floor
+            </div>
+          </RadioGroup>
         </>
       );
 };
 
 const Button2 = ({cb} : ButtonProps) => {
+  console.log("typeof(cb) is ", typeof(cb));
+  const mycb = () => {
+    console.log("SECoND button HANDLER");
+  }
       return (
         <>
+{ /*
         <div style={{paddingBottom: "120px"}} className="col-md-4 d-flex align-items-center lower_margin" id="floor_radios" >
           <label className="mb-0 font-weight-bold">Floor</label>
           <input type="radio" value="0" id="ground" onChange={cb} name="floor" />
@@ -53,13 +87,30 @@ const Button2 = ({cb} : ButtonProps) => {
           <input type="radio" value="2" id="second" onChange={cb} name="floor" defaultChecked />
           <label htmlFor="second">Second</label>
         </div>
+*/ }
+
+{ /*
+<RadioGroup name="fruits" onChange={(e) => handleOnChange(e)}>
+*/ }
+         <RadioGroup name="Floor" defaultValue="2" onChange={mycb}>
+            <div className="radio-button-background">
+                <Radio value="0" className="radio-button" />Ground Floor
+            </div>
+            <div className="radio-button-background">
+                <Radio value="1" className="radio-button" />First Floor
+            </div>
+            <div className="radio-button-background">
+                <Radio value="2" className="radio-button" />Second Floor
+            </div>
+          </RadioGroup>
+
         </>
       );
 };
-
 export const Floor = ({floor, floorsetter}: FloorProps) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("HaNdLe ChAnGe");
     console.log(e.target.value)
     floorsetter(parseInt(e.target.value, 10));
   }

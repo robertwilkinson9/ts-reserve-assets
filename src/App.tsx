@@ -11,6 +11,21 @@ import { Header } from './components/header'
 import { InputForm } from './components/form'
 import { ProcessData } from './components/processdata'
 
+{ /*
+const reset = (setStartDate: React.Dispatch<React.SetStateAction<Date|null>>,
+               setFloor: React.Dispatch<React.SetStateAction<number|null>>,
+               setDesk: React.Dispatch<React.SetStateAction<string|null>>,
+               setEmail: React.Dispatch<React.SetStateAction<string|null>>,
+               setComplete: React.Dispatch<React.SetStateAction<boolean>>): void =>
+{
+  setStartDate(new Date());
+  setFloor(0);
+  setDesk(null);
+  setEmail(null);
+  setComplete(false);
+}
+*/ }
+
 export const App = () => {
   const [startDate, setStartDate] = useState<Date|null>(new Date());
   if (startDate) {
@@ -31,15 +46,23 @@ export const App = () => {
     console.log("Date is ", startDate);
     console.log("Desk  is ", desk);
     console.log("Email is ", email);
-  }
 
-  return (
-    <>
-    <Header />
-    <InputForm start={startDate} datesetter={setStartDate} floor={floor} floorsetter={setFloor} desksetter={setDesk} email={email} emailsetter={setEmail} completesetter={setComplete} />
-    <ProcessData start={startDate} floor={floor} desk={desk} email={email} />
-    </>
-  );
+//    reset(setStartDate, setFloor, setDesk, setEmail, setComplete); // eventually just show processdata screen for now
+    return (
+      <>
+      <Header />
+      <ProcessData start={startDate} floor={floor} desk={desk} email={email} />
+      <InputForm start={startDate} datesetter={setStartDate} floor={floor} floorsetter={setFloor} desksetter={setDesk} email={email} emailsetter={setEmail} completesetter={setComplete} />
+      </>
+    );
+  } else {
+    return (
+      <>
+      <Header />
+      <InputForm start={startDate} datesetter={setStartDate} floor={floor} floorsetter={setFloor} desksetter={setDesk} email={email} emailsetter={setEmail} completesetter={setComplete} />
+      </>
+    );
+  }
 }
 
 export default App
