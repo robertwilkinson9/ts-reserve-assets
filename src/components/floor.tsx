@@ -12,26 +12,26 @@ interface ButtonProps {
 const Button0 = ({cb} : ButtonProps) => {
       return (
         <>
-          <div class="container">
-          <div class="row" id="pull-left">
-            <div class="col-sm-12 align-items-left" >
+          <div className="container">
+          <div className="row" id="pull-left">
+            <div className="col-sm-12 align-items-left" >
                 <label className="mb-0 font-weight-bold flabel">Floor</label>
             </div>
           </div>
-            <div class="row" id="floor_radios">
-              <div class="col-sm-6">
+            <div className="row" id="floor_radios">
+              <div className="col-sm-6">
                 <input type="radio" value="0" id="ground" onChange={cb} name="floor" defaultChecked />
                 <label htmlFor="ground" className="red">Ground</label>
               </div>
             </div>
-            <div class="row" id="floor_radios">
-              <div class="col-sm-6">
+            <div className="row" id="floor_radios">
+              <div className="col-sm-6">
                 <input type="radio" value="1" id="first" onChange={cb} name="floor" />
                 <label htmlFor="first">First</label>
               </div>
             </div>
-            <div class="row" id="floor_radios">
-              <div class="col-sm-6">
+            <div className="row" id="floor_radios">
+              <div className="col-sm-6">
                 <input type="radio" value="2" id="second" onChange={cb} name="floor" />
                 <label htmlFor="second">Second</label>
               </div>
@@ -44,26 +44,26 @@ const Button0 = ({cb} : ButtonProps) => {
 const Button1 = ({cb} : ButtonProps) => {
       return (
         <>
-          <div class="row" id="pull-left">
-            <div class="col-sm-12 align-items-left" >
+          <div className="row" id="pull-left">
+            <div className="col-sm-12 align-items-left" >
                 <label className="mb-0 font-weight-bold flabel">Floor</label>
             </div>
           </div>
-          <div class="container">
-            <div class="row" id="floor_radios">
-              <div class="col-sm-6">
+          <div className="container">
+            <div className="row" id="floor_radios">
+              <div className="col-sm-6">
                 <input type="radio" value="0" id="ground" onChange={cb} name="floor" />
                 <label htmlFor="ground" className="red">Ground</label>
               </div>
             </div>
-            <div class="row" id="floor_radios">
-              <div class="col-sm-6">
+            <div className="row" id="floor_radios">
+              <div className="col-sm-6">
                 <input type="radio" value="1" id="first" onChange={cb} name="floor" defaultChecked />
                 <label htmlFor="first">First</label>
               </div>
             </div>
-            <div class="row" id="floor_radios">
-              <div class="col-sm-6">
+            <div className="row" id="floor_radios">
+              <div className="col-sm-6">
                 <input type="radio" value="2" id="second" onChange={cb} name="floor" />
                 <label htmlFor="second">Second</label>
               </div>
@@ -76,26 +76,26 @@ const Button1 = ({cb} : ButtonProps) => {
 const Button2 = ({cb} : ButtonProps) => {
       return (
         <>
-          <div class="row" id="pull-left">
-            <div class="col-sm-12 align-items-left" >
+          <div className="row" id="pull-left">
+            <div className="col-sm-12 align-items-left" >
                 <label className="mb-0 font-weight-bold flabel">Floor</label>
             </div>
           </div>
-          <div class="container">
-            <div class="row" id="floor_radios">
-              <div class="col-sm-6">
+          <div className="container">
+            <div className="row" id="floor_radios">
+              <div className="col-sm-6">
                 <input type="radio" value="0" id="ground" onChange={cb} name="floor" />
                 <label htmlFor="ground" className="red">Ground</label>
               </div>
             </div>
-            <div class="row" id="floor_radios">
-              <div class="col-sm-6">
+            <div className="row" id="floor_radios">
+              <div className="col-sm-6">
                 <input type="radio" value="1" id="first" onChange={cb} name="floor" />
                 <label htmlFor="first">First</label>
               </div>
             </div>
-            <div class="row" id="floor_radios">
-              <div class="col-sm-6">
+            <div className="row" id="floor_radios">
+              <div className="col-sm-6">
                 <input type="radio" value="2" id="second" onChange={cb} name="floor" defaultChecked />
                 <label htmlFor="second">Second</label>
               </div>
