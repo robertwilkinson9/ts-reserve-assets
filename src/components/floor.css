@@ -1,4 +1,4 @@
-label, label>input{
+label{
     font-size: 20px;
     display: inline-block;
     margin: 0;
@@ -18,6 +18,10 @@ flabel {
 
 #floor_radios label + input {
     clear: both;
+}
+
+#pull-left {
+  margin-left: -1px;
 }
 
 /*

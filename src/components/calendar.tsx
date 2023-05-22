@@ -13,7 +13,7 @@ export interface CalendarProps {
 export const Calendar = (props: CalendarProps) => {
  return (
     <>
-    <h4> Calendar </h4>
+    <label> Calendar </label>
     <DatePicker locale="en-GB" dateFormat="P" selected={props.start} onChange={(date) => props.setter(date)} />
     </>
   );
