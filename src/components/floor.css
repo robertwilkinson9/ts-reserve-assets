@@ -8,8 +8,11 @@ label{
 }
 
 flabel {
+/*
   margin-top: 10px;
   margin-bottom: 100px;
+*/
+  margin-left: -100px;
 }
 
 #floor_radios label {

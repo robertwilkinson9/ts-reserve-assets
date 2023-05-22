@@ -12,12 +12,15 @@ interface ButtonProps {
 const Button0 = ({cb} : ButtonProps) => {
       return (
         <>
+          <div class="container">
           <div class="row" id="pull-left">
             <div class="col-sm-12 align-items-left" >
                 <label className="mb-0 font-weight-bold flabel">Floor</label>
             </div>
           </div>
+{ /*
           <div class="container">
+*/}
             <div class="row" id="floor_radios">
               <div class="col-sm-6">
                 <input type="radio" value="0" id="ground" onChange={cb} name="floor" defaultChecked />
