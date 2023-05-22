@@ -8,10 +8,6 @@ label{
 }
 
 flabel {
-/*
-  margin-top: 10px;
-  margin-bottom: 100px;
-*/
   margin-left: -100px;
 }
 
@@ -26,55 +22,3 @@ flabel {
 #pull-left {
   margin-left: -1px;
 }
-
-/*
-#floor_radios input {
-  float: left;
-}
-
-#floor_radios label {
-  float: left;
-}
-
-input {
-    float: left;
-    clear: left;
-    width: 50px;
-    line-height: 20px;
-}
-
-label {
-    float: left;
-    vertical-align: middle;
-}
-
-#floor_radios input {
-  float: left;
-  margin-top: 10px;
-    display: table-cell;
-    vertical-align: middle
-}
-
-#floor_radios label {
-  float: left;
-  margin-top: 10px;
-    display: table-cell;
-    vertical-align: middle
-}
-
-input[type="radio"] {
-  margin-top: -1px;
-  float: left;
-  vertical-align: middle;
-}
-
-input[type='radio'], label{   
-    vertical-align: baseline;
-    padding: 10px;
-    margin: 10px;
-
-label > input[type=radio] {
-    vertical-align: middle;
-    margin-top: -2px;
-}
-*/

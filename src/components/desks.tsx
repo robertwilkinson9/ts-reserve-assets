@@ -64,7 +64,6 @@ const listbuild = (istart:number, ilast:number, prefix: string) => {
     } else {
          d = `${prefix}${i}`;
        }
-//       console.log(d);
        desks.push(d);
     }
      
@@ -88,20 +87,16 @@ export const Desks = ({ floor, desksetter } : DesksProps) => {
    } else if (floor == 1) {
      const istart = 7;
      const ilast = 33;
-//     console.log(`start ${istart} last ${ilast}`);
      desks = listbuild(istart, ilast, "ff");
    } else if (floor == 2) {
      const istart = 7;
      const ilast = 27;
-//     console.log(`start ${istart} last ${ilast}`);
      desks = listbuild(istart, ilast, "2f");
    } else {
      console.log(`Bad floor ${floor}`);
      alert(`Bad floor ${floor}`);
    }
    const select_desk_list: Select_type[] = desks_select(desks)
-//   console.log("SELECT_DESK_LIST");
-//   console.log(select_desk_list);
 
    return (
      <>

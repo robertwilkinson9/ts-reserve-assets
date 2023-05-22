@@ -6,9 +6,6 @@ export interface AddEmailProps {
 }
 
 export const AddEmail = ({email, emailsetter} : AddEmailProps) =>{
-//  console.log("EMAILSETTER is")
-//  console.log(emailsetter)
-
   if (typeof(email) !== "string") {email = "";}
 
   return (
@@ -17,13 +14,6 @@ export const AddEmail = ({email, emailsetter} : AddEmailProps) =>{
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => emailsetter(e.target.value)} />
-{ /*
-        <Form.Text
-          className="text-muted"
-        >
-          We'll never share your email with anyone else.
-        </Form.Text>
-*/ }
       </Form.Group>
       </div>
     </>

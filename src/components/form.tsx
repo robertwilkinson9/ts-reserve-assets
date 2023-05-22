@@ -1,7 +1,3 @@
-{ /*
-import { Testapp } from './testapp'
-*/ }
-
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { Calendar } from './calendar'
@@ -11,11 +7,8 @@ import { AddEmail } from './addemail'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-// const handleBRClick = (event: React.MouseEvent<HTMLElement>, myText: string, completesetter: React.Dispatch<React.SetStateAction<boolean>>) => {
 const handleBRClick = (completesetter: React.Dispatch<React.SetStateAction<boolean>>) => {
-//  console.log(myText);
   completesetter(true);
-//  console.log(event);
 };
 
 export interface InputFormProps {
@@ -33,28 +26,11 @@ export const InputForm = ({start, datesetter, floor, floorsetter, desksetter, em
   const buttonText = "Book Desk";
   return (
     <>
-{ /*
-     <Form id="emailForm">
-   <Form.Group className="mb-3" controlId="formBasicEmail">
-     <Form onSubmit={handleSubmit} id="emailForm">
-*/ }
      <Form id="emailForm">
      <Calendar start={start} setter={datesetter} />
-{ /*
-     <Testapp />
-*/ }
      <Floor floor={floor} floorsetter={floorsetter}/>
      <Desks floor={floor} desksetter={desksetter} />
      <AddEmail email={email} emailsetter={emailsetter} />
-{ /*
-       type="submit" 
-       variant="primary"
-       size="lg"
-       value="submit"
-       form="emailForm"
-         handleBRClick(e, buttonText, completesetter);
-       onClick={(e) => {
-*/ }
      <Button 
        onClick={() => {
          handleBRClick(completesetter);
