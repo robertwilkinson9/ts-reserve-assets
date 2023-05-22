@@ -7,9 +7,11 @@ label{
     vertical-align: top;
 }
 
+/*
 flabel {
-  margin-left: -100px;
+  margin-left: -1px;
 }
+*/
 
 #floor_radios label {
   margin-left: 10px;
@@ -20,5 +22,5 @@ flabel {
 }
 
 #pull-left {
-  margin-left: -1px;
+  margin-left: -24px;
 }
