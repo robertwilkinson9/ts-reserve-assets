@@ -106,12 +106,10 @@ updateDesk = async (req, res) => {
       });
     console.log("mydata is ");
     console.log(mydata);
-    console.log("mydata.due is ");
-    console.log(mydata.due);
-    console.log("mydata.summary is ");
-    console.log(mydata.summary);
-    console.log("mydata.text is ");
-    console.log(mydata.text);
+    console.log("mydata.booking_date is ");
+    console.log(mydata.booking_date);
+    console.log("mydata.email is ");
+    console.log(mydata.email);
 
     return res.status(200).json({ success: true, data: mydata })
 }
@@ -149,8 +147,8 @@ getDesks = async (req, res) => {
     const desks = await Desk.find( { } );
     console.log("desks.length is ");
     console.log(desks.length);
-    console.log("desks[0].summary is ");
-    console.log(desks[0].summary);
+    console.log("desks[0].email is ");
+    console.log(desks[0].email);
     if (!desks.length) {
         return res
             .status(404)
