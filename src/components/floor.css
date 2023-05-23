@@ -8,11 +8,6 @@ label{
 }
 
 /*
-flabel {
-  margin-left: -1px;
-}
-*/
-
 #floor_radios label {
   margin-left: 10px;
 }
@@ -20,7 +15,8 @@ flabel {
 #floor_radios label + input {
     clear: both;
 }
+*/
 
 #pull-left {
-  margin-left: -24px;
+  margin-left: -12px;
 }
