@@ -21,3 +21,11 @@ switched to db desk
 > 
 
 
+> db.desk.createIndex({ "expireAt": 1 }, { expireAfterSeconds: 0 })
+{
+	"createdCollectionAutomatically" : false,
+	"numIndexesBefore" : 1,
+	"numIndexesAfter" : 2,
+	"ok" : 1
+}
+> 
