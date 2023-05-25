@@ -7,103 +7,50 @@ export interface FloorProps {
 
 interface ButtonProps {
   cb : React.ChangeEventHandler<HTMLInputElement>;
+  lcf: string;
+  ucf: string;
+  floorst: string;
+  checked: boolean;
 }
 
-const Button0 = ({cb} : ButtonProps) => {
-      return (
-        <>
-          <div className="container">
-          <div className="row" id="pull-left">
-            <div className="col-sm-12 align-items-left" >
-                <label className="mb-0 font-weight-bold flabel">Floor</label>
-            </div>
-          </div>
-            <div className="row" id="floor_radios">
-              <div className="col-sm-6">
-                <input type="radio" value="0" id="ground" onChange={cb} name="floor" defaultChecked />
-                <label htmlFor="ground" className="red">Ground</label>
-              </div>
-            </div>
-            <div className="row" id="floor_radios">
-              <div className="col-sm-6">
-                <input type="radio" value="1" id="first" onChange={cb} name="floor" />
-                <label htmlFor="first">First</label>
-              </div>
-            </div>
-            <div className="row" id="floor_radios">
-              <div className="col-sm-6">
-                <input type="radio" value="2" id="second" onChange={cb} name="floor" />
-                <label htmlFor="second">Second</label>
-              </div>
-            </div>
-          </div>
-        </>
-      );
-};
+const FloorLabel = () => {
+  return (
+    <>
+    <div className="row" id="pull-left">
+      <div className="col-sm-12 align-items-left" >
+        <label className="mb-0 font-weight-bold flabel">Floor</label>
+      </div>
+    </div>
+    </>
+  );
+}
 
-const Button1 = ({cb} : ButtonProps) => {
-      return (
-        <>
-          <div className="row" id="pull-left">
-            <div className="col-sm-12 align-items-left" >
-                <label className="mb-0 font-weight-bold flabel">Floor</label>
-            </div>
-          </div>
-          <div className="container">
-            <div className="row" id="floor_radios">
-              <div className="col-sm-6">
-                <input type="radio" value="0" id="ground" onChange={cb} name="floor" />
-                <label htmlFor="ground" className="red">Ground</label>
-              </div>
-            </div>
-            <div className="row" id="floor_radios">
-              <div className="col-sm-6">
-                <input type="radio" value="1" id="first" onChange={cb} name="floor" defaultChecked />
-                <label htmlFor="first">First</label>
-              </div>
-            </div>
-            <div className="row" id="floor_radios">
-              <div className="col-sm-6">
-                <input type="radio" value="2" id="second" onChange={cb} name="floor" />
-                <label htmlFor="second">Second</label>
-              </div>
-            </div>
-          </div>
-        </>
-      );
-};
+const FloorButton = ({cb, lcf, ucf, floorst, checked} : ButtonProps) => {
+  if (checked) {
+    return(
+      <>
+      <div className="row" id="floor_radios">
+        <div className="col-sm-6">
+          <input type="radio" value={floorst} id={lcf} onChange={cb} name="floor" defaultChecked />
+         <label htmlFor={lcf}>{ucf}</label>
+       </div>
+     </div>
+     </>
+   );
+  } else {
+    return(
+      <>
+      <div className="row" id="floor_radios">
+        <div className="col-sm-6">
+          <input type="radio" value={floorst} id={lcf} onChange={cb} name="floor"/>
+         <label htmlFor={lcf}>{ucf}</label>
+       </div>
+     </div>
+     </>
+   );
+  }
+}
 
-const Button2 = ({cb} : ButtonProps) => {
-      return (
-        <>
-          <div className="row" id="pull-left">
-            <div className="col-sm-12 align-items-left" >
-                <label className="mb-0 font-weight-bold flabel">Floor</label>
-            </div>
-          </div>
-          <div className="container">
-            <div className="row" id="floor_radios">
-              <div className="col-sm-6">
-                <input type="radio" value="0" id="ground" onChange={cb} name="floor" />
-                <label htmlFor="ground" className="red">Ground</label>
-              </div>
-            </div>
-            <div className="row" id="floor_radios">
-              <div className="col-sm-6">
-                <input type="radio" value="1" id="first" onChange={cb} name="floor" />
-                <label htmlFor="first">First</label>
-              </div>
-            </div>
-            <div className="row" id="floor_radios">
-              <div className="col-sm-6">
-                <input type="radio" value="2" id="second" onChange={cb} name="floor" defaultChecked />
-                <label htmlFor="second">Second</label>
-              </div>
-            </div>
-          </div>
-        </>
-      );
-};
 export const Floor = ({floor, floorsetter}: FloorProps) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -116,17 +63,32 @@ export const Floor = ({floor, floorsetter}: FloorProps) => {
     case 0:
         return(
         <>
-        <Button0 cb={handleChange} />
+          <FloorLabel />
+          <div className="container">
+            <FloorButton cb={handleChange} lcf="ground" ucf="Ground" floorst="0" checked={true} />
+            <FloorButton cb={handleChange} lcf="first" ucf="First" floorst="1" checked={false} />
+            <FloorButton cb={handleChange} lcf="second" ucf="Second" floorst="2" checked={false} />
+          </div>
         </>)
     case 1:
         return(
         <>
-        <Button1 cb={handleChange} />
+          <FloorLabel />
+          <div className="container">
+            <FloorButton cb={handleChange} lcf="ground" ucf="Ground" floorst="0" checked={false} />
+            <FloorButton cb={handleChange} lcf="first" ucf="First" floorst="1" checked={true} />
+            <FloorButton cb={handleChange} lcf="second" ucf="Second" floorst="2" checked={false} />
+          </div>
         </>)
     case 2:
         return(
         <>
-        <Button2 cb={handleChange} />
+          <FloorLabel />
+          <div className="container">
+            <FloorButton cb={handleChange} lcf="ground" ucf="Ground" floorst="0" checked={false} />
+            <FloorButton cb={handleChange} lcf="first" ucf="First" floorst="1" checked={false} />
+            <FloorButton cb={handleChange} lcf="second" ucf="Second" floorst="2" checked={true} />
+          </div>
         </>)
     default:
         return(
