@@ -12,13 +12,13 @@ import { InputForm } from './components/form'
 import { ProcessData } from './components/processdata'
 
 { /*
-const reset = (setStartDate: React.Dispatch<React.SetStateAction<Date|null>>,
+const reset = (setStartDateTime: React.Dispatch<React.SetStateAction<Date|null>>,
                setFloor: React.Dispatch<React.SetStateAction<number|null>>,
                setDesk: React.Dispatch<React.SetStateAction<string|null>>,
                setEmail: React.Dispatch<React.SetStateAction<string|null>>,
                setComplete: React.Dispatch<React.SetStateAction<boolean>>): void =>
 {
-  setStartDate(new Date());
+  setStartDateTime(new Date());
   setFloor(0);
   setDesk(null);
   setEmail(null);
@@ -36,9 +36,9 @@ interface DeskData {
 
 type string_or_null = string | null;
 
-const tomorrow_from_day = (startDate: Date): Date => {
+const tomorrow_from_day = (startDateTime: Date): Date => {
   // Current date
-  const date = new Date(startDate!);
+  const date = new Date(startDateTime!);
   // Tomorrow's date
   const tomorrow = date.setDate(date.getDate() + 1);
 
@@ -46,10 +46,14 @@ const tomorrow_from_day = (startDate: Date): Date => {
 }
 
 export const App = () => {
-  const [startDate, setStartDate] = useState<Date|null>(new Date());
-  if (startDate) {
-    console.log("startDate starts at ");
-    console.log(startDate.toLocaleDateString());
+  const [startDateTime, setStartDateTime] = useState<Date|null>(new Date());
+  // const [endDateTime, setEndDateTime] = useState<Date|null>(startDateTime);
+  const [endDateTime, setEndDateTime] = useState<Date|null>(null);
+  if (startDateTime) {
+    console.log("startDateTime starts at ");
+    console.log(startDateTime);
+    console.log(" or ");
+    console.log(startDateTime.toLocaleDateString());
   }
 
   const [floor, setFloor] = useState<number|null>(0);
@@ -107,16 +111,13 @@ export const App = () => {
 
   if (complete) {
     console.log("Form is complete - we can SUBMIT IT XXX");
-    console.log(`Date is ${startDate}, Floor is ${floor}, Desk is ${desk}, Email is ${email}`);
-    console.log("Date is ", startDate);
-    console.log("Desk  is ", desk);
-    console.log("Email is ", email);
+    console.log(`StartDateTime is ${startDateTime}, EndDateTime is ${endDateTime}, Floor is ${floor}, Desk is ${desk}, Email is ${email}`);
     
-    const tomorrow = tomorrow_from_day(startDate!);
+    const tomorrow = tomorrow_from_day(startDateTime!);
     console.log("tomorrow is ", tomorrow);
 
     const test_data = {
-      "booking_date": startDate!.toString(),
+      "booking_date": startDateTime!.toString(),
       "expireAt": tomorrow.toString(),
       "floor": floor!,
       "desk": desk!,
@@ -124,19 +125,19 @@ export const App = () => {
     };
     add_desk_to_mongodb(test_data);
 
-//    reset(setStartDate, setFloor, setDesk, setEmail, setComplete); // eventually just show processdata screen for now
+//    reset(setStartDateTime, setFloor, setDesk, setEmail, setComplete); // eventually just show processdata screen for now
     return (
       <>
       <Header />
-      <ProcessData start={startDate} floor={floor} desk={desk} email={email} />
-      <InputForm start={startDate} datesetter={setStartDate} floor={floor} floorsetter={setFloor} desksetter={setDesk} email={email} emailsetter={setEmail} completesetter={setComplete} />
+      <ProcessData start={startDateTime} floor={floor} desk={desk} email={email} />
+      <InputForm start={startDateTime} startdatesetter={setStartDateTime} end={endDateTime} enddatesetter={setEndDateTime} floor={floor} floorsetter={setFloor} desksetter={setDesk} email={email} emailsetter={setEmail} completesetter={setComplete} />
       </>
     );
   } else {
     return (
       <>
       <Header />
-      <InputForm start={startDate} datesetter={setStartDate} floor={floor} floorsetter={setFloor} desksetter={setDesk} email={email} emailsetter={setEmail} completesetter={setComplete} />
+      <InputForm start={startDateTime} startdatesetter={setStartDateTime} end={endDateTime} enddatesetter={setEndDateTime} floor={floor} floorsetter={setFloor} desksetter={setDesk} email={email} emailsetter={setEmail} completesetter={setComplete} />
       </>
     );
   }
