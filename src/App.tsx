@@ -12,13 +12,16 @@ import { InputForm } from './components/form'
 import { ProcessData } from './components/processdata'
 
 { /*
-const reset = (setStartDateTime: React.Dispatch<React.SetStateAction<Date|null>>,
-               setFloor: React.Dispatch<React.SetStateAction<number|null>>,
-               setDesk: React.Dispatch<React.SetStateAction<string|null>>,
-               setEmail: React.Dispatch<React.SetStateAction<string|null>>,
-               setComplete: React.Dispatch<React.SetStateAction<boolean>>): void =>
+const reset = (
+  setStartDateTime: React.Dispatch<React.SetStateAction<Date|null>>,
+  setEndDateTime: React.Dispatch<React.SetStateAction<Date|null>>,
+  setFloor: React.Dispatch<React.SetStateAction<number|null>>,
+  setDesk: React.Dispatch<React.SetStateAction<string|null>>,
+  setEmail: React.Dispatch<React.SetStateAction<string|null>>,
+  setComplete: React.Dispatch<React.SetStateAction<boolean>>): void =>
 {
   setStartDateTime(new Date());
+  setEndDateTime(null);
   setFloor(0);
   setDesk(null);
   setEmail(null);
@@ -27,7 +30,8 @@ const reset = (setStartDateTime: React.Dispatch<React.SetStateAction<Date|null>>
 */ }
 
 interface DeskData {
-  "booking_date": string;
+  "booking_start": string;
+  "booking_end": string;
   "expireAt": string;
   "floor": number; 
   "desk": string;
@@ -47,13 +51,20 @@ const tomorrow_from_day = (startDateTime: Date): Date => {
 
 export const App = () => {
   const [startDateTime, setStartDateTime] = useState<Date|null>(new Date());
-  // const [endDateTime, setEndDateTime] = useState<Date|null>(startDateTime);
-  const [endDateTime, setEndDateTime] = useState<Date|null>(null);
   if (startDateTime) {
     console.log("startDateTime starts at ");
     console.log(startDateTime);
     console.log(" or ");
     console.log(startDateTime.toLocaleDateString());
+  }
+
+  // const [endDateTime, setEndDateTime] = useState<Date|null>(startDateTime);
+  const [endDateTime, setEndDateTime] = useState<Date|null>(null);
+  if (endDateTime) {
+    console.log("endDateTime ends at ");
+    console.log(endDateTime);
+    console.log(" or ");
+    console.log(endDateTime.toLocaleDateString());
   }
 
   const [floor, setFloor] = useState<number|null>(0);
@@ -117,7 +128,8 @@ export const App = () => {
     console.log("tomorrow is ", tomorrow);
 
     const test_data = {
-      "booking_date": startDateTime!.toString(),
+      "booking_start": startDateTime!.toString(),
+      "booking_end": endDateTime!.toString(),
       "expireAt": tomorrow.toString(),
       "floor": floor!,
       "desk": desk!,
@@ -125,11 +137,11 @@ export const App = () => {
     };
     add_desk_to_mongodb(test_data);
 
-//    reset(setStartDateTime, setFloor, setDesk, setEmail, setComplete); // eventually just show processdata screen for now
+//    reset(setStartDateTime, setEndDateTime, setFloor, setDesk, setEmail, setComplete); // eventually just show processdata screen for now
     return (
       <>
       <Header />
-      <ProcessData start={startDateTime} floor={floor} desk={desk} email={email} />
+      <ProcessData start={startDateTime} end={endDateTime} floor={floor} desk={desk} email={email} />
       <InputForm start={startDateTime} startdatesetter={setStartDateTime} end={endDateTime} enddatesetter={setEndDateTime} floor={floor} floorsetter={setFloor} desksetter={setDesk} email={email} emailsetter={setEmail} completesetter={setComplete} />
       </>
     );
