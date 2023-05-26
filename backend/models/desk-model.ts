@@ -3,7 +3,8 @@ const Schema = mongoose.Schema
 
 const Deskschema = new Schema(
     {
-        booking_date: { type: Date },
+        booking_start: { type: Date },
+        booking_end: { type: Date },
         expireAt: { type: Date },
         floor: { type : Number },
         desk: { type: String },

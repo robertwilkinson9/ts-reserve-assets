@@ -1,7 +1,3 @@
-{ /*
-import React, { useState } from "react";
-import { useState } from "react";
-*/ }
 import { useState, useEffect } from "react";
 
 import { registerLocale, setDefaultLocale } from  "react-datepicker";
@@ -18,7 +14,8 @@ const reset = (
   setFloor: React.Dispatch<React.SetStateAction<number|null>>,
   setDesk: React.Dispatch<React.SetStateAction<string|null>>,
   setEmail: React.Dispatch<React.SetStateAction<string|null>>,
-  setComplete: React.Dispatch<React.SetStateAction<boolean>>): void =>
+  setComplete: React.Dispatch<React.SetStateAction<boolean>>,
+): void =>
 {
   setStartDateTime(new Date());
   setEndDateTime(null);
@@ -48,6 +45,27 @@ const tomorrow_from_day = (startDateTime: Date): Date => {
 
   return new Date(tomorrow);
 }
+
+const add_desk_to_mongodb = (url: string, desk_booking: DeskData) => {
+  console.log("ADD_DESK_TO_MONGODB and before ");
+  fetch(url, {
+    method: 'POST',
+    body: JSON.stringify(desk_booking),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    console.log("------------add_desk_to_mongodb returned data is");
+    console.log(data);
+    console.log("ADD_DESK_TO_MONGODB and desk_booking is ", JSON.stringify(desk_booking));
+    // Handle data
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
+};
 
 export const App = () => {
   const [startDateTime, setStartDateTime] = useState<Date|null>(new Date());
@@ -79,27 +97,6 @@ export const App = () => {
   const API_url = 'http://localhost:5179/api/';
   const DESK_url = API_url + 'desk/';
 
-  const add_desk_to_mongodb = (desk_booking: DeskData) => {
-    console.log("ADD_DESK_TO_MONGODB and before ");
-    fetch(DESK_url, {
-      method: 'POST',
-      body: JSON.stringify(desk_booking),
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
-    })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("------------add_todo returned data is");
-      console.log(data);
-      console.log("ADD_DESK_TO_MONGODB and desk_booking is ", JSON.stringify(desk_booking));
-      // Handle data
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
-  };
-
   const get_mongodesks = () => {
     // Change this endpoint to whatever local or online address you have
     const DESKS_url = API_url + 'desks/';
@@ -114,11 +111,22 @@ export const App = () => {
       });
     };
 
-    
     useEffect(() => {
         get_mongodesks();
     }, []);
+
   console.log("after useEffect App and DESKS are ", JSON.stringify(mongodesks));
+
+//    useEffect((url: string, desk_booking: DeskData) => {
+{ /*
+  const send_data = (url: string, desk_booking: DeskData) => {
+    console.log(`TEST DATA is ${desk_booking}`);
+     add_desk_to_mongodb(url, desk_booking)
+    };
+    useEffect(() => {
+     send_data(url, desk_booking)
+    }, [complete]);
+*/ }
 
   if (complete) {
     console.log("Form is complete - we can SUBMIT IT XXX");
@@ -135,7 +143,8 @@ export const App = () => {
       "desk": desk!,
       "email": email!,
     };
-    add_desk_to_mongodb(test_data);
+    add_desk_to_mongodb(DESK_url, test_data);
+//    send_data(DESK_url, test_data);
 
 //    reset(setStartDateTime, setEndDateTime, setFloor, setDesk, setEmail, setComplete); // eventually just show processdata screen for now
     return (

@@ -106,8 +106,8 @@ updateDesk = async (req, res) => {
       });
     console.log("mydata is ");
     console.log(mydata);
-    console.log("mydata.booking_date is ");
-    console.log(mydata.booking_date);
+    console.log("mydata.booking_start is ");
+    console.log(mydata.booking_start);
     console.log("mydata.email is ");
     console.log(mydata.email);
 

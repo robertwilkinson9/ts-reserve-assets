@@ -1,11 +1,3 @@
-> use desks
-switched to db desks
-> db.desks.insertOne( {"booking_date" : ISODate("2023-05-25"), "expireAt" : ISODate("2023-05-26"), "floor" : 2, "desk" : "2f18", "email" : "robert.wilkinson@raytheon.co.uk"} )
-{
-	"acknowledged" : true,
-	"insertedId" : ObjectId("646c88a7dbb676511e4e1781")
-}
-
 > use desk
 switched to db desk
 > db.desk.insertOne( {"booking_date" : ISODate("2023-05-25"), "expireAt" : ISODate("2023-05-26"), "floor" : 2, "desk" : "2f18", "email" : "robert.wilkinson@raytheon.co.uk"} )
@@ -20,7 +12,6 @@ switched to db desk
 { "_id" : ObjectId("646c8b20dbb676511e4e1782"), "booking_date" : ISODate("2023-05-25T00:00:00Z"), "expireAt" : ISODate("2023-05-26T00:00:00Z"), "floor" : 2, "desk" : "2f18", "email" : "robert.wilkinson@raytheon.co.uk" }
 > 
 
-
 > db.desk.createIndex({ "expireAt": 1 }, { expireAfterSeconds: 0 })
 {
 	"createdCollectionAutomatically" : false,
@@ -29,3 +20,16 @@ switched to db desk
 	"ok" : 1
 }
 > 
+
+> db.runCommand({delete: "desk", deletes: [ { q: { }, limit: 0 } ], writeConcern: { w: "majority", wtimeout: 5000 }})
+{ "n" : 2, "ok" : 1 }
+> db.desk.find({})
+>
+> db.desk.insertOne( {"booking_start": ISODate("2023-05-29T08:00:00Z"), "booking_end": ISODate("2023-05-29T17:00:00Z"), "expireAt": ISODate("2023-05-30T08:00:00Z"), "floor" : 2, "desk" : "2f18", "email" : "robert.wilkinson@raytheon.co.uk"})
+
+{
+	"acknowledged" : true,
+	"insertedId" : ObjectId("647085993236f00e8ece25aa")
+}
+> 
+
