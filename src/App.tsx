@@ -47,24 +47,21 @@ const tomorrow_from_day = (startDateTime: Date): Date => {
 }
 
 const add_desk_to_mongodb = (url: string, desk_booking: DeskData) => {
-  console.log("ADD_DESK_TO_MONGODB and before ");
-  fetch(url, {
+  console.log("ADD_DESK_TO_MONGODB and BEFORE desk_booking is ", JSON.stringify(desk_booking));
+  (async () => {
+    const rawResponse = await fetch(url, {
     method: 'POST',
-    body: JSON.stringify(desk_booking),
     headers: {
-      'Content-type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
     },
-  })
-  .then((response) => response.json())
-  .then((data) => {
-    console.log("------------add_desk_to_mongodb returned data is");
-    console.log(data);
-    console.log("ADD_DESK_TO_MONGODB and desk_booking is ", JSON.stringify(desk_booking));
-    // Handle data
-  })
-  .catch((err) => {
-    console.log(err.message);
+    body: JSON.stringify(desk_booking)
   });
+    const content = await rawResponse.json();
+
+    console.log("CONTENT IS ", content);
+    console.log('rawResponse IS :', rawResponse)
+  })();
 };
 
 export const App = () => {
@@ -127,20 +124,14 @@ export const App = () => {
     useEffect(() => {
      send_data(url, desk_booking)
     }, [complete]);
+//      if (!datasent) {
+//      }
 */ }
 
   const send_data = (url: string, desk_booking: DeskData) => {
     console.log(`START SEND_DATA - DATASENT IS ${datasent} and url is ${url}`)
-//    useEffect(() => {
-      if (!datasent) {
-        console.log(`TEST DATA is ${desk_booking}`);
-        add_desk_to_mongodb(url, desk_booking);
-        console.log(`0. SEND_DATA - DATASENT IS ${datasent}`)
-        setDatasent(true);
-        console.log(`1. SEND_DATA - DATASENT IS ${datasent}`)
-      }
-      console.log(`SEND_DATA - DATASENT IS ${datasent} and desk_booking is ${desk_booking}`)
-//    }, [datasent]);
+    console.log("TEST DATA is ", JSON.stringify(desk_booking));
+    add_desk_to_mongodb(url, desk_booking);
     console.log(`END SEND_DATA - DATASENT IS ${datasent} and url is ${url}`)
   }
 
@@ -160,7 +151,12 @@ export const App = () => {
       "email": email!,
     };
 //    add_desk_to_mongodb(DESK_url, test_data);
-    send_data(DESK_url, test_data);
+    if (!datasent) {
+      send_data(DESK_url, test_data);
+      console.log(`0. SET_DATASENT - DATASENT IS ${datasent}`)
+      setDatasent(true);
+      console.log(`1. SET_DATASENT - DATASENT IS ${datasent}`)
+    }
 
 //    reset(setStartDateTime, setEndDateTime, setFloor, setDesk, setEmail, setComplete); // eventually just show processdata screen for now
     return (

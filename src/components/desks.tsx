@@ -55,7 +55,7 @@ export interface DesksProps {
 }
 
 const listbuild = (istart:number, ilast:number, prefix: string) => {
-  let desks: string[] = [];
+  const desks: string[] = [];
   for (let i = istart; i <= ilast; i++) {
     let d = "";
 // sprintf?

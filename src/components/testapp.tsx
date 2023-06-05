@@ -38,7 +38,7 @@ export const Testapp = () => {
     }
   ];
 
-  const [selectedValue, setSelectedValue] = useState<String>(drinks[0].label);
+  const [selectedValue, setSelectedValue] = useState<string>(drinks[0].label);
 
   function radioGroupHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setSelectedValue(event.target.value);
