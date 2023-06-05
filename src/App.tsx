@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import axios from 'axios'
+
 import { registerLocale, setDefaultLocale } from  "react-datepicker";
 import enGB from 'date-fns/locale/en-GB';
 
@@ -46,8 +48,13 @@ const tomorrow_from_day = (startDateTime: Date): Date => {
   return new Date(tomorrow);
 }
 
-const add_desk_to_mongodb = (url: string, desk_booking: DeskData) => {
+const add_desk_to_mongodb = async (url: string, desk_booking: DeskData) => {
   console.log("ADD_DESK_TO_MONGODB and BEFORE desk_booking is ", JSON.stringify(desk_booking));
+  const response = await axios.post(url, desk_booking);
+  console.log('STATUS:', response.status)
+  console.log('DATA IS :', response.data)
+
+{ /*
   (async () => {
     const rawResponse = await fetch(url, {
     method: 'POST',
@@ -62,6 +69,8 @@ const add_desk_to_mongodb = (url: string, desk_booking: DeskData) => {
     console.log("CONTENT IS ", content);
     console.log('rawResponse IS :', rawResponse)
   })();
+*/ }
+
 };
 
 export const App = () => {
@@ -115,19 +124,6 @@ export const App = () => {
 
   console.log("after useEffect App and DESKS are ", JSON.stringify(mongodesks));
 
-//    useEffect((url: string, desk_booking: DeskData) => {
-{ /*
-  const send_data = (url: string, desk_booking: DeskData) => {
-    console.log(`TEST DATA is ${desk_booking}`);
-     add_desk_to_mongodb(url, desk_booking)
-    };
-    useEffect(() => {
-     send_data(url, desk_booking)
-    }, [complete]);
-//      if (!datasent) {
-//      }
-*/ }
-
   const send_data = (url: string, desk_booking: DeskData) => {
     console.log(`START SEND_DATA - DATASENT IS ${datasent} and url is ${url}`)
     console.log("TEST DATA is ", JSON.stringify(desk_booking));
@@ -150,7 +146,6 @@ export const App = () => {
       "desk": desk!,
       "email": email!,
     };
-//    add_desk_to_mongodb(DESK_url, test_data);
     if (!datasent) {
       send_data(DESK_url, test_data);
       console.log(`0. SET_DATASENT - DATASENT IS ${datasent}`)
