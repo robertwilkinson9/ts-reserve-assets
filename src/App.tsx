@@ -89,6 +89,7 @@ export const App = () => {
   const [desk, setDesk] = useState<string|null>(null);
   const [email, setEmail] = useState<string|null>(null);
   const [complete, setComplete] = useState<boolean>(false);
+  const [datasent, setDatasent] = useState<boolean>(false);
   const [mongodesks, setMongodesks] = useState<string_or_null[]>([null]);
 
   registerLocale('en-GB', enGB)
@@ -128,6 +129,21 @@ export const App = () => {
     }, [complete]);
 */ }
 
+  const send_data = (url: string, desk_booking: DeskData) => {
+    console.log(`START SEND_DATA - DATASENT IS ${datasent} and url is ${url}`)
+//    useEffect(() => {
+      if (!datasent) {
+        console.log(`TEST DATA is ${desk_booking}`);
+        add_desk_to_mongodb(url, desk_booking);
+        console.log(`0. SEND_DATA - DATASENT IS ${datasent}`)
+        setDatasent(true);
+        console.log(`1. SEND_DATA - DATASENT IS ${datasent}`)
+      }
+      console.log(`SEND_DATA - DATASENT IS ${datasent} and desk_booking is ${desk_booking}`)
+//    }, [datasent]);
+    console.log(`END SEND_DATA - DATASENT IS ${datasent} and url is ${url}`)
+  }
+
   if (complete) {
     console.log("Form is complete - we can SUBMIT IT XXX");
     console.log(`StartDateTime is ${startDateTime}, EndDateTime is ${endDateTime}, Floor is ${floor}, Desk is ${desk}, Email is ${email}`);
@@ -143,8 +159,8 @@ export const App = () => {
       "desk": desk!,
       "email": email!,
     };
-    add_desk_to_mongodb(DESK_url, test_data);
-//    send_data(DESK_url, test_data);
+//    add_desk_to_mongodb(DESK_url, test_data);
+    send_data(DESK_url, test_data);
 
 //    reset(setStartDateTime, setEndDateTime, setFloor, setDesk, setEmail, setComplete); // eventually just show processdata screen for now
     return (
