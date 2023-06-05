@@ -53,24 +53,6 @@ const add_desk_to_mongodb = async (url: string, desk_booking: DeskData) => {
   const response = await axios.post(url, desk_booking);
   console.log('STATUS:', response.status)
   console.log('DATA IS :', response.data)
-
-{ /*
-  (async () => {
-    const rawResponse = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(desk_booking)
-  });
-    const content = await rawResponse.json();
-
-    console.log("CONTENT IS ", content);
-    console.log('rawResponse IS :', rawResponse)
-  })();
-*/ }
-
 };
 
 export const App = () => {
@@ -124,13 +106,6 @@ export const App = () => {
 
   console.log("after useEffect App and DESKS are ", JSON.stringify(mongodesks));
 
-  const send_data = (url: string, desk_booking: DeskData) => {
-    console.log(`START SEND_DATA - DATASENT IS ${datasent} and url is ${url}`)
-    console.log("TEST DATA is ", JSON.stringify(desk_booking));
-    add_desk_to_mongodb(url, desk_booking);
-    console.log(`END SEND_DATA - DATASENT IS ${datasent} and url is ${url}`)
-  }
-
   if (complete) {
     console.log("Form is complete - we can SUBMIT IT XXX");
     console.log(`StartDateTime is ${startDateTime}, EndDateTime is ${endDateTime}, Floor is ${floor}, Desk is ${desk}, Email is ${email}`);
@@ -138,7 +113,7 @@ export const App = () => {
     const tomorrow = tomorrow_from_day(startDateTime!);
     console.log("tomorrow is ", tomorrow);
 
-    const test_data = {
+    const desk_booking = {
       "booking_start": startDateTime!.toString(),
       "booking_end": endDateTime!.toString(),
       "expireAt": tomorrow.toString(),
@@ -147,7 +122,7 @@ export const App = () => {
       "email": email!,
     };
     if (!datasent) {
-      send_data(DESK_url, test_data);
+      add_desk_to_mongodb(DESK_url, desk_booking);
       console.log(`0. SET_DATASENT - DATASENT IS ${datasent}`)
       setDatasent(true);
       console.log(`1. SET_DATASENT - DATASENT IS ${datasent}`)
