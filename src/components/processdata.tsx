@@ -31,8 +31,8 @@ interface DeskData {
 const add_desk_to_mongodb = async (url: string, desk_booking: DeskData) => {
   console.log("ADD_DESK_TO_MONGODB and BEFORE desk_booking is ", JSON.stringify(desk_booking));
   const response = await axios.post(url, desk_booking);
-  console.log('STATUS:', response.status)
-  console.log('DATA IS :', response.data)
+  console.log('ADD_DESK_TO_MONGODB STATUS:', response.status)
+  console.log('ADD_DESK_TO_MONGODB DATA IS :', response.data)
 };
 
 export const ProcessData = ({ start, end, floor, desk, email, url } : ProcessDataProps) => {

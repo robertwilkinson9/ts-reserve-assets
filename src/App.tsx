@@ -5,6 +5,7 @@ import axios from 'axios'
 import { registerLocale, setDefaultLocale } from  "react-datepicker";
 import enGB from 'date-fns/locale/en-GB';
 
+import { Clean } from './components/clean'
 import { Header } from './components/header'
 import { InputForm } from './components/form'
 import { ProcessData } from './components/processdata'
@@ -64,11 +65,11 @@ export const App = () => {
     const DESKS_url = API_url + 'desks/';
 
     const response = await axios.get(DESKS_url);
+    console.log("IN get_mongodesks and RESPONSE is ", response);
+    console.log("IN get_mongodesks and RESPONSE.STATUS is ", response.status);
     console.log("IN get_mongodesks and RESPONSE.DATA is ", JSON.stringify(response.data));
     setMongodesks(response.data);
   };
-
-  console.log("BEFORE useEffect App and COMPLETE is ",complete," and DESKS are ", JSON.stringify(mongodesks));
 
   useEffect(() => {
     get_mongodesks();
@@ -82,6 +83,7 @@ export const App = () => {
       <>
       <Header />
       <ProcessData start={startDateTime} end={endDateTime} floor={floor} desk={desk} email={email} url={API_url} />
+      <Clean sdt={setStartDateTime} edt={setEndDateTime} sf={setFloor} sd={setDesk} se={setEmail} sc={setComplete} /> 
       <InputForm start={startDateTime} startdatesetter={setStartDateTime} end={endDateTime} enddatesetter={setEndDateTime} floor={floor} floorsetter={setFloor} desksetter={setDesk} email={email} emailsetter={setEmail} completesetter={setComplete} />
       </>
     );
