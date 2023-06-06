@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import axios from 'axios'
+
 import { registerLocale, setDefaultLocale } from  "react-datepicker";
 import enGB from 'date-fns/locale/en-GB';
 
@@ -24,16 +26,6 @@ const reset = (
   setEmail(null);
   setComplete(false);
 }
-
-interface DeskData {
-  "booking_start": string;
-  "booking_end": string;
-  "expireAt": string;
-  "floor": number; 
-  "desk": string;
-  "email": string
-}
-
 */ }
 
 type string_or_null = string | null;
@@ -67,25 +59,22 @@ export const App = () => {
 
   const API_url = 'http://localhost:5179/api/';
 
-  const get_mongodesks = () => {
+  const get_mongodesks = async () => {
     // Change this endpoint to whatever local or online address you have
     const DESKS_url = API_url + 'desks/';
 
-    fetch(DESKS_url)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log("IN useEffect and DATA.DATA is ", JSON.stringify(data.data));
-        setMongodesks(data.data);
-      });
-    };
+    const response = await axios.get(DESKS_url);
+    console.log("IN get_mongodesks and RESPONSE.DATA is ", JSON.stringify(response.data));
+    setMongodesks(response.data);
+  };
 
-    useEffect(() => {
-        get_mongodesks();
-    }, []);
+  console.log("BEFORE useEffect App and COMPLETE is ",complete," and DESKS are ", JSON.stringify(mongodesks));
 
-  console.log("after useEffect App and DESKS are ", JSON.stringify(mongodesks));
+  useEffect(() => {
+    get_mongodesks();
+  }, [complete]);
+
+  console.log("AFTER useEffect App and COMPLETE is ",complete," and DESKS are ", JSON.stringify(mongodesks));
 
   if (complete) {
 //    reset(setStartDateTime, setEndDateTime, setFloor, setDesk, setEmail, setComplete); // eventually just show processdata screen for now
