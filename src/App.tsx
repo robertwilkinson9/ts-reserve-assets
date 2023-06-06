@@ -66,7 +66,6 @@ export const App = () => {
   setDefaultLocale('en-GB');
 
   const API_url = 'http://localhost:5179/api/';
-  const DESK_url = API_url + 'desk/';
 
   const get_mongodesks = () => {
     // Change this endpoint to whatever local or online address you have
@@ -93,7 +92,7 @@ export const App = () => {
     return (
       <>
       <Header />
-      <ProcessData start={startDateTime} end={endDateTime} floor={floor} desk={desk} email={email} url={DESK_url} />
+      <ProcessData start={startDateTime} end={endDateTime} floor={floor} desk={desk} email={email} url={API_url} />
       <InputForm start={startDateTime} startdatesetter={setStartDateTime} end={endDateTime} enddatesetter={setEndDateTime} floor={floor} floorsetter={setFloor} desksetter={setDesk} email={email} emailsetter={setEmail} completesetter={setComplete} />
       </>
     );

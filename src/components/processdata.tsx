@@ -51,7 +51,8 @@ export const ProcessData = ({ start, end, floor, desk, email, url } : ProcessDat
   };
 
   if (!datasent) {
-    add_desk_to_mongodb(url, desk_booking);
+    const DESK_url = url + 'desk/';
+    add_desk_to_mongodb(DESK_url, desk_booking);
     console.log(`0. SET_DATASENT - DATASENT IS ${datasent}`)
     setDatasent(true);
     console.log(`1. SET_DATASENT - DATASENT IS ${datasent}`)
