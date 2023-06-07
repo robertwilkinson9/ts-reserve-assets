@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button';
 
 import axios from 'axios'
 
+import App from '../App';
+
 export interface ProcessDataProps {
    start: Date | null;
    end: Date | null;
@@ -43,6 +45,7 @@ const add_desk_to_mongodb = async (url: string, desk_booking: DeskData) => {
 export const ProcessData = ({ start, end, floor, desk, email, url, ids, setIds } : ProcessDataProps) => {
   const [datasent, setDatasent] = useState<boolean>(false);
 //  const [ids, setIds] = useState<string[]>([]);
+  const [gohome, setGohome] = useState<boolean>(false);
 
   const tomorrow = tomorrow_from_day(start!);
   console.log("tomorrow is ", tomorrow);
@@ -89,6 +92,7 @@ export const ProcessData = ({ start, end, floor, desk, email, url, ids, setIds }
 
   const handleClick = () => {
     console.log("Another Button clicked!");
+    setGohome(true);
   }
 
   return (
@@ -104,6 +108,8 @@ export const ProcessData = ({ start, end, floor, desk, email, url, ids, setIds }
     >
     Another?
     </Button>
+
+    {gohome && <App /> }
     </>
   );
 };
