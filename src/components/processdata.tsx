@@ -1,4 +1,7 @@
 import { useState } from "react";
+
+import Button from 'react-bootstrap/Button';
+
 import axios from 'axios'
 
 export interface ProcessDataProps {
@@ -8,6 +11,8 @@ export interface ProcessDataProps {
    desk: string | null;
    email: string | null;
    url: string;
+   ids: string[];
+   setIds: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 const tomorrow_from_day = (startDateTime: Date): Date => {
@@ -29,14 +34,15 @@ interface DeskData {
 }
 
 const add_desk_to_mongodb = async (url: string, desk_booking: DeskData) => {
-  console.log("ADD_DESK_TO_MONGODB and BEFORE desk_booking is ", JSON.stringify(desk_booking));
   const response = await axios.post(url, desk_booking);
-  console.log('ADD_DESK_TO_MONGODB STATUS:', response.status)
-  console.log('ADD_DESK_TO_MONGODB DATA IS :', response.data)
+//  console.log('ADD_DESK_TO_MONGODB STATUS:', response.status) // XXX need to handle non success ?
+  console.log('ADD_DESK_TO_MONGODB ID IS :', response.data.id)
+  return response.data.id;
 };
 
-export const ProcessData = ({ start, end, floor, desk, email, url } : ProcessDataProps) => {
+export const ProcessData = ({ start, end, floor, desk, email, url, ids, setIds } : ProcessDataProps) => {
   const [datasent, setDatasent] = useState<boolean>(false);
+//  const [ids, setIds] = useState<string[]>([]);
 
   const tomorrow = tomorrow_from_day(start!);
   console.log("tomorrow is ", tomorrow);
@@ -50,12 +56,21 @@ export const ProcessData = ({ start, end, floor, desk, email, url } : ProcessDat
     "email": email!,
   };
 
-  if (!datasent) {
+  if (datasent) {
+    console.log("IDS are ", ids); 
+  } else {
     const DESK_url = url + 'desk/';
-    add_desk_to_mongodb(DESK_url, desk_booking);
-    console.log(`0. SET_DATASENT - DATASENT IS ${datasent}`)
+    const id = add_desk_to_mongodb(DESK_url, desk_booking);
+    id.then(function(value) {
+      console.log(`RESULT ${value}`);
+      setIds([...ids, value])
+      console.log("INSIDE NOW IDS are ", ids); 
+      setDatasent(true);
+      console.log(`INSIDE 1. SET_DATASENT - jj is ${id}, DATASENT IS ${datasent}`)
+    });
+    console.log("OUTSIDE NOW IDS are ", ids); 
     setDatasent(true);
-    console.log(`1. SET_DATASENT - DATASENT IS ${datasent}`)
+    console.log(`OUTSIDE 1. SET_DATASENT - jj is ${id}, DATASENT IS ${datasent}`)
   }
 
   let sdstr = "No start date available"
@@ -72,6 +87,10 @@ export const ProcessData = ({ start, end, floor, desk, email, url } : ProcessDat
     fstr = Floor[floor] + " floor";
   }
 
+  const handleClick = () => {
+    console.log("Another Button clicked!");
+  }
+
   return (
     <>
     <h4>ProcessData</h4>
@@ -80,6 +99,11 @@ export const ProcessData = ({ start, end, floor, desk, email, url } : ProcessDat
     <p>{fstr}</p>
     <p>{desk}</p>
     <p>{email}</p>
+    <Button
+       onClick={handleClick}
+    >
+    Another?
+    </Button>
     </>
   );
 };

@@ -5,7 +5,7 @@ import axios from 'axios'
 import { registerLocale, setDefaultLocale } from  "react-datepicker";
 import enGB from 'date-fns/locale/en-GB';
 
-import { Clean } from './components/clean'
+// import { Clean } from './components/clean'
 import { Header } from './components/header'
 import { InputForm } from './components/form'
 import { ProcessData } from './components/processdata'
@@ -54,6 +54,7 @@ export const App = () => {
   const [email, setEmail] = useState<string|null>(null);
   const [complete, setComplete] = useState<boolean>(false);
   const [mongodesks, setMongodesks] = useState<string_or_null[]>([null]);
+  const [ids, setIds] = useState<string[]>([]);
 
   registerLocale('en-GB', enGB)
   setDefaultLocale('en-GB');
@@ -82,9 +83,10 @@ export const App = () => {
     return (
       <>
       <Header />
-      <ProcessData start={startDateTime} end={endDateTime} floor={floor} desk={desk} email={email} url={API_url} />
+      <ProcessData start={startDateTime} end={endDateTime} floor={floor} desk={desk} email={email} url={API_url} ids={ids} setIds={setIds} />
+{ /*
       <Clean sdt={setStartDateTime} edt={setEndDateTime} sf={setFloor} sd={setDesk} se={setEmail} sc={setComplete} /> 
-      <InputForm start={startDateTime} startdatesetter={setStartDateTime} end={endDateTime} enddatesetter={setEndDateTime} floor={floor} floorsetter={setFloor} desksetter={setDesk} email={email} emailsetter={setEmail} completesetter={setComplete} />
+*/ }
       </>
     );
   } else {
