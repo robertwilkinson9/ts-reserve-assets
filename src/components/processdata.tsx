@@ -4,8 +4,6 @@ import Button from 'react-bootstrap/Button';
 
 import axios from 'axios'
 
-import App from '../App';
-
 const reset = (
   setStartDateTime: React.Dispatch<React.SetStateAction<Date|null>>,
   setEndDateTime: React.Dispatch<React.SetStateAction<Date|null>>,
@@ -60,19 +58,12 @@ interface DeskData {
 
 const add_desk_to_mongodb = async (url: string, desk_booking: DeskData) => {
   const response = await axios.post(url, desk_booking);
-//  console.log('ADD_DESK_TO_MONGODB STATUS:', response.status) // XXX need to handle non success ?
   console.log('ADD_DESK_TO_MONGODB ID IS :', response.data.id)
   return response.data.id;
 };
 
-{ /*
-      <ProcessData start={startDateTime} sdt={setStartDateTime} end={endDateTime} edt={setEndDateTime} floor={floor} sf={setFloor} desk={desk} sd={setDesk} email={email} sd={setDesk} sc={setComplete} url={API_url} ids={ids} setIds={setIds} />
-*/ }
-
 export const ProcessData = ({ start, sdt, end, edt, floor, sf, desk, sd, email, se, sc, url, ids, setIds } : ProcessDataProps) => {
   const [datasent, setDatasent] = useState<boolean>(false);
-//  const [ids, setIds] = useState<string[]>([]);
-  const [gohome, setGohome] = useState<boolean>(false);
 
   const tomorrow = tomorrow_from_day(start!);
   console.log("tomorrow is ", tomorrow);
@@ -102,20 +93,6 @@ export const ProcessData = ({ start, sdt, end, edt, floor, sf, desk, sd, email, 
     console.log("IDS are ", ids); 
   } else {
     console.log("DATASENT unset "); 
-{ /*
-    const DESK_url = url + 'desk/';
-    const id = add_desk_to_mongodb(DESK_url, desk_booking);
-    id.then(function(value) {
-      console.log(`RESULT ${value}`);
-      setIds([...ids, value])
-      console.log("INSIDE NOW IDS are ", ids); 
-      setDatasent(true);
-      console.log(`INSIDE 1. SET_DATASENT - jj is ${id}, DATASENT IS ${datasent}`)
-    });
-    console.log("OUTSIDE NOW IDS are ", ids); 
-    setDatasent(true);
-    console.log(`OUTSIDE 1. SET_DATASENT - jj is ${id}, DATASENT IS ${datasent}`)
-*/ }
   }
 
   let sdstr = "No start date available"
@@ -142,11 +119,6 @@ export const ProcessData = ({ start, sdt, end, edt, floor, sf, desk, sd, email, 
     reset(sdt, edt, sf, sd, se, sc);
   }
 
-  const handleClick = () => {
-    console.log("Another Button clicked!");
-    setGohome(true);
-  }
-
   return (
     <>
     <h4>ProcessData</h4>
@@ -167,13 +139,6 @@ export const ProcessData = ({ start, sdt, end, edt, floor, sf, desk, sd, email, 
     Cancel?
     </Button>
 
-    <Button
-       onClick={handleClick}
-    >
-    Another?
-    </Button>
-
-    {gohome && <App /> }
     </>
   );
 };
