@@ -83,7 +83,7 @@ export const App = () => {
     return (
       <>
       <Header />
-      <ProcessData start={startDateTime} end={endDateTime} floor={floor} desk={desk} email={email} url={API_url} ids={ids} setIds={setIds} />
+      <ProcessData start={startDateTime} sdt={setStartDateTime} end={endDateTime} edt={setEndDateTime} floor={floor} sf={setFloor} desk={desk} sd={setDesk} email={email} se={setEmail} sc={setComplete} url={API_url} ids={ids} setIds={setIds} />
 { /*
       <Clean sdt={setStartDateTime} edt={setEndDateTime} sf={setFloor} sd={setDesk} se={setEmail} sc={setComplete} /> 
 */ }

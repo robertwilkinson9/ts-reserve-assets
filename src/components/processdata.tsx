@@ -6,12 +6,35 @@ import axios from 'axios'
 
 import App from '../App';
 
+const reset = (
+  setStartDateTime: React.Dispatch<React.SetStateAction<Date|null>>,
+  setEndDateTime: React.Dispatch<React.SetStateAction<Date|null>>,
+  setFloor: React.Dispatch<React.SetStateAction<number|null>>,
+  setDesk: React.Dispatch<React.SetStateAction<string|null>>,
+  setEmail: React.Dispatch<React.SetStateAction<string|null>>,
+  setComplete: React.Dispatch<React.SetStateAction<boolean>>,
+): void =>
+{
+  setStartDateTime(new Date());
+  setEndDateTime(null);
+  setFloor(0);
+  setDesk(null);
+  setEmail(null);
+  setComplete(false);
+}
+
 export interface ProcessDataProps {
    start: Date | null;
+   sdt: React.Dispatch<React.SetStateAction<Date|null>>,
    end: Date | null;
+   edt: React.Dispatch<React.SetStateAction<Date|null>>,
    floor: number | null;
+   sf: React.Dispatch<React.SetStateAction<number|null>>,
    desk: string | null;
+   sd: React.Dispatch<React.SetStateAction<string|null>>,
    email: string | null;
+   se: React.Dispatch<React.SetStateAction<string|null>>,
+   sc: React.Dispatch<React.SetStateAction<boolean>>,
    url: string;
    ids: string[];
    setIds: React.Dispatch<React.SetStateAction<string[]>>;
@@ -42,7 +65,11 @@ const add_desk_to_mongodb = async (url: string, desk_booking: DeskData) => {
   return response.data.id;
 };
 
-export const ProcessData = ({ start, end, floor, desk, email, url, ids, setIds } : ProcessDataProps) => {
+{ /*
+      <ProcessData start={startDateTime} sdt={setStartDateTime} end={endDateTime} edt={setEndDateTime} floor={floor} sf={setFloor} desk={desk} sd={setDesk} email={email} sd={setDesk} sc={setComplete} url={API_url} ids={ids} setIds={setIds} />
+*/ }
+
+export const ProcessData = ({ start, sdt, end, edt, floor, sf, desk, sd, email, se, sc, url, ids, setIds } : ProcessDataProps) => {
   const [datasent, setDatasent] = useState<boolean>(false);
 //  const [ids, setIds] = useState<string[]>([]);
   const [gohome, setGohome] = useState<boolean>(false);
@@ -110,6 +137,11 @@ export const ProcessData = ({ start, end, floor, desk, email, url, ids, setIds }
     confirm_action();
   }
 
+  const handleCancel = () => {
+    console.log("Cancel Button clicked!");
+    reset(sdt, edt, sf, sd, se, sc);
+  }
+
   const handleClick = () => {
     console.log("Another Button clicked!");
     setGohome(true);
@@ -127,6 +159,12 @@ export const ProcessData = ({ start, end, floor, desk, email, url, ids, setIds }
        onClick={handleConfirm}
     >
     Confirm?
+    </Button>
+
+    <Button
+       onClick={handleCancel}
+    >
+    Cancel?
     </Button>
 
     <Button
