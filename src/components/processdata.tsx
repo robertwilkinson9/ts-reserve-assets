@@ -59,9 +59,23 @@ export const ProcessData = ({ start, end, floor, desk, email, url, ids, setIds }
     "email": email!,
   };
 
+  const confirm_action = () => {
+    const DESK_url = url + 'desk/';
+    const id = add_desk_to_mongodb(DESK_url, desk_booking);
+    id.then(function(value) {
+      console.log(`RESULT ${value}`);
+      setIds([...ids, value])
+      console.log("INSIDE NOW IDS are ", ids); 
+      setDatasent(true);
+      console.log(`INSIDE 1. SET_DATASENT - jj is ${id}, DATASENT IS ${datasent}`)
+    });
+  }
+
   if (datasent) {
     console.log("IDS are ", ids); 
   } else {
+    console.log("DATASENT unset "); 
+{ /*
     const DESK_url = url + 'desk/';
     const id = add_desk_to_mongodb(DESK_url, desk_booking);
     id.then(function(value) {
@@ -74,6 +88,7 @@ export const ProcessData = ({ start, end, floor, desk, email, url, ids, setIds }
     console.log("OUTSIDE NOW IDS are ", ids); 
     setDatasent(true);
     console.log(`OUTSIDE 1. SET_DATASENT - jj is ${id}, DATASENT IS ${datasent}`)
+*/ }
   }
 
   let sdstr = "No start date available"
@@ -90,6 +105,11 @@ export const ProcessData = ({ start, end, floor, desk, email, url, ids, setIds }
     fstr = Floor[floor] + " floor";
   }
 
+  const handleConfirm = () => {
+    console.log("Confirm Button clicked!");
+    confirm_action();
+  }
+
   const handleClick = () => {
     console.log("Another Button clicked!");
     setGohome(true);
@@ -103,6 +123,12 @@ export const ProcessData = ({ start, end, floor, desk, email, url, ids, setIds }
     <p>{fstr}</p>
     <p>{desk}</p>
     <p>{email}</p>
+    <Button
+       onClick={handleConfirm}
+    >
+    Confirm?
+    </Button>
+
     <Button
        onClick={handleClick}
     >
