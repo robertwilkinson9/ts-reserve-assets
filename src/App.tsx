@@ -10,25 +10,6 @@ import { Header } from './components/header'
 import { InputForm } from './components/form'
 import { ProcessData } from './components/processdata'
 
-{ /*
-const reset = (
-  setStartDateTime: React.Dispatch<React.SetStateAction<Date|null>>,
-  setEndDateTime: React.Dispatch<React.SetStateAction<Date|null>>,
-  setFloor: React.Dispatch<React.SetStateAction<number|null>>,
-  setDesk: React.Dispatch<React.SetStateAction<string|null>>,
-  setEmail: React.Dispatch<React.SetStateAction<string|null>>,
-  setComplete: React.Dispatch<React.SetStateAction<boolean>>,
-): void =>
-{
-  setStartDateTime(new Date());
-  setEndDateTime(null);
-  setFloor(0);
-  setDesk(null);
-  setEmail(null);
-  setComplete(false);
-}
-*/ }
-
 type string_or_null = string | null;
 
 export const App = () => {
@@ -54,7 +35,6 @@ export const App = () => {
   const [email, setEmail] = useState<string|null>(null);
   const [complete, setComplete] = useState<boolean>(false);
   const [mongodesks, setMongodesks] = useState<string_or_null[]>([null]);
-  const [ids, setIds] = useState<string[]>([]);
 
   registerLocale('en-GB', enGB)
   setDefaultLocale('en-GB');
@@ -83,10 +63,7 @@ export const App = () => {
     return (
       <>
       <Header />
-      <ProcessData start={startDateTime} sdt={setStartDateTime} end={endDateTime} edt={setEndDateTime} floor={floor} sf={setFloor} desk={desk} sd={setDesk} email={email} se={setEmail} sc={setComplete} url={API_url} ids={ids} setIds={setIds} />
-{ /*
-      <Clean sdt={setStartDateTime} edt={setEndDateTime} sf={setFloor} sd={setDesk} se={setEmail} sc={setComplete} /> 
-*/ }
+      <ProcessData start={startDateTime} sdt={setStartDateTime} end={endDateTime} edt={setEndDateTime} floor={floor} sf={setFloor} desk={desk} sd={setDesk} email={email} se={setEmail} sc={setComplete} url={API_url}/>
       </>
     );
   } else {

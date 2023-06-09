@@ -34,8 +34,6 @@ export interface ProcessDataProps {
    se: React.Dispatch<React.SetStateAction<string|null>>,
    sc: React.Dispatch<React.SetStateAction<boolean>>,
    url: string;
-   ids: string[];
-   setIds: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 const tomorrow_from_day = (startDateTime: Date): Date => {
@@ -62,7 +60,7 @@ const add_desk_to_mongodb = async (url: string, desk_booking: DeskData) => {
   return response.data.id;
 };
 
-export const ProcessData = ({ start, sdt, end, edt, floor, sf, desk, sd, email, se, sc, url, ids, setIds } : ProcessDataProps) => {
+export const ProcessData = ({ start, sdt, end, edt, floor, sf, desk, sd, email, se, sc, url} : ProcessDataProps) => {
   const [datasent, setDatasent] = useState<boolean>(false);
 
   const tomorrow = tomorrow_from_day(start!);
@@ -82,17 +80,9 @@ export const ProcessData = ({ start, sdt, end, edt, floor, sf, desk, sd, email, 
     const id = add_desk_to_mongodb(DESK_url, desk_booking);
     id.then(function(value) {
       console.log(`RESULT ${value}`);
-      setIds([...ids, value])
-      console.log("INSIDE NOW IDS are ", ids); 
       setDatasent(true);
       console.log(`INSIDE 1. SET_DATASENT - jj is ${id}, DATASENT IS ${datasent}`)
     });
-  }
-
-  if (datasent) {
-    console.log("IDS are ", ids); 
-  } else {
-    console.log("DATASENT unset "); 
   }
 
   let sdstr = "No start date available"
