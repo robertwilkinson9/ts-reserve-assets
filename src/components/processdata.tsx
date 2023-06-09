@@ -1,8 +1,10 @@
 import { useState } from "react";
 
+import axios from 'axios'
+
 import Button from 'react-bootstrap/Button';
 
-import axios from 'axios'
+import App from '../App'
 
 const reset = (
   setStartDateTime: React.Dispatch<React.SetStateAction<Date|null>>,
@@ -62,6 +64,7 @@ const add_desk_to_mongodb = async (url: string, desk_booking: DeskData) => {
 
 export const ProcessData = ({ start, sdt, end, edt, floor, sf, desk, sd, email, se, sc, url} : ProcessDataProps) => {
   const [datasent, setDatasent] = useState<boolean>(false);
+  const [confirmed, setConfirmed] = useState<boolean>(false);
 
   const tomorrow = tomorrow_from_day(start!);
   console.log("tomorrow is ", tomorrow);
@@ -102,6 +105,7 @@ export const ProcessData = ({ start, sdt, end, edt, floor, sf, desk, sd, email, 
   const handleConfirm = () => {
     console.log("Confirm Button clicked!");
     confirm_action();
+    setConfirmed(true);
   }
 
   const handleCancel = () => {
@@ -109,28 +113,37 @@ export const ProcessData = ({ start, sdt, end, edt, floor, sf, desk, sd, email, 
     reset(sdt, edt, sf, sd, se, sc);
   }
 
-  return (
-    <>
-    <h4>ProcessData</h4>
-    <p>{sdstr}</p>
-    <p>{edstr}</p>
-    <p>{fstr}</p>
-    <p>{desk}</p>
-    <p>{email}</p>
-    <Button
-       onClick={handleConfirm}
-    >
-    Confirm?
-    </Button>
-
-    <Button
-       onClick={handleCancel}
-    >
-    Cancel?
-    </Button>
-
-    </>
-  );
+  if (confirmed) {
+    return (
+      <>
+      <h4>Desk {desk} booked</h4>
+      <App />
+      </>
+    );
+  } else {
+    return (
+      <>
+      <h4>ProcessData</h4>
+      <p>{sdstr}</p>
+      <p>{edstr}</p>
+      <p>{fstr}</p>
+      <p>{desk}</p>
+      <p>{email}</p>
+      <Button
+         onClick={handleConfirm}
+      >
+      Confirm?
+      </Button>
+  
+      <Button
+         onClick={handleCancel}
+      >
+      Cancel?
+      </Button>
+  
+      </>
+    );
+  }
 };
 
 export default ProcessData
