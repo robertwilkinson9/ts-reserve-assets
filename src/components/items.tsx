@@ -50,7 +50,7 @@ const items_select = (items: string[]): Select_type[] => {
 }
 
 export interface ItemsProps {
-  collection: number | null;
+  bucket: number | null;
   itemsetter: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
@@ -70,7 +70,7 @@ const listbuild = (istart:number, ilast:number, prefix: string) => {
   return items;
 }
    
-export const Items = ({ collection, itemsetter } : ItemsProps) => {
+export const Items = ({ bucket, itemsetter } : ItemsProps) => {
 //   console.log(`itemsetter is ${itemsetter}`);
 
 { /*
@@ -80,21 +80,21 @@ export const Items = ({ collection, itemsetter } : ItemsProps) => {
 */ }
 
    let items: string[] = [];
-   if (collection === 0) {
+   if (bucket === 0) {
      const istart = 7;
      const ilast = 43;
      items = listbuild(istart, ilast, "gf");
-   } else if (collection == 1) {
+   } else if (bucket == 1) {
      const istart = 7;
      const ilast = 33;
      items = listbuild(istart, ilast, "ff");
-   } else if (collection == 2) {
+   } else if (bucket == 2) {
      const istart = 7;
      const ilast = 27;
      items = listbuild(istart, ilast, "2f");
    } else {
-     console.log(`Bad collection ${collection}`);
-     alert(`Bad collection ${collection}`);
+     console.log(`Bad bucket ${bucket}`);
+     alert(`Bad bucket ${bucket}`);
    }
    const select_item_list: Select_type[] = items_select(items)
 

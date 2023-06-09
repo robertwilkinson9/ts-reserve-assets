@@ -9,16 +9,16 @@ import App from '../App'
 const reset = (
   setStartDateTime: React.Dispatch<React.SetStateAction<Date|null>>,
   setEndDateTime: React.Dispatch<React.SetStateAction<Date|null>>,
-  setFloor: React.Dispatch<React.SetStateAction<number|null>>,
-  setDesk: React.Dispatch<React.SetStateAction<string|null>>,
+  setBucket: React.Dispatch<React.SetStateAction<number|null>>,
+  setItem: React.Dispatch<React.SetStateAction<string|null>>,
   setEmail: React.Dispatch<React.SetStateAction<string|null>>,
   setComplete: React.Dispatch<React.SetStateAction<boolean>>,
 ): void =>
 {
   setStartDateTime(new Date());
   setEndDateTime(null);
-  setFloor(0);
-  setDesk(null);
+  setBucket(0);
+  setItem(null);
   setEmail(null);
   setComplete(false);
 }
@@ -28,9 +28,9 @@ export interface ProcessDataProps {
    sdt: React.Dispatch<React.SetStateAction<Date|null>>,
    end: Date | null;
    edt: React.Dispatch<React.SetStateAction<Date|null>>,
-   floor: number | null;
+   bucket: number | null;
    sf: React.Dispatch<React.SetStateAction<number|null>>,
-   desk: string | null;
+   item: string | null;
    sd: React.Dispatch<React.SetStateAction<string|null>>,
    email: string | null;
    se: React.Dispatch<React.SetStateAction<string|null>>,
@@ -47,40 +47,40 @@ const tomorrow_from_day = (startDateTime: Date): Date => {
   return new Date(tomorrow);
 }
 
-interface DeskData {
+interface ItemData {
   "booking_start": string;
   "booking_end": string;
   "expireAt": string;
-  "floor": number;
-  "desk": string;
+  "bucket": number;
+  "item": string;
   "email": string
 }
 
-const add_desk_to_mongodb = async (url: string, desk_booking: DeskData) => {
-  const response = await axios.post(url, desk_booking);
+const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
+  const response = await axios.post(url, item_booking);
   console.log('ADD_DESK_TO_MONGODB ID IS :', response.data.id)
   return response.data.id;
 };
 
-export const ProcessData = ({ start, sdt, end, edt, floor, sf, desk, sd, email, se, sc, url} : ProcessDataProps) => {
+export const ProcessData = ({ start, sdt, end, edt, bucket, sf, item, sd, email, se, sc, url} : ProcessDataProps) => {
   const [datasent, setDatasent] = useState<boolean>(false);
   const [confirmed, setConfirmed] = useState<boolean>(false);
 
   const tomorrow = tomorrow_from_day(start!);
   console.log("tomorrow is ", tomorrow);
 
-  const desk_booking = {
+  const item_booking = {
     "booking_start": start!.toString(),
     "booking_end": end!.toString(),
     "expireAt": tomorrow.toString(),
-    "floor": floor!,
-    "desk": desk!,
+    "bucket": bucket!,
+    "item": item!,
     "email": email!,
   };
 
   const confirm_action = () => {
-    const DESK_url = url + 'desk/';
-    const id = add_desk_to_mongodb(DESK_url, desk_booking);
+    const DESK_url = url + 'item/';
+    const id = add_item_to_mongodb(DESK_url, item_booking);
     id.then(function(value) {
       console.log(`RESULT ${value}`);
       setDatasent(true);
@@ -96,10 +96,10 @@ export const ProcessData = ({ start, sdt, end, edt, floor, sf, desk, sd, email, 
   if (end) {
     edstr = `end date is ${end}`;
   }
-  const Floor = ["Ground", "First", "Second"];
-  let fstr = "No Floor";
-  if (floor === 0 || floor === 1 || floor === 2) {
-    fstr = Floor[floor] + " floor";
+  const Bucket = ["Ground", "First", "Second"];
+  let fstr = "No Bucket";
+  if (bucket === 0 || bucket === 1 || bucket === 2) {
+    fstr = Bucket[bucket] + " bucket";
   }
 
   const handleConfirm = () => {
@@ -116,7 +116,7 @@ export const ProcessData = ({ start, sdt, end, edt, floor, sf, desk, sd, email, 
   if (confirmed) {
     return (
       <>
-      <h4>Desk {desk} booked</h4>
+      <h4>Item {item} booked</h4>
       <App />
       </>
     );
@@ -127,7 +127,7 @@ export const ProcessData = ({ start, sdt, end, edt, floor, sf, desk, sd, email, 
       <p>{sdstr}</p>
       <p>{edstr}</p>
       <p>{fstr}</p>
-      <p>{desk}</p>
+      <p>{item}</p>
       <p>{email}</p>
       <Button
          onClick={handleConfirm}

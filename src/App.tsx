@@ -30,47 +30,47 @@ export const App = () => {
     console.log(endDateTime.toLocaleDateString());
   }
 
-  const [floor, setFloor] = useState<number|null>(0);
-  const [desk, setDesk] = useState<string|null>(null);
+  const [bucket, setBucket] = useState<number|null>(0);
+  const [item, setItem] = useState<string|null>(null);
   const [email, setEmail] = useState<string|null>(null);
   const [complete, setComplete] = useState<boolean>(false);
-  const [mongodesks, setMongodesks] = useState<string_or_null[]>([null]);
+  const [mongoitems, setMongoitems] = useState<string_or_null[]>([null]);
 
   registerLocale('en-GB', enGB)
   setDefaultLocale('en-GB');
 
   const API_url = 'http://localhost:5179/api/';
 
-  const get_mongodesks = async () => {
+  const get_mongoitems = async () => {
     // Change this endpoint to whatever local or online address you have
-    const DESKS_url = API_url + 'desks/';
+    const ITEMS_url = API_url + 'items/';
 
-    const response = await axios.get(DESKS_url);
-    console.log("IN get_mongodesks and RESPONSE is ", response);
-    console.log("IN get_mongodesks and RESPONSE.STATUS is ", response.status);
-    console.log("IN get_mongodesks and RESPONSE.DATA is ", JSON.stringify(response.data));
-    setMongodesks(response.data);
+    const response = await axios.get(ITEMS_url);
+    console.log("IN get_mongoitems and RESPONSE is ", response);
+    console.log("IN get_mongoitems and RESPONSE.STATUS is ", response.status);
+    console.log("IN get_mongoitems and RESPONSE.DATA is ", JSON.stringify(response.data));
+    setMongoitems(response.data);
   };
 
   useEffect(() => {
-    get_mongodesks();
+    get_mongoitems();
   }, [complete]);
 
-  console.log("AFTER useEffect App and COMPLETE is ",complete," and DESKS are ", JSON.stringify(mongodesks));
+  console.log("AFTER useEffect App and COMPLETE is ",complete," and ITEMS are ", JSON.stringify(mongoitems));
 
   if (complete) {
-//    reset(setStartDateTime, setEndDateTime, setFloor, setDesk, setEmail, setComplete); // eventually just show processdata screen for now
+//    reset(setStartDateTime, setEndDateTime, setBucket, setItem, setEmail, setComplete); // eventually just show processdata screen for now
     return (
       <>
       <Header />
-      <ProcessData start={startDateTime} sdt={setStartDateTime} end={endDateTime} edt={setEndDateTime} floor={floor} sf={setFloor} desk={desk} sd={setDesk} email={email} se={setEmail} sc={setComplete} url={API_url}/>
+      <ProcessData start={startDateTime} sdt={setStartDateTime} end={endDateTime} edt={setEndDateTime} bucket={bucket} sf={setBucket} item={item} sd={setItem} email={email} se={setEmail} sc={setComplete} url={API_url}/>
       </>
     );
   } else {
     return (
       <>
       <Header />
-      <InputForm start={startDateTime} startdatesetter={setStartDateTime} end={endDateTime} enddatesetter={setEndDateTime} floor={floor} floorsetter={setFloor} desksetter={setDesk} email={email} emailsetter={setEmail} completesetter={setComplete} />
+      <InputForm start={startDateTime} startdatesetter={setStartDateTime} end={endDateTime} enddatesetter={setEndDateTime} bucket={bucket} bucketsetter={setBucket} itemsetter={setItem} email={email} emailsetter={setEmail} completesetter={setComplete} />
       </>
     );
   }

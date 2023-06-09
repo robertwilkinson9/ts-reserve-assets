@@ -1,37 +1,37 @@
-import './collection.css';
+import './bucket.css';
 
-export interface CollectionProps {
-   collection : number | null;
-   collectionsetter: React.Dispatch<React.SetStateAction<number | null>>
+export interface BucketProps {
+   bucket : number | null;
+   bucketsetter: React.Dispatch<React.SetStateAction<number | null>>
 }
 
 interface ButtonProps {
   cb : React.ChangeEventHandler<HTMLInputElement>;
   lcf: string;
   ucf: string;
-  collectionst: string;
+  bucketst: string;
   checked: boolean;
 }
 
-const CollectionLabel = () => {
+const BucketLabel = () => {
   return (
     <>
     <div className="row" id="pull-left">
       <div className="col-sm-12 align-items-left" >
-        <label className="mb-0 font-weight-bold flabel">Collection</label>
+        <label className="mb-0 font-weight-bold flabel">Bucket</label>
       </div>
     </div>
     </>
   );
 }
 
-const CollectionButton = ({cb, lcf, ucf, collectionst, checked} : ButtonProps) => {
+const BucketButton = ({cb, lcf, ucf, bucketst, checked} : ButtonProps) => {
   if (checked) {
     return(
       <>
-      <div className="row" id="collection_radios">
+      <div className="row" id="bucket_radios">
         <div className="col-sm-6">
-          <input type="radio" value={collectionst} id={lcf} onChange={cb} name="collection" defaultChecked />
+          <input type="radio" value={bucketst} id={lcf} onChange={cb} name="bucket" defaultChecked />
          <label htmlFor={lcf}>{ucf}</label>
        </div>
      </div>
@@ -40,9 +40,9 @@ const CollectionButton = ({cb, lcf, ucf, collectionst, checked} : ButtonProps) =
   } else {
     return(
       <>
-      <div className="row" id="collection_radios">
+      <div className="row" id="bucket_radios">
         <div className="col-sm-6">
-          <input type="radio" value={collectionst} id={lcf} onChange={cb} name="collection"/>
+          <input type="radio" value={bucketst} id={lcf} onChange={cb} name="bucket"/>
          <label htmlFor={lcf}>{ucf}</label>
        </div>
      </div>
@@ -51,43 +51,43 @@ const CollectionButton = ({cb, lcf, ucf, collectionst, checked} : ButtonProps) =
   }
 }
 
-export const Collection = ({collection, collectionsetter}: CollectionProps) => {
+export const Bucket = ({bucket, bucketsetter}: BucketProps) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log("HaNdLe ChAnGe");
     console.log(e.target.value)
-    collectionsetter(parseInt(e.target.value, 10));
+    bucketsetter(parseInt(e.target.value, 10));
   }
 
-  switch (collection)  {
+  switch (bucket)  {
     case 0:
         return(
         <>
-          <CollectionLabel />
+          <BucketLabel />
           <div className="container">
-            <CollectionButton cb={handleChange} lcf="ground" ucf="Ground" collectionst="0" checked={true} />
-            <CollectionButton cb={handleChange} lcf="first" ucf="First" collectionst="1" checked={false} />
-            <CollectionButton cb={handleChange} lcf="second" ucf="Second" collectionst="2" checked={false} />
+            <BucketButton cb={handleChange} lcf="ground" ucf="Ground" bucketst="0" checked={true} />
+            <BucketButton cb={handleChange} lcf="first" ucf="First" bucketst="1" checked={false} />
+            <BucketButton cb={handleChange} lcf="second" ucf="Second" bucketst="2" checked={false} />
           </div>
         </>)
     case 1:
         return(
         <>
-          <CollectionLabel />
+          <BucketLabel />
           <div className="container">
-            <CollectionButton cb={handleChange} lcf="ground" ucf="Ground" collectionst="0" checked={false} />
-            <CollectionButton cb={handleChange} lcf="first" ucf="First" collectionst="1" checked={true} />
-            <CollectionButton cb={handleChange} lcf="second" ucf="Second" collectionst="2" checked={false} />
+            <BucketButton cb={handleChange} lcf="ground" ucf="Ground" bucketst="0" checked={false} />
+            <BucketButton cb={handleChange} lcf="first" ucf="First" bucketst="1" checked={true} />
+            <BucketButton cb={handleChange} lcf="second" ucf="Second" bucketst="2" checked={false} />
           </div>
         </>)
     case 2:
         return(
         <>
-          <CollectionLabel />
+          <BucketLabel />
           <div className="container">
-            <CollectionButton cb={handleChange} lcf="ground" ucf="Ground" collectionst="0" checked={false} />
-            <CollectionButton cb={handleChange} lcf="first" ucf="First" collectionst="1" checked={false} />
-            <CollectionButton cb={handleChange} lcf="second" ucf="Second" collectionst="2" checked={true} />
+            <BucketButton cb={handleChange} lcf="ground" ucf="Ground" bucketst="0" checked={false} />
+            <BucketButton cb={handleChange} lcf="first" ucf="First" bucketst="1" checked={false} />
+            <BucketButton cb={handleChange} lcf="second" ucf="Second" bucketst="2" checked={true} />
           </div>
         </>)
     default:
@@ -97,4 +97,4 @@ export const Collection = ({collection, collectionsetter}: CollectionProps) => {
   }
 };
 
-export default Collection;
+export default Bucket;

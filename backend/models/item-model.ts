@@ -6,7 +6,7 @@ const Itemschema = new Schema(
         booking_start: { type: Date },
         booking_end: { type: Date },
         expireAt: { type: Date },
-        collection: { type : Number },
+        bucket: { type : Number },
         item: { type: String },
         email: { type: String },
     },
