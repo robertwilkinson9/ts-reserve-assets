@@ -1,0 +1,22 @@
+label{
+    font-size: 20px;
+    display: inline-block;
+    margin: 0;
+    line-height: 28px;
+    height: 28px;
+    vertical-align: top;
+}
+
+/*
+#collection_radios label {
+  margin-left: 10px;
+}
+
+#collection_radios label + input {
+    clear: both;
+}
+*/
+
+#pull-left {
+  margin-left: -12px;
+}
