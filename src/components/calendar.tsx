@@ -5,12 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 // CSS Modules, react-datepicker-cssmodules.css
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
-export interface CalendarProps {
-   label: string;
-   selected: Date | null;
-   setter: React.Dispatch<React.SetStateAction<Date | null>>
-   setter2?: React.Dispatch<React.SetStateAction<Date | null>>
-}
+import { CalendarProps } from './interfaces';
 
 export const Calendar = ({label, selected, setter, setter2} : CalendarProps) => {
  return (

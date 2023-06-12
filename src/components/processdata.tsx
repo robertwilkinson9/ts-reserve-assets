@@ -6,6 +6,8 @@ import Button from 'react-bootstrap/Button';
 
 import App from '../App'
 
+import { ItemData, ProcessDataProps } from './interfaces';
+
 const reset = (
   setStartDateTime: React.Dispatch<React.SetStateAction<Date|null>>,
   setEndDateTime: React.Dispatch<React.SetStateAction<Date|null>>,
@@ -23,21 +25,6 @@ const reset = (
   setComplete(false);
 }
 
-export interface ProcessDataProps {
-   start: Date | null;
-   sdt: React.Dispatch<React.SetStateAction<Date|null>>,
-   end: Date | null;
-   edt: React.Dispatch<React.SetStateAction<Date|null>>,
-   bucket: number | null;
-   sf: React.Dispatch<React.SetStateAction<number|null>>,
-   item: string | null;
-   sd: React.Dispatch<React.SetStateAction<string|null>>,
-   email: string | null;
-   se: React.Dispatch<React.SetStateAction<string|null>>,
-   sc: React.Dispatch<React.SetStateAction<boolean>>,
-   url: string;
-}
-
 const tomorrow_from_day = (startDateTime: Date): Date => {
   // Current date
   const date = new Date(startDateTime!);
@@ -45,15 +32,6 @@ const tomorrow_from_day = (startDateTime: Date): Date => {
   const tomorrow = date.setDate(date.getDate() + 1);
 
   return new Date(tomorrow);
-}
-
-interface ItemData {
-  "booking_start": string;
-  "booking_end": string;
-  "expireAt": string;
-  "bucket": number;
-  "item": string;
-  "email": string
 }
 
 const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
@@ -67,7 +45,7 @@ export const ProcessData = ({ start, sdt, end, edt, bucket, sf, item, sd, email,
   const [confirmed, setConfirmed] = useState<boolean>(false);
 
   const tomorrow = tomorrow_from_day(start!);
-  console.log("tomorrow is ", tomorrow);
+//  console.log("tomorrow is ", tomorrow);
 
   const item_booking = {
     "booking_start": start!.toString(),

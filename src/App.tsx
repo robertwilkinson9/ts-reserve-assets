@@ -5,34 +5,33 @@ import axios from 'axios'
 import { registerLocale, setDefaultLocale } from  "react-datepicker";
 import enGB from 'date-fns/locale/en-GB';
 
-// import { Clean } from './components/clean'
+import configData from "./config.json";
+
 import { Header } from './components/header'
 import { InputForm } from './components/form'
 import { ProcessData } from './components/processdata'
 
 type string_or_null = string | null;
+type date_or_null = Date | null;
 
 export const App = () => {
-  const [startDateTime, setStartDateTime] = useState<Date|null>(new Date());
+  console.log("CONFIGDATA is ");
+  console.log(configData);
+  console.log(`configData is ${configData}`);
+  console.log(`configData.SERVER_URL is ${configData.SERVER_URL}`);
+  const [startDateTime, setStartDateTime] = useState<date_or_null>(new Date());
   if (startDateTime) {
-    console.log("startDateTime starts at ");
-    console.log(startDateTime);
-    console.log(" or ");
-    console.log(startDateTime.toLocaleDateString());
+    console.log(`startDateTime starts at ${startDateTime} or ${startDateTime.toLocaleDateString()}`);
   }
 
-  // const [endDateTime, setEndDateTime] = useState<Date|null>(startDateTime);
-  const [endDateTime, setEndDateTime] = useState<Date|null>(null);
+  const [endDateTime, setEndDateTime] = useState<date_or_null>(null);
   if (endDateTime) {
-    console.log("endDateTime ends at ");
-    console.log(endDateTime);
-    console.log(" or ");
-    console.log(endDateTime.toLocaleDateString());
+    console.log(`endDateTime ends at ${endDateTime} or ${endDateTime.toLocaleDateString()}`);
   }
 
   const [bucket, setBucket] = useState<number|null>(0);
-  const [item, setItem] = useState<string|null>(null);
-  const [email, setEmail] = useState<string|null>(null);
+  const [item, setItem] = useState<string_or_null>(null);
+  const [email, setEmail] = useState<string_or_null>(null);
   const [complete, setComplete] = useState<boolean>(false);
   const [mongoitems, setMongoitems] = useState<string_or_null[]>([null]);
 
@@ -46,8 +45,6 @@ export const App = () => {
     const ITEMS_url = API_url + 'items/';
 
     const response = await axios.get(ITEMS_url);
-    console.log("IN get_mongoitems and RESPONSE is ", response);
-    console.log("IN get_mongoitems and RESPONSE.STATUS is ", response.status);
     console.log("IN get_mongoitems and RESPONSE.DATA is ", JSON.stringify(response.data));
     setMongoitems(response.data);
   };
@@ -59,7 +56,6 @@ export const App = () => {
   console.log("AFTER useEffect App and COMPLETE is ",complete," and ITEMS are ", JSON.stringify(mongoitems));
 
   if (complete) {
-//    reset(setStartDateTime, setEndDateTime, setBucket, setItem, setEmail, setComplete); // eventually just show processdata screen for now
     return (
       <>
       <Header />
@@ -70,7 +66,7 @@ export const App = () => {
     return (
       <>
       <Header />
-      <InputForm start={startDateTime} startdatesetter={setStartDateTime} end={endDateTime} enddatesetter={setEndDateTime} bucket={bucket} bucketsetter={setBucket} itemsetter={setItem} email={email} emailsetter={setEmail} completesetter={setComplete} />
+      <InputForm config={configData} start={startDateTime} startdatesetter={setStartDateTime} end={endDateTime} enddatesetter={setEndDateTime} bucket={bucket} bucketsetter={setBucket} itemsetter={setItem} email={email} emailsetter={setEmail} completesetter={setComplete} />
       </>
     );
   }

@@ -1,17 +1,6 @@
 import './bucket.css';
 
-export interface BucketProps {
-   bucket : number | null;
-   bucketsetter: React.Dispatch<React.SetStateAction<number | null>>
-}
-
-interface ButtonProps {
-  cb : React.ChangeEventHandler<HTMLInputElement>;
-  lcf: string;
-  ucf: string;
-  bucketst: string;
-  checked: boolean;
-}
+import { BucketProps, ButtonProps } from './interfaces';
 
 const BucketLabel = () => {
   return (

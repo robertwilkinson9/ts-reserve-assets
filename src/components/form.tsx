@@ -7,24 +7,18 @@ import { AddEmail } from './addemail'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import { InputFormProps } from './interfaces';
+
 const handleBRClick = (completesetter: React.Dispatch<React.SetStateAction<boolean>>) => {
   completesetter(true);
 };
 
-export interface InputFormProps {
-  start: Date | null;
-  startdatesetter: React.Dispatch<React.SetStateAction<Date | null>>;
-  end: Date | null;
-  enddatesetter: React.Dispatch<React.SetStateAction<Date | null>>;
-  bucket: number | null;
-  bucketsetter: React.Dispatch<React.SetStateAction<number | null>>;
-  itemsetter: React.Dispatch<React.SetStateAction<string | null>>;
-  email: string | null;
-  emailsetter: React.Dispatch<React.SetStateAction<string | null>>;
-  completesetter: React.Dispatch<React.SetStateAction<boolean>>;
-}
+export const InputForm = ({config, start, startdatesetter, end, enddatesetter, bucket, bucketsetter, itemsetter, email, emailsetter, completesetter}: InputFormProps) => {
+  console.log(`config is ${config}`);
+{ /*
+  console.log(`config.SERVER_URL is ${config.SERVER_URL}`);
+*/ }
 
-export const InputForm = ({start, startdatesetter, end, enddatesetter, bucket, bucketsetter, itemsetter, email, emailsetter, completesetter}: InputFormProps) => {
   const buttonText = "Book Item";
   if (end) {
   return (

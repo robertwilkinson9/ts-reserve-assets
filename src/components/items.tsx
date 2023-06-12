@@ -1,5 +1,7 @@
 import Select from 'react-select'
 
+import { ItemsProps } from './interfaces';
+
 type Select_type = {
   value: string,
   label: string,
@@ -9,49 +11,10 @@ const item2select = (input: string): Select_type => {
   return {value: input, label: input};
 }
 
-{ /*
-type ItemEmail = {
-  item: string,
-  email: string,
-};
-
-const item2itememail = (input: string): ItemEmail => {
-  return {item: input, email: ""};
-}
-
-const items: string[] = [ "2f27", "2f26", "2f25", "2f24"];
-console.log(items);
-
-function emptyitems(items: string[]): ItemEmail[] {
-  const eitems: ItemEmail[] = [];
-  items.forEach(item => eitems.push(item2itememail(item)));
-  console.log(eitems);
-  return eitems;
-}
-
-const emptieditems = emptyitems(items)
-console.log(emptieditems);
-
-function items_select(items: string[]): Select_type[] {
-  const select_items: Select_type[] = [];
-  items.forEach(item => select_items.push(item2select(item)));
-  console.log(select_items);
-  return select_items;
-}
-
-const select_item_list = items_select(items)
-console.log(select_item_list);
-*/ }
-
 const items_select = (items: string[]): Select_type[] => {
   const select_items: Select_type[] = [];
   items.forEach(item => select_items.push(item2select(item)));
   return select_items;
-}
-
-export interface ItemsProps {
-  bucket: number | null;
-  itemsetter: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 const listbuild = (istart:number, ilast:number, prefix: string) => {
