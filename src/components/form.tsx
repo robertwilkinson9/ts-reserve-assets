@@ -15,9 +15,8 @@ const handleBRClick = (completesetter: React.Dispatch<React.SetStateAction<boole
 
 export const InputForm = ({config, start, startdatesetter, end, enddatesetter, bucket, bucketsetter, itemsetter, email, emailsetter, completesetter}: InputFormProps) => {
   console.log(`config is ${config}`);
-{ /*
-  console.log(`config.SERVER_URL is ${config.SERVER_URL}`);
-*/ }
+  console.log(`config.ITEM_NAME is ${config.ITEM_NAME}`);
+  console.log(`config.BUCKET_NAME is ${config.BUCKET_NAME}`);
 
   const buttonText = "Book Item";
   if (end) {

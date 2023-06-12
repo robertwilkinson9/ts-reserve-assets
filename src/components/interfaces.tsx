@@ -24,7 +24,7 @@ export interface CalendarProps {
 }
 
 export interface InputFormProps {
-  config: Object;
+  config: configData;
   start: Date | null;
   startdatesetter: React.Dispatch<React.SetStateAction<Date | null>>;
   end: Date | null;
@@ -64,4 +64,14 @@ export interface ProcessDataProps {
    se: React.Dispatch<React.SetStateAction<string|null>>,
    sc: React.Dispatch<React.SetStateAction<boolean>>,
    url: string;
+}
+
+interface bucketData {
+  "name": string;
+}
+  
+export interface configData {
+  "ITEM_NAME": string;
+  "BUCKET_NAME": string;
+  "BUCKETS": bucketData[];
 }

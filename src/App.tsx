@@ -15,10 +15,6 @@ type string_or_null = string | null;
 type date_or_null = Date | null;
 
 export const App = () => {
-  console.log("CONFIGDATA is ");
-  console.log(configData);
-  console.log(`configData is ${configData}`);
-  console.log(`configData.SERVER_URL is ${configData.SERVER_URL}`);
   const [startDateTime, setStartDateTime] = useState<date_or_null>(new Date());
   if (startDateTime) {
     console.log(`startDateTime starts at ${startDateTime} or ${startDateTime.toLocaleDateString()}`);

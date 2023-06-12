@@ -1,7 +1,16 @@
 {
-  "SERVER_URL": "https://example.com/api/",
-  "THEME_COLORS": {
-    "PRIMARY": "#007bff",
-    "SECONDARY": "#fc3"
-  }
+  "ITEM_NAME": "desk",
+  "BUCKET_NAME": "floor",
+  "BUCKETS":
+  [
+    {
+      "name": "ground"
+    },
+    {
+      "name": "first"
+    },
+    {
+      "name": "second"
+    }
+  ]
 }
