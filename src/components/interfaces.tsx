@@ -4,8 +4,9 @@ export interface AddEmailProps {
 }
 
 export interface BucketProps {
-   bucket : number | null;
-   bucketsetter: React.Dispatch<React.SetStateAction<number | null>>
+  config: configData;
+  bucket : number | null;
+  bucketsetter: React.Dispatch<React.SetStateAction<number | null>>
 }
 
 export interface ButtonProps {
@@ -17,10 +18,10 @@ export interface ButtonProps {
 }
 
 export interface CalendarProps {
-   label: string;
-   selected: Date | null;
-   setter: React.Dispatch<React.SetStateAction<Date | null>>
-   setter2?: React.Dispatch<React.SetStateAction<Date | null>>
+  label: string;
+  selected: Date | null;
+  setter: React.Dispatch<React.SetStateAction<Date | null>>
+  setter2?: React.Dispatch<React.SetStateAction<Date | null>>
 }
 
 export interface InputFormProps {
@@ -38,12 +39,12 @@ export interface InputFormProps {
 }
 
 export interface ItemData {
-  "booking_start": string;
-  "booking_end": string;
-  "expireAt": string;
-  "bucket": number;
-  "item": string;
-  "email": string
+  booking_start: string;
+  booking_end: string;
+  expireAt: string;
+  bucket: number;
+  item: string;
+  email: string
 }
 
 export interface ItemsProps {
@@ -52,24 +53,24 @@ export interface ItemsProps {
 }
 
 export interface ProcessDataProps {
-   start: Date | null;
-   sdt: React.Dispatch<React.SetStateAction<Date|null>>,
-   end: Date | null;
-   edt: React.Dispatch<React.SetStateAction<Date|null>>,
-   bucket: number | null;
-   sf: React.Dispatch<React.SetStateAction<number|null>>,
-   item: string | null;
-   sd: React.Dispatch<React.SetStateAction<string|null>>,
-   email: string | null;
-   se: React.Dispatch<React.SetStateAction<string|null>>,
-   sc: React.Dispatch<React.SetStateAction<boolean>>,
-   url: string;
+  start: Date | null;
+  sdt: React.Dispatch<React.SetStateAction<Date|null>>,
+  end: Date | null;
+  edt: React.Dispatch<React.SetStateAction<Date|null>>,
+  bucket: number | null;
+  sf: React.Dispatch<React.SetStateAction<number|null>>,
+  item: string | null;
+  sd: React.Dispatch<React.SetStateAction<string|null>>,
+  email: string | null;
+  se: React.Dispatch<React.SetStateAction<string|null>>,
+  sc: React.Dispatch<React.SetStateAction<boolean>>,
+  url: string;
 }
 
 interface bucketData {
-  "name": string;
+  name: string;
 }
-  
+
 export interface configData {
   "ITEM_NAME": string;
   "BUCKET_NAME": string;

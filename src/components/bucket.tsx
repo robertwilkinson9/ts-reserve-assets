@@ -40,12 +40,21 @@ const BucketButton = ({cb, lcf, ucf, bucketst, checked} : ButtonProps) => {
   }
 }
 
-export const Bucket = ({bucket, bucketsetter}: BucketProps) => {
+function capitalizeFirstLetter(name: string) {return name.charAt(0).toUpperCase() + name.slice(1);}
 
+export const Bucket = ({config, bucket, bucketsetter}: BucketProps) => {
+  console.log(`CONFIG.BUCKET_NAME is ${config.BUCKET_NAME}`);
+  console.log(`CONFIG.BUCKET SIZE is ${config.BUCKETS.length}`);
+  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log("HaNdLe ChAnGe");
     console.log(e.target.value)
     bucketsetter(parseInt(e.target.value, 10));
+  }
+
+  for (let i = 0; i < config.BUCKETS.length; i++) {
+    const name = config.BUCKETS[i].name;
+    console.log(`BUCKET i name is ${name} OR ${capitalizeFirstLetter(name)}`);
   }
 
   switch (bucket)  {

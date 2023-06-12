@@ -18,14 +18,17 @@ export const InputForm = ({config, start, startdatesetter, end, enddatesetter, b
   console.log(`config.ITEM_NAME is ${config.ITEM_NAME}`);
   console.log(`config.BUCKET_NAME is ${config.BUCKET_NAME}`);
 
-  const buttonText = "Book Item";
+//  const buttonText = "Book Item";
+//  const buttonText = "Book " + config.ITEM_NAME;
+  const buttonText = `Book ${config.ITEM_NAME}`;
+
   if (end) {
   return (
     <>
      <Form id="emailForm">
      <Calendar label="Start DateTime" selected={start} setter={startdatesetter} />
      <Calendar label="End DateTime" selected={end} setter={enddatesetter} />
-     <Bucket bucket={bucket} bucketsetter={bucketsetter}/>
+     <Bucket config={config} bucket={bucket} bucketsetter={bucketsetter}/>
      <Items bucket={bucket} itemsetter={itemsetter} />
      <AddEmail email={email} emailsetter={emailsetter} />
      <Button 
@@ -44,7 +47,7 @@ export const InputForm = ({config, start, startdatesetter, end, enddatesetter, b
      <Form id="emailForm">
      <Calendar label="Start DateTime" selected={start} setter={startdatesetter} setter2={enddatesetter} />
      <Calendar label="End DateTime" selected={end} setter={enddatesetter} />
-     <Bucket bucket={bucket} bucketsetter={bucketsetter}/>
+     <Bucket config={config} bucket={bucket} bucketsetter={bucketsetter}/>
      <Items bucket={bucket} itemsetter={itemsetter} />
      <AddEmail email={email} emailsetter={emailsetter} />
      <Button 
