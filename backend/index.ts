@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 
 const db = require('./db')
-const deskRouter = require('./routes/desk-router')
+const itemRouter = require('./routes/item-router')
 
 const app = express()
 const apiPort = 5179
@@ -18,6 +18,6 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
-app.use('/api', deskRouter)
+app.use('/api', itemRouter)
 
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`))

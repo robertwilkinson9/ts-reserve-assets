@@ -1,0 +1,25 @@
+{
+  "ITEM_NAME": "desk",
+  "BUCKET_NAME": "floor",
+  "BUCKETS":
+  [
+    {
+      "name": "ground",
+      "prefix": "gf",
+      "ifirst": 7,
+      "ilast": 43
+    },
+    {
+      "name": "first",
+      "prefix": "ff",
+      "ifirst": 7,
+      "ilast": 33
+    },
+    {
+      "name": "second",
+      "prefix": "2f",
+      "ifirst": 7,
+      "ilast": 27
+    }
+  ]
+}

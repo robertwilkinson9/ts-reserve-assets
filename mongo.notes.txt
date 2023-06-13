@@ -33,3 +33,16 @@ switched to db desk
 }
 > 
 
+> use item
+switched to db item
+> db.item.insertOne( {"booking_start": ISODate("2023-06-29T08:00:00Z"), "booking_end": ISODate("2023-06-29T17:00:00Z"), "expireAt": ISODate("2023-06-30T08:00:00Z"), "bucket" : 2, "item" : "2f18", "email" : "robert.wilkinson@raytheon.co.uk"})
+{
+	"acknowledged" : true,
+	"insertedId" : ObjectId("648314dfe64b58e46be7df5e")
+}
+> db.item.find()
+{ "_id" : ObjectId("648314dfe64b58e46be7df5e"), "booking_start" : ISODate("2023-06-29T08:00:00Z"), "booking_end" : ISODate("2023-06-29T17:00:00Z"), "expireAt" : ISODate("2023-06-30T08:00:00Z"), "bucket" : 2, "item" : "2f18", "email" : "robert.wilkinson@raytheon.co.uk" }
+> db.runCommand({delete: "item", deletes: [ { q: { }, limit: 0 } ], writeConcern: { w: "majority", wtimeout: 5000 }})
+{ "n" : 1, "ok" : 1 }
+> db.item.find()
+

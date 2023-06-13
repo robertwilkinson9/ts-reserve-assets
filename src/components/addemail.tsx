@@ -1,9 +1,6 @@
 import Form from 'react-bootstrap/Form';
 
-export interface AddEmailProps {
-  email: string | null;
-  emailsetter: React.Dispatch<React.SetStateAction<string | null>>;
-}
+import { AddEmailProps } from './interfaces';
 
 export const AddEmail = ({email, emailsetter} : AddEmailProps) =>{
   if (typeof(email) !== "string") {email = "";}
