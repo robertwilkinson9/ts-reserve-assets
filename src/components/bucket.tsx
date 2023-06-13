@@ -61,16 +61,8 @@ export const Bucket = ({config, bucket, bucketsetter}: BucketProps) => {
       const name = config.BUCKETS[i].name;
       const uname = capitalizeFirstLetter(name);
       const vector = [ name, uname, i.toString()];
-{ /*
-      console.log("VECTOR is ");
-      console.log(vector);
-*/ } 
       matrix.push(vector);
    }
-{ /*
-   console.log("MATRIX is ");
-   console.log(matrix);
-*/ } 
    return matrix;
  }
 
@@ -80,11 +72,6 @@ export const Bucket = ({config, bucket, bucketsetter}: BucketProps) => {
       const set = i == bucket;
       checked.push(set);
    }
-{ /*
-   console.log("CHECKED is ");
-   console.log(checked);
-      <BucketLabel label="Whatever" />
-*/ } 
    return checked;
  }
 
@@ -95,18 +82,22 @@ export const Bucket = ({config, bucket, bucketsetter}: BucketProps) => {
   console.log("2 CHECKED is ");
   console.log(checked);
 
-  console.log(`${bucket}.0 MATRIX is ${matrix[bucket!][0]}`);
-  console.log(`${bucket}.1 MATRIX is ${matrix[bucket!][1]}`);
-  console.log(`${bucket}.2 MATRIX is ${matrix[bucket!][2]}`);
-  console.log(`${bucket} CHECKED is ${checked[bucket!]}`);
-
   return(
     <>
       <BucketLabel label={capitalizeFirstLetter(config.BUCKET_NAME)} />
       <div className="container">
+      {
+        matrix.map((row, index) => (
+          <BucketButton cb={handleChange} lcf={row[0]} ucf={row[1]} bucketst={row[2]} checked={checked[index]} />
+        ))
+      }
+
+{ /*
         <BucketButton cb={handleChange} lcf={matrix[0][0]} ucf={matrix[0][1]} bucketst={matrix[0][2]} checked={checked[0]} />
         <BucketButton cb={handleChange} lcf={matrix[1][0]} ucf={matrix[1][1]} bucketst={matrix[1][2]} checked={checked[1]} />
         <BucketButton cb={handleChange} lcf={matrix[2][0]} ucf={matrix[2][1]} bucketst={matrix[2][2]} checked={checked[2]} />
+*/ }
+
       </div>
     </>
   )
