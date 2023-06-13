@@ -3,6 +3,10 @@ export interface AddEmailProps {
   emailsetter: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
+export interface BucketLabelProps {
+  label: string;
+}
+
 export interface BucketProps {
   config: configData;
   bucket : number | null;
