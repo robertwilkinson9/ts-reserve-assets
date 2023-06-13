@@ -30,6 +30,7 @@ export interface CalendarProps {
 
 export interface InputFormProps {
   config: configData;
+  mongoitems: MongoRecordType[];
   start: Date | null;
   startdatesetter: React.Dispatch<React.SetStateAction<Date | null>>;
   end: Date | null;
@@ -86,3 +87,23 @@ export interface configData {
   BUCKET_NAME: string;
   BUCKETS: bucketData[];
 }
+
+export type string_or_null = string | null;
+export type date_or_null = Date | null;
+
+export type MongoRecordType = {
+  _id: string;
+  booking_start: string;
+  booking_end: string;
+  expireAt: string;
+  bucket: number;
+  item: string;
+  email: string;
+  __v?: number;
+};
+
+export type MongoType = {
+  success: boolean;
+  data?: MongoRecordType[];
+};
+

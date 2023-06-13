@@ -7,6 +7,7 @@ import enGB from 'date-fns/locale/en-GB';
 
 import configData from "./config.json";
 
+import { MongoType, MongoRecordType } from './components/interfaces'
 import { Header } from './components/header'
 import { InputForm } from './components/form'
 import { ProcessData } from './components/processdata'
@@ -29,7 +30,7 @@ export const App = () => {
   const [item, setItem] = useState<string_or_null>(null);
   const [email, setEmail] = useState<string_or_null>(null);
   const [complete, setComplete] = useState<boolean>(false);
-  const [mongoitems, setMongoitems] = useState<string_or_null[]>([null]);
+  const [mongoitems, setMongoitems] = useState<MongoType>({"success": false});
 
   registerLocale('en-GB', enGB)
   setDefaultLocale('en-GB');
@@ -59,10 +60,15 @@ export const App = () => {
       </>
     );
   } else {
+    let mongo_data: MongoRecordType[] = [];
+    if (mongoitems !== null) {
+      mongo_data = mongoitems.data!;
+    }
+
     return (
       <>
       <Header />
-      <InputForm config={configData} start={startDateTime} startdatesetter={setStartDateTime} end={endDateTime} enddatesetter={setEndDateTime} bucket={bucket} bucketsetter={setBucket} itemsetter={setItem} email={email} emailsetter={setEmail} completesetter={setComplete} />
+      <InputForm config={configData} mongoitems={mongo_data} start={startDateTime} startdatesetter={setStartDateTime} end={endDateTime} enddatesetter={setEndDateTime} bucket={bucket} bucketsetter={setBucket} itemsetter={setItem} email={email} emailsetter={setEmail} completesetter={setComplete} />
       </>
     );
   }
