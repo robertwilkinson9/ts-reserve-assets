@@ -52,6 +52,7 @@ export interface ItemData {
 }
 
 export interface ItemsProps {
+  config: configData;
   bucket: number | null;
   itemsetter: React.Dispatch<React.SetStateAction<string | null>>;
 }
@@ -73,10 +74,15 @@ export interface ProcessDataProps {
 
 interface bucketData {
   name: string;
+  prefix?: string;
+  suffix?: string;
+  ifirst?: number;
+  ilast?: number;
+  items?: string[];
 }
 
 export interface configData {
-  "ITEM_NAME": string;
-  "BUCKET_NAME": string;
-  "BUCKETS": bucketData[];
+  ITEM_NAME: string;
+  BUCKET_NAME: string;
+  BUCKETS: bucketData[];
 }

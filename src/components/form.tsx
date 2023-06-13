@@ -29,7 +29,7 @@ export const InputForm = ({config, start, startdatesetter, end, enddatesetter, b
      <Calendar label="Start DateTime" selected={start} setter={startdatesetter} />
      <Calendar label="End DateTime" selected={end} setter={enddatesetter} />
      <Bucket config={config} bucket={bucket} bucketsetter={bucketsetter}/>
-     <Items bucket={bucket} itemsetter={itemsetter} />
+     <Items config={config} bucket={bucket} itemsetter={itemsetter} />
      <AddEmail email={email} emailsetter={emailsetter} />
      <Button 
        onClick={() => {
@@ -48,7 +48,7 @@ export const InputForm = ({config, start, startdatesetter, end, enddatesetter, b
      <Calendar label="Start DateTime" selected={start} setter={startdatesetter} setter2={enddatesetter} />
      <Calendar label="End DateTime" selected={end} setter={enddatesetter} />
      <Bucket config={config} bucket={bucket} bucketsetter={bucketsetter}/>
-     <Items bucket={bucket} itemsetter={itemsetter} />
+     <Items config={config} bucket={bucket} itemsetter={itemsetter} />
      <AddEmail email={email} emailsetter={emailsetter} />
      <Button 
        onClick={() => {

@@ -17,24 +17,34 @@ const items_select = (items: string[]): Select_type[] => {
   return select_items;
 }
 
-const listbuild = (istart:number, ilast:number, prefix: string) => {
+const listbuild = (istart:number, ilast:number, prefix: string | undefined, suffix?: string | undefined) => {
   const items: string[] = [];
   for (let i = istart; i <= ilast; i++) {
     let d = "";
 // sprintf?
-    if (i < 10) {
-         d = `${prefix}0${i}`;
+    if (i < 10) { // XXX and in general??
+         d = `0${i}`;
     } else {
-         d = `${prefix}${i}`;
-       }
-       items.push(d);
+         d = `${i}`;
     }
-     
+    if (prefix !== undefined) {
+      d = `${prefix}${d}`;
+    }
+    if (suffix !== undefined) {
+      d = `${d}${suffix}`;
+    }
+    items.push(d);
+  }
   return items;
 }
    
-export const Items = ({ bucket, itemsetter } : ItemsProps) => {
-//   console.log(`itemsetter is ${itemsetter}`);
+export const Items = ({ config, bucket, itemsetter } : ItemsProps) => {
+
+  console.log(`ITEMS CONFIG.BUCKET_NAME is ${config.BUCKET_NAME}`);
+  console.log(`ITEMS BUCKET is ${bucket}`);
+  console.log(`ITEMS CONFIG.BUCKET SIZE is ${config.BUCKETS.length}`);
+  console.log(`ITEMS CONFIG is`);
+  console.log(config);
 
 { /*
 // gf07 - 43
@@ -42,33 +52,25 @@ export const Items = ({ bucket, itemsetter } : ItemsProps) => {
 // 2f07 - 27
 */ }
 
-   let items: string[] = [];
-   if (bucket === 0) {
-     const istart = 7;
-     const ilast = 43;
-     items = listbuild(istart, ilast, "gf");
-   } else if (bucket == 1) {
-     const istart = 7;
-     const ilast = 33;
-     items = listbuild(istart, ilast, "ff");
-   } else if (bucket == 2) {
-     const istart = 7;
-     const ilast = 27;
-     items = listbuild(istart, ilast, "2f");
-   } else {
-     console.log(`Bad bucket ${bucket}`);
-     alert(`Bad bucket ${bucket}`);
-   }
-   const select_item_list: Select_type[] = items_select(items)
+  let items: string[] = [];
+  if (bucket !== null) {
+    if (config.BUCKETS[bucket].items != undefined && config.BUCKETS[bucket].items?.length) {
+      items = config.BUCKETS[bucket].items!;
+    } else {
+      items = listbuild(config.BUCKETS[bucket!].ifirst!, config.BUCKETS[bucket!].ilast!, config.BUCKETS[bucket!].prefix);
+    }
+  }
+  const select_item_list: Select_type[] = items_select(items)
 
-   return (
-     <>
-     <div id="itemPulldown">
-       <label className="mb-0 font-weight-bold">Item</label>
-         <Select options={select_item_list} onChange={(choice) => itemsetter(choice!.value)}/>
-     </div>
-     </>
-   );
+  const capitalizeFirstLetter = (name: string) => {return name.charAt(0).toUpperCase() + name.slice(1);}
+  return (
+    <>
+    <div id="itemPulldown">
+      <label className="mb-0 font-weight-bold">{capitalizeFirstLetter(config.ITEM_NAME)}</label>
+        <Select options={select_item_list} onChange={(choice) => itemsetter(choice!.value)}/>
+    </div>
+    </>
+  );
 };
 
 export default Items;

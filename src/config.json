@@ -4,13 +4,22 @@
   "BUCKETS":
   [
     {
-      "name": "ground"
+      "name": "ground",
+      "prefix": "gf",
+      "ifirst": 7,
+      "ilast": 43
     },
     {
-      "name": "first"
+      "name": "first",
+      "prefix": "ff",
+      "ifirst": 7,
+      "ilast": 33
     },
     {
-      "name": "second"
+      "name": "second",
+      "prefix": "2f",
+      "ifirst": 7,
+      "ilast": 27
     }
   ]
 }

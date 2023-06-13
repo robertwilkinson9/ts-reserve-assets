@@ -3,8 +3,6 @@ import './bucket.css';
 import { BucketLabelProps, BucketProps, ButtonProps, configData } from './interfaces';
 
 const BucketLabel = ({label}: BucketLabelProps,) => {
-  console.log("LABEL is ")
-  console.log(label)
   return (
     <>
     <div className="row" id="pull-left">
@@ -44,12 +42,7 @@ const BucketButton = ({cb, lcf, ucf, bucketst, checked} : ButtonProps) => {
 
 
 export const Bucket = ({config, bucket, bucketsetter}: BucketProps) => {
-  console.log(`CONFIG.BUCKET_NAME is ${config.BUCKET_NAME}`);
-  console.log(`CONFIG.BUCKET SIZE is ${config.BUCKETS.length}`);
-  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("HaNdLe ChAnGe");
-    console.log(e.target.value)
     bucketsetter(parseInt(e.target.value, 10));
   }
 
@@ -77,10 +70,6 @@ export const Bucket = ({config, bucket, bucketsetter}: BucketProps) => {
 
   const matrix = build_config_matrix(config);
   const checked = build_checked_vector(config, bucket);
-  console.log("2. MATRIX is ");
-  console.log(matrix);
-  console.log("2 CHECKED is ");
-  console.log(checked);
 
   return(
     <>
@@ -88,16 +77,9 @@ export const Bucket = ({config, bucket, bucketsetter}: BucketProps) => {
       <div className="container">
       {
         matrix.map((row, index) => (
-          <BucketButton cb={handleChange} lcf={row[0]} ucf={row[1]} bucketst={row[2]} checked={checked[index]} />
+          <BucketButton cb={handleChange} lcf={row[0]} ucf={row[1]} bucketst={row[2]} checked={checked[index]} key={index} />
         ))
       }
-
-{ /*
-        <BucketButton cb={handleChange} lcf={matrix[0][0]} ucf={matrix[0][1]} bucketst={matrix[0][2]} checked={checked[0]} />
-        <BucketButton cb={handleChange} lcf={matrix[1][0]} ucf={matrix[1][1]} bucketst={matrix[1][2]} checked={checked[1]} />
-        <BucketButton cb={handleChange} lcf={matrix[2][0]} ucf={matrix[2][1]} bucketst={matrix[2][2]} checked={checked[2]} />
-*/ }
-
       </div>
     </>
   )
