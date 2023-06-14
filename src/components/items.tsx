@@ -1,6 +1,6 @@
 import Select from 'react-select'
 
-import { ItemsProps, BucketItemType} from './interfaces';
+import { ItemsProps, ItemData} from './interfaces';
 
 type Select_type = {
   value: string,
@@ -62,7 +62,7 @@ export const Items = ({ config, bucket, bucket_items, itemsetter } : ItemsProps)
       console.log("ITEMS FLOOR_ITEMS is ");
       console.log(floor_items);
       if (floor_items) {
-        const reserved_items = floor_items.map((x: BucketItemType) => {return x.item});
+        const reserved_items = floor_items.map((x: ItemData) => {return x.item});
         console.log("ITEMS RESERVED_ITEMS is ");
         console.log(reserved_items);
       }

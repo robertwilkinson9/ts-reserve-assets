@@ -6,7 +6,7 @@ import { Bucket } from './bucket'
 import { Items } from './items'
 import { AddEmail } from './addemail'
 
-import { InputFormProps, MongoRecordType} from './interfaces';
+import { InputFormProps } from './interfaces';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -41,24 +41,17 @@ export const InputForm = ({config, mongoitems, start, startdatesetter, end, endd
             (after(x, b) && before(y, b)));
   };
 
-//  const overlapv = mongoitems.filter(function(item) {return overlap(start!, end!, new Date(item.booking_start), new Date(item.booking_end));});
   const overlapv = mongoitems.filter((item) => {return overlap(start!, end!, new Date(item.booking_start), new Date(item.booking_end));});
   console.log("InputForm overlapv is");
   console.log(overlapv);
 
-//  const get_bucket_and_item = (x: MongoRecordType) => { return {"bucket" : x.bucket, "item": x.item} };
-//  const bucket_items = overlapv.map(get_bucket_and_item);
-  const bucket_items = overlapv.map((x: MongoRecordType) => { return {"bucket" : x.bucket, "item": x.item} });
-  console.log("InputForm bucket_items is");
-  console.log(bucket_items);
-  
   return (
     <>
      <Form id="emailForm">
      <Calendar label="Start DateTime" selected={start} setter={startdatesetter} />
      <Calendar label="End DateTime" selected={end} setter={enddatesetter} />
      <Bucket config={config} bucket={bucket} bucketsetter={bucketsetter}/>
-     <Items config={config} bucket={bucket} bucket_items={bucket_items} itemsetter={itemsetter} />
+     <Items config={config} bucket={bucket} bucket_items={overlapv} itemsetter={itemsetter} />
      <AddEmail email={email} emailsetter={emailsetter} />
      <Button 
        onClick={() => {
