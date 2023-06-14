@@ -6,7 +6,7 @@ import { Bucket } from './bucket'
 import { Items } from './items'
 import { AddEmail } from './addemail'
 
-import { InputFormProps } from './interfaces';
+import { InputFormProps, MongoRecordType} from './interfaces';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -14,6 +14,26 @@ const handleBRClick = (completesetter: React.Dispatch<React.SetStateAction<boole
   completesetter(true);
 };
 
+const before = (d1: Date, d2: Date) => {
+  console.log(`BEFORE d1 is ${d1} and d2 is ${d2}`);
+  return d1 < d2;
+}
+
+const after = (d1: Date, d2: Date) => {
+  console.log(`AFTER d1 is ${d1} and d2 is ${d2}`);
+  return d1 > d2;
+}
+
+const overlap = (a: Date, b: Date, x: Date, y:Date) => {
+  // a to b is one date range, x to y is another date range
+  // we return true for overlap
+  console.log(`OVERLAP A is ${a} and B is ${b} and X is ${x} and Y is ${y}`);
+  return ((after(a, x) && before(a, y)) || 
+          (after(b, x) && before(b, y)) || 
+          (after(x, a) && before(y, a)) || 
+          (after(x, b) && before(y, b)));
+};
+  
 export const InputForm = ({config, mongoitems, start, startdatesetter, end, enddatesetter, bucket, bucketsetter, itemsetter, email, emailsetter, completesetter}: InputFormProps) => {
   console.log("InputForm config is");
   console.log(config);
@@ -23,19 +43,28 @@ export const InputForm = ({config, mongoitems, start, startdatesetter, end, endd
 
   if (end) {
 { /*
-  we find all the items in mongoitems with a start date before our end date, and with an end date after our start date
-  we want a list of all of the items wich are already booked so we can filter these from the list we present
+  we find all the overlapping items from mongoitems with our start date and our end date
+  a to b is one date range, x to y is another date range
+  we check x < a < y or x < b < y or a < x < b or a < y < b - which I think is correct?
+  we want a list of all of the items which are already booked so we can filter these from the list we present
 */ }
 
-  before = mongoitems.filter(booking_start < end);
-  console.log("InputForm mongoitems is");
-  console.log(mongoitems);
+  const overlapv = mongoitems.filter(function(item) {
+    const booking_start_date = new Date(item.booking_start);
+    const booking_end_date = new Date(item.booking_end);
 
-{ /*
-  booked = before.filter(booking_end > start);
-  console.log("InputForm booked is");
-  console.log(booked);
-*/ }
+    return overlap(start!, end!, booking_start_date, booking_end_date);
+  });
+  console.log("InputForm overlapv is");
+  console.log(overlapv);
+
+  const get_bucket_and_item = (x: MongoRecordType) => {
+    return {"bucket" : x.bucket, "item": x.item}
+  };
+
+  const bucket_items = overlapv.map(get_bucket_and_item);
+  console.log("InputForm bucket_items is");
+  console.log(bucket_items);
   
   return (
     <>
