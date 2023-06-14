@@ -39,17 +39,6 @@ const listbuild = (istart:number, ilast:number, prefix: string | undefined, suff
 }
    
 export const Items = ({ config, bucket, bucket_items, itemsetter } : ItemsProps) => {
-  if (bucket_items) {
-    console.log("ITEMS BUCKET_ITEMS is ");
-    console.log(bucket_items);
-  }
-
-{ /*
-// gf07 - 43
-// ff08 - 33
-// 2f07 - 27
-*/ }
-
   let items: string[] = [];
   if (bucket !== null) {
     if (config.BUCKETS[bucket].items != undefined && config.BUCKETS[bucket].items?.length) {
@@ -59,12 +48,9 @@ export const Items = ({ config, bucket, bucket_items, itemsetter } : ItemsProps)
     }
     if (bucket_items) {
       const floor_items = bucket_items.filter((item) => {return bucket == item.bucket});
-      console.log("ITEMS FLOOR_ITEMS is ");
-      console.log(floor_items);
       if (floor_items) {
         const reserved_items = floor_items.map((x: ItemData) => {return x.item});
-        console.log("ITEMS RESERVED_ITEMS is ");
-        console.log(reserved_items);
+        items = items.filter(n => !reserved_items.includes(n)); // slow and simple set difference 
       }
     }
   }
