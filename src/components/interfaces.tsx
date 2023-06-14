@@ -43,6 +43,11 @@ export interface InputFormProps {
   completesetter: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+export interface BucketItemType {
+  bucket: number;
+  item: string;
+}
+
 export interface ItemData {
   booking_start: string;
   booking_end: string;
@@ -55,6 +60,7 @@ export interface ItemData {
 export interface ItemsProps {
   config: configData;
   bucket: number | null;
+  bucket_items?: BucketItemType[];
   itemsetter: React.Dispatch<React.SetStateAction<string | null>>;
 }
 

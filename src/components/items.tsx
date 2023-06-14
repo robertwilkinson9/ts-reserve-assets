@@ -1,6 +1,6 @@
 import Select from 'react-select'
 
-import { ItemsProps } from './interfaces';
+import { ItemsProps, BucketItemType} from './interfaces';
 
 type Select_type = {
   value: string,
@@ -38,13 +38,17 @@ const listbuild = (istart:number, ilast:number, prefix: string | undefined, suff
   return items;
 }
    
-export const Items = ({ config, bucket, itemsetter } : ItemsProps) => {
+export const Items = ({ config, bucket, bucket_items, itemsetter } : ItemsProps) => {
 
   console.log(`ITEMS CONFIG.BUCKET_NAME is ${config.BUCKET_NAME}`);
   console.log(`ITEMS BUCKET is ${bucket}`);
   console.log(`ITEMS CONFIG.BUCKET SIZE is ${config.BUCKETS.length}`);
   console.log(`ITEMS CONFIG is`);
   console.log(config);
+  if (bucket_items) {
+    console.log("ITEMS BUCKET_ITEMS is ");
+    console.log(bucket_items);
+  }
 
 { /*
 // gf07 - 43
@@ -59,7 +63,20 @@ export const Items = ({ config, bucket, itemsetter } : ItemsProps) => {
     } else {
       items = listbuild(config.BUCKETS[bucket!].ifirst!, config.BUCKETS[bucket!].ilast!, config.BUCKETS[bucket!].prefix);
     }
+    if (bucket_items) {
+      const floor_items = bucket_items.filter(function(item) {return bucket == item.bucket});
+      console.log("ITEMS FLOOR_ITEMS is ");
+      console.log(floor_items);
+      if (floor_items) {
+        const get_item = (x: BucketItemType) => {return x.item};
+        const reserved_items = floor_items.map(get_item);
+//        const reserved_items = floor_items.map((x) => {x.item});
+        console.log("ITEMS RESERVED_ITEMS is ");
+        console.log(reserved_items);
+      }
+    }
   }
+
   const select_item_list: Select_type[] = items_select(items)
 
   const capitalizeFirstLetter = (name: string) => {return name.charAt(0).toUpperCase() + name.slice(1);}

@@ -17,14 +17,7 @@ type date_or_null = Date | null;
 
 export const App = () => {
   const [startDateTime, setStartDateTime] = useState<date_or_null>(new Date());
-  if (startDateTime) {
-    console.log(`startDateTime starts at ${startDateTime} or ${startDateTime.toLocaleDateString()}`);
-  }
-
   const [endDateTime, setEndDateTime] = useState<date_or_null>(null);
-  if (endDateTime) {
-    console.log(`endDateTime ends at ${endDateTime} or ${endDateTime.toLocaleDateString()}`);
-  }
 
   const [bucket, setBucket] = useState<number|null>(0);
   const [item, setItem] = useState<string_or_null>(null);

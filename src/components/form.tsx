@@ -14,26 +14,6 @@ const handleBRClick = (completesetter: React.Dispatch<React.SetStateAction<boole
   completesetter(true);
 };
 
-const before = (d1: Date, d2: Date) => {
-  console.log(`BEFORE d1 is ${d1} and d2 is ${d2}`);
-  return d1 < d2;
-}
-
-const after = (d1: Date, d2: Date) => {
-  console.log(`AFTER d1 is ${d1} and d2 is ${d2}`);
-  return d1 > d2;
-}
-
-const overlap = (a: Date, b: Date, x: Date, y:Date) => {
-  // a to b is one date range, x to y is another date range
-  // we return true for overlap
-  console.log(`OVERLAP A is ${a} and B is ${b} and X is ${x} and Y is ${y}`);
-  return ((after(a, x) && before(a, y)) || 
-          (after(b, x) && before(b, y)) || 
-          (after(x, a) && before(y, a)) || 
-          (after(x, b) && before(y, b)));
-};
-  
 export const InputForm = ({config, mongoitems, start, startdatesetter, end, enddatesetter, bucket, bucketsetter, itemsetter, email, emailsetter, completesetter}: InputFormProps) => {
   console.log("InputForm config is");
   console.log(config);
@@ -49,12 +29,19 @@ export const InputForm = ({config, mongoitems, start, startdatesetter, end, endd
   we want a list of all of the items which are already booked so we can filter these from the list we present
 */ }
 
-  const overlapv = mongoitems.filter(function(item) {
-    const booking_start_date = new Date(item.booking_start);
-    const booking_end_date = new Date(item.booking_end);
+  const before = (d1: Date, d2: Date) => {return d1 <= d2;}
+  const after = (d1: Date, d2: Date) => {return d1 >= d2;}
+  const overlap = (a: Date, b: Date, x: Date, y:Date) => {
+    // a to b is one date range, x to y is another date range
+    // we return true for overlap
+    console.log(`OVERLAP A is ${a} and B is ${b} and X is ${x} and Y is ${y}`);
+    return ((after(a, x) && before(a, y)) || 
+            (after(b, x) && before(b, y)) || 
+            (after(x, a) && before(y, a)) || 
+            (after(x, b) && before(y, b)));
+  };
 
-    return overlap(start!, end!, booking_start_date, booking_end_date);
-  });
+  const overlapv = mongoitems.filter(function(item) {return overlap(start!, end!, new Date(item.booking_start), new Date(item.booking_end));});
   console.log("InputForm overlapv is");
   console.log(overlapv);
 
@@ -72,7 +59,7 @@ export const InputForm = ({config, mongoitems, start, startdatesetter, end, endd
      <Calendar label="Start DateTime" selected={start} setter={startdatesetter} />
      <Calendar label="End DateTime" selected={end} setter={enddatesetter} />
      <Bucket config={config} bucket={bucket} bucketsetter={bucketsetter}/>
-     <Items config={config} bucket={bucket} itemsetter={itemsetter} />
+     <Items config={config} bucket={bucket} bucket_items={bucket_items} itemsetter={itemsetter} />
      <AddEmail email={email} emailsetter={emailsetter} />
      <Button 
        onClick={() => {
