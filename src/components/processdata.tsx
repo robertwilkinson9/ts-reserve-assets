@@ -40,12 +40,11 @@ const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
   return response.data.id;
 };
 
-export const ProcessData = ({ start, sdt, end, edt, bucket, sf, item, sd, email, se, sc, url} : ProcessDataProps) => {
+export const ProcessData = ({ config, start, sdt, end, edt, bucket, sf, item, sd, email, se, sc, url} : ProcessDataProps) => {
   const [datasent, setDatasent] = useState<boolean>(false);
   const [confirmed, setConfirmed] = useState<boolean>(false);
 
   const tomorrow = tomorrow_from_day(start!);
-//  console.log("tomorrow is ", tomorrow);
 
   const item_booking = {
     "booking_start": start!.toString(),
@@ -75,9 +74,9 @@ export const ProcessData = ({ start, sdt, end, edt, bucket, sf, item, sd, email,
     edstr = `end date is ${end}`;
   }
   const Bucket = ["Ground", "First", "Second"];
-  let fstr = "No Bucket";
+  let fstr = `No ${config.BUCKET_NAME}`;
   if (bucket === 0 || bucket === 1 || bucket === 2) {
-    fstr = Bucket[bucket] + " bucket";
+    fstr = `${Bucket[bucket]} ${config.BUCKET_NAME}`;
   }
 
   const handleConfirm = () => {
@@ -92,9 +91,10 @@ export const ProcessData = ({ start, sdt, end, edt, bucket, sf, item, sd, email,
   }
 
   if (confirmed) {
+    const istring = `${config.ITEM_NAME} ${item} booked!`;
     return (
       <>
-      <h4>Item {item} booked</h4>
+      <h4>{istring}</h4>
       <App />
       </>
     );

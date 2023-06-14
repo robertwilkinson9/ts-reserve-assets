@@ -49,7 +49,7 @@ export const App = () => {
     return (
       <>
       <Header />
-      <ProcessData start={startDateTime} sdt={setStartDateTime} end={endDateTime} edt={setEndDateTime} bucket={bucket} sf={setBucket} item={item} sd={setItem} email={email} se={setEmail} sc={setComplete} url={API_url}/>
+      <ProcessData config={configData} start={startDateTime} sdt={setStartDateTime} end={endDateTime} edt={setEndDateTime} bucket={bucket} sf={setBucket} item={item} sd={setItem} email={email} se={setEmail} sc={setComplete} url={API_url} />
       </>
     );
   } else {
