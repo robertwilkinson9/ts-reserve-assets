@@ -1,32 +1,17 @@
 import Select from 'react-select'
 
-import { ItemsProps, ItemData} from './interfaces';
-
-type Select_type = {
-  value: string,
-  label: string,
-};
-
-const item2select = (input: string): Select_type => {
-  return {value: input, label: input};
-}
+import { ItemsProps, ItemData, Select_type} from './interfaces';
 
 const items_select = (items: string[]): Select_type[] => {
-  const select_items: Select_type[] = [];
-  items.forEach(item => select_items.push(item2select(item)));
+  const select_items: Select_type[] = items.map(item => {return {value: item, label: item};});
   return select_items;
 }
 
 const listbuild = (istart:number, ilast:number, prefix: string | undefined, suffix?: string | undefined) => {
   const items: string[] = [];
   for (let i = istart; i <= ilast; i++) {
-    let d = "";
-// sprintf?
-    if (i < 10) { // XXX and in general??
-         d = `0${i}`;
-    } else {
-         d = `${i}`;
-    }
+    let d = i.toString().padStart(ilast.toString().length, '0');
+
     if (prefix !== undefined) {
       d = `${prefix}${d}`;
     }

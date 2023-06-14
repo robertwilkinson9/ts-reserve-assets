@@ -109,3 +109,7 @@ export type MongoType = {
   data?: MongoRecordType[];
 };
 
+export type Select_type = {
+  value: string,
+  label: string,
+};
