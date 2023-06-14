@@ -41,15 +41,14 @@ export const InputForm = ({config, mongoitems, start, startdatesetter, end, endd
             (after(x, b) && before(y, b)));
   };
 
-  const overlapv = mongoitems.filter(function(item) {return overlap(start!, end!, new Date(item.booking_start), new Date(item.booking_end));});
+//  const overlapv = mongoitems.filter(function(item) {return overlap(start!, end!, new Date(item.booking_start), new Date(item.booking_end));});
+  const overlapv = mongoitems.filter((item) => {return overlap(start!, end!, new Date(item.booking_start), new Date(item.booking_end));});
   console.log("InputForm overlapv is");
   console.log(overlapv);
 
-  const get_bucket_and_item = (x: MongoRecordType) => {
-    return {"bucket" : x.bucket, "item": x.item}
-  };
-
-  const bucket_items = overlapv.map(get_bucket_and_item);
+//  const get_bucket_and_item = (x: MongoRecordType) => { return {"bucket" : x.bucket, "item": x.item} };
+//  const bucket_items = overlapv.map(get_bucket_and_item);
+  const bucket_items = overlapv.map((x: MongoRecordType) => { return {"bucket" : x.bucket, "item": x.item} });
   console.log("InputForm bucket_items is");
   console.log(bucket_items);
   

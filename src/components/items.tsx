@@ -39,12 +39,6 @@ const listbuild = (istart:number, ilast:number, prefix: string | undefined, suff
 }
    
 export const Items = ({ config, bucket, bucket_items, itemsetter } : ItemsProps) => {
-
-  console.log(`ITEMS CONFIG.BUCKET_NAME is ${config.BUCKET_NAME}`);
-  console.log(`ITEMS BUCKET is ${bucket}`);
-  console.log(`ITEMS CONFIG.BUCKET SIZE is ${config.BUCKETS.length}`);
-  console.log(`ITEMS CONFIG is`);
-  console.log(config);
   if (bucket_items) {
     console.log("ITEMS BUCKET_ITEMS is ");
     console.log(bucket_items);
@@ -64,13 +58,11 @@ export const Items = ({ config, bucket, bucket_items, itemsetter } : ItemsProps)
       items = listbuild(config.BUCKETS[bucket!].ifirst!, config.BUCKETS[bucket!].ilast!, config.BUCKETS[bucket!].prefix);
     }
     if (bucket_items) {
-      const floor_items = bucket_items.filter(function(item) {return bucket == item.bucket});
+      const floor_items = bucket_items.filter((item) => {return bucket == item.bucket});
       console.log("ITEMS FLOOR_ITEMS is ");
       console.log(floor_items);
       if (floor_items) {
-        const get_item = (x: BucketItemType) => {return x.item};
-        const reserved_items = floor_items.map(get_item);
-//        const reserved_items = floor_items.map((x) => {x.item});
+        const reserved_items = floor_items.map((x: BucketItemType) => {return x.item});
         console.log("ITEMS RESERVED_ITEMS is ");
         console.log(reserved_items);
       }
