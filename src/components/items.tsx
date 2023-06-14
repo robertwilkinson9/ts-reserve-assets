@@ -25,7 +25,9 @@ const listbuild = (istart:number, ilast:number, prefix: string | undefined, suff
    
 export const Items = ({ config, bucket, bucket_items, itemsetter } : ItemsProps) => {
   let items: string[] = [];
+
   if (bucket !== null) {
+    itemsetter(null);
     if (config.BUCKETS[bucket].items != undefined && config.BUCKETS[bucket].items?.length) {
       items = config.BUCKETS[bucket].items!;
     } else {

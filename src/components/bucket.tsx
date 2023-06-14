@@ -41,9 +41,10 @@ const BucketButton = ({cb, lcf, ucf, bucketst, checked} : ButtonProps) => {
 }
 
 
-export const Bucket = ({config, bucket, bucketsetter}: BucketProps) => {
+export const Bucket = ({config, bucket, bucketsetter, itemsetter}: BucketProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     bucketsetter(parseInt(e.target.value, 10));
+    itemsetter(null);
   }
 
   const capitalizeFirstLetter = (name: string) => {return name.charAt(0).toUpperCase() + name.slice(1);}
