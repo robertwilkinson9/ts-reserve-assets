@@ -45,6 +45,10 @@ export const App = () => {
 
   console.log("AFTER useEffect App and COMPLETE is ",complete," and ITEMS are ", JSON.stringify(mongoitems));
 
+  console.log(`endDateTime IS ${endDateTime}`)
+  console.log(`item IS ${item}`)
+  console.log(`email IS ${email}`)
+
   if (endDateTime && item && email && complete) {
     return (
       <>
