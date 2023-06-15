@@ -10,8 +10,7 @@ export interface BucketLabelProps {
 export interface BucketProps {
   config: configData;
   bucket : number | null;
-  bucketsetter: React.Dispatch<React.SetStateAction<number | null>>
-  itemsetter: React.Dispatch<React.SetStateAction<string | null>>;
+  bucketsetter: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 export interface ButtonProps {

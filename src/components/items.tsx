@@ -44,12 +44,18 @@ export const Items = ({ config, bucket, bucket_items, itemsetter } : ItemsProps)
 
   const select_item_list: Select_type[] = items_select(items)
 
+  const key = `key__${bucket}`
+
   const capitalizeFirstLetter = (name: string) => {return name.charAt(0).toUpperCase() + name.slice(1);}
   return (
     <>
     <div id="itemPulldown">
       <label className="mb-0 font-weight-bold">{capitalizeFirstLetter(config.ITEM_NAME)}</label>
-        <Select options={select_item_list} onChange={(choice) => itemsetter(choice!.value)}/>
+        <Select
+           key={key}
+           options={select_item_list}
+           onChange={(choice) => itemsetter(choice!.value)}
+        />
     </div>
     </>
   );

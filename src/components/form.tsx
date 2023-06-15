@@ -50,7 +50,7 @@ export const InputForm = ({config, mongoitems, start, startdatesetter, end, endd
      <Form id="emailForm">
      <Calendar label="Start DateTime" selected={start} setter={startdatesetter} />
      <Calendar label="End DateTime" selected={end} setter={enddatesetter} />
-     <Bucket config={config} bucket={bucket} bucketsetter={bucketsetter} itemsetter={itemsetter} />
+     <Bucket config={config} bucket={bucket} bucketsetter={bucketsetter} />
      <Items config={config} bucket={bucket} bucket_items={overlapv} itemsetter={itemsetter} />
      <AddEmail email={email} emailsetter={emailsetter} />
      <Button 
@@ -69,7 +69,7 @@ export const InputForm = ({config, mongoitems, start, startdatesetter, end, endd
      <Form id="emailForm">
      <Calendar label="Start DateTime" selected={start} setter={startdatesetter} setter2={enddatesetter} />
      <Calendar label="End DateTime" selected={end} setter={enddatesetter} />
-     <Bucket config={config} bucket={bucket} bucketsetter={bucketsetter} itemsetter={itemsetter} />
+     <Bucket config={config} bucket={bucket} bucketsetter={bucketsetter} />
      <Items config={config} bucket={bucket} itemsetter={itemsetter} />
      <AddEmail email={email} emailsetter={emailsetter} />
      <Button 
