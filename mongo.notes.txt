@@ -46,4 +46,4 @@ switched to db item
 { "n" : 1, "ok" : 1 }
 > db.item.find()
 > db.item.createIndex({ "expireAt": 1 }, { expireAfterSeconds: 0 })
-
+> db.item.insertOne( {"booking_start": ISODate("2023-06-29T08:00:00Z"), "booking_end": ISODate("2023-06-29T17:00:00Z"), "expireAt": ISODate("2023-06-30T08:00:00Z"), "bucket" : 1, "item" : "1984", "email" : "robert.wilkinson@raytheon.co.uk"})

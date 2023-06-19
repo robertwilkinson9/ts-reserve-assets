@@ -75,10 +75,9 @@ export const ProcessData = ({ config, start, sdt, end, edt, bucket, sf, item, sd
   if (end) {
     edstr = `end date is ${end}`;
   }
-  const Bucket = ["Ground", "First", "Second"];
   let fstr = `No ${config.BUCKET_NAME}`;
   if (bucket === 0 || bucket === 1 || bucket === 2) {
-    fstr = `${Bucket[bucket]} ${config.BUCKET_NAME}`;
+    fstr = `${config.BUCKETS[bucket].name} ${config.BUCKET_NAME}`;
   }
 
   const handleConfirm = () => {

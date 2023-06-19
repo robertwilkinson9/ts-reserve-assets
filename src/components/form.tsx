@@ -19,7 +19,7 @@ export const InputForm = ({config, mongoitems, start, startdatesetter, end, endd
   console.log(config);
   console.log("InputForm mongoitems is");
   console.log(mongoitems);
-  const buttonText = `Book ${config.ITEM_NAME}`;
+  const buttonText = `Reserve ${config.ITEM_NAME}`;
 
   if (end) {
 { /*
