@@ -8,6 +8,8 @@ import App from '../App'
 
 import { ItemData, ProcessDataProps } from './interfaces';
 
+import './processdata.css';
+
 const reset = (
   setStartDateTime: React.Dispatch<React.SetStateAction<Date|null>>,
   setEndDateTime: React.Dispatch<React.SetStateAction<Date|null>>,

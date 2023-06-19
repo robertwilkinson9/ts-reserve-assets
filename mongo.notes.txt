@@ -45,4 +45,5 @@ switched to db item
 > db.runCommand({delete: "item", deletes: [ { q: { }, limit: 0 } ], writeConcern: { w: "majority", wtimeout: 5000 }})
 { "n" : 1, "ok" : 1 }
 > db.item.find()
+> db.item.createIndex({ "expireAt": 1 }, { expireAfterSeconds: 0 })
 

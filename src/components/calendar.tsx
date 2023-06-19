@@ -10,7 +10,7 @@ import { CalendarProps } from './interfaces';
 export const Calendar = ({label, selected, setter, setter2} : CalendarProps) => {
  return (
     <>
-      <label> {label} Calendar </label>
+      <label>{label}</label>
       <DatePicker
         locale="en-GB"
         dateFormat="d/MM/yyyy hh:mm aa"
