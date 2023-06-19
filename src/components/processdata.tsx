@@ -38,7 +38,7 @@ const tomorrow_from_day = (startDateTime: Date): Date => {
 
 const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
   const response = await axios.post(url, item_booking);
-  console.log('ADD_DESK_TO_MONGODB ID IS :', response.data.id)
+  console.log('ADD_ITEM_TO_MONGODB ID IS :', response.data.id)
   return response.data.id;
 };
 
@@ -58,8 +58,8 @@ export const ProcessData = ({ config, start, sdt, end, edt, bucket, sf, item, sd
   };
 
   const confirm_action = () => {
-    const DESK_url = url + 'item/';
-    const id = add_item_to_mongodb(DESK_url, item_booking);
+    const ITEM_url = url + 'item/';
+    const id = add_item_to_mongodb(ITEM_url, item_booking);
     id.then(function(value) {
       console.log(`RESULT ${value}`);
       setDatasent(true);
