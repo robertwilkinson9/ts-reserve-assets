@@ -1,0 +1,32 @@
+{
+  "ITEM_NAME": "book",
+  "BUCKET_NAME": "author",
+  "BUCKETS":
+  [
+    {
+      "name": "Jane Austen",
+      "items": [
+        "Emma",
+        "Mansfield Park",
+        "Northanger Abbey",
+        "Persuasion",
+        "Pride and Prejudice",
+        "Sense and Sensibility"
+      ]
+    },
+    {
+      "name": "George Orwell",
+      "items": [
+        "A Clergyman's Daughter",
+        "Animal Farm",
+        "Burmese Days",
+        "Coming Up for Air",
+        "Down and Out in Paris and London",
+        "Homage to Catalonia",
+        "Keep the Aspidistra Flying",
+        "Nineteen Eighty-Four",
+        "The Road to Wigan Pier"
+      ]
+    }
+  ]
+}
