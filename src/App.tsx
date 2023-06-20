@@ -58,8 +58,8 @@ export const App = () => {
     );
   } else {
     let mongo_data: MongoRecordType[] = [];
-    if (mongoitems !== null) {
-      mongo_data = mongoitems.data!;
+    if (mongoitems && mongoitems.data) {
+      mongo_data = mongoitems.data;
     }
 
     return (

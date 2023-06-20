@@ -29,11 +29,15 @@ const reset = (
 
 const tomorrow_from_day = (startDateTime: Date): Date => {
   // Current date
-  const date = new Date(startDateTime!);
-  // Tomorrow's date
-  const tomorrow = date.setDate(date.getDate() + 1);
+  if (startDateTime) {
+    const date = new Date(startDateTime);
+    // Tomorrow's date
+    const tomorrow = date.setDate(date.getDate() + 1);
 
-  return new Date(tomorrow);
+    return new Date(tomorrow);
+  } else {
+    return new Date();
+  }
 }
 
 const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
@@ -46,80 +50,89 @@ export const ProcessData = ({ config, start, sdt, end, edt, bucket, sf, item, sd
   const [datasent, setDatasent] = useState<boolean>(false);
   const [confirmed, setConfirmed] = useState<boolean>(false);
 
-  const tomorrow = tomorrow_from_day(start!);
+  if (start && end && bucket && item && email) {
+    const tomorrow = tomorrow_from_day(start);
 
-  const item_booking = {
-    "booking_start": start!.toString(),
-    "booking_end": end!.toString(),
-    "expireAt": tomorrow.toString(),
-    "bucket": bucket!,
-    "item": item!,
-    "email": email!,
-  };
+    const item_booking = {
+      "booking_start": start.toString(),
+      "booking_end": end.toString(),
+      "expireAt": tomorrow.toString(),
+      "bucket": bucket,
+      "item": item,
+      "email": email,
+    };
 
-  const confirm_action = () => {
-    const ITEM_url = url + 'item/';
-    const id = add_item_to_mongodb(ITEM_url, item_booking);
-    id.then(function(value) {
-      console.log(`RESULT ${value}`);
-      setDatasent(true);
-      console.log(`INSIDE 1. SET_DATASENT - jj is ${id}, DATASENT IS ${datasent}`)
-    });
-  }
+    const confirm_action = () => {
+      const ITEM_url = url + 'item/';
+      const id = add_item_to_mongodb(ITEM_url, item_booking);
+      id.then(function(value) {
+        console.log(`RESULT ${value}`);
+        setDatasent(true);
+        console.log(`INSIDE 1. SET_DATASENT - jj is ${id}, DATASENT IS ${datasent}`)
+      });
+    }
 
-  let sdstr = "No start date available"
-  if (start) {
-    sdstr = `start date is ${start}`;
-  }
-  let edstr = "No end date available"
-  if (end) {
-    edstr = `end date is ${end}`;
-  }
-  let fstr = `No ${config.BUCKET_NAME}`;
-  if (bucket === 0 || bucket === 1 || bucket === 2) {
-    fstr = `${config.BUCKETS[bucket].name} ${config.BUCKET_NAME}`;
-  }
+    const handleConfirm = () => {
+      console.log("Confirm Button clicked!");
+      confirm_action();
+      setConfirmed(true);
+    }
 
-  const handleConfirm = () => {
-    console.log("Confirm Button clicked!");
-    confirm_action();
-    setConfirmed(true);
-  }
+    let sdstr = "No start date available"
+    if (start) {
+      sdstr = `start date is ${start}`;
+    }
+    let edstr = "No end date available"
+    if (end) {
+      edstr = `end date is ${end}`;
+    }
+    let fstr = `No ${config.BUCKET_NAME}`;
+    if (bucket === 0 || bucket === 1 || bucket === 2) {
+      fstr = `${config.BUCKETS[bucket].name} ${config.BUCKET_NAME}`;
+    }
 
-  const handleCancel = () => {
-    console.log("Cancel Button clicked!");
-    reset(sdt, edt, sf, sd, se, sc);
-  }
+    const handleCancel = () => {
+      console.log("Cancel Button clicked!");
+      reset(sdt, edt, sf, sd, se, sc);
+    }
 
-  if (confirmed) {
-    const istring = `${config.ITEM_NAME} ${item} booked!`;
-    return (
-      <>
-      <h4>{istring}</h4>
-      <App />
-      </>
-    );
+    if (confirmed) {
+      const istring = `${config.ITEM_NAME} ${item} booked!`;
+      return (
+        <>
+        <h4>{istring}</h4>
+        <App />
+        </>
+      );
+    } else {
+      return (
+        <>
+        <h4>ProcessData</h4>
+        <p>{sdstr}</p>
+        <p>{edstr}</p>
+        <p>{fstr}</p>
+        <p>{item}</p>
+        <p>{email}</p>
+        <Button
+           onClick={handleConfirm}
+        >
+        Confirm?
+        </Button>
+
+        <Button
+           onClick={handleCancel}
+        >
+        Cancel?
+        </Button>
+
+        </>
+      );
+    }
   } else {
     return (
       <>
-      <h4>ProcessData</h4>
-      <p>{sdstr}</p>
-      <p>{edstr}</p>
-      <p>{fstr}</p>
-      <p>{item}</p>
-      <p>{email}</p>
-      <Button
-         onClick={handleConfirm}
-      >
-      Confirm?
-      </Button>
-  
-      <Button
-         onClick={handleCancel}
-      >
-      Cancel?
-      </Button>
-  
+      <h4>Insufficient Input</h4>
+      <App />
       </>
     );
   }
