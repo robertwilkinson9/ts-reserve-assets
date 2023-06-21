@@ -50,7 +50,9 @@ export const ProcessData = ({ config, start, sdt, end, edt, bucket, sf, item, sd
   const [datasent, setDatasent] = useState<boolean>(false);
   const [confirmed, setConfirmed] = useState<boolean>(false);
 
-  if (start && end && bucket && item && email) {
+  console.log(`start is ${start}, end is ${end}, bucket is ${bucket}, item is ${item} and email is ${email}`);
+
+  if (start && end && bucket !== null && item && email) {
     const tomorrow = tomorrow_from_day(start);
 
     const item_booking = {
