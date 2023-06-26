@@ -66,13 +66,14 @@ export interface ProcessDataProps {
   end: Date | null;
   edt: React.Dispatch<React.SetStateAction<Date|null>>,
   bucket: number | null;
-  sf: React.Dispatch<React.SetStateAction<number|null>>,
+  sb: React.Dispatch<React.SetStateAction<number|null>>,
   item: string | null;
-  sd: React.Dispatch<React.SetStateAction<string|null>>,
+  si: React.Dispatch<React.SetStateAction<string|null>>,
   email: string | null;
   se: React.Dispatch<React.SetStateAction<string|null>>,
   sc: React.Dispatch<React.SetStateAction<boolean>>,
   url: string;
+  sd: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 interface bucketData {

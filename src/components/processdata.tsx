@@ -17,14 +17,17 @@ const reset = (
   setItem: React.Dispatch<React.SetStateAction<string|null>>,
   setEmail: React.Dispatch<React.SetStateAction<string|null>>,
   setComplete: React.Dispatch<React.SetStateAction<boolean>>,
+  setDatasent: React.Dispatch<React.SetStateAction<boolean>>,
 ): void =>
 {
+  console.log("RESET invoked");
   setStartDateTime(new Date());
   setEndDateTime(null);
   setBucket(0);
   setItem(null);
   setEmail(null);
   setComplete(false);
+  setDatasent(false);
 }
 
 const tomorrow_from_day = (startDateTime: Date): Date => {
@@ -46,8 +49,7 @@ const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
   return response.data.id;
 };
 
-export const ProcessData = ({ config, start, sdt, end, edt, bucket, sf, item, sd, email, se, sc, url} : ProcessDataProps) => {
-  const [datasent, setDatasent] = useState<boolean>(false);
+export const ProcessData = ({ config, start, sdt, end, edt, bucket, sb, item, si, email, se, sc, url, sd} : ProcessDataProps) => {
   const [confirmed, setConfirmed] = useState<boolean>(false);
 
   console.log(`start is ${start}, end is ${end}, bucket is ${bucket}, item is ${item} and email is ${email}`);
@@ -68,9 +70,8 @@ export const ProcessData = ({ config, start, sdt, end, edt, bucket, sf, item, sd
       const ITEM_url = url + 'item/';
       const id = add_item_to_mongodb(ITEM_url, item_booking);
       id.then(function(value) {
-        console.log(`RESULT ${value}`);
-        setDatasent(true);
-        console.log(`INSIDE 1. SET_DATASENT - jj is ${id}, DATASENT IS ${datasent}`)
+        console.log(`RESULT NEWID is ${value}`);
+        sd(true);
       });
     }
 
@@ -95,7 +96,7 @@ export const ProcessData = ({ config, start, sdt, end, edt, bucket, sf, item, sd
 
     const handleCancel = () => {
       console.log("Cancel Button clicked!");
-      reset(sdt, edt, sf, sd, se, sc);
+      reset(sdt, edt, sb, si, se, sc, sd);
     }
 
     if (confirmed) {

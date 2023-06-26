@@ -23,6 +23,7 @@ export const App = () => {
   const [item, setItem] = useState<string_or_null>(null);
   const [email, setEmail] = useState<string_or_null>(null);
   const [complete, setComplete] = useState<boolean>(false);
+  const [datasent, setDatasent] = useState<boolean>(false);
   const [mongoitems, setMongoitems] = useState<MongoType>({"success": false});
 
   registerLocale('en-GB', enGB)
@@ -41,19 +42,16 @@ export const App = () => {
 
   useEffect(() => {
     get_mongoitems();
-  }, [complete]);
+  }, [complete, datasent]);
 
-  console.log("AFTER useEffect App and COMPLETE is ",complete," and ITEMS are ", JSON.stringify(mongoitems));
-
-  console.log(`endDateTime IS ${endDateTime}`)
-  console.log(`item IS ${item}`)
-  console.log(`email IS ${email}`)
+  console.log("AFTER useEffect App and COMPLETE is ",complete," and DATASENT is ",datasent," and ITEMS are ", JSON.stringify(mongoitems));
+  console.log(`endDateTime IS ${endDateTime}, item IS ${item} and email IS ${email}`)
 
   if (endDateTime && item && email && complete) {
     return (
       <>
       <Header />
-      <ProcessData config={configData} start={startDateTime} sdt={setStartDateTime} end={endDateTime} edt={setEndDateTime} bucket={bucket} sf={setBucket} item={item} sd={setItem} email={email} se={setEmail} sc={setComplete} url={API_url} />
+      <ProcessData config={configData} start={startDateTime} sdt={setStartDateTime} end={endDateTime} edt={setEndDateTime} bucket={bucket} sb={setBucket} item={item} si={setItem} email={email} se={setEmail} sc={setComplete} url={API_url} sd={setDatasent} />
       </>
     );
   } else {

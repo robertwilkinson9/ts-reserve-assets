@@ -15,8 +15,6 @@ const handleBRClick = (completesetter: React.Dispatch<React.SetStateAction<boole
 };
 
 export const InputForm = ({config, mongoitems, start, startdatesetter, end, enddatesetter, bucket, bucketsetter, itemsetter, email, emailsetter, completesetter}: InputFormProps) => {
-  console.log("InputForm config is");
-  console.log(config);
   console.log("InputForm mongoitems is");
   console.log(mongoitems);
   const buttonText = `Reserve ${config.ITEM_NAME}`;
@@ -35,7 +33,7 @@ export const InputForm = ({config, mongoitems, start, startdatesetter, end, endd
       const overlap = (a: Date, b: Date, x: Date, y:Date) => {
         // a to b is one date range, x to y is another date range
         // we return true for overlap
-        console.log(`OVERLAP A is ${a} and B is ${b} and X is ${x} and Y is ${y}`);
+//        console.log(`OVERLAP A is ${a} and B is ${b} and X is ${x} and Y is ${y}`);
         return ((after(a, x) && before(a, y)) ||
                 (after(b, x) && before(b, y)) ||
                 (after(x, a) && before(y, a)) ||
