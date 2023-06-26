@@ -31,34 +31,53 @@ export const App = () => {
 
   const API_url = 'http://localhost:5179/api/';
 
+  const get_data_from_items = (mongoitems: MongoType) => {
+    let mongo_data: MongoRecordType[] = [];
+    if (mongoitems && mongoitems.data) {
+      mongo_data = mongoitems.data;
+    }
+
+    return mongo_data;
+  }
+
   const get_mongoitems = async () => {
     // Change this endpoint to whatever local or online address you have
     const ITEMS_url = API_url + 'items/';
 
     const response = await axios.get(ITEMS_url);
     console.log("IN get_mongoitems and RESPONSE.DATA is ", JSON.stringify(response.data));
-    setMongoitems(response.data);
+
+    const mongo_data = get_data_from_items(mongoitems);
+    console.log("IN get_mongoitems and RESPONSE.DATA.DATA length is ", response.data.data.length, " AND MONGO_DATA.LENGTH is ", mongo_data.length, "AND DATASENT is ", datasent);
+
+//    if (response.data.data.length > mongo_data.length) {
+    if (datasent || mongo_data.length == 0) {
+      setMongoitems(response.data);
+    }
   };
 
   useEffect(() => {
     get_mongoitems();
-  }, [complete, datasent]);
+  }, [complete, datasent, endDateTime]);
 
   console.log("AFTER useEffect App and COMPLETE is ",complete," and DATASENT is ",datasent," and ITEMS are ", JSON.stringify(mongoitems));
   console.log(`endDateTime IS ${endDateTime}, item IS ${item} and email IS ${email}`)
 
+  const mongo_data = get_data_from_items(mongoitems);
   if (endDateTime && item && email && complete) {
     return (
       <>
       <Header />
-      <ProcessData config={configData} start={startDateTime} sdt={setStartDateTime} end={endDateTime} edt={setEndDateTime} bucket={bucket} sb={setBucket} item={item} si={setItem} email={email} se={setEmail} sc={setComplete} url={API_url} sd={setDatasent} />
+      <ProcessData config={configData} mongo_data={mongo_data} start={startDateTime} sdt={setStartDateTime} end={endDateTime} edt={setEndDateTime} bucket={bucket} sb={setBucket} item={item} si={setItem} email={email} se={setEmail} sc={setComplete} url={API_url} sd={setDatasent} />
       </>
     );
   } else {
+{ /*
     let mongo_data: MongoRecordType[] = [];
     if (mongoitems && mongoitems.data) {
       mongo_data = mongoitems.data;
     }
+*/ }
 
     return (
       <>
