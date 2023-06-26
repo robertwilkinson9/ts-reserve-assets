@@ -4,7 +4,9 @@ import axios from 'axios'
 
 import Button from 'react-bootstrap/Button';
 
-import App from '../App'
+//import App from '../App'
+
+import InputForm from './form'
 
 import { ItemData, ProcessDataProps } from './interfaces';
 
@@ -49,7 +51,13 @@ const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
   return response.data.id;
 };
 
+export const ProcessData = ({ config, mongo_data, start, sdt, end, edt, bucket, sb, item, si, email, se, sc, url, sd} : ProcessDataProps) => {
+  console.log("MONGO DATA AT start of ProcessData is ", mongo_data);
+
+{ /*
 export const ProcessData = ({ config, start, sdt, end, edt, bucket, sb, item, si, email, se, sc, url, sd} : ProcessDataProps) => {
+*/ }
+
   const [confirmed, setConfirmed] = useState<boolean>(false);
 
   console.log(`start is ${start}, end is ${end}, bucket is ${bucket}, item is ${item} and email is ${email}`);
@@ -100,14 +108,27 @@ export const ProcessData = ({ config, start, sdt, end, edt, bucket, sb, item, si
     }
 
     if (confirmed) {
+      console.log("PROCESS DATA CONFIRMED!!");
       const istring = `${config.ITEM_NAME} ${item} booked!`;
+      console.log(`ISTRING is ${istring}`);
+      edt(null);
+      sb(0);
+      si(null);
+      se(null);
+//  sc(false);
+//  sd(false);
+
       return (
         <>
         <h4>{istring}</h4>
+{ /*
         <App />
+*/ }
+        <InputForm config={config} mongoitems={mongo_data} start={start} startdatesetter={sdt} end={end} enddatesetter={edt} bucket={bucket} bucketsetter={sb} itemsetter={si} email={email} emailsetter={se} completesetter={sc} />
         </>
       );
-    } else {
+    }  else {
+      console.log("PROCESS DATA not CONFIRMED!!");
       return (
         <>
         <h4>ProcessData</h4>
@@ -132,10 +153,15 @@ export const ProcessData = ({ config, start, sdt, end, edt, bucket, sb, item, si
       );
     }
   } else {
+    console.log("INSUFIICIENT INPUT CONFIRMED!!");
+//    reset(sdt, edt, sb, si, se, sc, sd);
     return (
       <>
       <h4>Insufficient Input</h4>
+{ /*
       <App />
+*/ }
+      <InputForm config={config} mongoitems={mongo_data} start={start} startdatesetter={sdt} end={end} enddatesetter={edt} bucket={bucket} bucketsetter={sb} itemsetter={si} email={email} emailsetter={se} completesetter={sc} />
       </>
     );
   }

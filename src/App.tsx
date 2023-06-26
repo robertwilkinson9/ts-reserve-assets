@@ -50,8 +50,8 @@ export const App = () => {
     const mongo_data = get_data_from_items(mongoitems);
     console.log("IN get_mongoitems and RESPONSE.DATA.DATA length is ", response.data.data.length, " AND MONGO_DATA.LENGTH is ", mongo_data.length, "AND DATASENT is ", datasent);
 
-//    if (response.data.data.length > mongo_data.length) {
-    if (datasent || mongo_data.length == 0) {
+    if ((datasent || mongo_data.length == 0) && (response.data.data.length > mongo_data.length)) {
+      console.log("SETTING MONGO ITEMS DATSENT is ", datasent, "MONGO_DATA.LENGTH is ",mongo_data.length, " and RESPONSE.DATA.DATA is ", response.data.data.length);
       setMongoitems(response.data);
     }
   };
@@ -63,7 +63,8 @@ export const App = () => {
   console.log("AFTER useEffect App and COMPLETE is ",complete," and DATASENT is ",datasent," and ITEMS are ", JSON.stringify(mongoitems));
   console.log(`endDateTime IS ${endDateTime}, item IS ${item} and email IS ${email}`)
 
-  const mongo_data = get_data_from_items(mongoitems);
+    const mongo_data = get_data_from_items(mongoitems);
+
   if (endDateTime && item && email && complete) {
     return (
       <>
@@ -72,13 +73,6 @@ export const App = () => {
       </>
     );
   } else {
-{ /*
-    let mongo_data: MongoRecordType[] = [];
-    if (mongoitems && mongoitems.data) {
-      mongo_data = mongoitems.data;
-    }
-*/ }
-
     return (
       <>
       <Header />

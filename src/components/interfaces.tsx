@@ -61,6 +61,7 @@ export interface ItemsProps {
 
 export interface ProcessDataProps {
   config: configData;
+  mongo_data: MongoRecordType[];
   start: Date | null;
   sdt: React.Dispatch<React.SetStateAction<Date|null>>,
   end: Date | null;
