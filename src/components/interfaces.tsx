@@ -24,8 +24,8 @@ export interface ButtonProps {
 export interface CalendarProps {
   label: string;
   selected: Date | null;
-  setter: React.Dispatch<React.SetStateAction<Date | null>>
-  setter2?: React.Dispatch<React.SetStateAction<Date | null>>
+  setter: React.Dispatch<React.SetStateAction<Date | null>>;
+  setter2?: React.Dispatch<React.SetStateAction<Date | null>>;
 }
 
 export interface InputFormProps {
@@ -63,18 +63,20 @@ export interface ProcessDataProps {
   config: configData;
   mongo_data: MongoRecordType[];
   start: Date | null;
-  sdt: React.Dispatch<React.SetStateAction<Date|null>>,
+  sdt: React.Dispatch<React.SetStateAction<Date|null>>;
   end: Date | null;
-  edt: React.Dispatch<React.SetStateAction<Date|null>>,
+  edt: React.Dispatch<React.SetStateAction<Date|null>>;
   bucket: number | null;
-  sb: React.Dispatch<React.SetStateAction<number|null>>,
+  sb: React.Dispatch<React.SetStateAction<number|null>>;
   item: string | null;
-  si: React.Dispatch<React.SetStateAction<string|null>>,
+  si: React.Dispatch<React.SetStateAction<string|null>>;
   email: string | null;
-  se: React.Dispatch<React.SetStateAction<string|null>>,
-  sc: React.Dispatch<React.SetStateAction<boolean>>,
+  se: React.Dispatch<React.SetStateAction<string|null>>;
+  sc: React.Dispatch<React.SetStateAction<boolean>>;
   url: string;
-  sd: React.Dispatch<React.SetStateAction<boolean>>,
+  sd: React.Dispatch<React.SetStateAction<boolean>>;
+  confirmed: boolean;
+  set_confirmed: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface bucketData {

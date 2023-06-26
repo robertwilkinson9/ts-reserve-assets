@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 
 import axios from 'axios'
 
@@ -11,26 +11,6 @@ import InputForm from './form'
 import { ItemData, ProcessDataProps } from './interfaces';
 
 import './processdata.css';
-
-const reset = (
-  setStartDateTime: React.Dispatch<React.SetStateAction<Date|null>>,
-  setEndDateTime: React.Dispatch<React.SetStateAction<Date|null>>,
-  setBucket: React.Dispatch<React.SetStateAction<number|null>>,
-  setItem: React.Dispatch<React.SetStateAction<string|null>>,
-  setEmail: React.Dispatch<React.SetStateAction<string|null>>,
-  setComplete: React.Dispatch<React.SetStateAction<boolean>>,
-  setDatasent: React.Dispatch<React.SetStateAction<boolean>>,
-): void =>
-{
-  console.log("RESET invoked");
-  setStartDateTime(new Date());
-  setEndDateTime(null);
-  setBucket(0);
-  setItem(null);
-  setEmail(null);
-  setComplete(false);
-  setDatasent(false);
-}
 
 const tomorrow_from_day = (startDateTime: Date): Date => {
   // Current date
@@ -51,16 +31,12 @@ const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
   return response.data.id;
 };
 
-export const ProcessData = ({ config, mongo_data, start, sdt, end, edt, bucket, sb, item, si, email, se, sc, url, sd} : ProcessDataProps) => {
-  console.log("MONGO DATA AT start of ProcessData is ", mongo_data);
+export const ProcessData = ({ config, mongo_data, start, sdt, end, edt, bucket, sb, item, si, email, se, sc, url, sd, confirmed, set_confirmed} : ProcessDataProps) => {
+//  console.log("MONGO DATA AT start of ProcessData is ", mongo_data);
 
-{ /*
-export const ProcessData = ({ config, start, sdt, end, edt, bucket, sb, item, si, email, se, sc, url, sd} : ProcessDataProps) => {
-*/ }
+//  const [confirmed, setConfirmed] = useState<boolean>(false);
 
-  const [confirmed, setConfirmed] = useState<boolean>(false);
-
-  console.log(`start is ${start}, end is ${end}, bucket is ${bucket}, item is ${item} and email is ${email}`);
+//  console.log(`start is ${start}, end is ${end}, bucket is ${bucket}, item is ${item} and email is ${email}`);
 
   if (start && end && bucket !== null && item && email) {
     const tomorrow = tomorrow_from_day(start);
@@ -86,7 +62,7 @@ export const ProcessData = ({ config, start, sdt, end, edt, bucket, sb, item, si
     const handleConfirm = () => {
       console.log("Confirm Button clicked!");
       confirm_action();
-      setConfirmed(true);
+      set_confirmed(true);
     }
 
     let sdstr = "No start date available"
@@ -102,6 +78,26 @@ export const ProcessData = ({ config, start, sdt, end, edt, bucket, sb, item, si
       fstr = `${config.BUCKETS[bucket].name} ${config.BUCKET_NAME}`;
     }
 
+    const reset = (
+      setStartDateTime: React.Dispatch<React.SetStateAction<Date|null>>,
+      setEndDateTime: React.Dispatch<React.SetStateAction<Date|null>>,
+      setBucket: React.Dispatch<React.SetStateAction<number|null>>,
+      setItem: React.Dispatch<React.SetStateAction<string|null>>,
+      setEmail: React.Dispatch<React.SetStateAction<string|null>>,
+      setComplete: React.Dispatch<React.SetStateAction<boolean>>,
+      setDatasent: React.Dispatch<React.SetStateAction<boolean>>,
+    ): void =>
+    {
+      console.log("RESET invoked");
+      setStartDateTime(new Date());
+      setEndDateTime(null);
+      setBucket(0);
+      setItem(null);
+      setEmail(null);
+      setComplete(false);
+      setDatasent(false);
+    }
+
     const handleCancel = () => {
       console.log("Cancel Button clicked!");
       reset(sdt, edt, sb, si, se, sc, sd);
@@ -109,21 +105,19 @@ export const ProcessData = ({ config, start, sdt, end, edt, bucket, sb, item, si
 
     if (confirmed) {
       console.log("PROCESS DATA CONFIRMED!!");
-      const istring = `${config.ITEM_NAME} ${item} booked!`;
+//      const istring = `${config.ITEM_NAME} ${item} booked!`;
+      const istring = config.ITEM_NAME + " " + item + " booked!";
       console.log(`ISTRING is ${istring}`);
       edt(null);
       sb(0);
       si(null);
       se(null);
-//  sc(false);
-//  sd(false);
+      sc(false);
+//      sd(false);
 
       return (
         <>
         <h4>{istring}</h4>
-{ /*
-        <App />
-*/ }
         <InputForm config={config} mongoitems={mongo_data} start={start} startdatesetter={sdt} end={end} enddatesetter={edt} bucket={bucket} bucketsetter={sb} itemsetter={si} email={email} emailsetter={se} completesetter={sc} />
         </>
       );
@@ -154,13 +148,9 @@ export const ProcessData = ({ config, start, sdt, end, edt, bucket, sb, item, si
     }
   } else {
     console.log("INSUFIICIENT INPUT CONFIRMED!!");
-//    reset(sdt, edt, sb, si, se, sc, sd);
     return (
       <>
       <h4>Insufficient Input</h4>
-{ /*
-      <App />
-*/ }
       <InputForm config={config} mongoitems={mongo_data} start={start} startdatesetter={sdt} end={end} enddatesetter={edt} bucket={bucket} bucketsetter={sb} itemsetter={si} email={email} emailsetter={se} completesetter={sc} />
       </>
     );

@@ -15,8 +15,8 @@ const handleBRClick = (completesetter: React.Dispatch<React.SetStateAction<boole
 };
 
 export const InputForm = ({config, mongoitems, start, startdatesetter, end, enddatesetter, bucket, bucketsetter, itemsetter, email, emailsetter, completesetter}: InputFormProps) => {
-  console.log("InputForm mongoitems is");
-  console.log(mongoitems);
+//  console.log("InputForm mongoitems is");
+//  console.log(mongoitems);
   const buttonText = `Reserve ${config.ITEM_NAME}`;
 
   if (end) {
@@ -51,13 +51,7 @@ export const InputForm = ({config, mongoitems, start, startdatesetter, end, endd
          <Bucket config={config} bucket={bucket} bucketsetter={bucketsetter} />
          <Items config={config} bucket={bucket} bucket_items={overlapv} itemsetter={itemsetter} />
          <AddEmail email={email} emailsetter={emailsetter} />
-         <Button
-           onClick={() => {
-             handleBRClick(completesetter);
-           }}
-         >
-          {buttonText}
-         </Button>
+         <Button onClick={() => {handleBRClick(completesetter);}} >{buttonText} </Button>
         </Form>
         </>
       );
@@ -70,13 +64,7 @@ export const InputForm = ({config, mongoitems, start, startdatesetter, end, endd
          <Bucket config={config} bucket={bucket} bucketsetter={bucketsetter} />
          <Items config={config} bucket={bucket} itemsetter={itemsetter} />
          <AddEmail email={email} emailsetter={emailsetter} />
-         <Button
-           onClick={() => {
-             handleBRClick(completesetter);
-           }}
-         >
-          {buttonText}
-         </Button>
+         <Button onClick={() => {handleBRClick(completesetter);}} >{buttonText}</Button>
         </Form>
         </>
       );
@@ -90,13 +78,7 @@ export const InputForm = ({config, mongoitems, start, startdatesetter, end, endd
        <Bucket config={config} bucket={bucket} bucketsetter={bucketsetter} />
        <Items config={config} bucket={bucket} itemsetter={itemsetter} />
        <AddEmail email={email} emailsetter={emailsetter} />
-       <Button
-         onClick={() => {
-           handleBRClick(completesetter);
-         }}
-       >
-        {buttonText}
-       </Button>
+       <Button onClick={() => {handleBRClick(completesetter);}} >{buttonText} </Button>
       </Form>
       </>
     );
