@@ -30,7 +30,7 @@ export interface CalendarProps {
 
 export interface InputFormProps {
   config: configData;
-  mongoitems: MongoRecordType[];
+  mongoitems: MongoData[];
   start: Date | null;
   startdatesetter: React.Dispatch<React.SetStateAction<Date | null>>;
   end: Date | null;
@@ -55,13 +55,13 @@ export interface ItemData {
 export interface ItemsProps {
   config: configData;
   bucket: number | null;
-  bucket_items?: ItemData[];
+  bucket_items?: MongoData[];
   itemsetter: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 export interface ProcessDataProps {
   config: configData;
-  mongo_data: MongoRecordType[];
+  mongo_data: MongoData[];
   start: Date | null;
   sdt: React.Dispatch<React.SetStateAction<Date|null>>;
   end: Date | null;
@@ -114,6 +114,17 @@ export type MongoType = {
 };
 
 export type Select_type = {
-  value: string,
-  label: string,
+  value: string;
+  label: string;
 };
+
+// maybe want to add _id to this sometime?
+
+// export interface MongoData {
+export type MongoData = {
+  booking_start: string;
+  booking_end: string;
+  bucket: number;
+  item: string;
+};
+

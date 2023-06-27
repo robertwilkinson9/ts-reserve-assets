@@ -1,6 +1,7 @@
 import Select from 'react-select'
 
-import { ItemsProps, ItemData, Select_type} from './interfaces';
+//import { ItemsProps, ItemData, Select_type} from './interfaces';
+import { ItemsProps, Select_type} from './interfaces';
 
 const items_select = (items: string[]): Select_type[] => {
   const select_items: Select_type[] = items.map(item => {return {value: item, label: item};});
@@ -37,9 +38,9 @@ export const Items = ({ config, bucket, bucket_items, itemsetter } : ItemsProps)
       }
     }
     if (bucket_items) {
-      const floor_items = bucket_items.filter((item) => {return bucket == item.bucket});
+      const floor_items = bucket_items.filter(item => {return bucket == item.bucket});
       if (floor_items) {
-        const reserved_items = floor_items.map((x: ItemData) => {return x.item});
+        const reserved_items = floor_items.map(x => {return x.item});
         if (items) {
           items = items.filter(n => !reserved_items.includes(n)); // slow and simple set difference 
         }
