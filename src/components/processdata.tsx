@@ -1,12 +1,10 @@
-// import { useState } from "react";
-
 import axios from 'axios'
 
 import Button from 'react-bootstrap/Button';
 
 import InputForm from './form'
 
-import { ItemData, ProcessDataProps } from './interfaces';
+import { ItemData, MongoData, ProcessDataProps } from './interfaces';
 
 import './processdata.css';
 
@@ -29,20 +27,14 @@ const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
   return response.data.id;
 };
 
-export const ProcessData = ({ config, mongo_data, start, sdt, end, edt, bucket, sb, item, si, email, se, sc, url, sd, confirmed, set_confirmed} : ProcessDataProps) => {
-//  console.log("MONGO DATA AT start of ProcessData is ", mongo_data);
-
-//  const [confirmed, setConfirmed] = useState<boolean>(false);
-
-//  console.log(`start is ${start}, end is ${end}, bucket is ${bucket}, item is ${item} and email is ${email}`);
-
+export const ProcessData = ({ config, mongo_data, start, sdt, end, edt, bucket, sb, item, si, email, se, sc, url, sd, confirmed, set_confirmed, setmongodata} : ProcessDataProps) => {
   if (start && end && bucket !== null && item && email) {
     const tomorrow = tomorrow_from_day(start);
 
     const item_booking = {
-      "booking_start": start.toString(),
-      "booking_end": end.toString(),
-      "expireAt": tomorrow.toString(),
+      "booking_start": start.toISOString(),
+      "booking_end": end.toISOString(),
+      "expireAt": tomorrow.toISOString(),
       "bucket": bucket,
       "item": item,
       "email": email,
@@ -53,6 +45,14 @@ export const ProcessData = ({ config, mongo_data, start, sdt, end, edt, bucket, 
       const id = add_item_to_mongodb(ITEM_url, item_booking);
       id.then(function(value) {
         console.log(`RESULT NEWID is ${value}`);
+        const new_record: MongoData = {"booking_start": start.toISOString(), "booking_end": end.toISOString(), "bucket": bucket, "item": item};
+        console.log("NEW RECORD is ");
+        console.log(new_record);
+        let tmp = mongo_data;
+        tmp.push(new_record);
+        setmongodata(tmp);
+        console.log("MONGODATA is ");
+        console.log(mongo_data);
         sd(true);
       });
     }

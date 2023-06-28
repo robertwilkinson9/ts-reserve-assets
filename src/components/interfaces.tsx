@@ -52,6 +52,13 @@ export interface ItemData {
   email: string
 }
 
+export interface MongoData {
+  booking_start: string;
+  booking_end: string;
+  bucket: number;
+  item: string;
+}
+
 export interface ItemsProps {
   config: configData;
   bucket: number | null;
@@ -77,6 +84,7 @@ export interface ProcessDataProps {
   sd: React.Dispatch<React.SetStateAction<boolean>>;
   confirmed: boolean;
   set_confirmed: React.Dispatch<React.SetStateAction<boolean>>;
+  setmongodata: React.Dispatch<React.SetStateAction<MongoData[]>>;
 }
 
 interface bucketData {
@@ -121,10 +129,10 @@ export type Select_type = {
 // maybe want to add _id to this sometime?
 
 // export interface MongoData {
-export type MongoData = {
-  booking_start: string;
-  booking_end: string;
-  bucket: number;
-  item: string;
-};
-
+//export type MongoData = {
+//  booking_start: string;
+//  booking_end: string;
+//  bucket: number;
+//  item: string;
+//};
+//
