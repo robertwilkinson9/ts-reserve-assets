@@ -15,8 +15,8 @@ const handleBRClick = (completesetter: React.Dispatch<React.SetStateAction<boole
 };
 
 export const InputForm = ({config, mongoitems, start, startdatesetter, end, enddatesetter, bucket, bucketsetter, itemsetter, email, emailsetter, completesetter}: InputFormProps) => {
-//  console.log("InputForm mongoitems is");
-//  console.log(mongoitems);
+  console.log("InputForm mongoitems is");
+  console.log(mongoitems);
   const buttonText = `Reserve ${config.ITEM_NAME}`;
 
   if (end) {

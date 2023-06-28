@@ -55,7 +55,7 @@ export const App = () => {
     console.log("IN get_mongoitems and RESPONSE.DATA.DATA length is ", response.data.data.length, " AND MONGO_DATA.LENGTH is ", mongo_data.length, "AND DATASENT is ", datasent);
     setMongoitems(response.data);
 
-    let mymongodata = response.data.data.map(x => {return {"booking_start": x.booking_start, "booking_end": x.booking_end, "bucket": x.bucket, "item": x.item}})
+    let mymongodata = response.data.data.map((x: MongoRecordType) => {return {"booking_start": x.booking_start, "booking_end": x.booking_end, "bucket": x.bucket, "item": x.item}})
     console.log("MYMONGO_DATA is ");
     console.log(mymongodata);
     setMongodata(mymongodata);

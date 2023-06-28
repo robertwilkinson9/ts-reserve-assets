@@ -4,8 +4,6 @@ import axios from 'axios'
 
 import Button from 'react-bootstrap/Button';
 
-//import App from '../App'
-
 import InputForm from './form'
 
 import { ItemData, ProcessDataProps } from './interfaces';
