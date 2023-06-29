@@ -7,7 +7,6 @@ import enGB from 'date-fns/locale/en-GB';
 
 import configData from "./config.json";
 
-//import { MongoType, MongoRecordType, MongoData} from './components/interfaces'
 import { MongoRecordType, MongoData} from './components/interfaces'
 import { Header } from './components/header'
 import { InputForm } from './components/form'
@@ -26,7 +25,6 @@ export const App = () => {
   const [complete, setComplete] = useState<boolean>(false);
   const [confirmed, setConfirmed] = useState<boolean>(false);
   const [needreset, setNeedreset] = useState<boolean>(false);
-//  const [mongoitems, setMongoitems] = useState<MongoType>({"success": false});
   const [mongodata, setMongodata] = useState<MongoData[]>([]);
 
   registerLocale('en-GB', enGB)
@@ -36,26 +34,12 @@ export const App = () => {
 
   const API_url = 'http://localhost:5179/api/';
 
-/*
-  const get_data_from_items = (mongoitems: MongoType) => {
-    let mongo_data: MongoRecordType[] = [];
-    if (mongoitems && mongoitems.data) {
-      mongo_data = mongoitems.data;
-    }
-
-    return mongo_data;
-  }
-*/
-
   const get_mongoitems = async () => {
     // Change this endpoint to whatever local or online address you have
     const ITEMS_url = API_url + 'items/';
 
     const response = await axios.get(ITEMS_url);
     console.log("IN get_mongoitems and RESPONSE.DATA is ", JSON.stringify(response.data));
-
-//    const mongo_data = get_data_from_items(mongoitems);
-//    setMongoitems(response.data);
 
     let mymongodata = response.data.data.map((x: MongoRecordType) => {return {"booking_start": x.booking_start, "booking_end": x.booking_end, "bucket": x.bucket, "item": x.item}})
     console.log("MYMONGO_DATA is ");
@@ -89,7 +73,7 @@ export const App = () => {
     return (
       <>
       <Header />
-      <ProcessData config={configData} mongo_data={mongodata} start={startDateTime} sdt={setStartDateTime} end={endDateTime} edt={setEndDateTime} bucket={bucket} sb={setBucket} item={item} si={setItem} email={email} se={setEmail} setcomplete={setComplete} url={API_url} confirmed={confirmed} set_confirmed={setConfirmed} setmongodata={setMongodata} setneedreset={setNeedreset} />
+      <ProcessData config={configData} mongo_data={mongodata} start={startDateTime} ssdt={setStartDateTime} end={endDateTime} sedt={setEndDateTime} bucket={bucket} setbucket={setBucket} item={item} setitem={setItem} email={email} setemail={setEmail} setcomplete={setComplete} url={API_url} confirmed={confirmed} set_confirmed={setConfirmed} setmongodata={setMongodata} setneedreset={setNeedreset} />
       </>
     );
   } else {

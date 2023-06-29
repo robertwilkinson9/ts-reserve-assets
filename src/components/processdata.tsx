@@ -27,7 +27,7 @@ const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
   return response.data.id;
 };
 
-export const ProcessData = ({ config, mongo_data, start, sdt, end, edt, bucket, sb, item, si, email, se, setcomplete, url, confirmed, set_confirmed, setmongodata, setneedreset} : ProcessDataProps) => {
+export const ProcessData = ({ config, mongo_data, start, ssdt, end, sedt, bucket, setbucket, item, setitem, email, setemail, setcomplete, url, confirmed, set_confirmed, setmongodata, setneedreset} : ProcessDataProps) => {
   if (start && end && bucket !== null && item && email) {
     const tomorrow = tomorrow_from_day(start);
 
@@ -89,7 +89,7 @@ export const ProcessData = ({ config, mongo_data, start, sdt, end, edt, bucket, 
       return (
         <>
         <h4>{istring}</h4>
-        <InputForm config={config} mongoitems={mongo_data} start={start} startdatesetter={sdt} end={end} enddatesetter={edt} bucket={bucket} bucketsetter={sb} itemsetter={si} email={email} emailsetter={se} completesetter={setcomplete} />
+        <InputForm config={config} mongoitems={mongo_data} start={start} startdatesetter={ssdt} end={end} enddatesetter={sedt} bucket={bucket} bucketsetter={setbucket} itemsetter={setitem} email={email} emailsetter={setemail} completesetter={setcomplete} />
         </>
       );
     }  else {
@@ -112,7 +112,7 @@ export const ProcessData = ({ config, mongo_data, start, sdt, end, edt, bucket, 
     return (
       <>
       <h4>Insufficient Input</h4>
-      <InputForm config={config} mongoitems={mongo_data} start={start} startdatesetter={sdt} end={end} enddatesetter={edt} bucket={bucket} bucketsetter={sb} itemsetter={si} email={email} emailsetter={se} completesetter={setcomplete} />
+      <InputForm config={config} mongoitems={mongo_data} start={start} startdatesetter={ssdt} end={end} enddatesetter={sedt} bucket={bucket} bucketsetter={setbucket} itemsetter={setitem} email={email} emailsetter={setemail} completesetter={setcomplete} />
       </>
     );
   }
