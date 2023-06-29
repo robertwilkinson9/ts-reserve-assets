@@ -27,7 +27,7 @@ const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
   return response.data.id;
 };
 
-export const ProcessData = ({ config, mongo_data, start, sdt, end, edt, bucket, sb, item, si, email, se, complete, setcomplete, url, confirmed, set_confirmed, setmongodata, setneedreset} : ProcessDataProps) => {
+export const ProcessData = ({ config, mongo_data, start, sdt, end, edt, bucket, sb, item, si, email, se, setcomplete, url, confirmed, set_confirmed, setmongodata, setneedreset} : ProcessDataProps) => {
   if (start && end && bucket !== null && item && email) {
     const tomorrow = tomorrow_from_day(start);
 
@@ -43,16 +43,16 @@ export const ProcessData = ({ config, mongo_data, start, sdt, end, edt, bucket, 
     const confirm_action = () => {
       const ITEM_url = url + 'item/';
       const id = add_item_to_mongodb(ITEM_url, item_booking);
-      id.then(function(value) {
-        console.log(`RESULT NEWID is ${value}`);
+      id.then(() => {
+//        console.log(`RESULT NEWID is ${value}`);
         const new_record: MongoData = {"booking_start": start.toISOString(), "booking_end": end.toISOString(), "bucket": bucket, "item": item};
-        console.log("NEW RECORD is ");
-        console.log(new_record);
+//        console.log("NEW RECORD is ");
+//        console.log(new_record);
         let tmp = mongo_data;
         tmp.push(new_record);
         setmongodata(tmp);
-        console.log("MONGODATA is ");
-        console.log(mongo_data);
+//        console.log("MONGODATA is ");
+//        console.log(mongo_data);
         setneedreset(true);
       });
     }
@@ -82,19 +82,18 @@ export const ProcessData = ({ config, mongo_data, start, sdt, end, edt, bucket, 
     }
 
     if (confirmed) {
-      console.log("PROCESS DATA CONFIRMED!!");
+//      console.log("PROCESS DATA CONFIRMED!!");
       const istring = `${config.ITEM_NAME} ${item} booked!`;
-      console.log(`ISTRING is ${istring}`);
-//      setneedreset(true);
+//      console.log(`ISTRING is ${istring}`);
 
       return (
         <>
         <h4>{istring}</h4>
-        <InputForm config={config} mongoitems={mongo_data} start={start} startdatesetter={sdt} end={end} enddatesetter={edt} bucket={bucket} bucketsetter={sb} itemsetter={si} email={email} emailsetter={se} complete={complete} completesetter={setcomplete} />
+        <InputForm config={config} mongoitems={mongo_data} start={start} startdatesetter={sdt} end={end} enddatesetter={edt} bucket={bucket} bucketsetter={sb} itemsetter={si} email={email} emailsetter={se} completesetter={setcomplete} />
         </>
       );
     }  else {
-      console.log("PROCESS DATA not CONFIRMED!!");
+//      console.log("PROCESS DATA not CONFIRMED!!");
       return (
         <>
         <h4>ProcessData</h4>
@@ -109,12 +108,11 @@ export const ProcessData = ({ config, mongo_data, start, sdt, end, edt, bucket, 
       );
     }
   } else {
-    console.log("INSUFIICIENT INPUT CONFIRMED!!");
-//    setneedreset(true);
+    console.log("INSUFFICIENT INPUT CONFIRMED!!");
     return (
       <>
       <h4>Insufficient Input</h4>
-      <InputForm config={config} mongoitems={mongo_data} start={start} startdatesetter={sdt} end={end} enddatesetter={edt} bucket={bucket} bucketsetter={sb} itemsetter={si} email={email} emailsetter={se} complete={complete} completesetter={setcomplete} />
+      <InputForm config={config} mongoitems={mongo_data} start={start} startdatesetter={sdt} end={end} enddatesetter={edt} bucket={bucket} bucketsetter={sb} itemsetter={si} email={email} emailsetter={se} completesetter={setcomplete} />
       </>
     );
   }

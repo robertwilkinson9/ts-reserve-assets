@@ -1,6 +1,5 @@
 import Select from 'react-select'
 
-//import { ItemsProps, ItemData, Select_type} from './interfaces';
 import { ItemsProps, Select_type} from './interfaces';
 
 const items_select = (items: string[]): Select_type[] => {

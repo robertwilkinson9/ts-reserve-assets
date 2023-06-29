@@ -40,7 +40,6 @@ export interface InputFormProps {
   itemsetter: React.Dispatch<React.SetStateAction<string | null>>;
   email: string | null;
   emailsetter: React.Dispatch<React.SetStateAction<string | null>>;
-  complete: boolean;
   completesetter: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -80,7 +79,6 @@ export interface ProcessDataProps {
   si: React.Dispatch<React.SetStateAction<string|null>>;
   email: string | null;
   se: React.Dispatch<React.SetStateAction<string|null>>;
-  complete: boolean;
   setcomplete: React.Dispatch<React.SetStateAction<boolean>>;
   url: string;
   confirmed: boolean;
@@ -118,23 +116,12 @@ export type MongoRecordType = {
   __v?: number;
 };
 
-export type MongoType = {
-  success: boolean;
-  data?: MongoRecordType[];
-};
+//export type MongoType = {
+//  success: boolean;
+//  data?: MongoRecordType[];
+//};
 
 export type Select_type = {
   value: string;
   label: string;
 };
-
-// maybe want to add _id to this sometime?
-
-// export interface MongoData {
-//export type MongoData = {
-//  booking_start: string;
-//  booking_end: string;
-//  bucket: number;
-//  item: string;
-//};
-//
