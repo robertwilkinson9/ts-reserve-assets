@@ -40,6 +40,7 @@ export interface InputFormProps {
   itemsetter: React.Dispatch<React.SetStateAction<string | null>>;
   email: string | null;
   emailsetter: React.Dispatch<React.SetStateAction<string | null>>;
+  complete: boolean;
   completesetter: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -79,12 +80,13 @@ export interface ProcessDataProps {
   si: React.Dispatch<React.SetStateAction<string|null>>;
   email: string | null;
   se: React.Dispatch<React.SetStateAction<string|null>>;
-  sc: React.Dispatch<React.SetStateAction<boolean>>;
+  complete: boolean;
+  setcomplete: React.Dispatch<React.SetStateAction<boolean>>;
   url: string;
-  sd: React.Dispatch<React.SetStateAction<boolean>>;
   confirmed: boolean;
   set_confirmed: React.Dispatch<React.SetStateAction<boolean>>;
   setmongodata: React.Dispatch<React.SetStateAction<MongoData[]>>;
+  setneedreset: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface bucketData {

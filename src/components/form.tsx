@@ -10,13 +10,12 @@ import { InputFormProps } from './interfaces';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const handleBRClick = (completesetter: React.Dispatch<React.SetStateAction<boolean>>) => {
-  completesetter(true);
-};
+const handleBRClick = (completesetter: React.Dispatch<React.SetStateAction<boolean>>) => {console.log("handleBRClick CALLED"); completesetter(true);};
 
-export const InputForm = ({config, mongoitems, start, startdatesetter, end, enddatesetter, bucket, bucketsetter, itemsetter, email, emailsetter, completesetter}: InputFormProps) => {
+export const InputForm = ({config, mongoitems, start, startdatesetter, end, enddatesetter, bucket, bucketsetter, itemsetter, email, emailsetter, complete, completesetter}: InputFormProps) => {
   console.log("InputForm mongoitems is");
   console.log(mongoitems);
+  console.log(`INPUT FORM COMPLETE IS ${complete}`);
 
   const buttonText = `Reserve ${config.ITEM_NAME}`;
 

@@ -27,7 +27,7 @@ const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
   return response.data.id;
 };
 
-export const ProcessData = ({ config, mongo_data, start, sdt, end, edt, bucket, sb, item, si, email, se, sc, url, sd, confirmed, set_confirmed, setmongodata} : ProcessDataProps) => {
+export const ProcessData = ({ config, mongo_data, start, sdt, end, edt, bucket, sb, item, si, email, se, complete, setcomplete, url, confirmed, set_confirmed, setmongodata, setneedreset} : ProcessDataProps) => {
   if (start && end && bucket !== null && item && email) {
     const tomorrow = tomorrow_from_day(start);
 
@@ -53,7 +53,7 @@ export const ProcessData = ({ config, mongo_data, start, sdt, end, edt, bucket, 
         setmongodata(tmp);
         console.log("MONGODATA is ");
         console.log(mongo_data);
-        sd(true);
+        setneedreset(true);
       });
     }
 
@@ -76,47 +76,21 @@ export const ProcessData = ({ config, mongo_data, start, sdt, end, edt, bucket, 
       fstr = `${config.BUCKETS[bucket].name} ${config.BUCKET_NAME}`;
     }
 
-    const reset = (
-      setStartDateTime: React.Dispatch<React.SetStateAction<Date|null>>,
-      setEndDateTime: React.Dispatch<React.SetStateAction<Date|null>>,
-      setBucket: React.Dispatch<React.SetStateAction<number|null>>,
-      setItem: React.Dispatch<React.SetStateAction<string|null>>,
-      setEmail: React.Dispatch<React.SetStateAction<string|null>>,
-      setComplete: React.Dispatch<React.SetStateAction<boolean>>,
-      setDatasent: React.Dispatch<React.SetStateAction<boolean>>,
-    ): void =>
-    {
-      console.log("RESET invoked");
-      setStartDateTime(new Date());
-      setEndDateTime(null);
-      setBucket(0);
-      setItem(null);
-      setEmail(null);
-      setComplete(false);
-      setDatasent(false);
-    }
-
     const handleCancel = () => {
       console.log("Cancel Button clicked!");
-      reset(sdt, edt, sb, si, se, sc, sd);
+      setneedreset(true);
     }
 
     if (confirmed) {
       console.log("PROCESS DATA CONFIRMED!!");
-//      const istring = `${config.ITEM_NAME} ${item} booked!`;
-      const istring = config.ITEM_NAME + " " + item + " booked!";
+      const istring = `${config.ITEM_NAME} ${item} booked!`;
       console.log(`ISTRING is ${istring}`);
-      edt(null);
-      sb(0);
-      si(null);
-      se(null);
-      sc(false);
-//      sd(false);
+//      setneedreset(true);
 
       return (
         <>
         <h4>{istring}</h4>
-        <InputForm config={config} mongoitems={mongo_data} start={start} startdatesetter={sdt} end={end} enddatesetter={edt} bucket={bucket} bucketsetter={sb} itemsetter={si} email={email} emailsetter={se} completesetter={sc} />
+        <InputForm config={config} mongoitems={mongo_data} start={start} startdatesetter={sdt} end={end} enddatesetter={edt} bucket={bucket} bucketsetter={sb} itemsetter={si} email={email} emailsetter={se} complete={complete} completesetter={setcomplete} />
         </>
       );
     }  else {
@@ -129,27 +103,18 @@ export const ProcessData = ({ config, mongo_data, start, sdt, end, edt, bucket, 
         <p>{fstr}</p>
         <p>{item}</p>
         <p>{email}</p>
-        <Button
-           onClick={handleConfirm}
-        >
-        Confirm?
-        </Button>
-
-        <Button
-           onClick={handleCancel}
-        >
-        Cancel?
-        </Button>
-
+        <Button onClick={handleConfirm}>Confirm?</Button>
+        <Button onClick={handleCancel}>Cancel?</Button>
         </>
       );
     }
   } else {
     console.log("INSUFIICIENT INPUT CONFIRMED!!");
+//    setneedreset(true);
     return (
       <>
       <h4>Insufficient Input</h4>
-      <InputForm config={config} mongoitems={mongo_data} start={start} startdatesetter={sdt} end={end} enddatesetter={edt} bucket={bucket} bucketsetter={sb} itemsetter={si} email={email} emailsetter={se} completesetter={sc} />
+      <InputForm config={config} mongoitems={mongo_data} start={start} startdatesetter={sdt} end={end} enddatesetter={edt} bucket={bucket} bucketsetter={sb} itemsetter={si} email={email} emailsetter={se} complete={complete} completesetter={setcomplete} />
       </>
     );
   }
