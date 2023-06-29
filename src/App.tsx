@@ -30,7 +30,7 @@ export const App = () => {
   registerLocale('en-GB', enGB)
   setDefaultLocale('en-GB');
 
-  console.log("APP STARTED");
+//  console.log("APP STARTED");
 
   const API_url = 'http://localhost:5179/api/';
 
@@ -73,14 +73,36 @@ export const App = () => {
     return (
       <>
       <Header />
-      <ProcessData config={configData} mongo_data={mongodata} start={startDateTime} ssdt={setStartDateTime} end={endDateTime} sedt={setEndDateTime} bucket={bucket} setbucket={setBucket} item={item} setitem={setItem} email={email} setemail={setEmail} setcomplete={setComplete} url={API_url} confirmed={confirmed} set_confirmed={setConfirmed} setmongodata={setMongodata} setneedreset={setNeedreset} />
+      <ProcessData
+        config={configData}
+        mongo_data={mongodata}
+        start={startDateTime} ssdt={setStartDateTime}
+        end={endDateTime} sedt={setEndDateTime}
+        bucket={bucket} setbucket={setBucket}
+        item={item} setitem={setItem}
+        email={email} setemail={setEmail}
+        setcomplete={setComplete}
+        url={API_url}
+        confirmed={confirmed} set_confirmed={setConfirmed}
+        setmongodata={setMongodata}
+        setneedreset={setNeedreset}
+      />
       </>
     );
   } else {
     return (
       <>
       <Header />
-      <InputForm config={configData} mongoitems={mongodata} start={startDateTime} startdatesetter={setStartDateTime} end={endDateTime} enddatesetter={setEndDateTime} bucket={bucket} bucketsetter={setBucket} itemsetter={setItem} email={email} emailsetter={setEmail} completesetter={setComplete} />
+      <InputForm
+        config={configData}
+        mongoitems={mongodata}
+        start={startDateTime} startdatesetter={setStartDateTime}
+        end={endDateTime} enddatesetter={setEndDateTime}
+        bucket={bucket} bucketsetter={setBucket}
+        itemsetter={setItem}
+        email={email} emailsetter={setEmail}
+        completesetter={setComplete}
+      />
       </>
     );
   }
