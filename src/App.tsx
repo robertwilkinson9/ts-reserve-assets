@@ -85,12 +85,12 @@ export const App = () => {
       <InputForm
         config={configData}
         mongo_data={mongodata}
-        booking_start={startDateTime} startdatesetter={setStartDateTime}
-        booking_end={endDateTime} enddatesetter={setEndDateTime}
-        bucket={bucket} bucketsetter={setBucket}
-        itemsetter={setItem}
-        email={email} emailsetter={setEmail}
-        completesetter={setComplete}
+        booking_start={startDateTime} set_booking_start={setStartDateTime}
+        booking_end={endDateTime} set_booking_end={setEndDateTime}
+        bucket={bucket} set_bucket={setBucket}
+        set_item={setItem}
+        email={email} set_email={setEmail}
+        set_complete={setComplete}
       />
       </>
     );

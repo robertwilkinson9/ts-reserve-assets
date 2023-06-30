@@ -10,9 +10,9 @@ import { InputFormProps } from './interfaces';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const handleBRClick = (completesetter: React.Dispatch<React.SetStateAction<boolean>>) => {console.log("handleBRClick CALLED"); completesetter(true);};
+const handleBRClick = (set_complete: React.Dispatch<React.SetStateAction<boolean>>) => {set_complete(true);};
 
-export const InputForm = ({config, mongo_data, booking_start, startdatesetter, booking_end, enddatesetter, bucket, bucketsetter, itemsetter, email, emailsetter, completesetter}: InputFormProps) => {
+export const InputForm = ({config, mongo_data, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, set_item, email, set_email, set_complete}: InputFormProps) => {
   const buttonText = `Reserve ${config.ITEM_NAME}`;
 
   if (booking_end) {
@@ -39,12 +39,12 @@ export const InputForm = ({config, mongo_data, booking_start, startdatesetter, b
       return (
         <>
          <Form id="emailForm">
-         <Calendar label="Start DateTime" selected={booking_start} setter={startdatesetter} />
-         <Calendar label="End DateTime" selected={booking_end} setter={enddatesetter} />
-         <Bucket config={config} bucket={bucket} bucketsetter={bucketsetter} />
-         <Items config={config} bucket={bucket} bucket_items={overlapv} itemsetter={itemsetter} />
-         <AddEmail email={email} emailsetter={emailsetter} />
-         <Button onClick={() => {handleBRClick(completesetter);}} >{buttonText} </Button>
+         <Calendar label="Start DateTime" selected={booking_start} setter={set_booking_start} />
+         <Calendar label="End DateTime" selected={booking_end} setter={set_booking_end} />
+         <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
+         <Items config={config} bucket={bucket} bucket_items={overlapv} set_item={set_item} />
+         <AddEmail email={email} set_email={set_email} />
+         <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText} </Button>
         </Form>
         </>
       );
@@ -52,12 +52,12 @@ export const InputForm = ({config, mongo_data, booking_start, startdatesetter, b
       return (
         <>
          <Form id="emailForm">
-         <Calendar label="Start DateTime" selected={booking_start} setter={startdatesetter} />
-         <Calendar label="End DateTime" selected={booking_end} setter={enddatesetter} />
-         <Bucket config={config} bucket={bucket} bucketsetter={bucketsetter} />
-         <Items config={config} bucket={bucket} itemsetter={itemsetter} />
-         <AddEmail email={email} emailsetter={emailsetter} />
-         <Button onClick={() => {handleBRClick(completesetter);}} >{buttonText}</Button>
+         <Calendar label="Start DateTime" selected={booking_start} setter={set_booking_start} />
+         <Calendar label="End DateTime" selected={booking_end} setter={set_booking_end} />
+         <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
+         <Items config={config} bucket={bucket} set_item={set_item} />
+         <AddEmail email={email} set_email={set_email} />
+         <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText}</Button>
         </Form>
         </>
       );
@@ -66,12 +66,12 @@ export const InputForm = ({config, mongo_data, booking_start, startdatesetter, b
     return (
       <>
        <Form id="emailForm">
-       <Calendar label="Start DateTime" selected={booking_start} setter={startdatesetter} setter2={enddatesetter} />
-       <Calendar label="End DateTime" selected={booking_end} setter={enddatesetter} />
-       <Bucket config={config} bucket={bucket} bucketsetter={bucketsetter} />
-       <Items config={config} bucket={bucket} itemsetter={itemsetter} />
-       <AddEmail email={email} emailsetter={emailsetter} />
-       <Button onClick={() => {handleBRClick(completesetter);}} >{buttonText} </Button>
+       <Calendar label="Start DateTime" selected={booking_start} setter={set_booking_start} setter2={set_booking_end} />
+       <Calendar label="End DateTime" selected={booking_end} setter={set_booking_end} />
+       <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
+       <Items config={config} bucket={bucket} set_item={set_item} />
+       <AddEmail email={email} set_email={set_email} />
+       <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText} </Button>
       </Form>
       </>
     );

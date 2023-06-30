@@ -23,7 +23,6 @@ const tomorrow_from_day = (startDateTime: Date): Date => {
 
 const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
   const response = await axios.post(url, item_booking);
-//  console.log('ADD_ITEM_TO_MONGODB ID IS :', response.data.id)
   return response.data.id;
 };
 
@@ -53,13 +52,11 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
     }
 
     const handleConfirm = () => {
-      console.log("Confirm Button clicked!");
       confirm_action();
       set_confirmed(true);
     }
 
     const handleCancel = () => {
-      console.log("Cancel Button clicked!");
       set_needreset(true);
     }
 
@@ -72,12 +69,12 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
         <InputForm
           config={config}
           mongo_data={mongo_data}
-          booking_start={booking_start} startdatesetter={set_booking_start}
-          booking_end={booking_end} enddatesetter={set_booking_end}
-          bucket={bucket} bucketsetter={set_bucket}
-          itemsetter={set_item}
-          email={email} emailsetter={set_email}
-          completesetter={set_complete}
+          booking_start={booking_start} set_booking_start={set_booking_start}
+          booking_end={booking_end} set_booking_end={set_booking_end}
+          bucket={bucket} set_bucket={set_bucket}
+          set_item={set_item}
+          email={email} set_email={set_email}
+          set_complete={set_complete}
         />
         </>
       );
@@ -116,12 +113,12 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
       <InputForm
         config={config}
         mongo_data={mongo_data}
-        booking_start={booking_start} startdatesetter={set_booking_start}
-        booking_end={booking_end} enddatesetter={set_booking_end}
-        bucket={bucket} bucketsetter={set_bucket}
-        itemsetter={set_item}
-        email={email} emailsetter={set_email}
-        completesetter={set_complete}
+        booking_start={booking_start} set_booking_start={set_booking_start}
+        booking_end={booking_end} set_booking_end={set_booking_end}
+        bucket={bucket} set_bucket={set_bucket}
+        set_item={set_item}
+        email={email} set_email={set_email}
+        set_complete={set_complete}
       />
       </>
     );

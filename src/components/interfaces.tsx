@@ -1,6 +1,10 @@
+export type date_or_null = Date | null;
+export type number_or_null = number | null;
+export type string_or_null = string | null;
+
 export interface AddEmailProps {
-  email: string | null;
-  emailsetter: React.Dispatch<React.SetStateAction<string | null>>;
+  email: string_or_null;
+  set_email: React.Dispatch<React.SetStateAction<string_or_null>>;
 }
 
 export interface BucketLabelProps {
@@ -9,8 +13,8 @@ export interface BucketLabelProps {
 
 export interface BucketProps {
   config: configData;
-  bucket : number | null;
-  bucketsetter: React.Dispatch<React.SetStateAction<number | null>>;
+  bucket : number_or_null;
+  set_bucket: React.Dispatch<React.SetStateAction<number_or_null>>;
 }
 
 export interface ButtonProps {
@@ -23,24 +27,24 @@ export interface ButtonProps {
 
 export interface CalendarProps {
   label: string;
-  selected: Date | null;
-  setter: React.Dispatch<React.SetStateAction<Date | null>>;
-  setter2?: React.Dispatch<React.SetStateAction<Date | null>>;
+  selected: date_or_null;
+  setter: React.Dispatch<React.SetStateAction<date_or_null>>;
+  setter2?: React.Dispatch<React.SetStateAction<date_or_null>>;
 }
 
 export interface InputFormProps {
   config: configData;
   mongo_data: MongoData[];
-  booking_start: Date | null;
-  startdatesetter: React.Dispatch<React.SetStateAction<Date | null>>;
-  booking_end: Date | null;
-  enddatesetter: React.Dispatch<React.SetStateAction<Date | null>>;
-  bucket: number | null;
-  bucketsetter: React.Dispatch<React.SetStateAction<number | null>>;
-  itemsetter: React.Dispatch<React.SetStateAction<string | null>>;
-  email: string | null;
-  emailsetter: React.Dispatch<React.SetStateAction<string | null>>;
-  completesetter: React.Dispatch<React.SetStateAction<boolean>>;
+  booking_start: date_or_null;
+  set_booking_start: React.Dispatch<React.SetStateAction<date_or_null>>;
+  booking_end: date_or_null;
+  set_booking_end: React.Dispatch<React.SetStateAction<date_or_null>>;
+  bucket: number_or_null;
+  set_bucket: React.Dispatch<React.SetStateAction<number_or_null>>;
+  set_item: React.Dispatch<React.SetStateAction<string_or_null>>;
+  email: string_or_null;
+  set_email: React.Dispatch<React.SetStateAction<string_or_null>>;
+  set_complete: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface ItemData {
@@ -61,25 +65,25 @@ export interface MongoData {
 
 export interface ItemsProps {
   config: configData;
-  bucket: number | null;
+  bucket: number_or_null;
   bucket_items?: MongoData[];
-  itemsetter: React.Dispatch<React.SetStateAction<string | null>>;
+  set_item: React.Dispatch<React.SetStateAction<string_or_null>>;
 }
 
 export interface ProcessDataProps {
   config: configData;
   mongo_data: MongoData[];
   set_mongodata: React.Dispatch<React.SetStateAction<MongoData[]>>;
-  booking_start: Date | null;
-  set_booking_start: React.Dispatch<React.SetStateAction<Date|null>>;
-  booking_end: Date | null;
-  set_booking_end: React.Dispatch<React.SetStateAction<Date|null>>;
-  bucket: number | null;
-  set_bucket: React.Dispatch<React.SetStateAction<number|null>>;
-  item: string | null;
-  set_item: React.Dispatch<React.SetStateAction<string|null>>;
-  email: string | null;
-  set_email: React.Dispatch<React.SetStateAction<string|null>>;
+  booking_start: date_or_null;
+  set_booking_start: React.Dispatch<React.SetStateAction<date_or_null>>;
+  booking_end: date_or_null;
+  set_booking_end: React.Dispatch<React.SetStateAction<date_or_null>>;
+  bucket: number_or_null;
+  set_bucket: React.Dispatch<React.SetStateAction<number_or_null>>;
+  item: string_or_null;
+  set_item: React.Dispatch<React.SetStateAction<string_or_null>>;
+  email: string_or_null;
+  set_email: React.Dispatch<React.SetStateAction<string_or_null>>;
   set_complete: React.Dispatch<React.SetStateAction<boolean>>;
   url: string;
   confirmed: boolean;
@@ -101,9 +105,6 @@ export interface configData {
   BUCKET_NAME: string;
   BUCKETS: bucketData[];
 }
-
-export type string_or_null = string | null;
-export type date_or_null = Date | null;
 
 export type MongoRecordType = {
   _id: string;

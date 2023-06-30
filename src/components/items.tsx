@@ -25,7 +25,7 @@ const listbuild = (istart:number | undefined, ilast:number | undefined, prefix: 
   return items;
 }
    
-export const Items = ({ config, bucket, bucket_items, itemsetter } : ItemsProps) => {
+export const Items = ({ config, bucket, bucket_items, set_item } : ItemsProps) => {
   let items: string[] | undefined = [];
 
   if (bucket !== null) {
@@ -60,7 +60,7 @@ export const Items = ({ config, bucket, bucket_items, itemsetter } : ItemsProps)
           <Select
             key={key}
             options={select_item_list}
-            onChange={(choice) => choice ? itemsetter(choice.value) : ""}
+            onChange={(choice) => choice ? set_item(choice.value) : ""}
           />
       </div>
       </>
