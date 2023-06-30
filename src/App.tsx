@@ -27,7 +27,7 @@ export const App = () => {
   registerLocale('en-GB', enGB)
   setDefaultLocale('en-GB');
 
-  const API_url = 'http://localhost:5179/api/';
+  const API_url = `http://localhost:${configData.APIPORT}/api/`;
 
   const get_mongo_data = async () => {
     // Change this endpoint to whatever local or online address you have
@@ -64,8 +64,8 @@ export const App = () => {
       <>
       <Header />
       <ProcessData
-        config={configData} mongo_data={mongodata}
-        set_mongodata={setMongodata}
+        config={configData}
+        mongo_data={mongodata} set_mongodata={setMongodata}
         booking_start={startDateTime} set_booking_start={setStartDateTime}
         booking_end={endDateTime} set_booking_end={setEndDateTime}
         bucket={bucket} set_bucket={setBucket}
