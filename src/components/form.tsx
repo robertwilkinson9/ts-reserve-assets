@@ -12,13 +12,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const handleBRClick = (completesetter: React.Dispatch<React.SetStateAction<boolean>>) => {console.log("handleBRClick CALLED"); completesetter(true);};
 
-export const InputForm = ({config, mongoitems, start, startdatesetter, end, enddatesetter, bucket, bucketsetter, itemsetter, email, emailsetter, completesetter}: InputFormProps) => {
+export const InputForm = ({config, mongo_data, booking_start, startdatesetter, booking_end, enddatesetter, bucket, bucketsetter, itemsetter, email, emailsetter, completesetter}: InputFormProps) => {
   const buttonText = `Reserve ${config.ITEM_NAME}`;
 
-  if (end) {
-    if (start) {
+  if (booking_end) {
+    if (booking_start) {
       { /*
-        we find all the overlapping items from mongoitems with our start date and our end date
+        we find all the overlapping items from mongo_data with our start date and our end date
         a to b is one date range, x to y is another date range
         we check x < a < y or x < b < y or a < x < b or a < y < b - which I think is correct?
         we want a list of all of the items which are already booked so we can filter these from the list we present
@@ -34,13 +34,13 @@ export const InputForm = ({config, mongoitems, start, startdatesetter, end, endd
                 (after(x, a) && before(y, a)) ||
                 (after(x, b) && before(y, b)));
       };
-      const overlapv = mongoitems.filter((item) => {return overlap(start, end, new Date(item.booking_start), new Date(item.booking_end));});
+      const overlapv = mongo_data.filter((item) => {return overlap(booking_start, booking_end, new Date(item.booking_start), new Date(item.booking_end));});
 
       return (
         <>
          <Form id="emailForm">
-         <Calendar label="Start DateTime" selected={start} setter={startdatesetter} />
-         <Calendar label="End DateTime" selected={end} setter={enddatesetter} />
+         <Calendar label="Start DateTime" selected={booking_start} setter={startdatesetter} />
+         <Calendar label="End DateTime" selected={booking_end} setter={enddatesetter} />
          <Bucket config={config} bucket={bucket} bucketsetter={bucketsetter} />
          <Items config={config} bucket={bucket} bucket_items={overlapv} itemsetter={itemsetter} />
          <AddEmail email={email} emailsetter={emailsetter} />
@@ -52,8 +52,8 @@ export const InputForm = ({config, mongoitems, start, startdatesetter, end, endd
       return (
         <>
          <Form id="emailForm">
-         <Calendar label="Start DateTime" selected={start} setter={startdatesetter} />
-         <Calendar label="End DateTime" selected={end} setter={enddatesetter} />
+         <Calendar label="Start DateTime" selected={booking_start} setter={startdatesetter} />
+         <Calendar label="End DateTime" selected={booking_end} setter={enddatesetter} />
          <Bucket config={config} bucket={bucket} bucketsetter={bucketsetter} />
          <Items config={config} bucket={bucket} itemsetter={itemsetter} />
          <AddEmail email={email} emailsetter={emailsetter} />
@@ -66,8 +66,8 @@ export const InputForm = ({config, mongoitems, start, startdatesetter, end, endd
     return (
       <>
        <Form id="emailForm">
-       <Calendar label="Start DateTime" selected={start} setter={startdatesetter} setter2={enddatesetter} />
-       <Calendar label="End DateTime" selected={end} setter={enddatesetter} />
+       <Calendar label="Start DateTime" selected={booking_start} setter={startdatesetter} setter2={enddatesetter} />
+       <Calendar label="End DateTime" selected={booking_end} setter={enddatesetter} />
        <Bucket config={config} bucket={bucket} bucketsetter={bucketsetter} />
        <Items config={config} bucket={bucket} itemsetter={itemsetter} />
        <AddEmail email={email} emailsetter={emailsetter} />

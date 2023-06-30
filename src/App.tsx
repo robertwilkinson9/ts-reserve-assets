@@ -7,13 +7,10 @@ import enGB from 'date-fns/locale/en-GB';
 
 import configData from "./config.json";
 
-import { MongoRecordType, MongoData} from './components/interfaces'
+import { string_or_null, date_or_null, MongoRecordType, MongoData} from './components/interfaces'
 import { Header } from './components/header'
 import { InputForm } from './components/form'
 import { ProcessData } from './components/processdata'
-
-type string_or_null = string | null;
-type date_or_null = Date | null;
 
 export const App = () => {
   const [startDateTime, setStartDateTime] = useState<date_or_null>(new Date());
@@ -30,30 +27,24 @@ export const App = () => {
   registerLocale('en-GB', enGB)
   setDefaultLocale('en-GB');
 
-//  console.log("APP STARTED");
-
   const API_url = 'http://localhost:5179/api/';
 
-  const get_mongoitems = async () => {
+  const get_mongo_data = async () => {
     // Change this endpoint to whatever local or online address you have
     const ITEMS_url = API_url + 'items/';
 
     const response = await axios.get(ITEMS_url);
-    console.log("IN get_mongoitems and RESPONSE.DATA is ", JSON.stringify(response.data));
 
     let mymongodata = response.data.data.map((x: MongoRecordType) => {return {"booking_start": x.booking_start, "booking_end": x.booking_end, "bucket": x.bucket, "item": x.item}})
-    console.log("MYMONGO_DATA is ");
-    console.log(mymongodata);
     setMongodata(mymongodata);
   };
 
   useEffect(() => {
-    get_mongoitems();
+    get_mongo_data();
   }, []);
 
   const reset = (): void =>
   {
-    console.log("RESET invoked");
     setNeedreset(false);
     setStartDateTime(new Date());
     setEndDateTime(null);
@@ -65,7 +56,6 @@ export const App = () => {
   }
 
   if (needreset) {
-    console.log(`1. BEFORE RESET NEEDRESET IS ${needreset} COMPLETE IS ${complete} AND CONFIRMED IS ${confirmed}`);
     reset();
   }
 
@@ -74,18 +64,17 @@ export const App = () => {
       <>
       <Header />
       <ProcessData
-        config={configData}
-        mongo_data={mongodata}
-        start={startDateTime} ssdt={setStartDateTime}
-        end={endDateTime} sedt={setEndDateTime}
-        bucket={bucket} setbucket={setBucket}
-        item={item} setitem={setItem}
-        email={email} setemail={setEmail}
-        setcomplete={setComplete}
+        config={configData} mongo_data={mongodata}
+        set_mongodata={setMongodata}
+        booking_start={startDateTime} set_booking_start={setStartDateTime}
+        booking_end={endDateTime} set_booking_end={setEndDateTime}
+        bucket={bucket} set_bucket={setBucket}
+        item={item} set_item={setItem}
+        email={email} set_email={setEmail}
+        set_complete={setComplete}
         url={API_url}
         confirmed={confirmed} set_confirmed={setConfirmed}
-        setmongodata={setMongodata}
-        setneedreset={setNeedreset}
+        set_needreset={setNeedreset}
       />
       </>
     );
@@ -95,9 +84,9 @@ export const App = () => {
       <Header />
       <InputForm
         config={configData}
-        mongoitems={mongodata}
-        start={startDateTime} startdatesetter={setStartDateTime}
-        end={endDateTime} enddatesetter={setEndDateTime}
+        mongo_data={mongodata}
+        booking_start={startDateTime} startdatesetter={setStartDateTime}
+        booking_end={endDateTime} enddatesetter={setEndDateTime}
         bucket={bucket} bucketsetter={setBucket}
         itemsetter={setItem}
         email={email} emailsetter={setEmail}

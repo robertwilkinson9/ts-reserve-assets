@@ -30,10 +30,10 @@ export interface CalendarProps {
 
 export interface InputFormProps {
   config: configData;
-  mongoitems: MongoData[];
-  start: Date | null;
+  mongo_data: MongoData[];
+  booking_start: Date | null;
   startdatesetter: React.Dispatch<React.SetStateAction<Date | null>>;
-  end: Date | null;
+  booking_end: Date | null;
   enddatesetter: React.Dispatch<React.SetStateAction<Date | null>>;
   bucket: number | null;
   bucketsetter: React.Dispatch<React.SetStateAction<number | null>>;
@@ -69,22 +69,22 @@ export interface ItemsProps {
 export interface ProcessDataProps {
   config: configData;
   mongo_data: MongoData[];
-  start: Date | null;
-  ssdt: React.Dispatch<React.SetStateAction<Date|null>>;
-  end: Date | null;
-  sedt: React.Dispatch<React.SetStateAction<Date|null>>;
+  set_mongodata: React.Dispatch<React.SetStateAction<MongoData[]>>;
+  booking_start: Date | null;
+  set_booking_start: React.Dispatch<React.SetStateAction<Date|null>>;
+  booking_end: Date | null;
+  set_booking_end: React.Dispatch<React.SetStateAction<Date|null>>;
   bucket: number | null;
-  setbucket: React.Dispatch<React.SetStateAction<number|null>>;
+  set_bucket: React.Dispatch<React.SetStateAction<number|null>>;
   item: string | null;
-  setitem: React.Dispatch<React.SetStateAction<string|null>>;
+  set_item: React.Dispatch<React.SetStateAction<string|null>>;
   email: string | null;
-  setemail: React.Dispatch<React.SetStateAction<string|null>>;
-  setcomplete: React.Dispatch<React.SetStateAction<boolean>>;
+  set_email: React.Dispatch<React.SetStateAction<string|null>>;
+  set_complete: React.Dispatch<React.SetStateAction<boolean>>;
   url: string;
   confirmed: boolean;
   set_confirmed: React.Dispatch<React.SetStateAction<boolean>>;
-  setmongodata: React.Dispatch<React.SetStateAction<MongoData[]>>;
-  setneedreset: React.Dispatch<React.SetStateAction<boolean>>;
+  set_needreset: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface bucketData {
@@ -115,11 +115,6 @@ export type MongoRecordType = {
   email: string;
   __v?: number;
 };
-
-//export type MongoType = {
-//  success: boolean;
-//  data?: MongoRecordType[];
-//};
 
 export type Select_type = {
   value: string;

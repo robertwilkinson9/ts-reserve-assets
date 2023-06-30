@@ -27,13 +27,13 @@ const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
   return response.data.id;
 };
 
-export const ProcessData = ({ config, mongo_data, start, ssdt, end, sedt, bucket, setbucket, item, setitem, email, setemail, setcomplete, url, confirmed, set_confirmed, setmongodata, setneedreset} : ProcessDataProps) => {
-  if (start && end && bucket !== null && item && email) {
-    const tomorrow = tomorrow_from_day(start);
+export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, item, set_item, email, set_email, set_complete, url, confirmed, set_confirmed, set_needreset} : ProcessDataProps) => {
+  if (booking_start && booking_end && bucket !== null && item && email) {
+    const tomorrow = tomorrow_from_day(booking_start);
 
     const item_booking = {
-      "booking_start": start.toISOString(),
-      "booking_end": end.toISOString(),
+      "booking_start": booking_start.toISOString(),
+      "booking_end": booking_end.toISOString(),
       "expireAt": tomorrow.toISOString(),
       "bucket": bucket,
       "item": item,
@@ -44,11 +44,11 @@ export const ProcessData = ({ config, mongo_data, start, ssdt, end, sedt, bucket
       const ITEM_url = url + 'item/';
       const id = add_item_to_mongodb(ITEM_url, item_booking);
       id.then(() => {
-        const new_record: MongoData = {"booking_start": start.toISOString(), "booking_end": end.toISOString(), "bucket": bucket, "item": item};
+        const new_record: MongoData = {"booking_start": booking_start.toISOString(), "booking_end": booking_end.toISOString(), "bucket": bucket, "item": item};
         let tmp = mongo_data;
         tmp.push(new_record);
-        setmongodata(tmp);
-        setneedreset(true);
+        set_mongodata(tmp);
+        set_needreset(true);
       });
     }
 
@@ -60,7 +60,7 @@ export const ProcessData = ({ config, mongo_data, start, ssdt, end, sedt, bucket
 
     const handleCancel = () => {
       console.log("Cancel Button clicked!");
-      setneedreset(true);
+      set_needreset(true);
     }
 
     if (confirmed) {
@@ -71,27 +71,27 @@ export const ProcessData = ({ config, mongo_data, start, ssdt, end, sedt, bucket
         <h4>{istring}</h4>
         <InputForm
           config={config}
-          mongoitems={mongo_data}
-          start={start} startdatesetter={ssdt}
-          end={end} enddatesetter={sedt}
-          bucket={bucket} bucketsetter={setbucket}
-          itemsetter={setitem}
-          email={email} emailsetter={setemail}
-          completesetter={setcomplete}
+          mongo_data={mongo_data}
+          booking_start={booking_start} startdatesetter={set_booking_start}
+          booking_end={booking_end} enddatesetter={set_booking_end}
+          bucket={bucket} bucketsetter={set_bucket}
+          itemsetter={set_item}
+          email={email} emailsetter={set_email}
+          completesetter={set_complete}
         />
         </>
       );
     }  else {
       let sdstr = "No start date available"
-      if (start) {
-        sdstr = `start date is ${start}`;
+      if (booking_start) {
+        sdstr = `start date is ${booking_start}`;
       }
       let edstr = "No end date available"
-      if (end) {
-        edstr = `end date is ${end}`;
+      if (booking_end) {
+        edstr = `end date is ${booking_end}`;
       }
       let fstr = `No ${config.BUCKET_NAME}`;
-      if (bucket === 0 || bucket === 1 || bucket === 2) { // EEK NO! - need to test for number! XXX
+      if ((typeof bucket === 'number') && Number.isInteger(bucket)) {
         fstr = `${config.BUCKETS[bucket].name} ${config.BUCKET_NAME}`;
       }
 
@@ -115,13 +115,13 @@ export const ProcessData = ({ config, mongo_data, start, ssdt, end, sedt, bucket
       <h4>Insufficient Input</h4>
       <InputForm
         config={config}
-        mongoitems={mongo_data}
-        start={start} startdatesetter={ssdt}
-        end={end} enddatesetter={sedt}
-        bucket={bucket} bucketsetter={setbucket}
-        itemsetter={setitem}
-        email={email} emailsetter={setemail}
-        completesetter={setcomplete}
+        mongo_data={mongo_data}
+        booking_start={booking_start} startdatesetter={set_booking_start}
+        booking_end={booking_end} enddatesetter={set_booking_end}
+        bucket={bucket} bucketsetter={set_bucket}
+        itemsetter={set_item}
+        email={email} emailsetter={set_email}
+        completesetter={set_complete}
       />
       </>
     );
