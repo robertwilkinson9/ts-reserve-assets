@@ -30,13 +30,33 @@ export const App = () => {
   const API_url = `http://localhost:${configData.APIPORT}/api/`;
 
   const get_mongo_data = async () => {
-    // Change this endpoint to whatever local or online address you have
     const ITEMS_url = API_url + 'items/';
+    try {
+      const response = await axios.get(ITEMS_url);
 
-    const response = await axios.get(ITEMS_url);
-
-    let mymongodata = response.data.data.map((x: MongoRecordType) => {return {"booking_start": x.booking_start, "booking_end": x.booking_end, "bucket": x.bucket, "item": x.item}})
-    setMongodata(mymongodata);
+      if (response) {
+        const mymongodata = response.data.data.map((x: MongoRecordType) => {return {"booking_start": x.booking_start, "booking_end": x.booking_end, "bucket": x.bucket, "item": x.item}})
+        setMongodata(mymongodata);
+      }
+    } catch (error) {
+      if (error.response) {
+        // The client was given an error response (5xx, 4xx)
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      } else if (error.request) {
+        // The client never received a response, and the request was never left
+        // The request was made but no response was received
+        // `error.request` is an instance of XMLHttpRequest in the browser 
+        // and an instance of http.ClientRequest in node.js
+        console.log(error.request);
+      } else {
+        // Anything else
+        console.log('Error', error.message);
+      }
+    }
   };
 
   useEffect(() => {
