@@ -22,6 +22,9 @@ const tomorrow_from_day = (startDateTime: Date): Date => {
 }
 
 const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
+  console.log("ADDING ITEM");
+  console.log(item_booking);
+
   const response = await axios.post(url, item_booking);
   return response.data.id;
 };
@@ -30,20 +33,22 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
   if (booking_start && booking_end && bucket !== null && item && email) {
     const tomorrow = tomorrow_from_day(booking_start);
 
-    const item_booking = {
+    const date_booking = {
       "booking_start": booking_start.toISOString(),
       "booking_end": booking_end.toISOString(),
       "expireAt": tomorrow.toISOString(),
-      "bucket": bucket,
-      "item": item,
       "email": email,
     };
 
+    const item_booking = Object.assign(date_booking, { [config.BUCKET_NAME]: bucket }, { [config.ITEM_NAME]: item });
+
+    console.log(`ITEM is ${item} and ITEM NAME is ${config.ITEM_NAME}`);
+
     const confirm_action = () => {
-      const ITEM_url = url + 'item/';
+      const ITEM_url = url + config.ITEM_NAME + '/';
       const id = add_item_to_mongodb(ITEM_url, item_booking);
       id.then(() => {
-        const new_record: MongoData = {"booking_start": booking_start.toISOString(), "booking_end": booking_end.toISOString(), "bucket": bucket, "item": item};
+        const new_record: MongoData = {"booking_start": booking_start.toISOString(), "booking_end": booking_end.toISOString(), [config.BUCKET_NAME]: bucket, [config.ITEM_NAME]: item};
         let tmp = mongo_data;
         tmp.push(new_record);
         set_mongodata(tmp);

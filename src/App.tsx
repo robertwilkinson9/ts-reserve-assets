@@ -30,7 +30,7 @@ export const App = () => {
   const API_url = `http://localhost:${configData.APIPORT}/api/`;
 
   const get_mongo_data = async () => {
-    const ITEMS_url = API_url + 'items/';
+    const ITEMS_url = API_url + configData.ITEM_NAME + 's/';
     try {
       const response = await axios.get(ITEMS_url);
 

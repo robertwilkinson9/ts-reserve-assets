@@ -51,8 +51,8 @@ export interface ItemData {
   booking_start: string;
   booking_end: string;
   expireAt: string;
-  bucket: number;
-  item: string;
+  bucket?: number;
+  item?: string;
   email: string
 }
 
