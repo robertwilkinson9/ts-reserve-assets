@@ -40,9 +40,9 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
       "email": email,
     };
 
-    const item_booking = Object.assign(date_booking, { [config.BUCKET_NAME]: bucket }, { [config.ITEM_NAME]: item });
+    const item_booking = Object.assign(date_booking, { [config.BUCKET_NAME]: bucket }, { [config.ITEM_LABEL]: item });
 
-    console.log(`ITEM is ${item} and ITEM NAME is ${config.ITEM_NAME}`);
+    console.log(`ITEM is ${item} and ITEM NAME is ${config.ITEM_NAME} And ITEM LABEL is ${config.ITEM_LABEL}`);
 
     const confirm_action = () => {
       const ITEM_url = url + config.ITEM_NAME + '/';
