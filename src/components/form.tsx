@@ -34,7 +34,7 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
                 (after(x, a) && before(y, a)) ||
                 (after(x, b) && before(y, b)));
       };
-      const overlapv = mongo_data.filter((item) => {return overlap(booking_start, booking_end, new Date(item.booking_start), new Date(item.booking_end));});
+      const overlapv = mongo_data.filter((it) => {return overlap(booking_start, booking_end, new Date(it.booking_start), new Date(it.booking_end));});
 
       return (
         <>

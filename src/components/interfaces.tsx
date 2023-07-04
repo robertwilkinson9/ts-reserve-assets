@@ -51,16 +51,17 @@ export interface ItemData {
   booking_start: string;
   booking_end: string;
   expireAt: string;
-  bucket?: number;
-  item?: string;
+  bucket: number;
   email: string
 }
+
+/*  item?: string; */
 
 export interface MongoData {
   booking_start: string;
   booking_end: string;
   bucket: number;
-  item: string;
+  [key: string]: any;
 }
 
 export interface ItemsProps {
@@ -101,7 +102,9 @@ interface bucketData {
 }
 
 export interface configData {
+  APIPORT: string; // XXX should be a number? 
   ITEM_NAME: string;
+  ITEM_LABEL: string;
   BUCKET_NAME: string;
   BUCKETS: bucketData[];
 }

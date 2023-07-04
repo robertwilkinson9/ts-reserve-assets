@@ -77,6 +77,6 @@ switched to db desk
 > db.desk.find({})
 { "_id" : ObjectId("64a2cca3372f597bf058fd7e"), "booking_start" : ISODate("2023-07-25T08:00:00Z"), "booking_end" : ISODate("2023-07-25T17:00:00Z"), "expireAt" : ISODate("2023-07-26T00:00:00Z"), "floor" : 2, "desk" : "2f18", "email" : "robert.wilkinson@raytheon.co.uk" }
 > 
+> db.book.insertOne( {"booking_start": ISODate("2023-07-29T08:00:00Z"), "booking_end": ISODate("2023-07-29T17:00:00Z"), "expireAt": ISODate("2023-07-30T08:00:00Z"), "author" : "George Orwell", "bucket": 1, "title" : "1984", "email" : "robert.wilkinson@raytheon.co.uk"})
+> db.desk.insertOne( {"booking_start" : ISODate("2023-07-25T08:00:00Z"), "booking_end" : ISODate("2023-07-25T17:00:00Z"), "expireAt" : ISODate("2023-07-26"), "floor" : "second", "bucket": 2, "desk" : "2f18", "email" : "robert.wilkinson@raytheon.co.uk"} )
 
-> db.book.insertOne( {"booking_start": ISODate("2023-07-29T08:00:00Z"), "booking_end": ISODate("2023-07-29T17:00:00Z"), "expireAt": ISODate("2023-07-30T08:00:00Z"), "author" : 1, "title" : "1984", "email" : "robert.wilkinson@raytheon.co.uk"})
-{

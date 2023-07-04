@@ -37,18 +37,23 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
       "booking_start": booking_start.toISOString(),
       "booking_end": booking_end.toISOString(),
       "expireAt": tomorrow.toISOString(),
+      "bucket": bucket,
       "email": email,
     };
 
-    const item_booking = Object.assign(date_booking, { [config.BUCKET_NAME]: bucket }, { [config.ITEM_LABEL]: item });
+    let name = "Anononymous";
+    if ((config.BUCKETS) && config.BUCKETS[bucket] && config.BUCKETS[bucket].name) {
+      name = config.BUCKETS[bucket].name; 
+    }
+    const item_booking = Object.assign(date_booking, { [config.BUCKET_NAME]: name }, { [config.ITEM_LABEL]: item });
 
-    console.log(`ITEM is ${item} and ITEM NAME is ${config.ITEM_NAME} And ITEM LABEL is ${config.ITEM_LABEL}`);
+    console.log(`BUCKET_NAME is ${config.BUCKET_NAME} and name is ${name} and ITEM is ${item} and ITEM NAME is ${config.ITEM_NAME} And ITEM LABEL is ${config.ITEM_LABEL}`);
 
     const confirm_action = () => {
       const ITEM_url = url + config.ITEM_NAME + '/';
       const id = add_item_to_mongodb(ITEM_url, item_booking);
       id.then(() => {
-        const new_record: MongoData = {"booking_start": booking_start.toISOString(), "booking_end": booking_end.toISOString(), [config.BUCKET_NAME]: bucket, [config.ITEM_NAME]: item};
+        const new_record: MongoData = {"booking_start": booking_start.toISOString(), "booking_end": booking_end.toISOString(), "bucket": bucket, [config.BUCKET_NAME]: name, [config.ITEM_NAME]: item};
         let tmp = mongo_data;
         tmp.push(new_record);
         set_mongodata(tmp);
