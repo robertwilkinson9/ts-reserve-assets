@@ -25,8 +25,34 @@ const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
   console.log("ADDING ITEM");
   console.log(item_booking);
 
-  const response = await axios.post(url, item_booking);
-  return response.data.id;
+  try {
+    const response = await axios.post(url, item_booking, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    console.log(`RDI is ${response.data.id}`);
+    return response.data.id;
+  } catch (error) {
+    if (error.response) {
+      // The client was given an error response (5xx, 4xx)
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      // The client never received a response, and the request was never left
+      // The request was made but no response was received
+      // `error.request` is an instance of XMLHttpRequest in the browser
+      // and an instance of http.ClientRequest in node.js
+      console.log(error.request);
+    } else {
+      // Anything else
+      console.log('Error', error.message);
+    }
+  }
+
 };
 
 export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, item, set_item, email, set_email, set_complete, url, confirmed, set_confirmed, set_needreset} : ProcessDataProps) => {

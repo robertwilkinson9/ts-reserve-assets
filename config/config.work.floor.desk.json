@@ -1,6 +1,7 @@
 {
   "APIPORT": "5179",
   "ITEM_NAME": "desk",
+  "ITEM_LABEL": "desk",
   "BUCKET_NAME": "floor",
   "BUCKETS":
   [

@@ -5,7 +5,7 @@ import axios from 'axios'
 import { registerLocale, setDefaultLocale } from  "react-datepicker";
 import enGB from 'date-fns/locale/en-GB';
 
-import configData from "./config.json";
+import configData from "../config/config.json";
 
 import { string_or_null, date_or_null, MongoRecordType, MongoData} from './components/interfaces'
 import { Header } from './components/header'

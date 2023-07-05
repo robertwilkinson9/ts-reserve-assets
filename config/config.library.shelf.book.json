@@ -1,6 +1,7 @@
 {
   "APIPORT": "5180",
   "ITEM_NAME": "book",
+  "ITEM_LABEL": "title",
   "BUCKET_NAME": "shelf",
   "BUCKETS":
   [
