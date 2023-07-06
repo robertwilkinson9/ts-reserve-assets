@@ -39,8 +39,9 @@ export const Items = ({ config, bucket, bucket_items, set_item } : ItemsProps) =
     if (bucket_items) {
       const floor_items = bucket_items.filter(it => {return bucket == it.bucket});
       if (floor_items) {
-        const item_key = config.ITEM_LABEL;
-        const reserved_items = floor_items.map(x => {return x[item_key]});
+//        const item_key = config.ITEM_LABEL;
+//        const reserved_items = floor_items.map(x => {return x[item_key]});
+        const reserved_items = floor_items.map(x => {return x.item});
         if (items) {
           items = items.filter(n => !reserved_items.includes(n)); // slow and simple set difference 
         }

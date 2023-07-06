@@ -30,11 +30,13 @@ export const App = () => {
   const API_url = `http://localhost:${configData.APIPORT}/api/`;
 
   const get_mongo_data = async () => {
-    const ITEMS_url = API_url + configData.ITEM_NAME + 's/';
+    const ITEMS_url = API_url + 'all_' + configData.ITEM_NAME + 's/';
+//    const ITEMS_url = API_url + configData.ITEM_NAME + 's/';
     try {
       const response = await axios.get(ITEMS_url);
 
       if (response) {
+//        const mymongodata = response.data.data.map((x: MongoRecordType) => {return {"booking_start": x.booking_start, "booking_end": x.booking_end, "bucket": x.bucket, "item": x[configData.ITEM_NAME]}})
         const mymongodata = response.data.data.map((x: MongoRecordType) => {return {"booking_start": x.booking_start, "booking_end": x.booking_end, "bucket": x.bucket, "item": x.item}})
         setMongodata(mymongodata);
       }
