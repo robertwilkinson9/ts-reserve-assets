@@ -9,7 +9,7 @@
     "book_backend": "npm --prefix ../../ts-backend run book",
     "book": "cp config/config.library.author.book.json config/config.json && sleep 5 && vite --port 5175 --host $(hostname -I | awk '{print $1}')",
     "desk_backend": "npm --prefix ../../ts-backend run desk",
-    "desk": "cp config/config.work.floor.desk.json config/config.json && sleep 5 &&&& vite --port 5174 --host $(hostname -I | awk '{print $1}')",
+    "desk": "cp config/config.work.floor.desk.json config/config.json && sleep 5 && vite --port 5174 --host $(hostname -I | awk '{print $1}')",
     "allbooks": "concurrently --names \"FRONTEND,BACKEND\" --prefix-colors \"bgGreen.bold,bgMagenta.bold\" \"npm run book\" \"npm run book_backend\"",
     "alldesks": "concurrently --names \"FRONTEND,BACKEND\" --prefix-colors \"bgGreen.bold,bgMagenta.bold\" \"npm run desk\" \"npm run desk_backend\"",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
