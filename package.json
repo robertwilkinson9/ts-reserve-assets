@@ -6,14 +6,15 @@
   "scripts": {
     "dev": "vite --host $(hostname -I | awk '{print $1}')",
     "build": "tsc && vite build",
-    "book_backend": "npm --prefix ../../ts-backend run book",
+    "book_backend": "npm --prefix ../ts-backend run book",
     "book": "cp config/config.library.author.book.json config/config.json && sleep 5 && vite --port 5175 --host $(hostname -I | awk '{print $1}')",
-    "desk_backend": "npm --prefix ../../ts-backend run desk",
+    "desk_backend": "npm --prefix ../ts-backend run desk",
     "desk": "cp config/config.work.floor.desk.json config/config.json && sleep 5 && vite --port 5174 --host $(hostname -I | awk '{print $1}')",
     "allbooks": "concurrently --names \"FRONTEND,BACKEND\" --prefix-colors \"bgGreen.bold,bgMagenta.bold\" \"npm run book\" \"npm run book_backend\"",
     "alldesks": "concurrently --names \"FRONTEND,BACKEND\" --prefix-colors \"bgGreen.bold,bgMagenta.bold\" \"npm run desk\" \"npm run desk_backend\"",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest"
   },
   "dependencies": {
     "@types/react-bootstrap": "^0.32.32",
@@ -31,6 +32,8 @@
     "styled-components": "^6.0.0-rc.1"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^14.0.0",
     "@types/react": "^18.0.28",
     "@types/react-datepicker": "^4.11.2",
     "@types/react-dom": "^18.0.11",
@@ -38,13 +41,18 @@
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "@typescript-eslint/parser": "^5.57.1",
     "@vitejs/plugin-react": "^4.0.0",
+    "@vitest/browser": "^0.34.1",
+    "@vitest/ui": "^0.34.1",
     "axios": "^1.4.0",
     "concurrently": "^8.2.0",
     "eslint": "^8.38.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
+    "happy-dom": "^10.9.0",
+    "jsdom": "^22.1.0",
     "typescript": "^5.0.2",
     "vite": "^4.3.2",
-    "vitest": "^0.34.1"
+    "vitest": "^0.34.1",
+    "webdriverio": "^8.14.3"
   }
 }

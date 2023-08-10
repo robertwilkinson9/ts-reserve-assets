@@ -5,5 +5,9 @@ export const Header = () => {
     </>
   )
 };
-
-export default Header
+{ /*
+export function Header() {
+    <div data-testid="header-div">
+    <hr data-testid="header_ruler" />
+    </div>
+*/ }
