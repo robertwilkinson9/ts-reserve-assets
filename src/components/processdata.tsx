@@ -72,7 +72,6 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
     if ((config.BUCKETS) && config.BUCKETS[bucket] && config.BUCKETS[bucket].name) {
       name = config.BUCKETS[bucket].name; 
     }
-//    const item_booking = Object.assign(date_booking, { [config.BUCKET_NAME]: name }, { [config.ITEM_LABEL]: item });
     const item_booking = Object.assign(date_booking, { [config.BUCKET_NAME]: name });
 
     console.log(`BUCKET_NAME is ${config.BUCKET_NAME} and name is ${name} and ITEM is ${item} and ITEM NAME is ${config.ITEM_NAME} And ITEM LABEL is ${config.ITEM_LABEL}`);
@@ -81,7 +80,6 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
       const ITEM_url = url + config.ITEM_NAME + '/';
       const id = add_item_to_mongodb(ITEM_url, item_booking);
       id.then(() => {
-//        const new_record: MongoData = {"booking_start": booking_start.toISOString(), "booking_end": booking_end.toISOString(), "bucket": bucket, [config.BUCKET_NAME]: name, [config.ITEM_NAME]: item};
         const new_record: MongoData = {"booking_start": booking_start.toISOString(), "booking_end": booking_end.toISOString(), "bucket": bucket, [config.BUCKET_NAME]: name, "item": item};
         let tmp = mongo_data;
         tmp.push(new_record);

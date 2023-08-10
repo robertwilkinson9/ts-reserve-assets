@@ -28,8 +28,8 @@ export interface ButtonProps {
 export interface CalendarProps {
   label: string;
   selected: date_or_null;
-  setter: React.Dispatch<React.SetStateAction<date_or_null>>;
-  setter2?: React.Dispatch<React.SetStateAction<date_or_null>>;
+  date_setter: React.Dispatch<React.SetStateAction<date_or_null>>;
+  date_setter2?: React.Dispatch<React.SetStateAction<date_or_null>>;
 }
 
 export interface InputFormProps {

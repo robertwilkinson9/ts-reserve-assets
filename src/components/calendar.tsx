@@ -7,7 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import { CalendarProps } from './interfaces';
 
-export const Calendar = ({label, selected, setter, setter2} : CalendarProps) => {
+export const Calendar = ({label, selected, date_setter, date_setter2} : CalendarProps) => {
  return (
     <>
       <label>{label}</label>
@@ -16,7 +16,7 @@ export const Calendar = ({label, selected, setter, setter2} : CalendarProps) => 
         dateFormat="d/MM/yyyy hh:mm aa"
         selected={selected}
         showTimeSelect
-        onChange={(date) => {setter(date); setter2 ? setter2(date) : "" } }
+        onChange={(date) => {date_setter(date); date_setter2 ? date_setter2(date) : "" } }
       />
     </>
   );
