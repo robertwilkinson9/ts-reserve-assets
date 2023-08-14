@@ -1,3 +1,7 @@
+// We present a set of radio buttons for each of the collections - here called buckets
+// e.g. rooms containing desks, authors who write books, tables having seats etc. 
+// these radio buttons then have the individual items available as pull-down selects
+
 import './bucket.css';
 
 import { BucketLabelProps, BucketProps, ButtonProps, configData } from './interfaces';
@@ -39,7 +43,6 @@ const BucketButton = ({cb, lcf, ucf, bucketst, checked} : ButtonProps) => {
    );
   }
 }
-
 
 export const Bucket = ({config, bucket, set_bucket}: BucketProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {set_bucket(parseInt(e.target.value, 10));}

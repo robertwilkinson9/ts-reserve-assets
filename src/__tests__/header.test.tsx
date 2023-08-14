@@ -14,7 +14,7 @@ describe('header test', () => {
   it("should contain a hr element", async () => {
     const { findByTestId } = renderHeader();
 
-    const Ruler = await findByTestId("ruler");
-    expect(Ruler).toContainElement(null);
+    const Ruler = await findByTestId("header_ruler");
+    expect(Ruler).toBeInTheDocument();
   });
 });

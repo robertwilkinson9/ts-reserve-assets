@@ -67,7 +67,7 @@ export interface MongoData {
 export interface ItemsProps {
   config: configData;
   bucket: number_or_null;
-  bucket_items?: MongoData[];
+  allocated_items?: MongoData[];
   set_item: React.Dispatch<React.SetStateAction<string_or_null>>;
 }
 

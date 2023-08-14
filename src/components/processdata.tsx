@@ -1,3 +1,7 @@
+// we process the form data, allow a confirmation or cancellation
+// then save the item to the backend data store on confirmation with expiration
+// of the record set for the day after the booking
+
 import axios from 'axios'
 
 import Button from 'react-bootstrap/Button';

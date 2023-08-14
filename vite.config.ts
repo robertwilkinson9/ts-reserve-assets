@@ -7,9 +7,12 @@ export default defineConfig({
   define: {'process.argv': process.argv}, 
   test: {
     globals: true,
-    environment: 'happy-dom',
-    reporter: [ "default", "dot"],
+    environment: 'jsdom',
+    reporter: [ "dot", "html"],
     setupFiles: './setup.js',
   }
 });
+//    environment: 'happy-dom',
 //    reporter: [ "json", "html"],
+//    reporter: [ "default", "dot"],
+//    reporter: [ "dot"],

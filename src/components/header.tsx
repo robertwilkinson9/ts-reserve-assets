@@ -1,13 +1,7 @@
 export const Header = () => {
  return (
     <>
-    <hr />
+    <hr data-testid="header_ruler" />
     </>
   )
 };
-{ /*
-export function Header() {
-    <div data-testid="header-div">
-    <hr data-testid="header_ruler" />
-    </div>
-*/ }

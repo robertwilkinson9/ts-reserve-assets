@@ -10,7 +10,8 @@ import { CalendarProps } from './interfaces';
 export const Calendar = ({label, selected, date_setter, date_setter2} : CalendarProps) => {
  return (
     <>
-      <label>{label}</label>
+      <label data-testid="calendar_label" >{label}</label>
+      <div data-testid="calendar_datepicker">
       <DatePicker
         locale="en-GB"
         dateFormat="d/MM/yyyy hh:mm aa"
@@ -18,6 +19,7 @@ export const Calendar = ({label, selected, date_setter, date_setter2} : Calendar
         showTimeSelect
         onChange={(date) => {date_setter(date); date_setter2 ? date_setter2(date) : "" } }
       />
+      </div>
     </>
   );
 };

@@ -31,7 +31,7 @@ describe('it item contents', () => {
     expect(AddEmaillabel).toHaveTextContent('Email address');
 
     const AddEmailcontrol = await findByTestId("emailaddress_control");
-    expect(AddEmailcontrol).toContainElement(null);
+    expect(AddEmailcontrol).toBeInTheDocument();
 
    const AddEmail = await findByTestId("emailaddress");
    expect(AddEmail).toContainElement(AddEmaillabel);

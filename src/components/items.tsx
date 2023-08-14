@@ -1,3 +1,11 @@
+// semantics - a buckets is a collection - and was called that until mongoDB objected to the name
+// e.g. a room containing desks, the desks being the items
+// the books by an author, the author is the bucket and the books the items
+// the tables in the restaurant, the tables are the buckets, the bookable seats the items.
+
+// these items are presented to the author as pull down lists once the bucket radio button is selected
+// we filter the out those items currently booked at the time requested from those presented 
+
 import Select from 'react-select'
 
 import { ItemsProps, Select_type} from './interfaces';
@@ -7,6 +15,7 @@ const items_select = (items: string[]): Select_type[] => {
   return select_items;
 }
 
+// listbuild can build a list from a start and last number and surround each with a prefix and suffix
 const listbuild = (istart:number | undefined, ilast:number | undefined, prefix: string | undefined, suffix?: string | undefined) => {
   const items: string[] = [];
   if (istart != undefined && ilast != undefined) {
@@ -25,7 +34,7 @@ const listbuild = (istart:number | undefined, ilast:number | undefined, prefix: 
   return items;
 }
    
-export const Items = ({ config, bucket, bucket_items, set_item } : ItemsProps) => {
+export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps) => {
   let items: string[] | undefined = [];
 
   if (bucket !== null) {
@@ -36,12 +45,10 @@ export const Items = ({ config, bucket, bucket_items, set_item } : ItemsProps) =
         items = listbuild(config.BUCKETS[bucket].ifirst, config.BUCKETS[bucket].ilast, config.BUCKETS[bucket].prefix);
       }
     }
-    if (bucket_items) {
-      const floor_items = bucket_items.filter(it => {return bucket == it.bucket});
-      if (floor_items) {
-//        const item_key = config.ITEM_LABEL;
-//        const reserved_items = floor_items.map(x => {return x[item_key]});
-        const reserved_items = floor_items.map(x => {return x.item});
+    if (allocated_items) {
+      const bucket_items = allocated_items.filter(it => {return bucket == it.bucket});
+      if (bucket_items) {
+        const reserved_items = bucket_items.map(x => {return x.item});
         if (items) {
           items = items.filter(n => !reserved_items.includes(n)); // slow and simple set difference 
         }
