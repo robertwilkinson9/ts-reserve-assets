@@ -94,11 +94,9 @@ describe('header test', () => {
     const test_date_string = "31/12/1999 11:59 PM";
     const test_date = new Date("1999-12-31T23:59");
 
-    const { container } =  renderCalendar({label: test_label, selected: test_date, date_setter: null_setter, date_setter2: null_setter});
+    renderCalendar({label: test_label, selected: test_date, date_setter: null_setter, date_setter2: null_setter});
 
-// maybe revisit this once we find out how to locate the input element
-
-    const react_datepicker_input_value = container.querySelector(`[value="${test_date_string}"]`)
-    expect(react_datepicker_input_value).toBeInTheDocument();
+    const input_box = screen.getByRole('textbox');
+    expect(input_box).toHaveAttribute("value", test_date_string);
   });
 });
