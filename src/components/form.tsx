@@ -38,41 +38,41 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
 
       return (
         <>
-         <Form id="emailForm">
-         <Calendar label="Start DateTime" selected={booking_start} date_setter={set_booking_start} />
-         <Calendar label="End DateTime" selected={booking_end} date_setter={set_booking_end} />
-         <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
-         <Items config={config} bucket={bucket} allocated_items={overlapv} set_item={set_item} />
-         <AddEmail email={email} set_email={set_email} />
-         <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText} </Button>
-        </Form>
+          <Form id="emailForm">
+            <Calendar label="Start DateTime" selected={booking_start} date_setter={set_booking_start} />
+            <Calendar label="End DateTime" selected={booking_end} date_setter={set_booking_end} />
+            <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
+            <Items config={config} bucket={bucket} allocated_items={overlapv} set_item={set_item} />
+            <AddEmail email={email} set_email={set_email} />
+            <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText} </Button>
+          </Form>
         </>
       );
     } else {
       return (
         <>
-         <Form id="emailForm">
-         <Calendar label="Start DateTime" selected={booking_start} date_setter={set_booking_start} />
-         <Calendar label="End DateTime" selected={booking_end} date_setter={set_booking_end} />
-         <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
-         <Items config={config} bucket={bucket} set_item={set_item} />
-         <AddEmail email={email} set_email={set_email} />
-         <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText}</Button>
-        </Form>
+          <Form id="emailForm">
+            <Calendar label="Start DateTime" selected={booking_start} date_setter={set_booking_start} />
+            <Calendar label="End DateTime" selected={booking_end} date_setter={set_booking_end} />
+            <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
+            <Items config={config} bucket={bucket} set_item={set_item} />
+            <AddEmail email={email} set_email={set_email} />
+            <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText}</Button>
+          </Form>
         </>
       );
     }
   } else {
     return (
       <>
-       <Form id="emailForm">
-       <Calendar label="Start DateTime" selected={booking_start} date_setter={set_booking_start} date_setter2={set_booking_end} />
-       <Calendar label="End DateTime" selected={booking_end} date_setter={set_booking_end} />
-       <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
-       <Items config={config} bucket={bucket} set_item={set_item} />
-       <AddEmail email={email} set_email={set_email} />
-       <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText} </Button>
-      </Form>
+        <Form id="emailForm">
+          <Calendar label="Start DateTime" selected={booking_start} date_setter={set_booking_start} date_setter2={set_booking_end} />
+          <Calendar label="End DateTime" selected={booking_end} date_setter={set_booking_end} />
+          <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
+          <Items config={config} bucket={bucket} set_item={set_item} />
+          <AddEmail email={email} set_email={set_email} />
+          <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText} </Button>
+        </Form>
       </>
     );
   }

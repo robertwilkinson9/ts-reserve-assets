@@ -23,9 +23,12 @@ const BucketButton = ({cb, lcf, ucf, bucketst, checked} : ButtonProps) => {
     return(
       <>
       <div className="row" id="bucket_radios">
+{ /*
         <div className="col-sm-6">
+*/ }
+        <div className="col">
           <input type="radio" value={bucketst} id={lcf} onChange={cb} name="bucket" defaultChecked />
-         <label htmlFor={lcf}>{ucf}</label>
+          <label htmlFor={lcf}>{ucf}</label>
        </div>
      </div>
      </>
@@ -34,9 +37,12 @@ const BucketButton = ({cb, lcf, ucf, bucketst, checked} : ButtonProps) => {
     return(
       <>
       <div className="row" id="bucket_radios">
+{ /*
         <div className="col-sm-6">
+*/ }
+        <div className="col">
           <input type="radio" value={bucketst} id={lcf} onChange={cb} name="bucket"/>
-         <label htmlFor={lcf}>{ucf}</label>
+          <label htmlFor={lcf}>{ucf}</label>
        </div>
      </div>
      </>

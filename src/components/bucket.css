@@ -7,7 +7,6 @@ label{
     vertical-align: top;
 }
 
-/*
 #bucket_radios label {
   margin-left: 10px;
 }
@@ -15,7 +14,6 @@ label{
 #bucket_radios label + input {
     clear: both;
 }
-*/
 
 #pull-left {
   margin-left: -12px;
