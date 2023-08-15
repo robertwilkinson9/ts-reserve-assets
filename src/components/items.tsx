@@ -11,8 +11,7 @@ import Select from 'react-select'
 import { ItemsProps, Select_type} from './interfaces';
 
 const items_select = (items: string[]): Select_type[] => {
-  const select_items: Select_type[] = items.map(item => {return {value: item, label: item};});
-  return select_items;
+  return items.map(item => {return {value: item, label: item};});
 }
 
 // listbuild can build a list from a start and last number and surround each with a prefix and suffix
@@ -64,8 +63,8 @@ export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps
     const capitalizeFirstLetter = (name: string) => {return name.charAt(0).toUpperCase() + name.slice(1);}
     return (
       <>
-      <div id="itemPulldown">
-        <label className="mb-0 font-weight-bold">{capitalizeFirstLetter(config.ITEM_NAME)}</label>
+      <div data-testid="items_div" id="itemPulldown">
+        <label data-testid="items_label" className="mb-0 font-weight-bold">{capitalizeFirstLetter(config.ITEM_NAME)}</label>
           <Select
             key={key}
             options={select_item_list}

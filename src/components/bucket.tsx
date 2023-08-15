@@ -9,9 +9,9 @@ import { BucketLabelProps, BucketProps, ButtonProps, configData } from './interf
 const BucketLabel = ({label}: BucketLabelProps,) => {
   return (
     <>
-    <div className="row" id="pull-left">
+    <div data-testid="bucket_label_div" className="row" id="pull-left">
       <div className="col-sm-12 align-items-left" >
-        <label className="mb-0 font-weight-bold flabel">{label}</label>
+        <label data-testid="bucket_label_label" className="mb-0 font-weight-bold flabel">{label}</label>
       </div>
     </div>
     </>
@@ -22,13 +22,10 @@ const BucketButton = ({cb, lcf, ucf, bucketst, checked} : ButtonProps) => {
   if (checked) {
     return(
       <>
-      <div className="row" id="bucket_radios">
-{ /*
-        <div className="col-sm-6">
-*/ }
+      <div data-testid="bucket_button_checked" className="row" id="bucket_radios">
         <div className="col">
-          <input type="radio" value={bucketst} id={lcf} onChange={cb} name="bucket" defaultChecked />
-          <label htmlFor={lcf}>{ucf}</label>
+          <input data-testid="bucket_button_checked_input" type="radio" value={bucketst} id={lcf} onChange={cb} name="bucket" defaultChecked />
+          <label data-testid="bucket_button_checked_label" htmlFor={lcf}>{ucf}</label>
        </div>
      </div>
      </>
@@ -36,13 +33,10 @@ const BucketButton = ({cb, lcf, ucf, bucketst, checked} : ButtonProps) => {
   } else {
     return(
       <>
-      <div className="row" id="bucket_radios">
-{ /*
-        <div className="col-sm-6">
-*/ }
+      <div data-testid="bucket_button_unchecked" className="row" id="bucket_radios">
         <div className="col">
-          <input type="radio" value={bucketst} id={lcf} onChange={cb} name="bucket"/>
-          <label htmlFor={lcf}>{ucf}</label>
+          <input data-testid="bucket_button_unchecked_input" type="radio" value={bucketst} id={lcf} onChange={cb} name="bucket"/>
+          <label data-testid="bucket_button_unchecked_label" htmlFor={lcf}>{ucf}</label>
        </div>
      </div>
      </>
@@ -81,7 +75,7 @@ export const Bucket = ({config, bucket, set_bucket}: BucketProps) => {
   return(
     <>
       <BucketLabel label={capitalizeFirstLetter(config.BUCKET_NAME)} />
-      <div className="container">
+      <div data-testid="bucket_div" className="container">
       {
         matrix.map((row, index) => (
           <BucketButton cb={handleChange} lcf={row[0]} ucf={row[1]} bucketst={row[2]} checked={checked[index]} key={index} />
