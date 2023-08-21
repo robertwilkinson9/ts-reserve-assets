@@ -38,19 +38,19 @@ describe('it item contents', () => {
    expect(AddEmail).toContainElement(AddEmailcontrol);
   });
 
-  it("should be able to set email", async () => {
+//  it("should be able to set email", async () => {
 //    const email = "email@domain.org";
 //    const itemprops = {email: email};
 //
 //    const { findByTestId } = renderAddEmail(itemprops);
 //
-//    const AddEmail = await findByTestId("addemail");
-//    expect(AddEmail).toHaveTextContent("1");
+//    const AddEmail = await findByTestId("emailaddress_control");
+//    expect(AddEmail).toHaveTextContent("Q1");
 //
 //    const AddEmaillabel = await findByTestId("addemail_label");
-//    expect(AddEmaillabel).toHaveTextContent("label1");
+//    expect(AddEmaillabel).toHaveTextContent("label7");
 //
 //    const AddEmailcontrol = await findByTestId("addemail_control");
 //    expect(AddEmailcontrol).toHaveTextContent("control1");
-  });
+//  });
 });
