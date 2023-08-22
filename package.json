@@ -17,6 +17,9 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.14.5",
+    "@mui/styled-engine": "^5.13.2",
     "@types/react-bootstrap": "^0.32.32",
     "@types/react-native": "^0.72.0",
     "@types/styled-components": "^5.1.26",

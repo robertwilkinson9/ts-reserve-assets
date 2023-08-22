@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 
 import { Calendar } from './calendar'
 import { Bucket } from './bucket'
-import { Field } from './field'
+import { Input } from './input'
 import { Items } from './items'
 import { AddEmail } from './addemail'
 
@@ -45,7 +45,7 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
             <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
             <Items config={config} bucket={bucket} allocated_items={overlapv} set_item={set_item} />
             <AddEmail email={email} set_email={set_email} />
-            <Field />
+            <Input label="alpha" />
             <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText} </Button>
           </Form>
         </>
@@ -59,7 +59,7 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
             <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
             <Items config={config} bucket={bucket} set_item={set_item} />
             <AddEmail email={email} set_email={set_email} />
-            <Field />
+            <Input label="beta" />
             <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText}</Button>
           </Form>
         </>
@@ -74,7 +74,7 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
           <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
           <Items config={config} bucket={bucket} set_item={set_item} />
           <AddEmail email={email} set_email={set_email} />
-          <Field />
+          <Input label="gamma" />
           <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText} </Button>
         </Form>
       </>
