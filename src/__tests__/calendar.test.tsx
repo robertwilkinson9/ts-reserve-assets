@@ -8,8 +8,8 @@ import { CalendarProps } from '../components/interfaces';
 import { Calendar } from '../components/calendar';
 
 const renderCalendar = (props : CalendarProps) => {
-  console.log(`in renderCalendar - props.label is ${props.label}`);
-  console.log(`in renderCalendar - props.selected is ${props.selected}`);
+//  console.log(`in renderCalendar - props.label is ${props.label}`);
+//  console.log(`in renderCalendar - props.selected is ${props.selected}`);
   return render(<Calendar label={props.label} selected={props.selected} date_setter={props.date_setter} date_setter2={props.date_setter2} />);
 }
 

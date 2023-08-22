@@ -3,8 +3,8 @@
  */
 
 import { render } from '@testing-library/react';
-//import { render, screen } from '@testing-library/react';
-import selectEvent from 'react-select-event'
+// import { render, screen } from '@testing-library/react';
+// import selectEvent from 'react-select-event'
 
 import { MongoData } from '../components/interfaces';
 import { Items } from '../components/items';
@@ -34,7 +34,8 @@ const test_config = {
 const null_setter = () => {};
  
 // export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps
-const renderItems = (num: number = 0, bucket: number = 0, allocated_items: MongoData[] = []) => {
+// const renderItems = (num: number = 0, bucket: number = 0, allocated_items: MongoData[] = []) => {
+const renderItems = (bucket: number = 0, allocated_items: MongoData[] = []) => {
   return render(<Items config={test_config} bucket={bucket} allocated_items={allocated_items} set_item={null_setter} />);
 }
 

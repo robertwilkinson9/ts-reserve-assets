@@ -5,7 +5,7 @@
 
 import { render } from '@testing-library/react';
 
-import Form from 'react-bootstrap/Form';
+// import Form from 'react-bootstrap/Form';
 
 import {InputFormProps} from '../components/interfaces'
 import InputForm from '../components/form';
@@ -32,6 +32,7 @@ const test_config = {
   ]
 }
 
+
 const null_setter = () => {};
 
 function renderInputForm(props: Partial<InputFormProps> = {}) {
@@ -39,6 +40,15 @@ function renderInputForm(props: Partial<InputFormProps> = {}) {
     config: test_config,
     bucket: 0,
     email: "",
+    mongo_data: [],
+    booking_start: new Date("2099-12-31T23:30"),
+    set_booking_start: null_setter,
+    booking_end: new Date("2099-12-31T23:45"),
+    set_booking_end: null_setter,
+    set_bucket: null_setter,
+    set_item: null_setter,
+    set_email: null_setter,
+    set_complete: null_setter,
   };
 
   return render(<InputForm  {...defaultProps} {...props} />);
