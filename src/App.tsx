@@ -7,7 +7,7 @@ import enGB from 'date-fns/locale/en-GB';
 
 import configData from "../config/config.json";
 
-import { string_or_null, date_or_null, MongoRecordType, MongoData} from './components/interfaces'
+import { string_or_null, date_or_null, AuxRecordType, MongoRecordType, MongoData} from './components/interfaces'
 import { Header } from './components/header'
 import { InputForm } from './components/form'
 import { ProcessData } from './components/processdata'
@@ -23,6 +23,9 @@ export const App = () => {
   const [confirmed, setConfirmed] = useState<boolean>(false);
   const [needreset, setNeedreset] = useState<boolean>(false);
   const [mongodata, setMongodata] = useState<MongoData[]>([]);
+  const [auxdata, setAuxdata] = useState<AuxRecordType[]>(configData.AUXILLIARY);
+  
+  console.log(`auxdata is ${auxdata}, setAuxdata is ${setAuxdata}`);
 
   registerLocale('en-GB', enGB)
   setDefaultLocale('en-GB');
@@ -71,6 +74,7 @@ export const App = () => {
     setBucket(0);
     setItem(null);
     setEmail(null);
+    setAuxdata([]);
     setComplete(false);
     setConfirmed(false);
   }
@@ -78,6 +82,10 @@ export const App = () => {
   if (needreset) {
     reset();
   }
+
+{ /*
+        auxdata={auxdata} set_auxdata={setAuxdata}
+*/ }
 
   if (endDateTime && item && email && complete) {
     return (
@@ -91,6 +99,7 @@ export const App = () => {
         bucket={bucket} set_bucket={setBucket}
         item={item} set_item={setItem}
         email={email} set_email={setEmail}
+        auxdata={auxdata} set_auxdata={setAuxdata}
         set_complete={setComplete}
         url={API_url}
         confirmed={confirmed} set_confirmed={setConfirmed}
@@ -110,6 +119,7 @@ export const App = () => {
         bucket={bucket} set_bucket={setBucket}
         set_item={setItem}
         email={email} set_email={setEmail}
+        auxdata={auxdata} set_auxdata={setAuxdata}
         set_complete={setComplete}
       />
       </>

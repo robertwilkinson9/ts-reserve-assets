@@ -2,7 +2,10 @@
   "APIPORT": "5182",
   "ITEM_NAME": "spot",
   "ITEM_LABEL": "place",
-  AUXILLIARY: ["registration number"],
+  "AUXILLIARY": [
+    {"id": 1, "label": "registration number"},
+    {"id": 2, "label": "date of birth"}
+  ],
   "BUCKET_NAME": "carpark",
   "BUCKETS":
   [
@@ -13,7 +16,7 @@
       "ilast": 40
     },
     {
-      "name": "upper carpark8",
+      "name": "upper carpark",
       "prefix": "uc",
       "ifirst": 1,
       "ilast": 80

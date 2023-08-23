@@ -59,7 +59,7 @@ const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
 
 };
 
-export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, item, set_item, email, set_email, set_complete, url, confirmed, set_confirmed, set_needreset} : ProcessDataProps) => {
+export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, item, set_item, email, set_email, auxdata, set_auxdata, set_complete, url, confirmed, set_confirmed, set_needreset} : ProcessDataProps) => {
   if (booking_start && booking_end && bucket !== null && item && email) {
     const tomorrow = tomorrow_from_day(booking_start);
 
@@ -115,6 +115,7 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
           bucket={bucket} set_bucket={set_bucket}
           set_item={set_item}
           email={email} set_email={set_email}
+          auxdata={auxdata} set_auxdata={set_auxdata}
           set_complete={set_complete}
         />
         </>
@@ -159,6 +160,7 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
         bucket={bucket} set_bucket={set_bucket}
         set_item={set_item}
         email={email} set_email={set_email}
+        auxdata={auxdata} set_auxdata={set_auxdata}
         set_complete={set_complete}
       />
       </>

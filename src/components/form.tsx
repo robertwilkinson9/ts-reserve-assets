@@ -45,7 +45,7 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
             <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
             <Items config={config} bucket={bucket} allocated_items={overlapv} set_item={set_item} />
             <AddEmail email={email} set_email={set_email} />
-            <Input label="alpha" />
+            {config.AUXILLIARY?.map( (x) => <Input label={x.label} key={x.id} /> )}
             <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText} </Button>
           </Form>
         </>
@@ -59,7 +59,7 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
             <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
             <Items config={config} bucket={bucket} set_item={set_item} />
             <AddEmail email={email} set_email={set_email} />
-            <Input label="beta" />
+            {config.AUXILLIARY?.map( (x) => <Input label={x.label} key={x.id} /> )}
             <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText}</Button>
           </Form>
         </>
@@ -74,7 +74,7 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
           <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
           <Items config={config} bucket={bucket} set_item={set_item} />
           <AddEmail email={email} set_email={set_email} />
-          <Input label="gamma" />
+          {config.AUXILLIARY?.map( (x) => <Input label={x.label} key={x.id} /> )}
           <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText} </Button>
         </Form>
       </>

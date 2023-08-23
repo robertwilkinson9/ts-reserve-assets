@@ -44,6 +44,8 @@ export interface InputFormProps {
   set_item: React.Dispatch<React.SetStateAction<string_or_null>>;
   email: string_or_null;
   set_email: React.Dispatch<React.SetStateAction<string_or_null>>;
+  auxdata: AuxRecordType[];
+  set_auxdata: React.Dispatch<React.SetStateAction<AuxRecordType[]>>;
   set_complete: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -85,6 +87,8 @@ export interface ProcessDataProps {
   set_item: React.Dispatch<React.SetStateAction<string_or_null>>;
   email: string_or_null;
   set_email: React.Dispatch<React.SetStateAction<string_or_null>>;
+  auxdata: AuxRecordType[];
+  set_auxdata: React.Dispatch<React.SetStateAction<AuxRecordType[]>>;
   set_complete: React.Dispatch<React.SetStateAction<boolean>>;
   url: string;
   confirmed: boolean;
@@ -101,12 +105,18 @@ interface bucketData {
   items?: string[];
 }
 
+export interface AuxRecordType  {
+  id: number;
+  label: string;
+}
+
 export interface configData {
   APIPORT: string; // XXX should be a number? 
   ITEM_NAME: string;
   ITEM_LABEL: string;
   BUCKET_NAME: string;
   BUCKETS: bucketData[];
+  AUXILLIARY?: AuxRecordType[];
 }
 
 export type MongoRecordType = {

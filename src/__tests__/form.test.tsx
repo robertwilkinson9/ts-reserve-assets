@@ -40,6 +40,7 @@ function renderInputForm(props: Partial<InputFormProps> = {}) {
     config: test_config,
     bucket: 0,
     email: "",
+    auxdata: [],
     mongo_data: [],
     booking_start: new Date("2099-12-31T23:30"),
     set_booking_start: null_setter,
@@ -48,6 +49,7 @@ function renderInputForm(props: Partial<InputFormProps> = {}) {
     set_bucket: null_setter,
     set_item: null_setter,
     set_email: null_setter,
+    set_auxdata: null_setter,
     set_complete: null_setter,
   };
 

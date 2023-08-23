@@ -1,6 +1,3 @@
-// import { useState } from 'react'
-// import './input.css'
-
 import TextField from '@mui/material/TextField';
 // import { TextField } from '@mui/material';
 
@@ -26,9 +23,6 @@ export const Input = (props: inputProps) => {
     <div className="Input">
       <label data-testid="input_label" htmlFor={labelfor}>{labelfor}</label>
       <TextField id="outlined-basic" label={props.label} variant="outlined" />
-{ /*
-    <TextField id="outlined-basic" label="OutlinedLabel" variant="outlined" />
-*/ }
     </div>
   )
 }
