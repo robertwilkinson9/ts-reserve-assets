@@ -88,6 +88,7 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
     }
     let aux_string = "";
 //    aux_merged.forEach((item, key) => {console.log("ITEM"); console.log(item); aux_string += `KEY is ${key} and ITEM is ${item}\n`; console.log(`KEY is ${key} and ITEM is ${item}`);});
+// we add a key entry to the date_booking here and write the aux_string
     aux_merged.forEach((item, key) => {date_booking[key] = item; console.log("ITEM"); console.log(item); aux_string += `KEY is ${key} and ITEM is ${item}\n`; console.log(`KEY is ${key} and ITEM is ${item}`);});
     console.log("AUX_STRING");
     console.log(aux_string);
@@ -101,7 +102,15 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
     console.log(`BUCKET_NAME is ${config.BUCKET_NAME} and name is ${name} and ITEM is ${item} and ITEM NAME is ${config.ITEM_NAME} And ITEM LABEL is ${config.ITEM_LABEL}`);
 
     const confirm_action = () => {
-      const ITEM_url = url + config.ITEM_NAME + '/';
+      const collection: string = config.COLLECTION_NAME ? config.COLLECTION_NAME : config.ITEM_NAME + '/';
+      console.log("collection");
+      console.log(collection);
+      const ITEM_url: string = url + collection;
+
+console.log(`item_url is ${ITEM_url}`)
+console.log("item_booking")
+console.log(item_booking)
+
       const id = add_item_to_mongodb(ITEM_url, item_booking);
       id.then(() => {
         const new_record: MongoData = {"booking_start": booking_start.toISOString(), "booking_end": booking_end.toISOString(), "bucket": bucket, [config.BUCKET_NAME]: name, "item": item};

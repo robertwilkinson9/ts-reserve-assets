@@ -1,7 +1,8 @@
 {
   "APIPORT": "5182",
-  "ITEM_NAME": "bay",
-  "ITEM_LABEL": "bay",
+  "COLLECTION_NAME": "carpark",
+  "ITEM_NAME": "carpark",
+  "ITEM_LABEL": "carpark_label",
   "AUXILLIARY": [
     {"id": "1", "label": "registration number", "dbname": "registration_number"},
     {"id": "2", "label": "date of birth", "dbname": "notTHEre"}
