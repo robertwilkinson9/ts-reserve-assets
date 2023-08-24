@@ -7,7 +7,7 @@ import enGB from 'date-fns/locale/en-GB';
 
 import configData from "../config/config.json";
 
-import { string_or_null, date_or_null, AuxRecordType, MongoRecordType, MongoData} from './components/interfaces'
+import { string_or_null, date_or_null, AuxDataRecordType, MongoRecordType, MongoData} from './components/interfaces'
 import { Header } from './components/header'
 import { InputForm } from './components/form'
 import { ProcessData } from './components/processdata'
@@ -23,7 +23,7 @@ export const App = () => {
   const [confirmed, setConfirmed] = useState<boolean>(false);
   const [needreset, setNeedreset] = useState<boolean>(false);
   const [mongodata, setMongodata] = useState<MongoData[]>([]);
-  const [auxdata, setAuxdata] = useState<AuxRecordType[]>(configData.AUXILLIARY);
+  const [auxdata, setAuxdata] = useState<AuxDataRecordType[]>([]);
   
   console.log(`auxdata is ${auxdata}, setAuxdata is ${setAuxdata}`);
 

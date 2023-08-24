@@ -13,7 +13,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const handleBRClick = (set_complete: React.Dispatch<React.SetStateAction<boolean>>) => {set_complete(true);};
 
-export const InputForm = ({config, mongo_data, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, set_item, email, set_email, set_complete}: InputFormProps) => {
+export const InputForm = ({config, mongo_data, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, set_item, email, set_email, auxdata, set_auxdata, set_complete}: InputFormProps) => {
   const buttonText = `Reserve ${config.ITEM_NAME}`;
 
   if (booking_end) {
@@ -45,7 +45,7 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
             <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
             <Items config={config} bucket={bucket} allocated_items={overlapv} set_item={set_item} />
             <AddEmail email={email} set_email={set_email} />
-            {config.AUXILLIARY?.map( (x) => <Input label={x.label} key={x.id} /> )}
+            {config.AUXILLIARY?.map( (x) => <Input label={x.label} key={x.id} id={x.id} auxdata={auxdata} set_auxdata={set_auxdata} /> )}
             <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText} </Button>
           </Form>
         </>
@@ -59,7 +59,7 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
             <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
             <Items config={config} bucket={bucket} set_item={set_item} />
             <AddEmail email={email} set_email={set_email} />
-            {config.AUXILLIARY?.map( (x) => <Input label={x.label} key={x.id} /> )}
+            {config.AUXILLIARY?.map( (x) => <Input label={x.label} key={x.id} id={x.id} auxdata={auxdata} set_auxdata={set_auxdata} /> )}
             <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText}</Button>
           </Form>
         </>
@@ -74,7 +74,7 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
           <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
           <Items config={config} bucket={bucket} set_item={set_item} />
           <AddEmail email={email} set_email={set_email} />
-          {config.AUXILLIARY?.map( (x) => <Input label={x.label} key={x.id} /> )}
+          {config.AUXILLIARY?.map( (x) => <Input label={x.label} key={x.id} id={x.id} auxdata={auxdata} set_auxdata={set_auxdata} /> )}
           <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText} </Button>
         </Form>
       </>

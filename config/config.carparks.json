@@ -3,8 +3,8 @@
   "ITEM_NAME": "spot",
   "ITEM_LABEL": "place",
   "AUXILLIARY": [
-    {"id": 1, "label": "registration number"},
-    {"id": 2, "label": "date of birth"}
+    {"id": "1", "label": "registration number"},
+    {"id": "2", "label": "date of birth"}
   ],
   "BUCKET_NAME": "carpark",
   "BUCKETS":

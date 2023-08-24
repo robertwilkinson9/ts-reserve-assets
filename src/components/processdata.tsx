@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 
 import InputForm from './form'
 
-import { ItemData, MongoData, ProcessDataProps } from './interfaces';
+import { AuxConfigRecordType, AuxDataRecordType, AuxType, ItemData, MongoData, ProcessDataProps } from './interfaces';
 
 import './processdata.css';
 
@@ -24,6 +24,13 @@ const tomorrow_from_day = (startDateTime: Date): Date => {
     return new Date();
   }
 }
+
+const auxdatamerge = (aux_config: AuxConfigRecordType[], aux_data: AuxDataRecordType[]): AuxType[] => {
+//  const merged = aux_config.map((c) => {const data = aux_data.filter((d) => {return d.id == c.id}); console.log("DATA FOLLOWA"); console.log(data); return {id: c.id, label: c.label, value: data[0].value} });
+  const merged = aux_config.map((c) => {const data = aux_data.filter((d) => {return d.id == c.id}); return {id: c.id, label: c.label, value: data[0].value} });
+//  console.log(merged);
+  return merged;
+};
 
 const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
   console.log("ADDING ITEM");
@@ -60,6 +67,10 @@ const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
 };
 
 export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, item, set_item, email, set_email, auxdata, set_auxdata, set_complete, url, confirmed, set_confirmed, set_needreset} : ProcessDataProps) => {
+  
+//  console.log("PROCESSDATA - AUXDATA follows");
+//  console.log(auxdata);
+
   if (booking_start && booking_end && bucket !== null && item && email) {
     const tomorrow = tomorrow_from_day(booking_start);
 
@@ -101,6 +112,23 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
       set_needreset(true);
     }
 
+    const ac = config.AUXILLIARY;
+    let aux_merged = new Map<string, string>();
+    if (ac) {
+      const merged = auxdatamerge(ac,  auxdata);
+//      console.log("MERGED");
+//      console.log(merged);
+      merged.map((item) => {return aux_merged.set(item.label, item.value);})
+    }
+ 
+    console.log("UX_MERGED");
+    console.log(aux_merged);
+    let aux_string = "";
+    aux_merged.forEach((item, key) => {console.log("ITEM"); console.log(item); aux_string += `KEY is ${key} and ITEM is ${item}\n`; console.log(`KEY is ${key} and ITEM is ${item}`);});
+    console.log("DONE");
+    console.log("AUX_STRING");
+    console.log(aux_string);
+   
     if (confirmed) {
       const istring = `${config.ITEM_NAME} ${item} booked!`;
 
@@ -142,6 +170,7 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
         <p>{fstr}</p>
         <p>{item}</p>
         <p>{email}</p>
+        <p>{aux_string}</p>
         <Button onClick={handleConfirm}>Confirm?</Button>
         <Button onClick={handleCancel}>Cancel?</Button>
         </>

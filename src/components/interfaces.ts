@@ -44,8 +44,8 @@ export interface InputFormProps {
   set_item: React.Dispatch<React.SetStateAction<string_or_null>>;
   email: string_or_null;
   set_email: React.Dispatch<React.SetStateAction<string_or_null>>;
-  auxdata: AuxRecordType[];
-  set_auxdata: React.Dispatch<React.SetStateAction<AuxRecordType[]>>;
+  auxdata: AuxDataRecordType[];
+  set_auxdata: React.Dispatch<React.SetStateAction<AuxDataRecordType[]>>;
   set_complete: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -87,8 +87,8 @@ export interface ProcessDataProps {
   set_item: React.Dispatch<React.SetStateAction<string_or_null>>;
   email: string_or_null;
   set_email: React.Dispatch<React.SetStateAction<string_or_null>>;
-  auxdata: AuxRecordType[];
-  set_auxdata: React.Dispatch<React.SetStateAction<AuxRecordType[]>>;
+  auxdata: AuxDataRecordType[];
+  set_auxdata: React.Dispatch<React.SetStateAction<AuxDataRecordType[]>>;
   set_complete: React.Dispatch<React.SetStateAction<boolean>>;
   url: string;
   confirmed: boolean;
@@ -105,9 +105,24 @@ interface bucketData {
   items?: string[];
 }
 
-export interface AuxRecordType  {
-  id: number;
+//export interface AuxIdType  {
+//  id: string;
+//}
+
+//  id: AuxIdType;
+export interface AuxConfigRecordType  {
+  id: string;
   label: string;
+}
+
+//  id: AuxIdType;
+export interface AuxDataRecordType  {
+  id: string;
+  value: string;
+}
+
+export interface AuxType extends AuxConfigRecordType  {
+  value: string;
 }
 
 export interface configData {
@@ -116,7 +131,7 @@ export interface configData {
   ITEM_LABEL: string;
   BUCKET_NAME: string;
   BUCKETS: bucketData[];
-  AUXILLIARY?: AuxRecordType[];
+  AUXILLIARY?: AuxConfigRecordType[];
 }
 
 export type MongoRecordType = {
