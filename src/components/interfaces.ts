@@ -113,6 +113,7 @@ interface bucketData {
 export interface AuxConfigRecordType  {
   id: string;
   label: string;
+  dbname: string;
 }
 
 //  id: AuxIdType;

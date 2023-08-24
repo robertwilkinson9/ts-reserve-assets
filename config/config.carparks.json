@@ -1,10 +1,10 @@
 {
   "APIPORT": "5182",
-  "ITEM_NAME": "spot",
-  "ITEM_LABEL": "place",
+  "ITEM_NAME": "bay",
+  "ITEM_LABEL": "bay",
   "AUXILLIARY": [
-    {"id": "1", "label": "registration number"},
-    {"id": "2", "label": "date of birth"}
+    {"id": "1", "label": "registration number", "dbname": "registration_number"},
+    {"id": "2", "label": "date of birth", "dbname": "notTHEre"}
   ],
   "BUCKET_NAME": "carpark",
   "BUCKETS":

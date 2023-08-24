@@ -30,6 +30,9 @@ export const App = () => {
   registerLocale('en-GB', enGB)
   setDefaultLocale('en-GB');
 
+  console.log("configData is ");
+  console.log(configData);
+
   const API_url = `http://localhost:${configData.APIPORT}/api/`;
 
   const get_mongo_data = async () => {
