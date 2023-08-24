@@ -55,7 +55,9 @@ export interface ItemData {
   expireAt: string;
   bucket: number;
   email: string
+  [key: string]: string | number; // 👈️ variable key
 }
+//  [key: string]: any; // 👈️ variable key
 
 /*  item?: string; */
 

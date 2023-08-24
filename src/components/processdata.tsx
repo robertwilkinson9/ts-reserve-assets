@@ -26,12 +26,12 @@ const tomorrow_from_day = (startDateTime: Date): Date => {
 }
 
 const auxdatamerge = (aux_config: AuxConfigRecordType[], aux_data: AuxDataRecordType[]): AuxType[] => {
-//  const merged = aux_config.map((c) => {const data = aux_data.filter((d) => {return d.id == c.id}); console.log("DATA FOLLOWA"); console.log(data); return {id: c.id, label: c.label, value: data[0].value} });
   const merged = aux_config.map((c) => {const data = aux_data.filter((d) => {return d.id == c.id}); return {id: c.id, label: c.label, dbname: c.dbname, value: data[0].value} });
   console.log(merged);
   return merged;
 };
 
+// const add_item_to_mongodb = async (url: string, item_booking: object) => {
 const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
   console.log("ADDING ITEM");
   console.log(item_booking);
@@ -71,7 +71,7 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
   if (booking_start && booking_end && bucket !== null && item && email) {
     const tomorrow = tomorrow_from_day(booking_start);
 
-    const date_booking = {
+    const date_booking : ItemData = {
       "booking_start": booking_start.toISOString(),
       "booking_end": booking_end.toISOString(),
       "expireAt": tomorrow.toISOString(),
@@ -80,6 +80,18 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
       "email": email,
     };
 
+    let aux_merged = new Map<string, string>();
+    const ac = config.AUXILLIARY;
+    if (ac) {
+      const merged = auxdatamerge(ac,  auxdata);
+      merged.map((item) => {return aux_merged.set(item.dbname || item.label, item.value);})
+    }
+    let aux_string = "";
+//    aux_merged.forEach((item, key) => {console.log("ITEM"); console.log(item); aux_string += `KEY is ${key} and ITEM is ${item}\n`; console.log(`KEY is ${key} and ITEM is ${item}`);});
+    aux_merged.forEach((item, key) => {date_booking[key] = item; console.log("ITEM"); console.log(item); aux_string += `KEY is ${key} and ITEM is ${item}\n`; console.log(`KEY is ${key} and ITEM is ${item}`);});
+    console.log("AUX_STRING");
+    console.log(aux_string);
+   
     let name = "Anononymous";
     if ((config.BUCKETS) && config.BUCKETS[bucket] && config.BUCKETS[bucket].name) {
       name = config.BUCKETS[bucket].name; 
@@ -109,18 +121,6 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
       set_needreset(true);
     }
 
-    let aux_merged = new Map<string, string>();
-    const ac = config.AUXILLIARY;
-    if (ac) {
-      const merged = auxdatamerge(ac,  auxdata);
-      merged.map((item) => {return aux_merged.set(item.dbname || item.label, item.value);})
-    }
-    let aux_string = "";
-    aux_merged.forEach((item, key) => {console.log("ITEM"); console.log(item); aux_string += `KEY is ${key} and ITEM is ${item}\n`; console.log(`KEY is ${key} and ITEM is ${item}`);});
-    console.log("DONE");
-    console.log("AUX_STRING");
-    console.log(aux_string);
-   
     if (confirmed) {
       const istring = `${config.ITEM_NAME} ${item} booked!`;
 
