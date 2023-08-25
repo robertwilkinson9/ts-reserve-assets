@@ -45,9 +45,15 @@ export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps
       }
     }
     if (allocated_items) {
+//      console.log("ALLOCATED ITEMS");
+//      console.log(allocated_items);
       const bucket_items = allocated_items.filter(it => {return bucket == it.bucket});
       if (bucket_items) {
-        const reserved_items = bucket_items.map(x => {return x.item});
+      console.log("BUCKET ITEMS");
+      console.log(bucket_items);
+        const reserved_items = bucket_items.map(x => {return x[config.ITEM_NAME]});
+      console.log(`RESERVED ITEMS with ${config.ITEM_NAME}`);
+      console.log(reserved_items);
         if (items) {
           items = items.filter(n => !reserved_items.includes(n)); // slow and simple set difference 
         }

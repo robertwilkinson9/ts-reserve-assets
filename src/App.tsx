@@ -25,6 +25,9 @@ export const App = () => {
   const [mongodata, setMongodata] = useState<MongoData[]>([]);
   const [auxdata, setAuxdata] = useState<AuxDataRecordType[]>([]);
   
+        console.log("APP START MONGODATA");
+        console.log(mongodata);
+
   registerLocale('en-GB', enGB)
   setDefaultLocale('en-GB');
 
@@ -36,7 +39,12 @@ export const App = () => {
       const response = await axios.get(ITEMS_url);
 
       if (response) {
-        const mymongodata = response.data.data.map((x: MongoRecordType) => {return {"booking_start": x.booking_start, "booking_end": x.booking_end, "bucket": x.bucket, "item": x.item}})
+        console.log("RESPONSE.DATA.DATA")
+        console.log(response.data.data)
+//        const mymongodata = response.data.data.map((x: MongoRecordType) => {return {"booking_start": x.booking_start, "booking_end": x.booking_end, "bucket": x.bucket, [configData.ITEM_NAME]: x.item}})
+        const mymongodata = response.data.data.map((x: MongoRecordType) => {return {"booking_start": x.booking_start, "booking_end": x.booking_end, "bucket": x.bucket, [configData.ITEM_NAME]: x[configData.ITEM_NAME]}})
+        console.log("MYMONGODATA");
+        console.log(mymongodata);
         setMongodata(mymongodata);
       }
     } catch (error) {

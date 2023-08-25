@@ -27,7 +27,6 @@ const tomorrow_from_day = (startDateTime: Date): Date => {
 
 const auxdatamerge = (aux_config: AuxConfigRecordType[], aux_data: AuxDataRecordType[]): AuxType[] => {
   const merged = aux_config.map((c) => {const data = aux_data.filter((d) => {return d.id == c.id}); return {id: c.id, label: c.label, dbname: c.dbname, value: data[0].value} });
-  console.log(merged);
   return merged;
 };
 
@@ -90,8 +89,8 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
 //    aux_merged.forEach((item, key) => {console.log("ITEM"); console.log(item); aux_string += `KEY is ${key} and ITEM is ${item}\n`; console.log(`KEY is ${key} and ITEM is ${item}`);});
 // we add a key entry to the date_booking here and write the aux_string
     aux_merged.forEach((item, key) => {date_booking[key] = item; console.log("ITEM"); console.log(item); aux_string += `KEY is ${key} and ITEM is ${item}\n`; console.log(`KEY is ${key} and ITEM is ${item}`);});
-    console.log("AUX_STRING");
-    console.log(aux_string);
+//    console.log("AUX_STRING");
+//    console.log(aux_string);
    
     let name = "Anononymous";
     if ((config.BUCKETS) && config.BUCKETS[bucket] && config.BUCKETS[bucket].name) {
@@ -103,7 +102,7 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
 
     const confirm_action = () => {
       const collection: string = config.COLLECTION_NAME ? config.COLLECTION_NAME : config.ITEM_NAME + '/';
-      console.log("collection");
+      console.log("COLLECTION is ");
       console.log(collection);
       const ITEM_url: string = url + collection;
 
@@ -116,6 +115,7 @@ console.log(item_booking)
         const new_record: MongoData = {"booking_start": booking_start.toISOString(), "booking_end": booking_end.toISOString(), "bucket": bucket, [config.BUCKET_NAME]: name, [config.ITEM_NAME]: item};
         let tmp = mongo_data;
         tmp.push(new_record);
+        console.log("SETTING MONGO DATA");
         set_mongodata(tmp);
         set_needreset(true);
       });
