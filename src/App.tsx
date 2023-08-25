@@ -25,13 +25,8 @@ export const App = () => {
   const [mongodata, setMongodata] = useState<MongoData[]>([]);
   const [auxdata, setAuxdata] = useState<AuxDataRecordType[]>([]);
   
-  console.log(`auxdata is ${auxdata}, setAuxdata is ${setAuxdata}`);
-
   registerLocale('en-GB', enGB)
   setDefaultLocale('en-GB');
-
-  console.log("configData is ");
-  console.log(configData);
 
   const API_url = `http://localhost:${configData.APIPORT}/api/`;
 

@@ -76,7 +76,7 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
       "booking_end": booking_end.toISOString(),
       "expireAt": tomorrow.toISOString(),
       "bucket": bucket,
-      "item": item,
+      [config.ITEM_NAME]: item,
       "email": email,
     };
 
@@ -113,7 +113,7 @@ console.log(item_booking)
 
       const id = add_item_to_mongodb(ITEM_url, item_booking);
       id.then(() => {
-        const new_record: MongoData = {"booking_start": booking_start.toISOString(), "booking_end": booking_end.toISOString(), "bucket": bucket, [config.BUCKET_NAME]: name, "item": item};
+        const new_record: MongoData = {"booking_start": booking_start.toISOString(), "booking_end": booking_end.toISOString(), "bucket": bucket, [config.BUCKET_NAME]: name, [config.ITEM_NAME]: item};
         let tmp = mongo_data;
         tmp.push(new_record);
         set_mongodata(tmp);
