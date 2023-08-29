@@ -1,6 +1,8 @@
 {
   "APIPORT": "5182",
+  "COLLECTION": "Bay",
   "COLLECTION_NAME": "bay",
+  "LCCOLLECTION": "bay",
   "ITEM_NAME": "bay",
   "ITEM_LABEL": "bay_label",
   "AUXILLIARY": [
@@ -22,5 +24,21 @@
       "ifirst": 1,
       "ilast": 80
     }
+  ],
+  "SCHEMA": {
+      "booking_start": {"type": "Date"},
+      "booking_end": {"type": "Date"},
+      "expireAt": {"type": "Date"},
+      "bucket": {"type": "Number"},
+      "bay": {"type": "String"},
+      "registration_number": {"type": "String"},
+      "email": {"type": "String"}
+  },
+  "SHOW_ALL": true,
+  "EXPORTS": [
+    "booking_start",
+    "booking_end",
+    "bucket",
+    "bay"
   ]
 }
