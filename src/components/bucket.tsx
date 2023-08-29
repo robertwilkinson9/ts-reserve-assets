@@ -47,24 +47,29 @@ const BucketButton = ({cb, lcf, ucf, bucketst, checked} : ButtonProps) => {
 export const Bucket = ({config, bucket, set_bucket}: BucketProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {set_bucket(parseInt(e.target.value, 10));}
 
-  const capitalizeFirstLetter = (name: string) => {return name.charAt(0).toUpperCase() + name.slice(1);}
+  const capitalizeFirstLetter = (name: string) => {if (name && name.length) { return name.charAt(0).toUpperCase() + name.slice(1) }
+                                                   else {return "X";}}
 
   const build_config_matrix = (config: configData)  => {
     const matrix = [];
-    for (let i = 0; i < config.BUCKETS.length; i++) {
-      const name = config.BUCKETS[i].name;
-      const uname = capitalizeFirstLetter(name);
-      const vector = [ name, uname, i.toString()];
-      matrix.push(vector);
+    if (config.BUCKETS) {
+      for (let i = 0; i < config.BUCKETS.length; i++) {
+        const name = config.BUCKETS[i].name;
+        const uname = capitalizeFirstLetter(name);
+        const vector = [ name, uname, i.toString()];
+        matrix.push(vector);
+     }
    }
    return matrix;
  }
 
   const build_checked_vector = (config: configData, bucket: number | null)  => {
     const checked = []
-    for (let i = 0; i < config.BUCKETS.length; i++) {
-      const set = i == bucket;
-      checked.push(set);
+    if (config.BUCKETS) {
+      for (let i = 0; i < config.BUCKETS.length; i++) {
+        const set = i == bucket;
+        checked.push(set);
+     }
    }
    return checked;
  }

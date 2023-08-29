@@ -11,6 +11,7 @@ import { Items } from '../components/items';
 
 const test_config = {
   "APIPORT": "1234",
+  "LCCOLLECTION": "test",
   "ITEM_NAME": "test_items_name",
   "ITEM_LABEL": "test_items_label",
   "BUCKET_NAME": "test_items",

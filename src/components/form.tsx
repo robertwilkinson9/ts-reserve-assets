@@ -35,11 +35,12 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
                 (after(x, a) && before(y, a)) ||
                 (after(x, b) && before(y, b)));
       };
-      console.log("MONGO DATAS before OVERLAPV");
-      console.log(mongo_data);
-      const overlapv = mongo_data.filter((it) => {console.log("IT is "); console.log(it); return overlap(booking_start, booking_end, new Date(it.booking_start), new Date(it.booking_end));});
-      console.log("OVERLAPV");
-      console.log(overlapv);
+//      console.log("MONGO DATAS before OVERLAPV");
+//      console.log(mongo_data);
+//      const overlapv = mongo_data.filter((it) => {console.log("IT is "); console.log(it); return overlap(booking_start, booking_end, new Date(it.booking_start), new Date(it.booking_end));});
+      const overlapv = mongo_data.filter((it) => {return overlap(booking_start, booking_end, new Date(it.booking_start), new Date(it.booking_end));});
+//      console.log("OVERLAPV");
+//      console.log(overlapv);
 
       return (
         <>

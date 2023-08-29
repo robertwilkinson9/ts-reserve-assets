@@ -25,8 +25,8 @@ export const App = () => {
   const [mongodata, setMongodata] = useState<MongoData[]>([]);
   const [auxdata, setAuxdata] = useState<AuxDataRecordType[]>([]);
   
-        console.log("APP START MONGODATA");
-        console.log(mongodata);
+//        console.log("APP START MONGODATA");
+//        console.log(mongodata);
 
   registerLocale('en-GB', enGB)
   setDefaultLocale('en-GB');

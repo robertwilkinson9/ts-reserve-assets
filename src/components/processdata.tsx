@@ -12,7 +12,8 @@ import { AuxConfigRecordType, AuxDataRecordType, AuxType, ItemData, MongoData, P
 
 import './processdata.css';
 
-const tomorrow_from_day = (startDateTime: Date): Date => {
+// const tomorrow_from_day = (startDateTime: Date): Date => {
+export const tomorrow_from_day = (startDateTime: Date): Date => {
   // Current date
   if (startDateTime) {
     const date = new Date(startDateTime);
@@ -25,7 +26,9 @@ const tomorrow_from_day = (startDateTime: Date): Date => {
   }
 }
 
-const auxdatamerge = (aux_config: AuxConfigRecordType[], aux_data: AuxDataRecordType[]): AuxType[] => {
+// const auxdatamerge = (aux_config: AuxConfigRecordType[], aux_data: AuxDataRecordType[]): AuxType[] => {
+export const auxdatamerge = (aux_config: AuxConfigRecordType[], aux_data: AuxDataRecordType[]): AuxType[] => {
+//  const merged = aux_config.map((c) => {const data = aux_data.filter((d) => {return d.id == c.id}); console.log("IN AUXDATAMERGE and DATA is ");console.log(data); return {id: c.id, label: c.label, dbname: c.dbname, value: data[0].value} });
   const merged = aux_config.map((c) => {const data = aux_data.filter((d) => {return d.id == c.id}); return {id: c.id, label: c.label, dbname: c.dbname, value: data[0].value} });
   return merged;
 };
@@ -86,11 +89,9 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
       merged.map((item) => {return aux_merged.set(item.dbname || item.label, item.value);})
     }
     let aux_string = "";
-//    aux_merged.forEach((item, key) => {console.log("ITEM"); console.log(item); aux_string += `KEY is ${key} and ITEM is ${item}\n`; console.log(`KEY is ${key} and ITEM is ${item}`);});
 // we add a key entry to the date_booking here and write the aux_string
-    aux_merged.forEach((item, key) => {date_booking[key] = item; console.log("ITEM"); console.log(item); aux_string += `KEY is ${key} and ITEM is ${item}\n`; console.log(`KEY is ${key} and ITEM is ${item}`);});
-//    console.log("AUX_STRING");
-//    console.log(aux_string);
+//    aux_merged.forEach((item, key) => {date_booking[key] = item; console.log("ITEM"); console.log(item); aux_string += `KEY is ${key} and ITEM is ${item}\n`; console.log(`KEY is ${key} and ITEM is ${item}`);});
+    aux_merged.forEach((item, key) => {date_booking[key] = item; aux_string += `KEY is ${key} and ITEM is ${item}\n`; console.log(aux_string);});
    
     let name = "Anononymous";
     if ((config.BUCKETS) && config.BUCKETS[bucket] && config.BUCKETS[bucket].name) {
@@ -101,10 +102,7 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
     console.log(`BUCKET_NAME is ${config.BUCKET_NAME} and name is ${name} and ITEM is ${item} and ITEM NAME is ${config.ITEM_NAME} And ITEM LABEL is ${config.ITEM_LABEL}`);
 
     const confirm_action = () => {
-      const collection: string = config.COLLECTION_NAME ? config.COLLECTION_NAME : config.ITEM_NAME + '/';
-      console.log("COLLECTION is ");
-      console.log(collection);
-      const ITEM_url: string = url + collection;
+      const ITEM_url: string = url + config.LCCOLLECTION + '/';
 
 console.log(`item_url is ${ITEM_url}`)
 console.log("item_booking")
