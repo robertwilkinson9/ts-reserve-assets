@@ -87,7 +87,8 @@ test('use jsdom in this test file', () => {
 })
 
 test('expect ProcessData to render', () => {
-  const {getAllByText} = renderProcessData();
+//  const {getAllByText} = renderProcessData();
+  renderProcessData();
 //  screen.debug();
 
 // const iistring = '<h4>Insufficient Input</h4>';
