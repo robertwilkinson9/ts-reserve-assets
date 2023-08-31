@@ -2,9 +2,9 @@
 // then save the item to the backend data store on confirmation with expiration
 // of the record set for the day after the booking
 
-import axios from 'axios'
+import axios, { isAxiosError } from 'axios'
 
-import Button from 'react-bootstrap/Button';
+import { Button } from '@chakra-ui/react'
 
 import InputForm from './form'
 
@@ -28,7 +28,6 @@ export const tomorrow_from_day = (startDateTime: Date): Date => {
 
 // const auxdatamerge = (aux_config: AuxConfigRecordType[], aux_data: AuxDataRecordType[]): AuxType[] => {
 export const auxdatamerge = (aux_config: AuxConfigRecordType[], aux_data: AuxDataRecordType[]): AuxType[] => {
-//  const merged = aux_config.map((c) => {const data = aux_data.filter((d) => {return d.id == c.id}); console.log("IN AUXDATAMERGE and DATA is ");console.log(data); return {id: c.id, label: c.label, dbname: c.dbname, value: data[0].value} });
   const merged = aux_config.map((c) => {const data = aux_data.filter((d) => {return d.id == c.id}); return {id: c.id, label: c.label, dbname: c.dbname, value: data[0].value} });
   return merged;
 };
@@ -47,22 +46,25 @@ const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
     console.log(`RDI is ${response.data.id}`);
     return response.data.id;
   } catch (error) {
-    if (error.response) {
-      // The client was given an error response (5xx, 4xx)
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx
-      console.log(error.response.data);
-      console.log(error.response.status);
-      console.log(error.response.headers);
-    } else if (error.request) {
-      // The client never received a response, and the request was never left
-      // The request was made but no response was received
-      // `error.request` is an instance of XMLHttpRequest in the browser
-      // and an instance of http.ClientRequest in node.js
-      console.log(error.request);
-    } else {
-      // Anything else
-      console.log('Error', error.message);
+//    if(error instanceof Error ){
+    if (isAxiosError(error)) {
+      if (error.response) {
+        // The client was given an error response (5xx, 4xx)
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      } else if (error.request) {
+        // The client never received a response, and the request was never left
+        // The request was made but no response was received
+        // `error.request` is an instance of XMLHttpRequest in the browser
+        // and an instance of http.ClientRequest in node.js
+        console.log(error.request);
+      } else {
+        // Anything else
+        console.log('Error', error.message);
+      }
     }
   }
 
@@ -89,8 +91,6 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
       merged.map((item) => {return aux_merged.set(item.dbname || item.label, item.value);})
     }
     let aux_string = "";
-// we add a key entry to the date_booking here and write the aux_string
-//    aux_merged.forEach((item, key) => {date_booking[key] = item; console.log("ITEM"); console.log(item); aux_string += `KEY is ${key} and ITEM is ${item}\n`; console.log(`KEY is ${key} and ITEM is ${item}`);});
     aux_merged.forEach((item, key) => {date_booking[key] = item; aux_string += `KEY is ${key} and ITEM is ${item}\n`; console.log(aux_string);});
    
     let name = "Anononymous";
@@ -103,10 +103,6 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
 
     const confirm_action = () => {
       const ITEM_url: string = url + config.LCCOLLECTION + '/';
-
-console.log(`item_url is ${ITEM_url}`)
-console.log("item_booking")
-console.log(item_booking)
 
       const id = add_item_to_mongodb(ITEM_url, item_booking);
       id.then(() => {

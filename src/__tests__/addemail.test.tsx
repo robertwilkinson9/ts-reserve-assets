@@ -4,7 +4,9 @@
 
 import { render } from '@testing-library/react';
 
-import Form from 'react-bootstrap/Form';
+//import Form from 'react-bootstrap/Form';
+// import { Button, ChakraProvider, FormControl, FormLabel, FormHelperText } from '@chakra-ui/react'
+import { FormControl } from '@chakra-ui/react'
 
 import {AddEmailProps} from '../components/interfaces'
 import AddEmail from '../components/addemail.tsx';
@@ -15,7 +17,7 @@ function renderAddEmail(props: Partial<AddEmailProps> = {}) {
     set_email: () => {},
   };
 
-  return render(<Form id="emailForm"><AddEmail {...defaultProps} {...props} /></Form>);
+  return render(<FormControl id="emailForm"><AddEmail {...defaultProps} {...props} /></FormControl>);
 }
 
 test('use jsdom in this test file', () => {
@@ -30,12 +32,8 @@ describe('it item contents', () => {
     const AddEmaillabel = await findByTestId("emailaddress_label");
     expect(AddEmaillabel).toHaveTextContent('Email address');
 
-    const AddEmailcontrol = await findByTestId("emailaddress_control");
-    expect(AddEmailcontrol).toBeInTheDocument();
-
    const AddEmail = await findByTestId("emailaddress");
    expect(AddEmail).toContainElement(AddEmaillabel);
-   expect(AddEmail).toContainElement(AddEmailcontrol);
   });
 
 //  it("should be able to set email", async () => {

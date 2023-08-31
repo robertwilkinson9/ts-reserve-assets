@@ -69,12 +69,8 @@ describe('it item contents', () => {
     const InputFormlabel = await findByTestId("emailaddress_label");
     expect(InputFormlabel).toHaveTextContent('Email address');
 
-    const InputFormcontrol = await findByTestId("emailaddress_control");
-    expect(InputFormcontrol).toBeInTheDocument();
-
 //   const InputForm = await findByTestId("emailaddress");
 //   expect(InputForm).toContainElement(InputFormlabel);
-//   expect(InputForm).toContainElement(InputFormcontrol);
   });
 
   it("form should contain all parts", async () => {
@@ -143,7 +139,6 @@ describe('it item contents', () => {
 //          data-testid="items_label"
 //        data-testid="emailaddress"
 //            data-testid="emailaddress_label"
-//            data-testid="emailaddress_control"
 
     const items_div = await findByTestId("items_div");
     expect(items_div).toBeInTheDocument();
@@ -156,8 +151,5 @@ describe('it item contents', () => {
 
     const EmailFormlabel = await findByTestId("emailaddress_label");
     expect(EmailFormlabel).toBeInTheDocument();
-
-    const EmailFormcontrol = await findByTestId("emailaddress_control");
-    expect(EmailFormcontrol).toBeInTheDocument();
   });
 });

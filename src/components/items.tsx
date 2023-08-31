@@ -1,4 +1,4 @@
-// semantics - a buckets is a collection - and was called that until mongoDB objected to the name
+// semantics - a bucket is a collection - and was called that until mongoDB objected to the name
 // e.g. a room containing desks, the desks being the items
 // the books by an author, the author is the bucket and the books the items
 // the tables in the restaurant, the tables are the buckets, the bookable seats the items.
@@ -47,11 +47,7 @@ export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps
     if (allocated_items) {
       const bucket_items = allocated_items.filter(it => {return bucket == it.bucket});
       if (bucket_items) {
-//      console.log("BUCKET ITEMS");
-//      console.log(bucket_items);
         const reserved_items = bucket_items.map(x => {return x[config.ITEM_NAME]});
-//      console.log(`RESERVED ITEMS with ${config.ITEM_NAME}`);
-//      console.log(reserved_items);
         if (items) {
           items = items.filter(n => !reserved_items.includes(n)); // slow and simple set difference 
         }

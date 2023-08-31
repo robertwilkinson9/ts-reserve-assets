@@ -38,6 +38,7 @@
     "styled-components": "^6.0.0-rc.1"
   },
   "devDependencies": {
+    "@chakra-ui/react": "^2.8.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^14.0.0",
     "@types/react": "^18.0.28",

@@ -1,15 +1,23 @@
+{ /*
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+*/ }
+
+// import { ChakraProvider, Box, FormControl, Text} from '@chakra-ui/react'
+//import { Button, ChakraProvider, FormControl, FormLabel, FormHelperText, Input} from '@chakra-ui/react'
+import { Button, ChakraProvider, FormControl, FormLabel, FormHelperText } from '@chakra-ui/react'
 
 import { Calendar } from './calendar'
 import { Bucket } from './bucket'
-import { Input } from './input'
+import { MyInput } from './input'
 import { Items } from './items'
 import { AddEmail } from './addemail'
 
 import { InputFormProps } from './interfaces';
 
+{ /*
 import 'bootstrap/dist/css/bootstrap.min.css';
+*/ }
 
 const handleBRClick = (set_complete: React.Dispatch<React.SetStateAction<boolean>>) => {set_complete(true);};
 
@@ -44,44 +52,56 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
 
       return (
         <>
-          <Form id="emailForm">
-            <Calendar label="Start DateTime" selected={booking_start} date_setter={set_booking_start} />
-            <Calendar label="End DateTime" selected={booking_end} date_setter={set_booking_end} />
-            <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
-            <Items config={config} bucket={bucket} allocated_items={overlapv} set_item={set_item} />
-            <AddEmail email={email} set_email={set_email} />
-            {config.AUXILLIARY?.map( (x) => <Input label={x.label} key={x.id} id={x.id} auxdata={auxdata} set_auxdata={set_auxdata} /> )}
-            <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText} </Button>
-          </Form>
+          <ChakraProvider resetCSS={false}>
+            <FormControl>
+              <FormLabel data-testid='formlabel_1' >Form One</FormLabel>
+              <FormHelperText>We'll never share your Form One data.</FormHelperText>
+              <Calendar label="Start DateTime" selected={booking_start} date_setter={set_booking_start} />
+              <Calendar label="End DateTime" selected={booking_end} date_setter={set_booking_end} />
+              <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
+              <Items config={config} bucket={bucket} allocated_items={overlapv} set_item={set_item} />
+              <AddEmail email={email} set_email={set_email} />
+              {config.AUXILLIARY?.map( (x) => <MyInput label={x.label} key={x.id} id={x.id} auxdata={auxdata} set_auxdata={set_auxdata} /> )}
+              <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText} </Button>
+            </FormControl>
+          </ChakraProvider>
         </>
       );
     } else {
       return (
         <>
-          <Form id="emailForm">
-            <Calendar label="Start DateTime" selected={booking_start} date_setter={set_booking_start} />
-            <Calendar label="End DateTime" selected={booking_end} date_setter={set_booking_end} />
-            <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
-            <Items config={config} bucket={bucket} set_item={set_item} />
-            <AddEmail email={email} set_email={set_email} />
-            {config.AUXILLIARY?.map( (x) => <Input label={x.label} key={x.id} id={x.id} auxdata={auxdata} set_auxdata={set_auxdata} /> )}
-            <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText}</Button>
-          </Form>
+          <ChakraProvider resetCSS={false}>
+            <FormControl>
+              <FormLabel data-testid='formlabel_1' >Form One</FormLabel>
+              <FormHelperText>We'll never share your Form One data.</FormHelperText>
+              <Calendar label="Start DateTime" selected={booking_start} date_setter={set_booking_start} />
+              <Calendar label="End DateTime" selected={booking_end} date_setter={set_booking_end} />
+              <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
+              <Items config={config} bucket={bucket} set_item={set_item} />
+              <AddEmail email={email} set_email={set_email} />
+              {config.AUXILLIARY?.map( (x) => <MyInput label={x.label} key={x.id} id={x.id} auxdata={auxdata} set_auxdata={set_auxdata} /> )}
+              <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText}</Button>
+            </FormControl>
+          </ChakraProvider>
         </>
       );
     }
   } else {
     return (
       <>
-        <Form id="emailForm">
-          <Calendar label="Start DateTime" selected={booking_start} date_setter={set_booking_start} date_setter2={set_booking_end} />
-          <Calendar label="End DateTime" selected={booking_end} date_setter={set_booking_end} />
-          <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
-          <Items config={config} bucket={bucket} set_item={set_item} />
-          <AddEmail email={email} set_email={set_email} />
-          {config.AUXILLIARY?.map( (x) => <Input label={x.label} key={x.id} id={x.id} auxdata={auxdata} set_auxdata={set_auxdata} /> )}
-          <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText} </Button>
-        </Form>
+        <ChakraProvider resetCSS={false}>
+          <FormControl>
+            <FormLabel data-testid='formlabel_1' >Form One</FormLabel>
+            <FormHelperText>We'll never share your Form One data.</FormHelperText>
+            <Calendar label="Start DateTime" selected={booking_start} date_setter={set_booking_start} date_setter2={set_booking_end} />
+            <Calendar label="End DateTime" selected={booking_end} date_setter={set_booking_end} />
+            <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
+            <Items config={config} bucket={bucket} set_item={set_item} />
+            <AddEmail email={email} set_email={set_email} />
+            {config.AUXILLIARY?.map( (x) => <MyInput label={x.label} key={x.id} id={x.id} auxdata={auxdata} set_auxdata={set_auxdata} /> )}
+            <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText} </Button>
+          </FormControl>
+        </ChakraProvider>
       </>
     );
   }
