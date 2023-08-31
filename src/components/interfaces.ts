@@ -69,6 +69,8 @@ export interface MongoData {
 }
 
 export interface ItemsProps {
+  id?: string;
+  key?: string;
   config: configData;
   bucket: number_or_null;
   allocated_items?: MongoData[];

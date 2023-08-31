@@ -34,10 +34,13 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
       };
       const overlapv = mongo_data.filter((it) => {return overlap(booking_start, booking_end, new Date(it.booking_start), new Date(it.booking_end));});
 
+//            <FormControl>
+
       return (
         <>
+          <div id="key1" key="key1">
           <ChakraProvider resetCSS={false}>
-            <FormControl>
+            <FormControl id="key1" key="key1">
               <FormLabel data-testid='formlabel_1' >Form One</FormLabel>
               <FormHelperText>We'll never share your Form One data.</FormHelperText>
               <Calendar label="Start DateTime" selected={booking_start} date_setter={set_booking_start} />
@@ -49,15 +52,17 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
               <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText} </Button>
             </FormControl>
           </ChakraProvider>
+          </div>
         </>
       );
     } else {
       return (
         <>
+          <div id="key2" key="key2">
           <ChakraProvider resetCSS={false}>
-            <FormControl>
-              <FormLabel data-testid='formlabel_1' >Form One</FormLabel>
-              <FormHelperText>We'll never share your Form One data.</FormHelperText>
+            <FormControl id="key2" key="key2">
+              <FormLabel data-testid='formlabel_2' >Form Two</FormLabel>
+              <FormHelperText>We'll never share your Form Two data.</FormHelperText>
               <Calendar label="Start DateTime" selected={booking_start} date_setter={set_booking_start} />
               <Calendar label="End DateTime" selected={booking_end} date_setter={set_booking_end} />
               <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
@@ -67,16 +72,18 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
               <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText}</Button>
             </FormControl>
           </ChakraProvider>
+          </div>
         </>
       );
     }
   } else {
     return (
       <>
+        <div id="key3" key="key3">
         <ChakraProvider resetCSS={false}>
-          <FormControl>
-            <FormLabel data-testid='formlabel_2' >Form Two</FormLabel>
-            <FormHelperText>We'll never share your Form Two data.</FormHelperText>
+            <FormControl id="key3" key="key3">
+            <FormLabel data-testid='formlabel_3' >Form Three</FormLabel>
+            <FormHelperText>We'll never share your Form Three data.</FormHelperText>
             <Calendar label="Start DateTime" selected={booking_start} date_setter={set_booking_start} date_setter2={set_booking_end} />
             <Calendar label="End DateTime" selected={booking_end} date_setter={set_booking_end} />
             <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
@@ -86,6 +93,7 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
             <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText} </Button>
           </FormControl>
         </ChakraProvider>
+          </div>
       </>
     );
   }
