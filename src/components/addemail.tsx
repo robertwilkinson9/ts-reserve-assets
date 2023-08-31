@@ -2,8 +2,7 @@ import { FormControl, FormLabel, FormHelperText, Input} from '@chakra-ui/react'
 
 import { AddEmailProps } from './interfaces';
 
-// export const AddEmail = ({email, set_email} : AddEmailProps) =>{
-export const AddEmail = ({email} : AddEmailProps) =>{
+export const AddEmail = ({email, set_email} : AddEmailProps) =>{
   if (typeof(email) !== "string") {email = "";}
 
   return (
@@ -11,7 +10,7 @@ export const AddEmail = ({email} : AddEmailProps) =>{
       <div data-testid="emailaddress" id="emailaddress">
         <FormControl>
           <FormLabel data-testid='emailaddress_label' htmlFor='email' >Email address</FormLabel>
-          <Input id='email' type='email' />
+          <Input id='email' type='email' onChange={(event) => set_email(event.target.value)} />;
           <FormHelperText>We'll never share your email.</FormHelperText>
         </FormControl>
       </div>
