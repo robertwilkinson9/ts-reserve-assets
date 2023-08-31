@@ -6,8 +6,10 @@
 // these items are presented to the author as pull down lists once the bucket radio button is selected
 // we filter the out those items currently booked at the time requested from those presented 
 
- import Select from 'react-select'
-// import { Select } from '@chakra-ui/react'
+// import Select from 'react-select'
+
+import { Select } from '@chakra-ui/react'
+
 // import {
 //   AsyncCreatableSelect,
 //   AsyncSelect,
@@ -20,7 +22,7 @@
 import { ItemsProps, Select_type} from './interfaces';
 
 const items_select = (items: string[]): Select_type[] => {
-  return items.map(item => {return {value: item, label: item};});
+  return items.map((item) => {return {value: item, label: item};});
 }
 
 // listbuild can build a list from a start and last number and surround each with a prefix and suffix
@@ -64,21 +66,45 @@ export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps
     }
   }
 
+  const option_list_item = (item: Select_type) => {
+//      <option value={item.value}>{item.label}</option>
+    return (
+      <>
+      <option key={item.value} value={item.value}>{item.label}</option>
+      </>
+    )
+  }
+  
   if (items) {
     const select_item_list: Select_type[] = items_select(items)
+    const select_option_list = select_item_list.map((item) => {return option_list_item(item)});
+//    console.log("SOL IS");
+//    console.log(select_option_list[0]);
 
     const key = `key__${bucket}`
 
     const capitalizeFirstLetter = (name: string) => {if (name && name.length) {return name.charAt(0).toUpperCase() + name.slice(1);} else {return "X"} }
+
     return (
       <>
       <div data-testid="items_div" id="itemPulldown">
         <label data-testid="items_label" className="mb-0 font-weight-bold">{capitalizeFirstLetter(config.ITEM_NAME)}</label>
+{ /*
           <Select
             key={key}
             options={select_item_list}
             onChange={(choice) => choice ? set_item(choice.value) : ""}
           />
+          <Select placeholder='Select option'>
+          <Select onChange={(event) => set_item(event.target.value)}>
+*/ }
+          <Select
+            key={key}
+            onChange={(event) => set_item(event.target.value)}
+            placeholder='Select option'
+          >
+            ${select_option_list}
+          </Select>
       </div>
       </>
     );

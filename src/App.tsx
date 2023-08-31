@@ -87,7 +87,9 @@ export const App = () => {
     reset();
   }
 
+  console.log(`0. EDT is ${endDateTime} ITEM is ${item} EMAIL is ${email} and COMPLETE is ${complete}`);
   if (endDateTime && item && email && complete) {
+   console.log(`1. EDT is ${endDateTime} ITEM is ${item} EMAIL is ${email} and COMPLETE is ${complete}`);
     return (
       <>
       <Header />
