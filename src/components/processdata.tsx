@@ -12,7 +12,6 @@ import { AuxConfigRecordType, AuxDataRecordType, AuxType, ItemData, MongoData, P
 
 import './processdata.css';
 
-// const tomorrow_from_day = (startDateTime: Date): Date => {
 export const tomorrow_from_day = (startDateTime: Date): Date => {
   // Current date
   if (startDateTime) {
@@ -26,13 +25,11 @@ export const tomorrow_from_day = (startDateTime: Date): Date => {
   }
 }
 
-// const auxdatamerge = (aux_config: AuxConfigRecordType[], aux_data: AuxDataRecordType[]): AuxType[] => {
 export const auxdatamerge = (aux_config: AuxConfigRecordType[], aux_data: AuxDataRecordType[]): AuxType[] => {
   const merged = aux_config.map((c) => {const data = aux_data.filter((d) => {return d.id == c.id}); return {id: c.id, label: c.label, dbname: c.dbname, value: data[0].value} });
   return merged;
 };
 
-// const add_item_to_mongodb = async (url: string, item_booking: object) => {
 const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
   console.log("ADDING ITEM");
   console.log(item_booking);
@@ -46,7 +43,6 @@ const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
     console.log(`RDI is ${response.data.id}`);
     return response.data.id;
   } catch (error) {
-//    if(error instanceof Error ){
     if (isAxiosError(error)) {
       if (error.response) {
         // The client was given an error response (5xx, 4xx)

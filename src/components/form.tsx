@@ -1,10 +1,3 @@
-{ /*
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-*/ }
-
-// import { ChakraProvider, Box, FormControl, Text} from '@chakra-ui/react'
-//import { Button, ChakraProvider, FormControl, FormLabel, FormHelperText, Input} from '@chakra-ui/react'
 import { Button, ChakraProvider, FormControl, FormLabel, FormHelperText } from '@chakra-ui/react'
 
 import { Calendar } from './calendar'
@@ -14,10 +7,6 @@ import { Items } from './items'
 import { AddEmail } from './addemail'
 
 import { InputFormProps } from './interfaces';
-
-{ /*
-import 'bootstrap/dist/css/bootstrap.min.css';
-*/ }
 
 const handleBRClick = (set_complete: React.Dispatch<React.SetStateAction<boolean>>) => {set_complete(true);};
 
@@ -43,12 +32,7 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
                 (after(x, a) && before(y, a)) ||
                 (after(x, b) && before(y, b)));
       };
-//      console.log("MONGO DATAS before OVERLAPV");
-//      console.log(mongo_data);
-//      const overlapv = mongo_data.filter((it) => {console.log("IT is "); console.log(it); return overlap(booking_start, booking_end, new Date(it.booking_start), new Date(it.booking_end));});
       const overlapv = mongo_data.filter((it) => {return overlap(booking_start, booking_end, new Date(it.booking_start), new Date(it.booking_end));});
-//      console.log("OVERLAPV");
-//      console.log(overlapv);
 
       return (
         <>
@@ -91,8 +75,8 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
       <>
         <ChakraProvider resetCSS={false}>
           <FormControl>
-            <FormLabel data-testid='formlabel_1' >Form One</FormLabel>
-            <FormHelperText>We'll never share your Form One data.</FormHelperText>
+            <FormLabel data-testid='formlabel_2' >Form Two</FormLabel>
+            <FormHelperText>We'll never share your Form Two data.</FormHelperText>
             <Calendar label="Start DateTime" selected={booking_start} date_setter={set_booking_start} date_setter2={set_booking_end} />
             <Calendar label="End DateTime" selected={booking_end} date_setter={set_booking_end} />
             <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />

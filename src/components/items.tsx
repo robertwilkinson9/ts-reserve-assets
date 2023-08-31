@@ -6,7 +6,16 @@
 // these items are presented to the author as pull down lists once the bucket radio button is selected
 // we filter the out those items currently booked at the time requested from those presented 
 
-import Select from 'react-select'
+ import Select from 'react-select'
+// import { Select } from '@chakra-ui/react'
+// import {
+//   AsyncCreatableSelect,
+//   AsyncSelect,
+//   CreatableSelect,
+//   Select,
+// } from "chakra-react-select";
+
+// import { Select } from "chakra-react-select";
 
 import { ItemsProps, Select_type} from './interfaces';
 

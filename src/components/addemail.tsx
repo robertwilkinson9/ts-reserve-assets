@@ -2,10 +2,9 @@ import { FormControl, FormLabel, FormHelperText, Input} from '@chakra-ui/react'
 
 import { AddEmailProps } from './interfaces';
 
-export const AddEmail = ({email, set_email} : AddEmailProps) =>{
+// export const AddEmail = ({email, set_email} : AddEmailProps) =>{
+export const AddEmail = ({email} : AddEmailProps) =>{
   if (typeof(email) !== "string") {email = "";}
-
-  console.log(`set_email is ${set_email}`);
 
   return (
     <>
