@@ -10,7 +10,7 @@ import React from 'react';
 
 import { Select } from '@chakra-ui/react'
 
-import { ItemsProps, Select_type} from './interfaces';
+import { BucketReadProps, ItemsProps, Select_type} from './interfaces';
 
 const items_select = (items: string[]): Select_type[] => {
   return items.map((item) => {return {value: item, label: item};});
@@ -34,8 +34,8 @@ const listbuild = (istart:number | undefined, ilast:number | undefined, prefix: 
   }
   return items;
 }
-   
-export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps) => {
+
+const get_items_from_config = ({config, bucket}: BucketReadProps): string[] | undefined => {
   let items: string[] | undefined = [];
 
   if (bucket !== null) {
@@ -48,6 +48,16 @@ export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps
         items = listbuild(config.BUCKETS[bucket].ifirst, config.BUCKETS[bucket].ilast, config.BUCKETS[bucket].prefix);
       }
     }
+  }
+  return items;
+}
+ 
+export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps) => {
+  let items: string[] | undefined = [];
+
+  if (bucket !== null) {
+    items = get_items_from_config({config, bucket});
+
     if (allocated_items) {
       const bucket_items = allocated_items.filter(it => {return bucket == it.bucket});
       if (bucket_items) {
@@ -59,20 +69,9 @@ export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps
     }
   }
 
-  const option_list_item = (item: Select_type) => {
-    return (
-      <React.Fragment key={item.value}>
-      <option value={item.value}>{item.label}</option>
-      </React.Fragment>
-    )
-  }
-  
   if (items) {
     const select_item_list: Select_type[] = items_select(items)
-    const select_option_list = select_item_list.map((item) => {return option_list_item(item)});
-
-    const key = bucket? `key__${bucket}` : "Empty";
-    const selectkey = "select_" + key;
+    const select_option_list = select_item_list.map((item, key) => { return (<React.Fragment key={key}><option value={item.value}>{item.label}</option></React.Fragment>) });
 
     const capitalizeFirstLetter = (name: string) => {if (name && name.length) {return name.charAt(0).toUpperCase() + name.slice(1);} else {return "X"} }
 
@@ -81,7 +80,6 @@ export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps
       <div data-testid="items_div" id="itemPulldown">
         <label data-testid="items_label" className="mb-0 font-weight-bold">{capitalizeFirstLetter(config.ITEM_NAME)}</label>
           <Select
-            key={selectkey}
             onChange={(event) => set_item(event.target.value)}
             placeholder='Select option'
           >
