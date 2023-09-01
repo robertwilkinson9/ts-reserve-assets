@@ -32,7 +32,7 @@
       "expireAt": {"type": "Date"},
       "bucket": {"type": "Number"},
       "floor": {"type": "String"},
-      "item": {"type": "String"},
+      "desk": {"type": "String"},
       "email": {"type": "String"}
   },
   "SHOW_ALL": true,
@@ -40,6 +40,6 @@
     "booking_start",
     "booking_end",
     "floor",
-    "item"
+    "desk"
   ]
 }
