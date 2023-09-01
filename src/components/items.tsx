@@ -6,18 +6,20 @@
 // these items are presented to the author as pull down lists once the bucket radio button is selected
 // we filter the out those items currently booked at the time requested from those presented 
 
+import React from 'react';
+
 import { Select } from '@chakra-ui/react'
 
 import { ItemsProps, Select_type} from './interfaces';
 
 const items_select = (items: string[]): Select_type[] => {
-  return items.map((item) => {return {value: item, key: item, id: item, label: item};});
+  return items.map((item) => {return {value: item, label: item};});
 }
 
 // listbuild can build a list from a start and last number and surround each with a prefix and suffix
 const listbuild = (istart:number | undefined, ilast:number | undefined, prefix: string | undefined, suffix?: string | undefined) => {
   const items: string[] = [];
-//  const items: object[] = [];
+
   if (istart != undefined && ilast != undefined) {
     for (let i = istart; i <= ilast; i++) {
       let d = i.toString().padStart(ilast.toString().length, '0');
@@ -27,21 +29,20 @@ const listbuild = (istart:number | undefined, ilast:number | undefined, prefix: 
       if (suffix !== undefined) {
         d = `${d}${suffix}`;
       }
-//      console.log(d);
       items.push(d);
-//      items.push({"key": d, "value": d});
     }
   }
   return items;
 }
    
 export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps) => {
-let items: string[] | undefined = [];
-//  let items: object[] | undefined = [];
+  let items: string[] | undefined = [];
 
   if (bucket !== null) {
-    if (config.BUCKETS[bucket].items) {
-      items = config.BUCKETS[bucket].items;
+    let cbi : string[] | undefined = [];
+    cbi = config.BUCKETS[bucket].items;
+    if (cbi && cbi.length) {
+      items = cbi;
     } else {
       if (config.BUCKETS[bucket].ifirst && config.BUCKETS[bucket].ilast) {
         items = listbuild(config.BUCKETS[bucket].ifirst, config.BUCKETS[bucket].ilast, config.BUCKETS[bucket].prefix);
@@ -60,9 +61,9 @@ let items: string[] | undefined = [];
 
   const option_list_item = (item: Select_type) => {
     return (
-      <>
-      <option id={item.value} key={item.value} value={item.value}>{item.label}</option>
-      </>
+      <React.Fragment key={item.value}>
+      <option value={item.value}>{item.label}</option>
+      </React.Fragment>
     )
   }
   
@@ -71,16 +72,14 @@ let items: string[] | undefined = [];
     const select_option_list = select_item_list.map((item) => {return option_list_item(item)});
 
     const key = bucket? `key__${bucket}` : "Empty";
-    const divkey = "div_" + key;
-    const labelkey = "label_" + key;
     const selectkey = "select_" + key;
 
     const capitalizeFirstLetter = (name: string) => {if (name && name.length) {return name.charAt(0).toUpperCase() + name.slice(1);} else {return "X"} }
 
     return (
       <>
-      <div key={divkey} data-testid="items_div" id="itemPulldown">
-        <label key={labelkey} data-testid="items_label" className="mb-0 font-weight-bold">{capitalizeFirstLetter(config.ITEM_NAME)}</label>
+      <div data-testid="items_div" id="itemPulldown">
+        <label data-testid="items_label" className="mb-0 font-weight-bold">{capitalizeFirstLetter(config.ITEM_NAME)}</label>
           <Select
             key={selectkey}
             onChange={(event) => set_item(event.target.value)}
