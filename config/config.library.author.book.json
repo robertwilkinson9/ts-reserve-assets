@@ -47,7 +47,7 @@
     "booking_start",
     "booking_end",
     "author",
-    "bucket"
+    "bucket",
     "book"
   ]
 }
