@@ -28,7 +28,8 @@ interface inputProps {
 }
 
 export const MyInput = (props: inputProps) => {
-  const labelfor = props.label + props.id;
+//  const labelfor = props.label + props.id;
+  const labelfor = props.label;
   return (
     <div className="MyInput">
       <label data-testid="input_label" htmlFor={labelfor}>{labelfor}</label>

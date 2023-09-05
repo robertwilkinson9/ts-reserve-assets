@@ -1,4 +1,7 @@
+{ /*
 import { Button, ChakraProvider, FormControl, FormLabel, FormHelperText, VStack } from '@chakra-ui/react'
+*/ }
+import { Button, ChakraProvider, FormControl, FormLabel, FormHelperText, Stack } from '@chakra-ui/react'
 
 import { Calendar } from './calendar'
 import { Bucket } from './bucket'
@@ -41,9 +44,9 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
           <div id="key1" key="key1">
           <ChakraProvider resetCSS={false}>
             <FormControl id="key1" key="key1">
-              <FormLabel data-testid='formlabel_1' >Form One</FormLabel>
+              <FormLabel data-testid='formlabel_1' >interesting Form One</FormLabel>
               <FormHelperText>We'll never share your Form One data.</FormHelperText>
-              <VStack spacing="24px">
+              <Stack spacing="20px" direction="column">
               <Calendar label="Start DateTime" selected={booking_start} date_setter={set_booking_start} />
               <Calendar label="End DateTime" selected={booking_end} date_setter={set_booking_end} />
               <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
@@ -51,7 +54,7 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
               <AddEmail email={email} set_email={set_email} />
               {config.AUXILLIARY?.map( (x) => <MyInput label={x.label} key={x.id} id={x.id} auxdata={auxdata} set_auxdata={set_auxdata} /> )}
               <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText} </Button>
-              </VStack>
+              </Stack>
             </FormControl>
           </ChakraProvider>
           </div>
@@ -63,9 +66,9 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
           <div id="key2" key="key2">
           <ChakraProvider resetCSS={false}>
             <FormControl id="key2" key="key2">
-              <FormLabel data-testid='formlabel_2' >Form Two</FormLabel>
+              <FormLabel data-testid='formlabel_2' >interesting Form Two</FormLabel>
               <FormHelperText>We'll never share your Form Two data.</FormHelperText>
-              <VStack spacing="24px">
+              <Stack spacing="20px" direction="column">
               <Calendar label="Start DateTime" selected={booking_start} date_setter={set_booking_start} />
               <Calendar label="End DateTime" selected={booking_end} date_setter={set_booking_end} />
               <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
@@ -73,7 +76,7 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
               <AddEmail email={email} set_email={set_email} />
               {config.AUXILLIARY?.map( (x) => <MyInput label={x.label} key={x.id} id={x.id} auxdata={auxdata} set_auxdata={set_auxdata} /> )}
               <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText}</Button>
-              </VStack>
+              </Stack>
             </FormControl>
           </ChakraProvider>
           </div>
@@ -86,9 +89,12 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
         <div id="key3" key="key3">
         <ChakraProvider resetCSS={false}>
             <FormControl id="key3" key="key3">
-            <FormLabel data-testid='formlabel_3' >Form Three</FormLabel>
+            <FormLabel data-testid='formlabel_3' >interesting Form Three</FormLabel>
             <FormHelperText>We'll never share your Form Three data.</FormHelperText>
+{ /*
               <VStack spacing="24px">
+*/ }
+              <Stack spacing="20px" direction="column">
             <Calendar label="Start DateTime" selected={booking_start} date_setter={set_booking_start} date_setter2={set_booking_end} />
             <Calendar label="End DateTime" selected={booking_end} date_setter={set_booking_end} />
             <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
@@ -96,7 +102,10 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
             <AddEmail email={email} set_email={set_email} />
             {config.AUXILLIARY?.map( (x) => <MyInput label={x.label} key={x.id} id={x.id} auxdata={auxdata} set_auxdata={set_auxdata} /> )}
             <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText} </Button>
+              </Stack>
+{ /*
               </VStack>
+*/ }
           </FormControl>
         </ChakraProvider>
           </div>
