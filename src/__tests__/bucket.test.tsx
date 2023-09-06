@@ -2,6 +2,8 @@
  * @vitest-environment jsdom
  */
 
+import { describe, it } from 'vitest';
+
 import { render } from '@testing-library/react';
 
 import { Bucket } from '../components/bucket';

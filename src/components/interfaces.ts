@@ -11,9 +11,12 @@ export interface BucketLabelProps {
   label: string;
 }
 
-export interface BucketProps {
+export interface BucketReadProps {
   config: configData;
   bucket : number_or_null;
+}
+
+export interface BucketProps extends BucketReadProps {
   set_bucket: React.Dispatch<React.SetStateAction<number_or_null>>;
 }
 
@@ -69,6 +72,8 @@ export interface MongoData {
 }
 
 export interface ItemsProps {
+  id?: string;
+  key?: string;
   config: configData;
   bucket: number_or_null;
   allocated_items?: MongoData[];

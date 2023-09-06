@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import axios from 'axios'
+import axios, { isAxiosError } from 'axios'
 
 import { registerLocale, setDefaultLocale } from  "react-datepicker";
 import enGB from 'date-fns/locale/en-GB';
@@ -25,9 +25,6 @@ export const App = () => {
   const [mongodata, setMongodata] = useState<MongoData[]>([]);
   const [auxdata, setAuxdata] = useState<AuxDataRecordType[]>([]);
   
-//        console.log("APP START MONGODATA");
-//        console.log(mongodata);
-
   registerLocale('en-GB', enGB)
   setDefaultLocale('en-GB');
 
@@ -41,30 +38,31 @@ export const App = () => {
       if (response) {
         console.log("RESPONSE.DATA.DATA")
         console.log(response.data.data)
-//        const mymongodata = response.data.data.map((x: MongoRecordType) => {return {"booking_start": x.booking_start, "booking_end": x.booking_end, "bucket": x.bucket, [configData.ITEM_NAME]: x.item}})
         const mymongodata = response.data.data.map((x: MongoRecordType) => {return {"booking_start": x.booking_start, "booking_end": x.booking_end, "bucket": x.bucket, [configData.ITEM_NAME]: x[configData.ITEM_NAME]}})
         console.log("MYMONGODATA");
         console.log(mymongodata);
         setMongodata(mymongodata);
       }
     } catch (error) {
-      if (error.response) {
-        // The client was given an error response (5xx, 4xx)
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);
-      } else if (error.request) {
-        // The client never received a response, and the request was never left
-        // The request was made but no response was received
-        // `error.request` is an instance of XMLHttpRequest in the browser 
-        // and an instance of http.ClientRequest in node.js
-        console.log(error.request);
-      } else {
-        // Anything else
-        console.log('Error', error.message);
-      }
+      if (isAxiosError(error)) {
+        if (error.response) {
+          // The client was given an error response (5xx, 4xx)
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          // The client never received a response, and the request was never left
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the browser 
+          // and an instance of http.ClientRequest in node.js
+          console.log(error.request);
+        } else {
+          // Anything else
+          console.log('Error', error.message);
+        }
+    }
     }
   };
 
@@ -89,11 +87,9 @@ export const App = () => {
     reset();
   }
 
-{ /*
-        auxdata={auxdata} set_auxdata={setAuxdata}
-*/ }
-
+  console.log(`0. EDT is ${endDateTime} ITEM is ${item} EMAIL is ${email} and COMPLETE is ${complete}`);
   if (endDateTime && item && email && complete) {
+   console.log(`1. EDT is ${endDateTime} ITEM is ${item} EMAIL is ${email} and COMPLETE is ${complete}`);
     return (
       <>
       <Header />

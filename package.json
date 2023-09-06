@@ -6,13 +6,13 @@
   "scripts": {
     "dev": "vite --host $(hostname -I | awk '{print $1}')",
     "build": "tsc && vite build",
-    "book_backend": "npm --prefix ../ts-backend run book",
+    "book_backend": "npm --prefix ../ts-REST-api-for-mongodb run book",
     "book": "cp config/config.library.author.book.json config/config.json && sleep 5 && vite --port 5176 --host $(hostname -I | awk '{print $1}')",
     "allbooks": "concurrently --names \"FRONTEND,BACKEND\" --prefix-colors \"bgGreen.bold,bgMagenta.bold\" \"npm run book\" \"npm run book_backend\"",
-    "carpark_backend": "npm --prefix ../ts-backend run carpark",
+    "carpark_backend": "npm --prefix ../ts-REST-api-for-mongodb run carpark",
     "carpark": "cp config/config.carparks.json config/config.json && sleep 5 && vite --port 5175 --host $(hostname -I | awk '{print $1}')",
     "allcarparks": "concurrently --names \"FRONTEND,BACKEND\" --prefix-colors \"bgGreen.bold,bgMagenta.bold\" \"npm run carpark\" \"npm run carpark_backend\"",
-    "desk_backend": "npm --prefix ../ts-backend run desk",
+    "desk_backend": "npm --prefix ../ts-REST-api-for-mongodb run desk",
     "desk": "cp config/config.work.floor.desk.json config/config.json && sleep 5 && vite --port 5174 --host $(hostname -I | awk '{print $1}')",
     "alldesks": "concurrently --names \"FRONTEND,BACKEND\" --prefix-colors \"bgGreen.bold,bgMagenta.bold\" \"npm run desk\" \"npm run desk_backend\"",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
@@ -27,6 +27,7 @@
     "@types/react-native": "^0.72.0",
     "@types/styled-components": "^5.1.26",
     "bootstrap": "^5.2.3",
+    "chakra-react-select": "^4.7.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
     "react-datepicker": "^4.11.0",
@@ -38,6 +39,7 @@
     "styled-components": "^6.0.0-rc.1"
   },
   "devDependencies": {
+    "@chakra-ui/react": "^2.8.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^14.0.0",
     "@types/react": "^18.0.28",
@@ -60,6 +62,7 @@
     "react-select-event": "^5.5.1",
     "typescript": "^5.0.2",
     "vite": "^4.3.2",
+    "vite-plugin-mkcert": "^1.16.0",
     "vitest": "^0.34.1",
     "webdriverio": "^8.14.3"
   }

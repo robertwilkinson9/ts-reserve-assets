@@ -34,7 +34,7 @@
       "expireAt": {"type": "Date"},
       "bucket": {"type": "Number"},
       "author": {"type": "String"},
-      "item": {"type": "String"},
+      "book": {"type": "String"},
       "email": {"type": "String"}
   },
   "SHOW_ALL": true,
@@ -42,6 +42,6 @@
     "booking_start",
     "booking_end",
     "author",
-    "item"
+    "book"
   ]
 }
