@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host $(hostname -I | awk '{print $1}')",
+    "dev": "vite --https --host $(hostname -I | awk '{print $1}')",
     "build": "tsc && vite build",
     "book_backend": "npm --prefix ../ts-REST-api-for-mongodb run book",
     "book": "cp config/config.library.author.book.json config/config.json && sleep 5 && vite --port 5176 --host $(hostname -I | awk '{print $1}')",
@@ -26,6 +26,7 @@
     "@types/react-bootstrap": "^0.32.32",
     "@types/react-native": "^0.72.0",
     "@types/styled-components": "^5.1.26",
+    "@vitejs/plugin-basic-ssl": "github:vitejs/vite-plugin-basic-ssl",
     "bootstrap": "^5.2.3",
     "chakra-react-select": "^4.7.0",
     "react": "^18.2.0",
