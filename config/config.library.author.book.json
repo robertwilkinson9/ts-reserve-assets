@@ -1,6 +1,6 @@
 {
   "APIPORT": "5180",
-  "API_IP": "localhost",
+  "API_IP": "192.168.1.185",
   "COLLECTION": "Book",
   "LCCOLLECTION": "book",
   "ITEM_NAME": "book",
