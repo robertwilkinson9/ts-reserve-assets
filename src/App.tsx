@@ -28,7 +28,7 @@ export const App = () => {
   registerLocale('en-GB', enGB)
   setDefaultLocale('en-GB');
 
-  const API_url = `http://localhost:${configData.APIPORT}/api/`;
+  const API_url = `https://${configData.API_IP}:${configData.APIPORT}/api/`;
 
   const get_mongo_data = async () => {
     const ITEMS_url = API_url + 'all_' + configData.ITEM_NAME + 's/';
