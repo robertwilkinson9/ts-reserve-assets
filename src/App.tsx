@@ -4,6 +4,7 @@ import axios, { isAxiosError } from 'axios'
 
 import { registerLocale, setDefaultLocale } from  "react-datepicker";
 import enGB from 'date-fns/locale/en-GB';
+// import ip from 'ip';
 
 import configData from "../config/config.json";
 
@@ -27,6 +28,8 @@ export const App = () => {
   
   registerLocale('en-GB', enGB)
   setDefaultLocale('en-GB');
+
+//  console.log(ip.address());
 
   const API_url = `https://${configData.API_IP}:${configData.APIPORT}/api/`;
 
