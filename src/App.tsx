@@ -4,7 +4,6 @@ import axios, { isAxiosError } from 'axios'
 
 import { registerLocale, setDefaultLocale } from  "react-datepicker";
 import enGB from 'date-fns/locale/en-GB';
-// import ip from 'ip';
 
 import configData from "../config/config.json";
 
@@ -29,9 +28,18 @@ export const App = () => {
   registerLocale('en-GB', enGB)
   setDefaultLocale('en-GB');
 
-//  console.log(ip.address());
+  var beserver = "localhost";
+  console.log(`0. beserver is ${beserver}`);
 
-  const API_url = `https://${configData.API_IP}:${configData.APIPORT}/api/`;
+  if (('API_IP' in configData) 
+    && (typeof configData.API_IP === "string")) {
+    beserver = configData.API_IP;
+    console.log(`1. beserver is ${beserver}`);
+  }
+
+  console.log(`2. beserver is ${beserver}`);
+  const API_url = `https://${beserver}:${configData.APIPORT}/api/`;
+  console.log(`API_url is ${API_url}`);
 
   const get_mongo_data = async () => {
     const ITEMS_url = API_url + 'all_' + configData.ITEM_NAME + 's/';
