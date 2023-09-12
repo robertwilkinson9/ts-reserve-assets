@@ -2,7 +2,7 @@
 // then save the item to the backend data store on confirmation with expiration
 // of the record set for the day after the booking
 
-import axios, { isAxiosError } from 'axios'
+import axios, { AxiosResponse, AxiosError, isAxiosError } from 'axios'
 
 import { Button } from '@chakra-ui/react'
 
@@ -35,32 +35,25 @@ const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
   console.log(item_booking);
 
   try {
-    const response = await axios.post(url, item_booking, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+    const response: AxiosResponse<ItemData> = await axios.post<ItemData>(url, item_booking, {headers: {'Content-Type': 'application/json'}})
     console.log(`RDI is ${response.data.id}`);
     return response.data.id;
-  } catch (error) {
+  } catch (error: unknown | AxiosError) {
     if (isAxiosError(error)) {
       if (error.response) {
         // The client was given an error response (5xx, 4xx)
         // The request was made and the server responded with a status code
         // that falls out of the range of 2xx
-        console.log(error.response.data);
         console.log(error.response.status);
         console.log(error.response.headers);
-      } else if (error.request) {
-        // The client never received a response, and the request was never left
-        // The request was made but no response was received
-        // `error.request` is an instance of XMLHttpRequest in the browser
-        // and an instance of http.ClientRequest in node.js
-        console.log(error.request);
       } else {
         // Anything else
-        console.log('Error', error.message);
+        console.log('Axios Error', error.message);
       }
+    } else {
+      // Any non-axios error
+      console.log('Non-Axios Error');
+      console.log(error);
     }
   }
 

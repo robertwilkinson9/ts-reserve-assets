@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import axios, { isAxiosError } from 'axios'
+import axios, { AxiosError, isAxiosError } from 'axios'
 
 import { registerLocale, setDefaultLocale } from  "react-datepicker";
 import enGB from 'date-fns/locale/en-GB';
@@ -29,51 +29,48 @@ export const App = () => {
   setDefaultLocale('en-GB');
 
   var beserver = "localhost";
-  console.log(`0. beserver is ${beserver}`);
-
-  if (('API_IP' in configData) 
-    && (typeof configData.API_IP === "string")) {
+  if (('API_IP' in configData) && (typeof configData.API_IP === "string")) {
     beserver = configData.API_IP;
-    console.log(`1. beserver is ${beserver}`);
   }
-
-  console.log(`2. beserver is ${beserver}`);
   const API_url = `https://${beserver}:${configData.APIPORT}/api/`;
   console.log(`API_url is ${API_url}`);
+
+  const build_mongo_data = (data: MongoRecordType[]): MongoData[] => {
+    if (data && data.length) {
+      return data.map((x: MongoRecordType) => {return {"booking_start": x.booking_start, "booking_end": x.booking_end, "bucket": x.bucket, [configData.ITEM_NAME]: x[configData.ITEM_NAME]}})
+    } else {
+      return [];
+    }
+  }
 
   const get_mongo_data = async () => {
     const ITEMS_url = API_url + 'all_' + configData.ITEM_NAME + 's/';
     try {
-      const response = await axios.get(ITEMS_url);
+      await axios.get<MongoRecordType[]>(ITEMS_url).then(response => {
+        const mymongodata: MongoData[] = build_mongo_data(response.data);
 
-      if (response) {
-        console.log("RESPONSE.DATA.DATA")
-        console.log(response.data.data)
-        const mymongodata = response.data.data.map((x: MongoRecordType) => {return {"booking_start": x.booking_start, "booking_end": x.booking_end, "bucket": x.bucket, [configData.ITEM_NAME]: x[configData.ITEM_NAME]}})
         console.log("MYMONGODATA");
         console.log(mymongodata);
         setMongodata(mymongodata);
       }
-    } catch (error) {
+      )
+    } catch (error: unknown | AxiosError) {
       if (isAxiosError(error)) {
         if (error.response) {
           // The client was given an error response (5xx, 4xx)
           // The request was made and the server responded with a status code
           // that falls out of the range of 2xx
-          console.log(error.response.data);
           console.log(error.response.status);
           console.log(error.response.headers);
-        } else if (error.request) {
-          // The client never received a response, and the request was never left
-          // The request was made but no response was received
-          // `error.request` is an instance of XMLHttpRequest in the browser 
-          // and an instance of http.ClientRequest in node.js
-          console.log(error.request);
         } else {
           // Anything else
-          console.log('Error', error.message);
+          console.log('Axios Error', error.message);
         }
-    }
+      } else {
+        // Anything else
+        console.log('Non Axios Error');
+        console.log(error);
+      }
     }
   };
 
@@ -98,9 +95,7 @@ export const App = () => {
     reset();
   }
 
-  console.log(`0. EDT is ${endDateTime} ITEM is ${item} EMAIL is ${email} and COMPLETE is ${complete}`);
   if (endDateTime && item && email && complete) {
-   console.log(`1. EDT is ${endDateTime} ITEM is ${item} EMAIL is ${email} and COMPLETE is ${complete}`);
     return (
       <>
       <Header />
