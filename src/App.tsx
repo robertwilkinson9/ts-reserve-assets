@@ -58,6 +58,7 @@ export const App = () => {
           // The client was given an error response (5xx, 4xx)
           // The request was made and the server responded with a status code
           // that falls out of the range of 2xx
+          console.log('Axios Error Response');
           console.log(error.response.status);
           console.log(error.response.headers);
         } else {

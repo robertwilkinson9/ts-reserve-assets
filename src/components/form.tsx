@@ -36,9 +36,8 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
 
       return (
         <>
-          <div id="key1" key="key1">
           <ChakraProvider resetCSS={false}>
-            <FormControl id="key1" key="key1">
+            <FormControl>
             <FormLabel data-testid='formlabel_1' >interesting Form One</FormLabel>
             <FormHelperText>We'll never share your Form One data.</FormHelperText>
               <Stack spacing="20px" direction="column">
@@ -52,15 +51,13 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
               </Stack>
             </FormControl>
           </ChakraProvider>
-          </div>
         </>
       );
     } else {
       return (
         <>
-          <div id="key2" key="key2">
           <ChakraProvider resetCSS={false}>
-            <FormControl id="key2" key="key2">
+            <FormControl>
             <FormLabel data-testid='formlabel_2' >interesting Form Two</FormLabel>
             <FormHelperText>We'll never share your Form Two data.</FormHelperText>
               <Stack spacing="20px" direction="column">
@@ -74,16 +71,14 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
               </Stack>
             </FormControl>
           </ChakraProvider>
-          </div>
         </>
       );
     }
   } else {
     return (
       <>
-        <div id="key3" key="key3">
           <ChakraProvider resetCSS={false}>
-            <FormControl id="key3" key="key3">
+            <FormControl>
             <FormLabel data-testid='formlabel_3' >interesting Form Three</FormLabel>
             <FormHelperText>We'll never share your Form Three data.</FormHelperText>
               <Stack spacing="20px" direction="column">
@@ -97,7 +92,6 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
               </Stack>
             </FormControl>
           </ChakraProvider>
-        </div>
       </>
     );
   }
