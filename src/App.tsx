@@ -35,10 +35,6 @@ export const App = () => {
   const API_url = `https://${beserver}:${configData.APIPORT}/api/`;
 
   const build_mongo_data = (data: MongoReturnType): MongoData[] => {
-    console.log("build_mongo_data data is ");
-    console.log(data);
-    console.log("build_mongo_data data.data is ");
-    console.log(data.data);
     if (data.data && data.data.length) {
       return data.data.map((x: MongoRecordType) => {return {"booking_start": x.booking_start, "booking_end": x.booking_end, "bucket": x.bucket, [configData.ITEM_NAME]: x[configData.ITEM_NAME]}})
     } else {
@@ -51,12 +47,8 @@ export const App = () => {
     console.log(`ITEMS_url is ${ITEMS_url}`);
     try {
       await axios.get<MongoReturnType>(ITEMS_url).then(response => {
-        console.log(`GET RESPONSE is`);
-        console.log(response);
         const mymongodata: MongoData[] = build_mongo_data(response.data);
 
-        console.log("MYMONGODATA");
-        console.log(mymongodata);
         setMongodata(mymongodata);
       }
       )
