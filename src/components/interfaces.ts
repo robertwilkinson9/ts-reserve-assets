@@ -136,23 +136,19 @@ export interface configData {
   AUXILLIARY?: AuxConfigRecordType[];
 }
 
-export interface MongoData {
+export type MongoData = {
   booking_start: string;
   booking_end: string;
   bucket: number;
-  [key: string]: any;
-}
+  [key: string]: string | number | undefined; // 👈️ variable key
+};
 
-export type MongoRecordType = {
+export type MongoRecordType = MongoData & {
   _id: string;
-  booking_start: string;
-  booking_end: string;
   expireAt: string;
-  bucket: number;
   item: string;
   email: string;
   __v?: number;
-  [key: string]: string | number | undefined; // 👈️ variable key
 };
 
 export type MongoReturnType = {
