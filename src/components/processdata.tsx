@@ -4,7 +4,7 @@
 
 import axios, { AxiosResponse, AxiosError, isAxiosError } from 'axios'
 
-import { Button } from '@chakra-ui/react'
+import { Button, ChakraProvider } from '@chakra-ui/react'
 
 import InputForm from './form'
 
@@ -148,15 +148,19 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
 
       return (
         <>
-        <h4>ProcessData</h4>
-        <p>{sdstr}</p>
-        <p>{edstr}</p>
-        <p>{fstr}</p>
-        <p>{item}</p>
-        <p>{email}</p>
-        <p>{aux_string}</p>
-        <Button onClick={handleConfirm}>Confirm?</Button>
-        <Button onClick={handleCancel}>Cancel?</Button>
+          <div id="key1" key="key1">
+          <ChakraProvider resetCSS={false}>
+            <h4>ProcessData</h4>
+            <p>{sdstr}</p>
+            <p>{edstr}</p>
+            <p>{fstr}</p>
+            <p>{item}</p>
+            <p>{email}</p>
+            <p>{aux_string}</p>
+            <Button onClick={handleConfirm}>Confirm?</Button>
+            <Button onClick={handleCancel}>Cancel?</Button>
+          </ChakraProvider>
+        </div>
         </>
       );
     }
