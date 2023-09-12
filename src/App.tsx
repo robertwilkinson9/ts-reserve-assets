@@ -7,7 +7,7 @@ import enGB from 'date-fns/locale/en-GB';
 
 import configData from "../config/config.json";
 
-import { string_or_null, date_or_null, AuxDataRecordType, MongoRecordType, MongoData} from './components/interfaces'
+import { string_or_null, date_or_null, AuxDataRecordType, MongoReturnType, MongoRecordType, MongoData} from './components/interfaces'
 import { Header } from './components/header'
 import { InputForm } from './components/form'
 import { ProcessData } from './components/processdata'
@@ -33,11 +33,14 @@ export const App = () => {
     beserver = configData.API_IP;
   }
   const API_url = `https://${beserver}:${configData.APIPORT}/api/`;
-  console.log(`API_url is ${API_url}`);
 
-  const build_mongo_data = (data: MongoRecordType[]): MongoData[] => {
-    if (data && data.length) {
-      return data.map((x: MongoRecordType) => {return {"booking_start": x.booking_start, "booking_end": x.booking_end, "bucket": x.bucket, [configData.ITEM_NAME]: x[configData.ITEM_NAME]}})
+  const build_mongo_data = (data: MongoReturnType): MongoData[] => {
+    console.log("build_mongo_data data is ");
+    console.log(data);
+    console.log("build_mongo_data data.data is ");
+    console.log(data.data);
+    if (data.data && data.data.length) {
+      return data.data.map((x: MongoRecordType) => {return {"booking_start": x.booking_start, "booking_end": x.booking_end, "bucket": x.bucket, [configData.ITEM_NAME]: x[configData.ITEM_NAME]}})
     } else {
       return [];
     }
@@ -45,8 +48,11 @@ export const App = () => {
 
   const get_mongo_data = async () => {
     const ITEMS_url = API_url + 'all_' + configData.ITEM_NAME + 's/';
+    console.log(`ITEMS_url is ${ITEMS_url}`);
     try {
-      await axios.get<MongoRecordType[]>(ITEMS_url).then(response => {
+      await axios.get<MongoReturnType>(ITEMS_url).then(response => {
+        console.log(`GET RESPONSE is`);
+        console.log(response);
         const mymongodata: MongoData[] = build_mongo_data(response.data);
 
         console.log("MYMONGODATA");
@@ -91,9 +97,7 @@ export const App = () => {
     setConfirmed(false);
   }
 
-  if (needreset) {
-    reset();
-  }
+  if (needreset) {reset()}
 
   if (endDateTime && item && email && complete) {
     return (

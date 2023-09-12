@@ -64,13 +64,6 @@ export interface ItemData {
 
 /*  item?: string; */
 
-export interface MongoData {
-  booking_start: string;
-  booking_end: string;
-  bucket: number;
-  [key: string]: any;
-}
-
 export interface ItemsProps {
   id?: string;
   key?: string;
@@ -143,6 +136,13 @@ export interface configData {
   AUXILLIARY?: AuxConfigRecordType[];
 }
 
+export interface MongoData {
+  booking_start: string;
+  booking_end: string;
+  bucket: number;
+  [key: string]: any;
+}
+
 export type MongoRecordType = {
   _id: string;
   booking_start: string;
@@ -153,6 +153,11 @@ export type MongoRecordType = {
   email: string;
   __v?: number;
   [key: string]: string | number | undefined; // 👈️ variable key
+};
+
+export type MongoReturnType = {
+  success: boolean;
+  data: MongoRecordType[];
 };
 
 export type Select_type = {
