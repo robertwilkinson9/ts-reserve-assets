@@ -35,9 +35,8 @@ export interface CalendarProps {
   date_setter2?: React.Dispatch<React.SetStateAction<date_or_null>>;
 }
 
-export interface InputFormProps {
+export interface Ifp {
   config: configData;
-  mongo_data: MongoData[];
   booking_start: date_or_null;
   set_booking_start: React.Dispatch<React.SetStateAction<date_or_null>>;
   booking_end: date_or_null;
@@ -50,6 +49,10 @@ export interface InputFormProps {
   auxdata: AuxDataRecordType[];
   set_auxdata: React.Dispatch<React.SetStateAction<AuxDataRecordType[]>>;
   set_complete: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface InputFormProps extends Ifp {
+  mongo_data: MongoData[];
 }
 
 export interface ItemData {
