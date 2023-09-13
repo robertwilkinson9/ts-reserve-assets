@@ -7,7 +7,7 @@ Various example config files are given, any of them can be copied and changed.
 
 The system does require that a start datetime and end datetime are given.
 
-It presents the user with radio buttons to choose between a number of groups - XXX test with one group? and then a pull-down list of items in the group to select.
+It presents the user with radio buttons to choose between the groups defined in the configuration file and then a pull-down list of items in the group to select.
 
 An email address is used for the booking, and additional fields can be required e.g. registration numbers in the car park booking system.
 

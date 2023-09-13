@@ -25,14 +25,18 @@ const form_contents = ({config, booking_start, set_booking_start, booking_end, s
         <FormLabel data-testid={label} >interesting Form {ordinal}</FormLabel>
         <FormHelperText>We'll never share your Form {ordinal} data.</FormHelperText>
           <Stack spacing="20px" direction="column">
-            booking_end
+            {
+              booking_end
               ? <Calendar label="Start DateTime" selected={booking_start} date_setter={set_booking_start} />
               : <Calendar label="Start DateTime" selected={booking_start} date_setter={set_booking_start} date_setter2={set_booking_end} />
+            }
             <Calendar label="End DateTime" selected={booking_end} date_setter={set_booking_end} />
             <Bucket config={config} bucket={bucket} set_bucket={set_bucket} />
-            overlapv.length
+            {
+              overlapv.length
               ? <Items config={config} bucket={bucket} allocated_items={overlapv} set_item={set_item} />
               : <Items config={config} bucket={bucket} set_item={set_item} />
+            }
             <AddEmail email={email} set_email={set_email} />
             {config.AUXILLIARY?.map( (x) => <MyInput label={x.label} key={x.id} id={x.id} auxdata={auxdata} set_auxdata={set_auxdata} /> )}
             <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText} </Button>
