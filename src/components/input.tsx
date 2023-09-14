@@ -1,3 +1,10 @@
+/**
+*
+* This file handles update of any auxilliary input fields
+* if any auxilliary fields are defined in the config file
+*
+*/
+
 import { Input, Text} from '@chakra-ui/react'
 
 import { AuxDataRecordType } from './interfaces';
@@ -28,7 +35,6 @@ interface inputProps {
 }
 
 export const MyInput = (props: inputProps) => {
-//  const labelfor = props.label + props.id;
   const labelfor = props.label;
   return (
     <div className="MyInput">

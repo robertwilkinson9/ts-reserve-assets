@@ -1,6 +1,8 @@
-// we process the form data, allow a confirmation or cancellation
-// then save the item to the backend data store on confirmation with expiration
-// of the record set for the day after the booking
+/**
+* we process the form data, allow a confirmation or cancellation
+* then save the item to the backend data store on confirmation with expiration
+* of the record set for the day after the booking
+*/
 
 import axios, { AxiosResponse, AxiosError, isAxiosError } from 'axios'
 
@@ -12,17 +14,11 @@ import { AuxConfigRecordType, AuxDataRecordType, AuxType, ItemData, MongoData, P
 
 import './processdata.css';
 
-export const tomorrow_from_day = (startDateTime: Date): Date => {
-  // Current date
-  if (startDateTime) {
-    const date = new Date(startDateTime);
-    // Tomorrow's date
-    const tomorrow = date.setDate(date.getDate() + 1);
-
-    return new Date(tomorrow);
-  } else {
-    return new Date();
-  }
+export const tomorrow_from_day = (passed_date: Date): Date => {
+//  const tomorrow = new Date(passed_date);
+  const tomorrow = passed_date;
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  return tomorrow;
 }
 
 export const auxdatamerge = (aux_config: AuxConfigRecordType[], aux_data: AuxDataRecordType[]): AuxType[] => {

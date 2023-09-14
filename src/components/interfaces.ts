@@ -63,9 +63,6 @@ export interface ItemData {
   email: string
   [key: string]: string | number; // 👈️ variable key
 }
-//  [key: string]: any; // 👈️ variable key
-
-/*  item?: string; */
 
 export interface ItemsProps {
   id?: string;
@@ -108,24 +105,20 @@ interface bucketData {
   items?: string[];
 }
 
-//export interface AuxIdType  {
-//  id: string;
-//}
-
-//  id: AuxIdType;
-export interface AuxConfigRecordType  {
+export interface AuxIdType {
   id: string;
+}
+
+export interface AuxDataRecordType extends AuxIdType {
+  value: string;
+}
+
+export interface AuxConfigRecordType extends AuxIdType {
   label: string;
   dbname: string;
 }
 
-//  id: AuxIdType;
-export interface AuxDataRecordType  {
-  id: string;
-  value: string;
-}
-
-export interface AuxType extends AuxConfigRecordType  {
+export interface AuxType extends AuxConfigRecordType {
   value: string;
 }
 

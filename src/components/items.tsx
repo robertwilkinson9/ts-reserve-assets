@@ -1,10 +1,12 @@
-// semantics - a bucket is a collection - and was called that until mongoDB objected to the name
-// e.g. a room containing desks, the desks being the items
-// the books by an author, the author is the bucket and the books the items
-// the tables in the restaurant, the tables are the buckets, the bookable seats the items.
+/** 
+* semantics - a bucket is a collection or container for items
+* e.g. a room containing desks, the desks being the items
+* the books by an author, the author is the bucket and the books the items
+* the tables in the restaurant, the tables are the buckets, the bookable seats the items.
 
-// these items are presented to the author as pull down lists once the bucket radio button is selected
-// we filter the out those items currently booked at the time requested from those presented 
+* these items are presented to the author as pull down lists once the bucket radio button is selected
+* we filter the out those items currently booked at the time requested from those presented 
+*/
 
 import React from 'react';
 
@@ -16,7 +18,10 @@ const items_select = (items: string[]): Select_type[] => {
   return items.map((item) => {return {value: item, label: item};});
 }
 
-// listbuild can build a list from a start and last number and surround each with a prefix and suffix
+/**
+* listbuild can build a list from a start and last number and surround each with a prefix and suffix
+*/
+
 const listbuild = (istart:number | undefined, ilast:number | undefined, prefix: string | undefined, suffix?: string | undefined) => {
   const items: string[] = [];
 
@@ -35,6 +40,13 @@ const listbuild = (istart:number | undefined, ilast:number | undefined, prefix: 
   return items;
 }
 
+/**
+*
+* items are either listed in the config files as strings
+* or else numeric, with the first and last in the config file, and the items computed
+*
+*/
+
 const get_items_from_config = ({config, bucket}: BucketReadProps): string[] | undefined => {
   let items: string[] | undefined = [];
 
@@ -45,13 +57,19 @@ const get_items_from_config = ({config, bucket}: BucketReadProps): string[] | un
       items = cbi;
     } else {
       if (config.BUCKETS[bucket].ifirst && config.BUCKETS[bucket].ilast) {
-        items = listbuild(config.BUCKETS[bucket].ifirst, config.BUCKETS[bucket].ilast, config.BUCKETS[bucket].prefix);
+        items = listbuild(config.BUCKETS[bucket].ifirst, config.BUCKETS[bucket].ilast, config.BUCKETS[bucket].prefix, config.BUCKETS[bucket].suffix);
       }
     }
   }
   return items;
 }
  
+/**
+*
+* we create a pulldown list for the selected bucket
+*
+*/
+
 export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps) => {
   let items: string[] | undefined = [];
 
