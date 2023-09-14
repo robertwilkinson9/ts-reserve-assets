@@ -123,7 +123,7 @@ export interface AuxType extends AuxConfigRecordType {
 }
 
 export interface configData {
-  APIPORT: string; // XXX should be a number? 
+  APIPORT: number;
   LCCOLLECTION: string;
   ITEM_NAME: string;
   ITEM_LABEL: string;

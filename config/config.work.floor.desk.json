@@ -1,5 +1,5 @@
 {
-  "APIPORT": "5179",
+  "APIPORT": 5179,
   "COLLECTION": "Desk",
   "LCCOLLECTION": "desk",
   "ITEM_NAME": "desk",

@@ -9,7 +9,7 @@ import { render } from '@testing-library/react';
 import { Bucket } from '../components/bucket';
 
 const test_config = {
-  "APIPORT": "1234",
+  "APIPORT": 1234,
   "LCCOLLECTION": "test",
   "ITEM_NAME": "test_item_name",
   "ITEM_LABEL": "test_item_label",

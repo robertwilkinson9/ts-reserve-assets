@@ -47,7 +47,7 @@ import { ProcessData, auxdatamerge, tomorrow_from_day} from '../components/proce
 
 function renderProcessData(props: Partial<ProcessDataProps> = {}) {
   const defaultConfig = {
-    "APIPORT": "7345",
+    "APIPORT": 7345,
     "LCCOLLECTION": "test",
     "ITEM_NAME": "test_item",
     "ITEM_LABEL": "test_label",

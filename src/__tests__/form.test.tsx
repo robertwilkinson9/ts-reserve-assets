@@ -11,7 +11,7 @@ import {InputFormProps} from '../components/interfaces'
 import InputForm from '../components/form';
 
 const test_config = {
-  "APIPORT": "1234",
+  "APIPORT": 1234,
   "LCCOLLECTION": "test",
   "ITEM_NAME": "test_items_name",
   "ITEM_LABEL": "test_items_label",
