@@ -49,4 +49,10 @@ for TYPE in ${TYPES[@]}; do
 	#
 	docker build -t ${TYPE}_frontend --file ${DOCKERFILE} --build-arg SSL_CERT=/certs/localhost.crt --build-arg SSL_KEY=/certs/localhost.key --build-arg API_IP=${API_IP} --build-arg API_PORT=${API_PORT} .
 	docker run --detach --network mongo-network --env SSL_KEY=/certs/localhost.key --env SSL_CERT=/certs/localhost.crt --env API_IP=${API_IP} --env API_PORT=${API_PORT} -p $FE_PORT:$FE_PORT ${TYPE}_frontend
+
+	DID=$(docker ps | grep ${TYPE}_frontend | awk '{print $NF}')
+	DIP=$(docker inspect ${DID} | grep IPA | grep 172 | awk '{print $NF}' | sed -e 's/,$//' | sed -e 's/"//g')
+	DPORT=$(docker inspect ${DID} | grep HostPort | tail -1 | awk '{print $NF}' | sed -e 's/,$//' | sed -e 's/"//g')
+
+	echo ${TYPE}_frontend at https://${DIP}:${DPORT}
 done
