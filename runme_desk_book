@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 TYPES=("desk" "book")
+declare -A DIPS
+declare -A NMAPS
 #
 rsync -av ../certs .
 #
@@ -12,12 +14,11 @@ then
 fi
 #
 for TYPE in ${TYPES[@]}; do
+	echo
 	echo TYPE is $TYPE
 	CONFIG_FILE=$(echo ${CONFIG_PREFIX}${TYPE}.json)
-	echo config file is $CONFIG_FILE
 	BACKEND=${TYPE}_backend
-	echo backend is ${BACKEND}
-	#
+
 	docker ps | grep -q my-mongo 
 	MONGO_EXISTS=$?
 	if [ ! $MONGO_EXISTS -eq 0 ]
@@ -25,7 +26,7 @@ for TYPE in ${TYPES[@]}; do
 	  echo NO MONGO
 	  exit 1
 	fi
-	#
+
 	docker ps | grep -q ${BACKEND}
 	BACKEND_EXISTS=$?
 	if [ ! $BACKEND_EXISTS -eq 0 ]
@@ -33,26 +34,28 @@ for TYPE in ${TYPES[@]}; do
 	  echo NO BACKEND
 	  exit 2
 	fi
-	#
+
 	DOCKERFILE=Dockerfile.${TYPE}
-	echo dockerfile is ${DOCKERFILE}
-	#
 	API_IP=$(docker inspect ${BACKEND} | grep API_IP | awk -F= '{print $2}' | sed -e 's/",$//')
-	echo api_ip is ${API_IP}
-	#
-	API_PORT=$(docker inspect book_backend | grep PORT | awk -F= '{print $2}' | sed -e 's/",$//')
-	echo api_port is ${API_PORT}
-	#
+	API_PORT=$(docker inspect ${TYPE}_backend | grep PORT | awk -F= '{print $2}' | sed -e 's/",$//')
 	CONFIG_FILE=$(echo config/config.${TYPE}.json)
 	FE_PORT=$(grep FEPORT $CONFIG_FILE | awk '{print $NF}' | sed -e 's/,$//')
-	echo fe_port is ${FE_PORT}
-	#
+
 	docker build -t ${TYPE}_frontend --file ${DOCKERFILE} --build-arg SSL_CERT=/certs/localhost.crt --build-arg SSL_KEY=/certs/localhost.key --build-arg API_IP=${API_IP} --build-arg API_PORT=${API_PORT} .
 	docker run --detach --network mongo-network --env SSL_KEY=/certs/localhost.key --env SSL_CERT=/certs/localhost.crt --env API_IP=${API_IP} --env API_PORT=${API_PORT} -p $FE_PORT:$FE_PORT ${TYPE}_frontend
 
 	DID=$(docker ps | grep ${TYPE}_frontend | awk '{print $NF}')
 	DIP=$(docker inspect ${DID} | grep IPA | grep 172 | awk '{print $NF}' | sed -e 's/,$//' | sed -e 's/"//g')
+	DIPS[$TYPE]=$DIP
 	DPORT=$(docker inspect ${DID} | grep HostPort | tail -1 | awk '{print $NF}' | sed -e 's/,$//' | sed -e 's/"//g')
 
-	echo ${TYPE}_frontend at https://${DIP}:${DPORT}
+        PSTART=$(($API_PORT - 20))
+        PSTOP=$(($API_PORT + 20))
+	NMAPS[$TYPE]="nmap ${DIP} -p ${PSTART}-${PSTOP}"
+done
+sleep 15
+echo
+for TYPE in ${TYPES[@]}; do
+	NPORT=$(${NMAPS[$TYPE]} | grep open | awk -F/ '{print $1}')
+	echo ${TYPE}_frontend at https://${DIPS[$TYPE]}:${NPORT}
 done
