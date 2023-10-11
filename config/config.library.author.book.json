@@ -1,5 +1,4 @@
 {
-  "DOCKERIP": 4,
   "APIPORT": 5180,
   "FEPORT": 5190,
   "COLLECTION": "Book",
