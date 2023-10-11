@@ -1,0 +1,52 @@
+#!/usr/bin/bash
+TYPES=("desk" "book")
+#
+rsync -av ../certs .
+#
+docker network ls | grep -q mongo-network
+NETWORK_EXISTS=$?
+if [ ! $NETWORK_EXISTS -eq 0 ]
+then
+  echo NO MONGO NETWORK
+  docker network create mongo-network
+fi
+#
+for TYPE in ${TYPES[@]}; do
+	echo TYPE is $TYPE
+	CONFIG_FILE=$(echo ${CONFIG_PREFIX}${TYPE}.json)
+	echo config file is $CONFIG_FILE
+	BACKEND=${TYPE}_backend
+	echo backend is ${BACKEND}
+	#
+	docker ps | grep -q my-mongo 
+	MONGO_EXISTS=$?
+	if [ ! $MONGO_EXISTS -eq 0 ]
+	then
+	  echo NO MONGO
+	  exit 1
+	fi
+	#
+	docker ps | grep -q ${BACKEND}
+	BACKEND_EXISTS=$?
+	if [ ! $BACKEND_EXISTS -eq 0 ]
+	then
+	  echo NO BACKEND
+	  exit 2
+	fi
+	#
+	DOCKERFILE=Dockerfile.${TYPE}
+	echo dockerfile is ${DOCKERFILE}
+	#
+	API_IP=$(docker inspect ${BACKEND} | grep API_IP | awk -F= '{print $2}' | sed -e 's/",$//')
+	echo api_ip is ${API_IP}
+	#
+	API_PORT=$(docker inspect book_backend | grep PORT | awk -F= '{print $2}' | sed -e 's/",$//')
+	echo api_port is ${API_PORT}
+	#
+	CONFIG_FILE=$(echo config/config.${TYPE}.json)
+	FE_PORT=$(grep FEPORT $CONFIG_FILE | awk '{print $NF}' | sed -e 's/,$//')
+	echo fe_port is ${FE_PORT}
+	#
+	docker build -t ${TYPE}_frontend --file ${DOCKERFILE} --build-arg SSL_CERT=/certs/localhost.crt --build-arg SSL_KEY=/certs/localhost.key --build-arg API_IP=${API_IP} --build-arg API_PORT=${API_PORT} .
+	docker run --detach --network mongo-network --env SSL_KEY=/certs/localhost.key --env SSL_CERT=/certs/localhost.crt --env API_IP=${API_IP} --env API_PORT=${API_PORT} -p $FE_PORT:$FE_PORT ${TYPE}_frontend
+done
