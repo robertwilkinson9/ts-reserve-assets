@@ -49,8 +49,8 @@ for TYPE in ${TYPES[@]}; do
 	DIPS[$TYPE]=$DIP
 	DPORT=$(docker inspect ${DID} | grep HostPort | tail -1 | awk '{print $NF}' | sed -e 's/,$//' | sed -e 's/"//g')
 
-        PSTART=$(($API_PORT - 20))
-        PSTOP=$(($API_PORT + 20))
+        PSTART=5173 # we use vite so https://vitejs.dev/config/server-options.html#server-port applies
+        PSTOP=$(($API_PORT + 30))
 	NMAPS[$TYPE]="nmap ${DIP} -p ${PSTART}-${PSTOP}"
 done
 sleep 15
