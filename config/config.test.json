@@ -1,7 +1,7 @@
 {
   "COLLECTION": "Test",
   "LCCOLLECTION": "test",
-  "APIPORT": 5177,
+  "APIPORT": 6177,
   "SCHEMA": {
     "food": { "type": "String" },
     "drink": { "type": "String" },

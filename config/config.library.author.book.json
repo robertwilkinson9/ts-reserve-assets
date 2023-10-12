@@ -1,6 +1,6 @@
 {
-  "APIPORT": 5180,
-  "FEPORT": 5190,
+  "APIPORT": 6180,
+  "FEPORT": 7190,
   "COLLECTION": "Book",
   "LCCOLLECTION": "book",
   "ITEM_NAME": "book",
