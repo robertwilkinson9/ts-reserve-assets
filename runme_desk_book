@@ -37,7 +37,7 @@ for TYPE in ${TYPES[@]}; do
 	API_IP=$(docker inspect $(docker ps| grep ${TYPE}_backend | awk '{print $1}') | jq --raw-output '.[0].NetworkSettings.Networks."mongo-network".IPAddress')
 	CONFIG_FILE=$(echo config/config.${TYPE}.json)
 	API_PORT=$(cat $CONFIG_FILE | jq --raw-output '.APIPORT')
-	FE_PORT=$(grep -e ${TYPE} package.json | grep port | awk -F port '{print $2}' | awk '{print $1}') # find out how to use variables in package.jso
+	FE_PORT=$(cat package.json | jq --raw-output .config.${TYPE})
         echo FEPORT is $FE_PORT
 
 	docker build -t ${TYPE}_frontend --file ${DOCKERFILE} .
