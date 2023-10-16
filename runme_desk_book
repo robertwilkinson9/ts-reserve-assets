@@ -1,7 +1,5 @@
 #!/usr/bin/bash
 TYPES=("desk" "book")
-declare -A DIPS
-declare -A NMAPS
 #
 rsync -av ../certs .
 #
@@ -36,26 +34,16 @@ for TYPE in ${TYPES[@]}; do
 	fi
 
 	DOCKERFILE=Dockerfile.${TYPE}
-	API_IP=$(docker inspect ${BACKEND} | grep API_IP | awk -F= '{print $2}' | sed -e 's/",$//')
-	API_PORT=$(docker inspect ${TYPE}_backend | grep PORT | awk -F= '{print $2}' | sed -e 's/",$//')
+	API_IP=$(docker inspect $(docker ps| grep ${TYPE}_backend | awk '{print $1}') | jq --raw-output '.[0].NetworkSettings.Networks."mongo-network".IPAddress')
 	CONFIG_FILE=$(echo config/config.${TYPE}.json)
-	FE_PORT=$(grep FEPORT $CONFIG_FILE | awk '{print $NF}' | sed -e 's/,$//')
+	API_PORT=$(cat $CONFIG_FILE | jq --raw-output '.APIPORT')
+	FE_PORT=$(grep -e ${TYPE} package.json | grep port | awk -F port '{print $2}' | awk '{print $1}') # find out how to use variables in package.jso
+        echo FEPORT is $FE_PORT
 
 	docker build -t ${TYPE}_frontend --file ${DOCKERFILE} .
-	docker run --detach --network mongo-network --env SSL_KEY=/certs/localhost.key --env SSL_CERT=/certs/localhost.crt --env API_IP=${API_IP} --env API_PORT=${API_PORT} -p $FE_PORT:$FE_PORT ${TYPE}_frontend
+	docker run --detach --network mongo-network --env SSL_KEY=/certs/localhost.key --env SSL_CERT=/certs/localhost.crt --env API_IP=${API_IP} --env VITE_API_IP=${API_IP} --env API_PORT=${API_PORT} -p $FE_PORT:$FE_PORT ${TYPE}_frontend
 
 	DID=$(docker ps | grep ${TYPE}_frontend | awk '{print $NF}')
-	DIP=$(docker inspect ${DID} | grep IPA | grep 172 | awk '{print $NF}' | sed -e 's/,$//' | sed -e 's/"//g')
-	DIPS[$TYPE]=$DIP
-	DPORT=$(docker inspect ${DID} | grep HostPort | tail -1 | awk '{print $NF}' | sed -e 's/,$//' | sed -e 's/"//g')
-
-        PSTART=5173 # we use vite so https://vitejs.dev/config/server-options.html#server-port applies
-        PSTOP=5210
-	NMAPS[$TYPE]="nmap ${DIP} -p ${PSTART}-${PSTOP}"
-done
-sleep 15
-echo
-for TYPE in ${TYPES[@]}; do
-	NPORT=$(${NMAPS[$TYPE]} | grep open | awk -F/ '{print $1}')
-	echo ${TYPE}_frontend at https://${DIPS[$TYPE]}:${NPORT}
+	DIP=$(docker inspect ${DID} | jq --raw-output '.[0].NetworkSettings.Networks."mongo-network".IPAddress')
+	echo ${TYPE}_frontend at https://${DIP}:${FE_PORT}
 done
