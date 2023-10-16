@@ -41,7 +41,7 @@ for TYPE in ${TYPES[@]}; do
 	CONFIG_FILE=$(echo config/config.${TYPE}.json)
 	FE_PORT=$(grep FEPORT $CONFIG_FILE | awk '{print $NF}' | sed -e 's/,$//')
 
-	docker build -t ${TYPE}_frontend --file ${DOCKERFILE} --build-arg SSL_CERT=/certs/localhost.crt --build-arg SSL_KEY=/certs/localhost.key --build-arg API_IP=${API_IP} --build-arg API_PORT=${API_PORT} .
+	docker build -t ${TYPE}_frontend --file ${DOCKERFILE} .
 	docker run --detach --network mongo-network --env SSL_KEY=/certs/localhost.key --env SSL_CERT=/certs/localhost.crt --env API_IP=${API_IP} --env API_PORT=${API_PORT} -p $FE_PORT:$FE_PORT ${TYPE}_frontend
 
 	DID=$(docker ps | grep ${TYPE}_frontend | awk '{print $NF}')
@@ -50,7 +50,7 @@ for TYPE in ${TYPES[@]}; do
 	DPORT=$(docker inspect ${DID} | grep HostPort | tail -1 | awk '{print $NF}' | sed -e 's/,$//' | sed -e 's/"//g')
 
         PSTART=5173 # we use vite so https://vitejs.dev/config/server-options.html#server-port applies
-        PSTOP=$(($API_PORT + 30))
+        PSTOP=5210
 	NMAPS[$TYPE]="nmap ${DIP} -p ${PSTART}-${PSTOP}"
 done
 sleep 15
