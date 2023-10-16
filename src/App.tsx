@@ -28,11 +28,19 @@ export const App = () => {
   registerLocale('en-GB', enGB)
   setDefaultLocale('en-GB');
 
+  Object.keys(process.env).forEach(function(key) {
+    console.log('export ' + key + '="' + process.env[key] +'"');
+  });
+
   var beserver = "localhost";
   if (('API_IP' in configData) && (typeof configData.API_IP === "string")) {
     beserver = configData.API_IP;
   }
+  if (process.env.API_IP) {
+    beserver = process.env.API_IP;
+  }
   const API_url = `https://${beserver}:${configData.APIPORT}/api/`;
+  console.log(`API_url is ${API_url}`);
 
   const build_mongo_data = (data: MongoReturnType): MongoData[] => {
     if (data.data && data.data.length) {
