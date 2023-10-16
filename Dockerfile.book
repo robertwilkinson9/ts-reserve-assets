@@ -17,8 +17,4 @@ RUN mkdir /src
 RUN git clone https://github.com/robertwilkinson9/ts-reserve-assets.git /src/ts-reserve-assets
 WORKDIR /src/ts-reserve-assets
 RUN npm install
-RUN : \
-    && /bin/echo -e "npm run book" > /exe \
-    && chmod +x /exe
-RUN cat /exe
-CMD ["/exe"]
+CMD ["npm", "run", "book"]
