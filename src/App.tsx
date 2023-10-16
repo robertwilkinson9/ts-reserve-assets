@@ -28,16 +28,12 @@ export const App = () => {
   registerLocale('en-GB', enGB)
   setDefaultLocale('en-GB');
 
-  Object.keys(process.env).forEach(function(key) {
-    console.log('export ' + key + '="' + process.env[key] +'"');
-  });
-
   var beserver = "localhost";
   if (('API_IP' in configData) && (typeof configData.API_IP === "string")) {
     beserver = configData.API_IP;
   }
-  if (process.env.API_IP) {
-    beserver = process.env.API_IP;
+  if (import.meta.env.VITE_API_IP) {
+    beserver = import.meta.env.VITE_API_IP;
   }
   const API_url = `https://${beserver}:${configData.APIPORT}/api/`;
   console.log(`API_url is ${API_url}`);
@@ -51,6 +47,15 @@ export const App = () => {
   }
 
   const get_mongo_data = async () => {
+
+/*
+    console.log("MY environment is ");
+    console.log("VITE_API_IP is");
+    console.log(import.meta.env.VITE_API_IP);
+    console.log("VITE_API_PORT is");
+    console.log(import.meta.env.VITE_API_PORT);
+*/
+
     const ITEMS_url = API_url + 'all_' + configData.ITEM_NAME + 's/';
     console.log(`ITEMS_url is ${ITEMS_url}`);
     try {
