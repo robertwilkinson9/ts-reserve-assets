@@ -38,7 +38,7 @@ for TYPE in ${TYPES[@]}; do
 	CONFIG_FILE=$(echo config/config.${TYPE}.json)
 	API_PORT=$(cat $CONFIG_FILE | jq --raw-output '.APIPORT')
 	FE_PORT=$(cat package.json | jq --raw-output .config.${TYPE})
-        echo FEPORT is $FE_PORT
+        echo FE_PORT is $FE_PORT
 
 	docker build -t ${TYPE}_frontend --file ${DOCKERFILE} .
 	docker run --detach --network mongo-network --env SSL_KEY=/certs/localhost.key --env SSL_CERT=/certs/localhost.crt --env API_IP=${API_IP} --env VITE_API_IP=${API_IP} --env API_PORT=${API_PORT} -p $FE_PORT:$FE_PORT ${TYPE}_frontend
