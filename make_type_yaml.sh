@@ -18,7 +18,7 @@ services:
     environment:
       SSL_CERT: "/certs/localhost.crt"
       SSL_KEY: "/certs/localhost.key"
-      API_IP: ${API_IP} 
+      API_IP: ${API_IP}
       VITE_API_IP: ${API_IP}
       API_PORT: ${API_PORT} 
 EOF
