@@ -10,8 +10,8 @@ echo TYPE is $TYPE AND JQSTRING iS ${JQSTRING} AND PORT is $PORT AND API_IP is $
 
 cat <<EOF > compose.yaml.${TYPE}
 services:
-  book_frontend:
-    container_name: book_frontend
+  ${TYPE}_frontend:
+    container_name: ${TYPE}_frontend
     build: .
     ports:
       - "${PORT}:${PORT}"
