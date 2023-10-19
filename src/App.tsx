@@ -28,16 +28,6 @@ export const App = () => {
   registerLocale('en-GB', enGB)
   setDefaultLocale('en-GB');
 
-  var beserver = "localhost";
-  if (('API_IP' in configData) && (typeof configData.API_IP === "string")) {
-    beserver = configData.API_IP;
-  }
-  if (import.meta.env.VITE_API_IP) {
-    beserver = import.meta.env.VITE_API_IP;
-  }
-  const API_url = `https://${beserver}:${configData.APIPORT}/api/`;
-  console.log(`API_url is ${API_url}`);
-
   const build_mongo_data = (data: MongoReturnType): MongoData[] => {
     if (data.data && data.data.length) {
       return data.data.map((x: MongoRecordType) => {return {"booking_start": x.booking_start, "booking_end": x.booking_end, "bucket": x.bucket, [configData.ITEM_NAME]: x[configData.ITEM_NAME]}})
@@ -48,15 +38,19 @@ export const App = () => {
 
   const get_mongo_data = async () => {
 
-/*
     console.log("MY environment is ");
+    console.log("VITE_TYPE is");
+    console.log(import.meta.env.VITE_TYPE);
     console.log("VITE_API_IP is");
     console.log(import.meta.env.VITE_API_IP);
     console.log("VITE_API_PORT is");
     console.log(import.meta.env.VITE_API_PORT);
-*/
 
-    const ITEMS_url = API_url + 'all_' + configData.ITEM_NAME + 's/';
+    const item_name = import.meta.env.VITE_TYPE || configData.ITEM_NAME;
+    const api_ip = import.meta.env.VITE_API_IP || configData.API_IP;
+    const api_port = import.meta.env.VITE_API_PORT || configData.APIPORT;
+    const api_url = `https://${api_ip}:${api_port}/api/`;
+    const ITEMS_url = api_url + 'all_' + item_name + 's/';
     console.log(`ITEMS_url is ${ITEMS_url}`);
     try {
       await axios.get<MongoReturnType>(ITEMS_url).then(response => {
