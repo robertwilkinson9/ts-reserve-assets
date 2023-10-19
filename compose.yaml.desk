@@ -1,12 +1,12 @@
 services:
-  book_frontend:
-    container_name: book_frontend
+  desk_frontend:
+    container_name: desk_frontend
     build: .
     ports:
       - "5174:5174"
     environment:
       SSL_CERT: "/certs/localhost.crt"
       SSL_KEY: "/certs/localhost.key"
-      API_IP: 172.26.0.4 
-      VITE_API_IP: 172.26.0.4
+      API_IP: 172.18.0.3
+      VITE_API_IP: 172.18.0.3
       API_PORT: 6179 
