@@ -21,4 +21,5 @@ services:
       API_IP: ${API_IP}
       VITE_API_IP: ${API_IP}
       API_PORT: ${API_PORT} 
+      TYPE: ${TYPE}
 EOF
