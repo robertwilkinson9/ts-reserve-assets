@@ -48,11 +48,47 @@ export const App = () => {
     console.log(import.meta.env.VITE_API_PORT);
 
     const item_name = import.meta.env.VITE_TYPE || configData.ITEM_NAME;
-    const api_ip = import.meta.env.VITE_API_IP || configData.API_IP;
-    const api_port = import.meta.env.VITE_API_PORT || configData.APIPORT;
+
+    const service_prefix=item_name.toUpperCase( ) + '_BACKEND_SERVICE';
+
+    const service_prefix_host_name = service_prefix + '_SERVICE_HOST';
+    console.log(`service_prefix_host_name is ${service_prefix_host_name}`); 
+
+    var service_prefix_host = "";
+    if (import.meta.env.service_prefix_host_name !== undefined) {
+      service_prefix_host = import.meta.env.service_prefix_host_name
+      console.log(`service_prefix_host is ${service_prefix_host}`); 
+    }
+    console.log(`service_prefix_host is ${service_prefix_host}`);
+
+    const service_prefix_port_name = service_prefix + '_SERVICE_PORT';
+    console.log(`service_prefix_port_name is ${service_prefix_port_name}`); 
+
+    var service_prefix_port = "";
+    if (import.meta.env.service_prefix_port_name !== undefined) {
+      service_prefix_port = import.meta.env.service_prefix_port_name
+      console.log(`service_prefix_port is ${service_prefix_port}`);
+    }
+    console.log(`service_prefix_port is ${service_prefix_port}`);
+
+    const api_ip = service_prefix_host || import.meta.env.VITE_API_IP || configData.API_IP;
+//    var api_ip = import.meta.env.VITE_API_IP || configData.API_IP;
+//    if (service_prefix_port.length) {
+//      api_ip = service_prefix_host;
+//    }
+    const api_port = service_prefix_port || import.meta.env.VITE_API_PORT || configData.APIPORT;
+//    var api_port = import.meta.env.VITE_API_PORT || configData.APIPORT;
+//    if (service_prefix_port.length) {
+//      api_port = service_prefix_port;
+//    }
     const api_url = `https://${api_ip}:${api_port}/api/`;
     const ITEMS_url = api_url + 'all_' + item_name + 's/';
+
+    console.log(`api_ip is ${api_ip}`);
+    console.log(`api_port is ${api_port}`);
+    console.log(`api_url is ${api_url}`);
     console.log(`ITEMS_url is ${ITEMS_url}`);
+
     try {
       await axios.get<MongoReturnType>(ITEMS_url).then(response => {
         const mymongodata: MongoData[] = build_mongo_data(response.data);
