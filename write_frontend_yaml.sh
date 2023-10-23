@@ -1,7 +1,9 @@
 #/bin/bash
 TYPE=$1
-BACKENDIP=$(./get_backend_IP ${TYPE})
-echo beip is $BACKENDIP
+BACKEND_IP=$(./get_backend_IP ${TYPE})
+echo beip is $BACKEND_IP
+BACKEND_PORT=$(kubectl describe pod/${TYPE}-backend | grep API_PORT | awk '{print $NF}')
+echo beport is $BACKEND_PORT
 
 cat << EOF > ${TYPE}-frontend.yaml
 ---
@@ -23,9 +25,9 @@ spec:
       - name: SSL_KEY
         value: /certs/localhost.key
       - name: VITE_API_IP
-        value: "${BACKENDIP}"
+        value: "${BACKEND_IP}"
       - name: VITE_API_PORT
-        value: "6180 "
+        value: "${BACKEND_PORT} "
       - name: VITE_TYPE
         value: "${TYPE}"
 EOF
