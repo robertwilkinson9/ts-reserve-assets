@@ -33,12 +33,15 @@ export const App = () => {
 
   const build_mongo_data = (data: MongoReturnType): MongoData[] => {
     if (data.data && data.data.length) {
-      const item_name = import.meta.env.VITE_TYPE || configData.ITEM_NAME;
+//      const item_name = import.meta.env.VITE_TYPE || configData.ITEM_NAME;
       return data.data.map((x: MongoRecordType) => {return {"booking_start": x.booking_start, "booking_end": x.booking_end, "bucket": x.bucket, [item_name]: x[item_name]}})
     } else {
       return [];
     }
   }
+
+  console.log("MY MAIN environment is ");
+  console.dir(import.meta.env);
 
   const get_api_url = () : string => {
     console.log("MY environment is ");
@@ -51,7 +54,7 @@ export const App = () => {
     console.log("VITE_API_PORT is");
     console.log(import.meta.env.VITE_API_PORT);
 
-    const item_name = import.meta.env.VITE_TYPE || configData.ITEM_NAME;
+//    const item_name = import.meta.env.VITE_TYPE || configData.ITEM_NAME;
 
     const service_prefix=item_name.toUpperCase( ) + '_BACKEND_SERVICE';
 
@@ -167,6 +170,9 @@ export const App = () => {
   }
 
   if (needreset) {reset()}
+
+  console.log("MONGODATA is");
+  console.log(mongodata);
 
   if (endDateTime && item && email && complete) {
     return (

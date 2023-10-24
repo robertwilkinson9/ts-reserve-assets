@@ -32,6 +32,10 @@ const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
 
   try {
     const response: AxiosResponse<ItemData> = await axios.post<ItemData>(url, item_booking, {headers: {'Content-Type': 'application/json'}})
+    console.log("POST Response is ");
+    console.log(response);
+    console.log("POST Response DATA is ");
+    console.log(response.data);
     console.log(`RDI is ${response.data.id}`);
     return response.data.id;
   } catch (error: unknown | AxiosError) {
