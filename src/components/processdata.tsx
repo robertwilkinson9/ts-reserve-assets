@@ -29,9 +29,11 @@ export const auxdatamerge = (aux_config: AuxConfigRecordType[], aux_data: AuxDat
 const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
   console.log("ADDING ITEM");
   console.log(item_booking);
+  console.log(`SENDING TO URL ${url}`); 
 
   try {
-    const response: AxiosResponse<ItemData> = await axios.post<ItemData>(url, item_booking, {headers: {'Content-Type': 'application/json'}})
+    const response: AxiosResponse<ItemData> = await axios.post<ItemData>(url, item_booking, {headers: [ {'Content-Type': 'application/json'}, {"Origin": url}, {'Access-Control-Allow-Origin': url}  ] } )
+//    const response: AxiosResponse<ItemData> = await axios.post<ItemData>(url, item_booking, {headers: {'Content-Type': 'application/json'}})
     console.log("POST Response is ");
     console.log(response);
     console.log("POST Response DATA is ");
