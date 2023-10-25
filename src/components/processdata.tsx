@@ -28,8 +28,8 @@ export const auxdatamerge = (aux_config: AuxConfigRecordType[], aux_data: AuxDat
 
 const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
   console.log("ADDING ITEM");
-  console.log(item_booking);
-  console.log(`SENDING TO URL ${url}`); 
+  console.dir(item_booking);
+  console.log(`SENDING TO URL ${url}`);
 
   try {
     const response: AxiosResponse<ItemData> = await axios.post<ItemData>(url, item_booking, {headers: [ {'Content-Type': 'application/json'}, {"Origin": url}, {'Access-Control-Allow-Origin': url}  ] } )
@@ -94,6 +94,9 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
 
     const confirm_action = () => {
       const ITEM_url: string = url + config.LCCOLLECTION + '/';
+      console.log(`POST ITEM_url is ${ITEM_url}`);
+      console.log("POST item_booking is ");
+      console.dir(item_booking);
 
       const id = add_item_to_mongodb(ITEM_url, item_booking);
       id.then(() => {
