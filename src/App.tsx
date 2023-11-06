@@ -39,11 +39,13 @@ export const App = () => {
     }
   }
 
+  const get_api_url = () : string => {
+
+/*
+
   console.log("MY MAIN environment is ");
   console.dir(import.meta.env);
 
-  const get_api_url = () : string => {
-/*
     console.log("MY environment is ");
     console.dir(import.meta.env);
     console.log("VITE_TYPE is");
@@ -121,8 +123,10 @@ export const App = () => {
       await axios.get<MongoReturnType>(ITEMS_url, {headers: {'Content-Type': 'application/json'}}).then(response => {
           const mymongodata: MongoData[] = build_mongo_data(response.data);
           setMongodata(mymongodata);
+/*
           console.log("MYMONGODATA");
           console.dir(mymongodata);
+*/
         }
       )
     } catch (error: unknown | AxiosError) {
@@ -150,8 +154,10 @@ export const App = () => {
     get_mongo_data();
   }, []);
 
+/*
   console.log("MY MAIN mongodata is ");
   console.dir(mongodata);
+*/
 
   const reset = (): void =>
   {
@@ -168,8 +174,10 @@ export const App = () => {
 
   if (needreset) {reset()}
 
+/*
   console.log("MONGODATA is");
   console.log(mongodata);
+*/
 
   if (endDateTime && item && email && complete) {
     return (

@@ -15,8 +15,8 @@ import { AuxConfigRecordType, AuxDataRecordType, AuxType, ItemData, MongoData, P
 import './processdata.css';
 
 export const tomorrow_from_day = (passed_date: Date): Date => {
-//  const tomorrow = new Date(passed_date);
-  const tomorrow = passed_date;
+  const tomorrow = new Date(passed_date);
+//  const tomorrow = passed_date;
   tomorrow.setDate(tomorrow.getDate() + 1);
   return tomorrow;
 }
@@ -62,9 +62,12 @@ const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
 };
 
 export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, item, set_item, email, set_email, auxdata, set_auxdata, set_complete, url, confirmed, set_confirmed, set_needreset} : ProcessDataProps) => {
+  console.log(`ProcessData given booking_start of ${booking_start}`);
  
   if (booking_start && booking_end && bucket !== null && item && email) {
     const tomorrow = tomorrow_from_day(booking_start);
+
+  console.log(`ProcessData 1 booking_start of ${booking_start}`);
 
     const date_booking : ItemData = {
       "booking_start": booking_start.toISOString(),
@@ -93,6 +96,7 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
     console.log(`BUCKET_NAME is ${config.BUCKET_NAME} and name is ${name} and ITEM is ${item} and ITEM NAME is ${config.ITEM_NAME} And ITEM LABEL is ${config.ITEM_LABEL}`);
 
     const confirm_action = () => {
+      console.log(`confirm_action given booking_start of ${booking_start}`);
       const ITEM_url: string = url + config.LCCOLLECTION + '/';
       console.log(`POST ITEM_url is ${ITEM_url}`);
       console.log("POST item_booking is ");
