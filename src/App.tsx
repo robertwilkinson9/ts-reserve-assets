@@ -150,6 +150,9 @@ export const App = () => {
     get_mongo_data();
   }, []);
 
+  console.log("MY MAIN mongodata is ");
+  console.dir(mongodata);
+
   const reset = (): void =>
   {
     setNeedreset(false);
