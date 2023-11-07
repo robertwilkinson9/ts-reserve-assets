@@ -31,7 +31,6 @@ const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
   console.log(`SENDING TO URL ${url}`);
 
   try {
-//    const response: AxiosResponse<ItemData> = await axios.post<ItemData>(url, item_booking, {headers: [ {'Content-Type': 'application/json'}, {"Origin": url}, {'Access-Control-Allow-Origin': url}  ] } )
     const response: AxiosResponse<ItemData> = await axios.post<ItemData>(url, item_booking, {headers: {'Content-Type': 'application/json'}})
     console.log("POST Response is ");
     console.log(response);
