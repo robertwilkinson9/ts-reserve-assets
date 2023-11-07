@@ -29,7 +29,7 @@ export const App = () => {
   setDefaultLocale('en-GB');
 
   const item_name = import.meta.env.VITE_TYPE || configData.ITEM_NAME;
-  console.log(`MAIN ITEM NAME IS ${item_name}`);
+//  console.log(`MAIN ITEM NAME IS ${item_name}`);
 
   const build_mongo_data = (data: MongoReturnType): MongoData[] => {
     if (data.data && data.data.length) {
@@ -41,63 +41,48 @@ export const App = () => {
 
   const get_api_url = () : string => {
 
-/*
-
-  console.log("MY MAIN environment is ");
-  console.dir(import.meta.env);
-
-    console.log("MY environment is ");
-    console.dir(import.meta.env);
-    console.log("VITE_TYPE is");
-    console.log(import.meta.env.VITE_TYPE);
-    console.log("VITE_API_IP is");
-    console.log(import.meta.env.VITE_API_IP);
-    console.log("VITE_API_PORT is");
-    console.log(import.meta.env.VITE_API_PORT);
-*/
-
     const service_prefix=item_name.toUpperCase( ) + '_BACKEND_SERVICE';
 
     const service_prefix_host_name = service_prefix + '_SERVICE_HOST';
-    console.log(`service_prefix_host_name is ${service_prefix_host_name}`); 
+//    console.log(`service_prefix_host_name is ${service_prefix_host_name}`); 
 
     var service_prefix_host = "";
     if (import.meta.env.service_prefix_host_name !== undefined) {
       service_prefix_host = import.meta.env.service_prefix_host_name
-      console.log(`service_prefix_host is ${service_prefix_host}`); 
+//      console.log(`service_prefix_host is ${service_prefix_host}`); 
     }
-    console.log(`service_prefix_host is ${service_prefix_host}`);
+//    console.log(`service_prefix_host is ${service_prefix_host}`);
 
     const service_prefix_port_name = service_prefix + '_SERVICE_PORT';
 
     var service_prefix_port = "";
     if (import.meta.env.service_prefix_port_name !== undefined) {
-      service_prefix_port = import.meta.env.service_prefix_port_name
+      service_prefix_port = import.meta.env.service_prefix_port_name;
       console.log(`service_prefix_port is ${service_prefix_port}`);
     }
 
     var vite_api_ip = "";
     if (import.meta.env.VITE_API_IP !== undefined) {
-      vite_api_ip = import.meta.env.VITE_API_IP
-      console.log(`vite_api_ip is ${vite_api_ip}`);
+      vite_api_ip = import.meta.env.VITE_API_IP;
+ //     console.log(`vite_api_ip is ${vite_api_ip}`);
     }
 
     var vite_api_port = "";
     if (import.meta.env.VITE_API_PORT !== undefined) {
-      vite_api_port = import.meta.env.VITE_API_PORT
-      console.log(`vite_api_port is ${vite_api_port}`);
+      vite_api_port = import.meta.env.VITE_API_PORT;
+//      console.log(`vite_api_port is ${vite_api_port}`);
     }
 
     var config_api_ip = "";
     if (configData.API_IP !== undefined) {
-      config_api_ip = configData.API_IP
-      console.log(`config_api_ip is ${config_api_ip}`);
+      config_api_ip = configData.API_IP;
+//      console.log(`config_api_ip is ${config_api_ip}`);
     }
 
     var config_api_port = "";
     if (configData.APIPORT !== undefined) {
-      config_api_port = configData.APIPORT
-      console.log(`config_api_port is ${config_api_port}`);
+      config_api_port = configData.APIPORT;
+ //     console.log(`config_api_port is ${config_api_port}`);
     }
 
     const api_ip = service_prefix_host || vite_api_ip || config_api_ip || 'localhost';
@@ -105,15 +90,15 @@ export const App = () => {
 
     const api_url = `https://${api_ip}:${api_port}/api/`;
 
-    console.log(`api_ip is ${api_ip}`);
-    console.log(`api_port is ${api_port}`);
-    console.log(`api_url is ${api_url}`);
+//    console.log(`api_ip is ${api_ip}`);
+//    console.log(`api_port is ${api_port}`);
+//    console.log(`api_url is ${api_url}`);
 
     return api_url
   }
 
   const api_url = get_api_url();
-  console.log(`MAIN API_URL is ${api_url}`);
+//  console.log(`MAIN API_URL is ${api_url}`);
   const ITEMS_url = api_url + 'all_' + item_name + 's/';
   console.log(`MAIN ITEMS_url is ${ITEMS_url}`);
 
@@ -123,10 +108,6 @@ export const App = () => {
       await axios.get<MongoReturnType>(ITEMS_url, {headers: {'Content-Type': 'application/json'}}).then(response => {
           const mymongodata: MongoData[] = build_mongo_data(response.data);
           setMongodata(mymongodata);
-/*
-          console.log("MYMONGODATA");
-          console.dir(mymongodata);
-*/
         }
       )
     } catch (error: unknown | AxiosError) {
@@ -154,11 +135,6 @@ export const App = () => {
     get_mongo_data();
   }, []);
 
-/*
-  console.log("MY MAIN mongodata is ");
-  console.dir(mongodata);
-*/
-
   const reset = (): void =>
   {
     setNeedreset(false);
@@ -173,11 +149,6 @@ export const App = () => {
   }
 
   if (needreset) {reset()}
-
-/*
-  console.log("MONGODATA is");
-  console.log(mongodata);
-*/
 
   if (endDateTime && item && email && complete) {
     return (

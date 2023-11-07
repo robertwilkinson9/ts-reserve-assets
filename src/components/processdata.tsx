@@ -31,8 +31,8 @@ const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
   console.log(`SENDING TO URL ${url}`);
 
   try {
-    const response: AxiosResponse<ItemData> = await axios.post<ItemData>(url, item_booking, {headers: [ {'Content-Type': 'application/json'}, {"Origin": url}, {'Access-Control-Allow-Origin': url}  ] } )
-//    const response: AxiosResponse<ItemData> = await axios.post<ItemData>(url, item_booking, {headers: {'Content-Type': 'application/json'}})
+//    const response: AxiosResponse<ItemData> = await axios.post<ItemData>(url, item_booking, {headers: [ {'Content-Type': 'application/json'}, {"Origin": url}, {'Access-Control-Allow-Origin': url}  ] } )
+    const response: AxiosResponse<ItemData> = await axios.post<ItemData>(url, item_booking, {headers: {'Content-Type': 'application/json'}})
     console.log("POST Response is ");
     console.log(response);
     console.log("POST Response DATA is ");
@@ -61,12 +61,9 @@ const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
 };
 
 export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, item, set_item, email, set_email, auxdata, set_auxdata, set_complete, url, confirmed, set_confirmed, set_needreset} : ProcessDataProps) => {
-  console.log(`ProcessData given booking_start of ${booking_start}`);
  
   if (booking_start && booking_end && bucket !== null && item && email) {
     const tomorrow = tomorrow_from_day(booking_start);
-
-  console.log(`ProcessData 1 booking_start of ${booking_start}`);
 
     const date_booking : ItemData = {
       "booking_start": booking_start.toISOString(),
