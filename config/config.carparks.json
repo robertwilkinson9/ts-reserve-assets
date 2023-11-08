@@ -12,16 +12,16 @@
   "BUCKETS":
   [
     {
-      "name": "lower carpark",
-      "prefix": "lc",
-      "ifirst": 1,
-      "ilast": 40
+      "NAME": "lower carpark",
+      "PREFIX": "lc",
+      "IFIRST": 1,
+      "ILAST": 40
     },
     {
-      "name": "upper carpark",
-      "prefix": "uc",
-      "ifirst": 1,
-      "ilast": 80
+      "NAME": "upper carpark",
+      "PREFIX": "uc",
+      "IFIRST": 1,
+      "ILAST": 80
     }
   ],
   "SCHEMA": {

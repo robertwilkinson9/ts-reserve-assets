@@ -6,22 +6,22 @@
   "BUCKETS":
   [
     {
-      "name": "window table - seats 6",
-      "prefix": "wt",
-      "ifirst": 1,
-      "ilast": 6
+      "NAME": "window table - seats 6",
+      "PREFIX": "wt",
+      "IFIRST": 1,
+      "ILAST": 6
     },
     {
-      "name": "central table - seats 4",
-      "prefix": "ct",
-      "ifirst": 1,
-      "ilast": 4
+      "NAME": "central table - seats 4",
+      "PREFIX": "ct",
+      "IFIRST": 1,
+      "ILAST": 4
     },
     {
-      "name": "rear table - seats 8",
-      "prefix": "rt",
-      "ifirst": 1,
-      "ilast": 8
+      "NAME": "rear table - seats 8",
+      "PREFIX": "rt",
+      "IFIRST": 1,
+      "ILAST": 8
     }
   ]
 }

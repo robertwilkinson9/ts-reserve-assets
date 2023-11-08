@@ -5,7 +5,7 @@
 * the tables in the restaurant, the tables are the buckets, the bookable seats the items.
 
 * these items are presented to the author as pull down lists once the bucket radio button is selected
-* we filter the out those items currently booked at the time requested from those presented 
+* filter out those items currently booked at the time requested from those presented 
 */
 
 import React from 'react';
@@ -52,14 +52,11 @@ const listbuild = (istart:number | undefined, ilast:number | undefined, prefix: 
 export const get_items_from_config = ({config, bucket}: BucketReadProps): string[] | undefined => {
   let items: string[] | undefined = [];
 
-//    "ITEMS": ["first one", "second two", "third three"],
-
-//  if ((bucket !== null) && config.BUCKETS.length && (config.BUCKETS[bucket] !== undefined)) {
   if ((bucket !== null) && config.BUCKETS !== undefined && config.BUCKETS.length && (config.BUCKETS[bucket] !== undefined)) {
     if ('ITEMS' in config.BUCKETS[bucket]) {
       items = config.BUCKETS[bucket].ITEMS;
     } else {
-      if (config.BUCKETS[bucket].ifirst && config.BUCKETS[bucket].ilast) {
+      if (config.BUCKETS[bucket].IFIRST && config.BUCKETS[bucket].ILAST) {
         items = listbuild(config.BUCKETS[bucket].IFIRST, config.BUCKETS[bucket].ILAST, config.BUCKETS[bucket].PREFIX, config.BUCKETS[bucket].SUFFIX);
       }
     }

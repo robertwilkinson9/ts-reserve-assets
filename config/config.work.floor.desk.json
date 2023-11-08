@@ -8,22 +8,22 @@
   "BUCKETS":
   [
     {
-      "name": "ground",
-      "prefix": "gf",
-      "ifirst": 7,
-      "ilast": 43
+      "NAME": "ground",
+      "PREFIX": "gf",
+      "IFIRST": 7,
+      "ILAST": 43
     },
     {
-      "name": "first",
-      "prefix": "ff",
-      "ifirst": 7,
-      "ilast": 33
+      "NAME": "first",
+      "PREFIX": "ff",
+      "IFIRST": 7,
+      "ILAST": 33
     },
     {
-      "name": "second",
-      "prefix": "2f",
-      "ifirst": 7,
-      "ilast": 27
+      "NAME": "second",
+      "PREFIX": "2f",
+      "IFIRST": 7,
+      "ILAST": 27
     }
   ],
   "SCHEMA": {
