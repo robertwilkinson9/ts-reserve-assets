@@ -14,6 +14,8 @@ import { Select } from '@chakra-ui/react'
 
 import { BucketReadProps, ItemsProps, Select_type} from './interfaces';
 
+import {hasOwnProperty} from './utils';
+
 const items_select = (items: string[]): Select_type[] => {
   return items.map((item) => {return {value: item, label: item};});
 }
@@ -47,14 +49,15 @@ const listbuild = (istart:number | undefined, ilast:number | undefined, prefix: 
 *
 */
 
-const get_items_from_config = ({config, bucket}: BucketReadProps): string[] | undefined => {
+export const get_items_from_config = ({config, bucket}: BucketReadProps): string[] | undefined => {
   let items: string[] | undefined = [];
 
-  if (bucket !== null) {
-    let cbi : string[] | undefined = [];
-    cbi = config.BUCKETS[bucket].items;
-    if (cbi && cbi.length) {
-      items = cbi;
+//    "ITEMS": ["first one", "second two", "third three"],
+
+//  if ((bucket !== null) && config.BUCKETS.length && (config.BUCKETS[bucket] !== undefined)) {
+  if ((bucket !== null) && config.BUCKETS !== undefined && config.BUCKETS.length && (config.BUCKETS[bucket] !== undefined)) {
+    if ('ITEMS' in config.BUCKETS[bucket]) {
+      items = config.BUCKETS[bucket].ITEMS;
     } else {
       if (config.BUCKETS[bucket].ifirst && config.BUCKETS[bucket].ilast) {
         items = listbuild(config.BUCKETS[bucket].ifirst, config.BUCKETS[bucket].ilast, config.BUCKETS[bucket].prefix, config.BUCKETS[bucket].suffix);
@@ -66,22 +69,31 @@ const get_items_from_config = ({config, bucket}: BucketReadProps): string[] | un
  
 /**
 *
-* we create a pulldown list for the selected bucket
+* create a pulldown list for the selected bucket
 *
 */
 
 export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps) => {
   let items: string[] | undefined = [];
 
+      console.log("BUCKET IS");
+      console.dir(bucket);
+
+/*
+      console.log("CONFIG IS");
+      console.dir(config);
+*/
+
   if (bucket !== null) {
     items = get_items_from_config({config, bucket});
 
+      console.log("ITEMS are ");
+      console.dir(items);
+
     if (allocated_items) {
 
-/*
       console.log("ALLOCATED ITEMS");
       console.dir(allocated_items);
-*/
 
       const bucket_items = allocated_items.filter(it => {return bucket == it.bucket});
       if (bucket_items) {

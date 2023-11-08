@@ -2,14 +2,14 @@
  * @vitest-environment jsdom
  */
 
-import { render } from '@testing-library/react';
+import { render, toBe } from '@testing-library/react';
 // import { render, screen } from '@testing-library/react';
 // import selectEvent from 'react-select-event'
 
 import { MongoData } from '../components/interfaces';
-import { Items } from '../components/items';
+import { get_items_from_config, Items } from '../components/items';
 
-const test_config = {
+const test_numeric_config = {
   "APIPORT": 1234,
   "LCCOLLECTION": "test",
   "ITEM_NAME": "test_items_name",
@@ -32,15 +32,30 @@ const test_config = {
   ]
 }
 
+const test_list_config = {
+  "APIPORT": 1235,
+  "LCCOLLECTION": "listtest",
+  "ITEM_NAME": "listtest_items_name",
+  "ITEM_LABEL": "listtest_items_label",
+  "BUCKET_NAME": "listtest_items",
+  "BUCKETS":
+  [
+    {
+    "ITEMS": ["first one", "second two", "third three"],
+    }
+  ]
+}
+
 const null_setter = () => {};
  
 // export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps
 // const renderItems = (num: number = 0, bucket: number = 0, allocated_items: MongoData[] = []) => {
 const renderItems = (bucket: number = 0, allocated_items: MongoData[] = []) => {
   const key = 'key__' + bucket;
+
+  console.log(`KEY is ${key}`);
   
-  return render(<Items key={key} id={key} config={test_config} bucket={bucket} allocated_items={allocated_items} set_item={null_setter} />);
-//  return render(<Items config={test_config} bucket={bucket} allocated_items={allocated_items} set_item={null_setter} />);
+  return render(<Items key={key} id={key} config={test_numeric_config} bucket={bucket} allocated_items={allocated_items} set_item={null_setter} />);
 }
 
 describe('label test', () => {
@@ -50,49 +65,71 @@ describe('label test', () => {
     const ItemsDiv = await findAllByTestId("items_div");
     const firstItemsDiv = ItemsDiv[0];
     expect(firstItemsDiv).toBeInTheDocument();
-//    console.log(ItemsDiv);
   });
 
-//  it("should contain a items div element", async () => {
-//    const { findAllByTestId } = renderItems();
+  it("should contain a items div element", async () => {
+    const { findAllByTestId } = renderItems();
 
-//    const ItemsDiv = await findAllByTestId("items_div");
-//    const firstItemsDiv = ItemsDiv[0];
-//    expect(firstItemsDiv).toBeInTheDocument();
-//  });
+    const ItemsDiv = await findAllByTestId("items_div");
+    const firstItemsDiv = ItemsDiv[0];
+    expect(firstItemsDiv).toBeInTheDocument();
+  });
 
   it("should contain a items label label element", async () => {
-//    const { findByTestId } = renderItems();
+    const { findByTestId } = renderItems();
 
-//    const ItemsLabel = await findByTestId("items_label");
-//    expect(ItemsLabel).toBeInTheDocument();
+    const ItemsLabel = await findByTestId("items_label");
+    expect(ItemsLabel).toBeInTheDocument();
   });
 
-//  it("items label label element should have the correct value", async () => {
-//    const { findByTestId } = renderItems();
-//
-//    const ItemsLabel = await findByTestId("items_label");
-//    expect(ItemsLabel).toHaveTextContent("Test_items_name");
-//  });
+  it("items label label element should have the correct value", async () => {
+    const { findByTestId } = renderItems();
+
+    const ItemsLabel = await findByTestId("items_label");
+    expect(ItemsLabel).toHaveTextContent("Test_items_name");
+  });
 });
 
-//describe('items test', () => {
-//  const { container, findByDisplayValue, getByText, getByLabelText, queryAllByLabelText, getByTestId } = renderItems(42);
-//
-//  it("Select list should have select element values", async () => {
-////    const my_item =  container.querySelector('#itemPulldown')
-////    await container.querySelector('#itemPulldown')
-////    await selectEvent.select(getByText('Test_items_name'), 'f02')
-////    await selectEvent.select(getByLabelText('Test_items_name'), 'f02')
-//    const labels = queryAllByLabelText(/Test_items_name/);
-//    const llen = labels.length;
-//    console.log("SIZE OF LABELS is ",llen);
-////    await selectEvent.select(queryAllByLabelText(/Test_items_name/)[0], 'f02')
-////    await selectEvent.select(queryAllByLabelText(/t/), 'f02')
-////    await selectEvent.select(findByDisplayValue('Test_items_name'), 'f02')
-////    expect(my_item).toHaveFormValues({food: 'chocolate',})
-//  });
-//});
+describe('get_items_from_config test', () => {
+  const data = {"config": test_numeric_config, "bucket": 0};
+  const items = get_items_from_config(data);
+  it("Numeric items computed from config should have selected element values", async () => {
+    console.log(`First Item is ${items[0]}`);
+    expect(items[0]).toBe('f01');
+    console.log(`Tenth Item is ${items[9]}`);
+    expect(items[9]).toBe('f10');
+  });
+
+  const listdata = {"config": test_list_config, "bucket": 0};
+  const listitems = get_items_from_config(listdata);
+  it("List items from config should have selected element values", async () => {
+    console.log(`First Item is ${listitems[0]}`);
+    expect(listitems[0]).toBe('first one');
+    console.log(`Third Item is ${listitems[2]}`);
+    expect(listitems[2]).toBe('third three');
+  });
+});
+
+describe('items test', () => {
+  const { container, findByDisplayValue, getByText, getByLabelText, queryAllByLabelText, getByTestId } = renderItems(42);
+
+  it("Select list should have select element values", async () => {
+    const my_item =  container.querySelector('#itemPulldown')
+    console.log("MY ITEM IS");
+    console.dir(my_item);
+//    await container.querySelector('#itemPulldown')
+//    await selectEvent.select(getByText('Test_items_name'), 'f02')
+//    await selectEvent.select(getByLabelText('Test_items_name'), 'f02')
+    const labels = queryAllByLabelText(/test_items_name/);
+    console.log("LABELS is ",labels);
+    const llen = labels.length;
+    console.log("SIZE OF LABELS is ",llen);
+//    await selectEvent.select(queryAllByLabelText(/Test_items_name/)[0], 'f02')
+//    await selectEvent.select(queryAllByLabelText(/t/), 'f02')
+//    await selectEvent.select(findByDisplayValue('Test_items_name'), 'f02')
+//    expect(my_item).toHaveFormValues({food: 'chocolate',})
+  });
+});
 
 //describe('items test', () => {
 //  it("Select list should have correct values", async () => {
