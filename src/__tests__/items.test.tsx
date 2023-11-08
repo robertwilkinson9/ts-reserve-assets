@@ -18,16 +18,16 @@ const test_numeric_config = {
   "BUCKETS":
   [
     {
-      "name": "first",
-      "prefix": "f",
-      "ifirst": 1,
-      "ilast": 10
+      "NAME": "first",
+      "PREFIX": "f",
+      "IFIRST": 1,
+      "ILAST": 10
     },
     {
-      "name": "second",
-      "prefix": "s",
-      "ifirst": 11,
-      "ilast": 20
+      "NAME": "second",
+      "PREFIX": "s",
+      "IFIRST": 11,
+      "ILAST": 20
     }
   ]
 }

@@ -14,7 +14,7 @@ import { Select } from '@chakra-ui/react'
 
 import { BucketReadProps, ItemsProps, Select_type} from './interfaces';
 
-import {hasOwnProperty} from './utils';
+// import {hasOwnProperty} from './utils';
 
 const items_select = (items: string[]): Select_type[] => {
   return items.map((item) => {return {value: item, label: item};});
@@ -60,7 +60,7 @@ export const get_items_from_config = ({config, bucket}: BucketReadProps): string
       items = config.BUCKETS[bucket].ITEMS;
     } else {
       if (config.BUCKETS[bucket].ifirst && config.BUCKETS[bucket].ilast) {
-        items = listbuild(config.BUCKETS[bucket].ifirst, config.BUCKETS[bucket].ilast, config.BUCKETS[bucket].prefix, config.BUCKETS[bucket].suffix);
+        items = listbuild(config.BUCKETS[bucket].IFIRST, config.BUCKETS[bucket].ILAST, config.BUCKETS[bucket].PREFIX, config.BUCKETS[bucket].SUFFIX);
       }
     }
   }

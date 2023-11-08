@@ -1,5 +1,5 @@
 /**
-* we process the form data, allow a confirmation or cancellation
+* process the form data, allow a confirmation or cancellation
 * then save the item to the backend data store on confirmation with expiration
 * of the record set for the day after the booking
 */
@@ -83,8 +83,8 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
     aux_merged.forEach((item, key) => {date_booking[key] = item; aux_string += `KEY is ${key} and ITEM is ${item}\n`; console.log(aux_string);});
    
     let name = "Anononymous";
-    if ((config.BUCKETS) && config.BUCKETS[bucket] && config.BUCKETS[bucket].name) {
-      name = config.BUCKETS[bucket].name; 
+    if ((config.BUCKETS) && config.BUCKETS[bucket] && config.BUCKETS[bucket].NAME) {
+      name = config.BUCKETS[bucket].NAME;
     }
     const item_booking = Object.assign(date_booking, { [config.BUCKET_NAME]: name });
 

@@ -8,14 +8,14 @@
   "BUCKETS":
   [
     {
-      "name": "green",
-      "prefix": "g_",
-      "ifirst": 1,
-      "ilast": 100
+      "NAME": "green",
+      "PREFIX": "g_",
+      "IFIRST": 1,
+      "ILAST": 100
     },
     {
-      "name": "red",
-      "items": [
+      "NAME": "red",
+      "ITEMS": [
         "A Clergyman's Daughter",
         "Animal Farm",
         "Burmese Days",

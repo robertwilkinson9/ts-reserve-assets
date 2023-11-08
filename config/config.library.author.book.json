@@ -8,8 +8,8 @@
   "BUCKETS":
   [
     {
-      "name": "Jane Austen",
-      "items": [
+      "NAME": "Jane Austen",
+      "ITEMS": [
         "Emma",
         "Mansfield Park",
         "Northanger Abbey",
@@ -19,8 +19,8 @@
       ]
     },
     {
-      "name": "George Orwell",
-      "items": [
+      "NAME": "George Orwell",
+      "ITEMS": [
         "A Clergyman's Daughter",
         "Animal Farm",
         "Burmese Days",
