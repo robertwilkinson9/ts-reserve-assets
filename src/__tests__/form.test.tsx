@@ -69,8 +69,6 @@ describe('it item contents', () => {
     const { findByTestId } = renderInputForm();
 
     const InputFormlabel = await findByTestId("emailaddress_label");
-//    console.log("LABEL");
-//    console.log(InputFormlabel);
 
     expect(InputFormlabel).toHaveTextContent('Email address');
 
@@ -82,11 +80,6 @@ describe('it item contents', () => {
 //grep testid form.html 
     const email = "email@domain.org";
     const itemprops = {email: email};
-
-/*
-    console.log("itemprops");
-    console.log(itemprops);
-*/
 
 //    const { findByTestId, queryAllByTestId } = renderInputForm(itemprops);
 
