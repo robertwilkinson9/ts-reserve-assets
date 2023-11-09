@@ -83,8 +83,10 @@ describe('it item contents', () => {
     const email = "email@domain.org";
     const itemprops = {email: email};
 
+/*
     console.log("itemprops");
     console.log(itemprops);
+*/
 
 //    const { findByTestId, queryAllByTestId } = renderInputForm(itemprops);
 

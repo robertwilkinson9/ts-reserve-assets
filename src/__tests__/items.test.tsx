@@ -49,12 +49,9 @@ const test_list_config = {
 const null_setter = () => {};
  
 // export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps
-// const renderItems = (num: number = 0, bucket: number = 0, allocated_items: MongoData[] = []) => {
 const renderItems = (bucket: number = 0, allocated_items: MongoData[] = []) => {
   const key = 'key__' + bucket;
 
-  console.log(`KEY is ${key}`);
-  
   return render(<Items key={key} id={key} config={test_numeric_config} bucket={bucket} allocated_items={allocated_items} set_item={null_setter} />);
 }
 
@@ -94,34 +91,28 @@ describe('get_items_from_config test', () => {
   const data = {"config": test_numeric_config, "bucket": 0};
   const items = get_items_from_config(data);
   it("Numeric items computed from config should have selected element values", async () => {
-    console.log(`First Item is ${items[0]}`);
     expect(items[0]).toBe('f01');
-    console.log(`Tenth Item is ${items[9]}`);
     expect(items[9]).toBe('f10');
   });
 
   const listdata = {"config": test_list_config, "bucket": 0};
   const listitems = get_items_from_config(listdata);
   it("List items from config should have selected element values", async () => {
-    console.log(`First Item is ${listitems[0]}`);
     expect(listitems[0]).toBe('first one');
-    console.log(`Third Item is ${listitems[2]}`);
     expect(listitems[2]).toBe('third three');
   });
 });
 
 describe('items test', () => {
   it("All items should be available if none allocated", async () => {
-    const { findByTestId, getAllByRole, getAllByText } = renderItems();
     const test_data_0 = {"config": test_numeric_config, "bucket": 0, "allocated_items": [], "set_item": null_setter};
+    const { findByTestId, getAllByRole, getAllByText } = renderItems(0, []);
 
     const Itemslabel = await findByTestId("items_label");
     expect(Itemslabel).toBeInTheDocument();
 
     const OptionsText = await getAllByRole('option');
     const options_values = OptionsText.map((it) => { return it.value });
-//    console.log("OPTIONS Values");
-//    console.dir(options_values);
    
     expect(options_values.length).toBe(11);
     expect(options_values[options_values.length - 1]).toBe('f10');
@@ -136,51 +127,21 @@ describe('items test', () => {
     const allocated_items_1 = {"booking_start": start_test_date, "booking_end": end_test_date, "bucket": "0", "expireAt": expiry_test_date, "email": "me@there.com", "test_items_name": "f09"};
     const allocated_items = [ allocated_items_0, allocated_items_1 ]
 
-    const test_data_1 = {"config": test_numeric_config, "bucket": 0, "allocated_items": allocated_items, "set_item": null_setter};
+    const { findByTestId, getAllByRole, getAllByText } = renderItems(0, allocated_items);
 
-    const items = Items(test_data_1);
-    console.log("ITD 1");
-    console.dir(test_data_1)
+    const Itemslabel = await findByTestId("items_label");
+    expect(Itemslabel).toBeInTheDocument();
+
+    const OptionsText = await getAllByRole('option');
+    const options_values = OptionsText.map((it) => { return it.value });
+   
+    expect(options_values.length).toBe(9);
+    const expected = ['', 'f01', 'f02', 'f03', 'f04',
+  'f05', 'f06', 'f08', 'f10'];
+
+    expect(options_values).toStrictEqual(expected);
   });
-
-//  it("ANother items should not be available", async () => {
-//
-//
-////    const my_item =  container.querySelector('#itemPulldown')
-////    console.log("MY ITEM IS");
-////    console.dir(my_item);
-////    await container.querySelector('#itemPulldown')
-////    await selectEvent.select(getByText('Test_items_name'), 'f02')
-////    await selectEvent.select(getByLabelText('Test_items_name'), 'f02')
-//    const labels = queryAllByLabelText(/test_items_name/);
-//    console.log("LABELS is ",labels);
-//    const llen = labels.length;
-//    console.log("SIZE OF LABELS is ",llen);
-////    await selectEvent.select(queryAllByLabelText(/Test_items_name/)[0], 'f02')
-////    await selectEvent.select(queryAllByLabelText(/t/), 'f02')
-////    await selectEvent.select(findByDisplayValue('Test_items_name'), 'f02')
-////    expect(my_item).toHaveFormValues({food: 'chocolate',})
-//  });
 });
-
-//describe('items test', () => {
-//  it("Select list should have correct values", async () => {
-////    const test_label = "date_test";
-////    const test_date_string = "31/12/1999 11:59 PM";
-////    const test_date = new Date("1999-12-31T23:59");
-//
-////    const { findByTestId } = renderItems();
-//    renderItems();
-//
-//    const combo_box = screen.getByRole('combobox');
-////    const dropdown = combo_box.querySelector('input')
-////    console.log("DROPDOWN");
-////    console.log(dropdown);
-//    console.log("COMBO BOX");
-//    console.log(combo_box);
-////    expect(combo_box).toHaveAttribute("value", test_date_string);
-//  });
-//});
 
 //describe('items test', () => {
 //  it("Select list should have correct values via id selector", async () => {

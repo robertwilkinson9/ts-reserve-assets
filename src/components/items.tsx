@@ -14,8 +14,6 @@ import { Select } from '@chakra-ui/react'
 
 import { BucketReadProps, ItemsProps, Select_type} from './interfaces';
 
-// import {hasOwnProperty} from './utils';
-
 const items_select = (items: string[]): Select_type[] => {
   return items.map((item) => {return {value: item, label: item};});
 }
@@ -73,50 +71,75 @@ export const get_items_from_config = ({config, bucket}: BucketReadProps): string
 export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps) => {
   let items: string[] | undefined = [];
 
+/*
       console.log("BUCKET IS");
       console.dir(bucket);
 
       console.log("CONFIG IS");
       console.dir(config);
+*/
 
   if (bucket !== null) {
     items = get_items_from_config({config, bucket});
 
+/*
       console.log("ITEMS are ");
       console.dir(items);
+*/
 
     if (allocated_items) {
 
+/*
       console.log("ALLOCATED ITEMS");
       console.dir(allocated_items);
+*/
 
       const bucket_items = allocated_items.filter(it => {return bucket == it.bucket});
       if (bucket_items) {
 
+/*
         console.log("BUCKET ITEMS");
         console.dir(bucket_items);
+*/
 
         const reserved_items = bucket_items.map(x => {return x[config.ITEM_NAME]});
 
+/*
         console.log("RESERVED ITEMS");
         console.dir(reserved_items);
+*/
 
         if (items) {
 
+/*
           console.log("ITEMS");
           console.dir(items);
+*/
 
           items = items.filter(n => !reserved_items.includes(n)); // slow and simple set difference 
+
+/*
+          console.log("ITEMS AFTER FILETR");
+          console.dir(items);
+*/
         }
       }
     }
   }
 
   if (items) {
+/*
     console.log("ITEMS 1 ");
     console.dir(items);
+*/
 
     const select_item_list: Select_type[] = items_select(items)
+
+/*
+    console.log("SELECT ITEM LIST ");
+    console.dir(select_item_list);
+*/
+
     const select_option_list = select_item_list.map((item, key) => { return (<React.Fragment key={key}><option value={item.value}>{item.label}</option></React.Fragment>) });
 
     const capitalizeFirstLetter = (name: string) => {if (name && name.length) {return name.charAt(0).toUpperCase() + name.slice(1);} else {return "X"} }
