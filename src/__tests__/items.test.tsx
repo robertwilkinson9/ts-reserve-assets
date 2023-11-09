@@ -111,24 +111,56 @@ describe('get_items_from_config test', () => {
 });
 
 describe('items test', () => {
-  const { container, findByDisplayValue, getByText, getByLabelText, queryAllByLabelText, getByTestId } = renderItems(42);
+  it("All items should be available if none allocated", async () => {
+    const { findByTestId, getAllByRole, getAllByText } = renderItems();
+    const test_data_0 = {"config": test_numeric_config, "bucket": 0, "allocated_items": [], "set_item": null_setter};
 
-  it("Select list should have select element values", async () => {
-    const my_item =  container.querySelector('#itemPulldown')
-    console.log("MY ITEM IS");
-    console.dir(my_item);
-//    await container.querySelector('#itemPulldown')
-//    await selectEvent.select(getByText('Test_items_name'), 'f02')
-//    await selectEvent.select(getByLabelText('Test_items_name'), 'f02')
-    const labels = queryAllByLabelText(/test_items_name/);
-    console.log("LABELS is ",labels);
-    const llen = labels.length;
-    console.log("SIZE OF LABELS is ",llen);
-//    await selectEvent.select(queryAllByLabelText(/Test_items_name/)[0], 'f02')
-//    await selectEvent.select(queryAllByLabelText(/t/), 'f02')
-//    await selectEvent.select(findByDisplayValue('Test_items_name'), 'f02')
-//    expect(my_item).toHaveFormValues({food: 'chocolate',})
+    const Itemslabel = await findByTestId("items_label");
+    expect(Itemslabel).toBeInTheDocument();
+
+    const OptionsText = await getAllByRole('option');
+    const options_values = OptionsText.map((it) => { return it.value });
+//    console.log("OPTIONS Values");
+//    console.dir(options_values);
+   
+    expect(options_values.length).toBe(11);
+    expect(options_values[options_values.length - 1]).toBe('f10');
   });
+
+  it("Allocated items should not be available", async () => {
+    const start_test_date = new Date("1999-12-31T00:00");
+    const end_test_date = new Date("1999-12-31T11:59");
+    const expiry_test_date = new Date("2000-01-01T00:00");
+
+    const allocated_items_0 = {"booking_start": start_test_date, "booking_end": end_test_date, "bucket": "0", "expireAt": expiry_test_date, "email": "me@there.com", "test_items_name": "f07"};
+    const allocated_items_1 = {"booking_start": start_test_date, "booking_end": end_test_date, "bucket": "0", "expireAt": expiry_test_date, "email": "me@there.com", "test_items_name": "f09"};
+    const allocated_items = [ allocated_items_0, allocated_items_1 ]
+
+    const test_data_1 = {"config": test_numeric_config, "bucket": 0, "allocated_items": allocated_items, "set_item": null_setter};
+
+    const items = Items(test_data_1);
+    console.log("ITD 1");
+    console.dir(test_data_1)
+  });
+
+//  it("ANother items should not be available", async () => {
+//
+//
+////    const my_item =  container.querySelector('#itemPulldown')
+////    console.log("MY ITEM IS");
+////    console.dir(my_item);
+////    await container.querySelector('#itemPulldown')
+////    await selectEvent.select(getByText('Test_items_name'), 'f02')
+////    await selectEvent.select(getByLabelText('Test_items_name'), 'f02')
+//    const labels = queryAllByLabelText(/test_items_name/);
+//    console.log("LABELS is ",labels);
+//    const llen = labels.length;
+//    console.log("SIZE OF LABELS is ",llen);
+////    await selectEvent.select(queryAllByLabelText(/Test_items_name/)[0], 'f02')
+////    await selectEvent.select(queryAllByLabelText(/t/), 'f02')
+////    await selectEvent.select(findByDisplayValue('Test_items_name'), 'f02')
+////    expect(my_item).toHaveFormValues({food: 'chocolate',})
+//  });
 });
 
 //describe('items test', () => {

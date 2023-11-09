@@ -76,10 +76,8 @@ export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps
       console.log("BUCKET IS");
       console.dir(bucket);
 
-/*
       console.log("CONFIG IS");
       console.dir(config);
-*/
 
   if (bucket !== null) {
     items = get_items_from_config({config, bucket});
@@ -95,18 +93,18 @@ export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps
       const bucket_items = allocated_items.filter(it => {return bucket == it.bucket});
       if (bucket_items) {
 
-/*
         console.log("BUCKET ITEMS");
         console.dir(bucket_items);
-*/
 
         const reserved_items = bucket_items.map(x => {return x[config.ITEM_NAME]});
+
+        console.log("RESERVED ITEMS");
+        console.dir(reserved_items);
+
         if (items) {
 
-/*
           console.log("ITEMS");
           console.dir(items);
-*/
 
           items = items.filter(n => !reserved_items.includes(n)); // slow and simple set difference 
         }
@@ -115,6 +113,9 @@ export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps
   }
 
   if (items) {
+    console.log("ITEMS 1 ");
+    console.dir(items);
+
     const select_item_list: Select_type[] = items_select(items)
     const select_option_list = select_item_list.map((item, key) => { return (<React.Fragment key={key}><option value={item.value}>{item.label}</option></React.Fragment>) });
 
