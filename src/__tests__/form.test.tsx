@@ -8,7 +8,7 @@ import { render } from '@testing-library/react';
 // import Form from 'react-bootstrap/Form';
 
 import {InputFormProps} from '../components/interfaces'
-import InputForm from '../components/form';
+import { InputForm, overlap } from '../components/form';
 
 const test_config = {
   "APIPORT": 1234,
@@ -62,6 +62,45 @@ function renderInputForm(props: Partial<InputFormProps> = {}) {
 test('use jsdom in this test file', () => {
   const element = document.createElement('div')
   expect(element).not.toBeNull()
+})
+
+describe('overlap function tests', () => {
+  it("no overlap should be false", async () => {
+    const adate = new Date("1999-12-31T00:00");
+    const bdate = new Date("1999-12-31T01:00");
+
+    const xdate = new Date("1999-12-31T02:00");
+    const ydate = new Date("1999-12-31T03:00");
+
+    const overlap_result = overlap(adate, bdate, xdate, ydate);
+    expect(overlap_result).toBe(false);
+  });
+
+  it("overlap should be true", async () => {
+    const adate = new Date("1999-12-31T00:00");
+    const bdate = new Date("1999-12-31T02:00");
+
+    const xdate = new Date("1999-12-31T01:00");
+    const ydate = new Date("1999-12-31T03:00");
+
+    const overlap_result = overlap(adate, bdate, xdate, ydate);
+    expect(overlap_result).toBe(true);
+  });
+
+  it("containment should be true", async () => {
+    const adate = new Date("1999-12-31T00:00");
+    const bdate = new Date("1999-12-31T03:00");
+
+    const xdate = new Date("1999-12-31T01:00");
+    const ydate = new Date("1999-12-31T02:00");
+
+    const overlap_result = overlap(adate, bdate, xdate, ydate);
+/*
+    console.log(overlap_result);
+    console.dir(overlap_result);
+*/
+    expect(overlap_result).toBe(true);
+  });
 })
 
 describe('it item contents', () => {
