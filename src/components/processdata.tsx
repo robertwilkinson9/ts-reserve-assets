@@ -147,7 +147,7 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
       }
       let fstr = `No ${config.BUCKET_NAME}`;
       if ((typeof bucket === 'number') && Number.isInteger(bucket)) {
-        fstr = `${config.BUCKETS[bucket].name} ${config.BUCKET_NAME}`;
+        fstr = `${config.BUCKETS[bucket].NAME} ${config.BUCKET_NAME}`;
       }
 
       return (
