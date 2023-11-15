@@ -17,6 +17,6 @@ The npm targets all_desks and all_books will run the backend and frontend in par
 
 SSL_CRT and SSL_KEY are required environmental variables e.g.
 
-SSL_CRT=../certs/localhost.crt SSL_KEY=../certs/localhost.key npm run desk
+<code>SSL_CRT=../certs/localhost.crt SSL_KEY=../certs/localhost.key npm run desk</code>
 
-MongoDB is used at the backend. The backend is another project here .. and presents a REST API to the MongoDB datastore.
+MongoDB is used at the backend. The backend is another project < a href="https://github.com/robertwilkinson9/ts-REST-api-for-mongodb">here</a>
