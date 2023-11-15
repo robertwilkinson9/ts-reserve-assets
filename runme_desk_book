@@ -1,4 +1,8 @@
 #!/usr/bin/bash
+#
+# AKA the procedural way to build containers
+# I think the declarative way is better
+#
 TYPES=("desk" "book")
 #
 rsync -av ../certs .
