@@ -1,5 +1,5 @@
-# ts-reserve-assets
-This is a config file driven reservation system, written in React and typescript.
+
+This is a config file driven reservation system, written in react and typescript and scaffolded using <a href="https://vitejs.dev/">vite</a>.
 
 I started off as a desk booking system and then realised that it could be used for reserving books in a library, seats at a restaurant, car park places ...
 
