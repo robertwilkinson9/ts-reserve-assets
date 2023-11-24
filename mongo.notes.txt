@@ -1,6 +1,6 @@
 > use desk
 switched to db desk
-> db.desk.insertOne( {"booking_date" : ISODate("2023-05-25"), "expireAt" : ISODate("2023-05-26"), "floor" : 2, "desk" : "2f18", "email" : "robert.wilkinson@raytheon.co.uk"} )
+> db.desk.insertOne( {"booking_date" : ISODate("2023-05-25"), "expireAt" : ISODate("2023-05-26"), "floor" : 2, "desk" : "2f18", "email" : "robert.wilkinson@someone.co.uk"} )
 {
 	"acknowledged" : true,
 	"insertedId" : ObjectId("646c8b20dbb676511e4e1782")
@@ -9,7 +9,7 @@ switched to db desk
 > use desk
 switched to db desk
 > db.desk.find( {} )
-{ "_id" : ObjectId("646c8b20dbb676511e4e1782"), "booking_date" : ISODate("2023-05-25T00:00:00Z"), "expireAt" : ISODate("2023-05-26T00:00:00Z"), "floor" : 2, "desk" : "2f18", "email" : "robert.wilkinson@raytheon.co.uk" }
+{ "_id" : ObjectId("646c8b20dbb676511e4e1782"), "booking_date" : ISODate("2023-05-25T00:00:00Z"), "expireAt" : ISODate("2023-05-26T00:00:00Z"), "floor" : 2, "desk" : "2f18", "email" : "robert.wilkinson@someone.co.uk" }
 >
 
 > db.desk.createIndex({ "expireAt": 1 }, { expireAfterSeconds: 0 })
@@ -25,7 +25,7 @@ switched to db desk
 { "n" : 2, "ok" : 1 }
 > db.desk.find({})
 >
-> db.desk.insertOne( {"booking_start": ISODate("2023-05-29T08:00:00Z"), "booking_end": ISODate("2023-05-29T17:00:00Z"), "expireAt": ISODate("2023-05-30T08:00:00Z"), "floor" : 2, "desk" : "2f18", "email" : "robert.wilkinson@raytheon.co.uk"})
+> db.desk.insertOne( {"booking_start": ISODate("2023-05-29T08:00:00Z"), "booking_end": ISODate("2023-05-29T17:00:00Z"), "expireAt": ISODate("2023-05-30T08:00:00Z"), "floor" : 2, "desk" : "2f18", "email" : "robert.wilkinson@someone.co.uk"})
 
 {
 	"acknowledged" : true,
@@ -35,18 +35,18 @@ switched to db desk
 
 > use item
 switched to db item
-> db.item.insertOne( {"booking_start": ISODate("2023-06-29T08:00:00Z"), "booking_end": ISODate("2023-06-29T17:00:00Z"), "expireAt": ISODate("2023-06-30T08:00:00Z"), "bucket" : 2, "item" : "2f18", "email" : "robert.wilkinson@raytheon.co.uk"})
+> db.item.insertOne( {"booking_start": ISODate("2023-06-29T08:00:00Z"), "booking_end": ISODate("2023-06-29T17:00:00Z"), "expireAt": ISODate("2023-06-30T08:00:00Z"), "bucket" : 2, "item" : "2f18", "email" : "robert.wilkinson@someone.co.uk"})
 {
 	"acknowledged" : true,
 	"insertedId" : ObjectId("648314dfe64b58e46be7df5e")
 }
 > db.item.find()
-{ "_id" : ObjectId("648314dfe64b58e46be7df5e"), "booking_start" : ISODate("2023-06-29T08:00:00Z"), "booking_end" : ISODate("2023-06-29T17:00:00Z"), "expireAt" : ISODate("2023-06-30T08:00:00Z"), "bucket" : 2, "item" : "2f18", "email" : "robert.wilkinson@raytheon.co.uk" }
+{ "_id" : ObjectId("648314dfe64b58e46be7df5e"), "booking_start" : ISODate("2023-06-29T08:00:00Z"), "booking_end" : ISODate("2023-06-29T17:00:00Z"), "expireAt" : ISODate("2023-06-30T08:00:00Z"), "bucket" : 2, "item" : "2f18", "email" : "robert.wilkinson@someone.co.uk" }
 > db.runCommand({delete: "item", deletes: [ { q: { }, limit: 0 } ], writeConcern: { w: "majority", wtimeout: 5000 }})
 { "n" : 1, "ok" : 1 }
 > db.item.find()
 > db.item.createIndex({ "expireAt": 1 }, { expireAfterSeconds: 0 })
-> db.item.insertOne( {"booking_start": ISODate("2023-06-29T08:00:00Z"), "booking_end": ISODate("2023-06-29T17:00:00Z"), "expireAt": ISODate("2023-06-30T08:00:00Z"), "bucket" : 1, "item" : "1984", "email" : "robert.wilkinson@raytheon.co.uk"})
+> db.item.insertOne( {"booking_start": ISODate("2023-06-29T08:00:00Z"), "booking_end": ISODate("2023-06-29T17:00:00Z"), "expireAt": ISODate("2023-06-30T08:00:00Z"), "bucket" : 1, "item" : "1984", "email" : "robert.wilkinson@someone.co.uk"})
 
 > use book
 switched to db book
@@ -59,7 +59,7 @@ switched to db book
 	"ok" : 1
 }
 
-> db.book.insertOne( {"booking_start": ISODate("2023-07-29T08:00:00Z"), "booking_end": ISODate("2023-07-29T17:00:00Z"), "expireAt": ISODate("2023-07-30T08:00:00Z"), "author": "George Orwell", "title" : "1984", "email" : "robert.wilkinson@raytheon.co.uk"})
+> db.book.insertOne( {"booking_start": ISODate("2023-07-29T08:00:00Z"), "booking_end": ISODate("2023-07-29T17:00:00Z"), "expireAt": ISODate("2023-07-30T08:00:00Z"), "author": "George Orwell", "title" : "1984", "email" : "robert.wilkinson@someone.co.uk"})
 {
 	"acknowledged" : true,
 	"insertedId" : ObjectId("64a2cb2b372f597bf058fd7d")
@@ -69,19 +69,19 @@ switched to db book
 switched to db desk
 > db.desk.find()
 > db.desk.find({})
-> db.desk.insertOne( {"booking_start" : ISODate("2023-07-25T08:00:00Z"), "booking_end" : ISODate("2023-07-25T17:00:00Z"), "expireAt" : ISODate("2023-07-26"), "floor" : 2, "desk" : "2f18", "email" : "robert.wilkinson@raytheon.co.uk"} )
+> db.desk.insertOne( {"booking_start" : ISODate("2023-07-25T08:00:00Z"), "booking_end" : ISODate("2023-07-25T17:00:00Z"), "expireAt" : ISODate("2023-07-26"), "floor" : 2, "desk" : "2f18", "email" : "robert.wilkinson@someone.co.uk"} )
 {
 	"acknowledged" : true,
 	"insertedId" : ObjectId("64a2cca3372f597bf058fd7e")
 }
 > db.desk.find({})
-{ "_id" : ObjectId("64a2cca3372f597bf058fd7e"), "booking_start" : ISODate("2023-07-25T08:00:00Z"), "booking_end" : ISODate("2023-07-25T17:00:00Z"), "expireAt" : ISODate("2023-07-26T00:00:00Z"), "floor" : 2, "desk" : "2f18", "email" : "robert.wilkinson@raytheon.co.uk" }
+{ "_id" : ObjectId("64a2cca3372f597bf058fd7e"), "booking_start" : ISODate("2023-07-25T08:00:00Z"), "booking_end" : ISODate("2023-07-25T17:00:00Z"), "expireAt" : ISODate("2023-07-26T00:00:00Z"), "floor" : 2, "desk" : "2f18", "email" : "robert.wilkinson@someone.co.uk" }
 >
-> db.book.insertOne( {"booking_start": ISODate("2023-07-29T08:00:00Z"), "booking_end": ISODate("2023-07-29T17:00:00Z"), "expireAt": ISODate("2023-07-30T08:00:00Z"), "author" : "George Orwell", "bucket": 1, "title" : "1984", "email" : "robert.wilkinson@raytheon.co.uk"})
-> db.desk.insertOne( {"booking_start" : ISODate("2023-07-25T08:00:00Z"), "booking_end" : ISODate("2023-07-25T17:00:00Z"), "expireAt" : ISODate("2023-07-26"), "floor" : "second", "bucket": 2, "desk" : "2f18", "email" : "robert.wilkinson@raytheon.co.uk"} )
+> db.book.insertOne( {"booking_start": ISODate("2023-07-29T08:00:00Z"), "booking_end": ISODate("2023-07-29T17:00:00Z"), "expireAt": ISODate("2023-07-30T08:00:00Z"), "author" : "George Orwell", "bucket": 1, "title" : "1984", "email" : "robert.wilkinson@someone.co.uk"})
+> db.desk.insertOne( {"booking_start" : ISODate("2023-07-25T08:00:00Z"), "booking_end" : ISODate("2023-07-25T17:00:00Z"), "expireAt" : ISODate("2023-07-26"), "floor" : "second", "bucket": 2, "desk" : "2f18", "email" : "robert.wilkinson@someone.co.uk"} )
 
 > db.runCommand({delete: "book", deletes: [ { q: { }, limit: 0 } ], writeConcern: { w: "majority", wtimeout: 5000 }})
-> db.book.insertOne( {"booking_start": ISODate("2023-07-29T08:00:00Z"), "booking_end": ISODate("2023-07-29T17:00:00Z"), "expireAt": ISODate("2023-07-30T08:00:00Z"), "author" : "George Orwell", "bucket": 1, "item" : "1984", "email" : "robert.wilkinson@raytheon.co.uk"})
+> db.book.insertOne( {"booking_start": ISODate("2023-07-29T08:00:00Z"), "booking_end": ISODate("2023-07-29T17:00:00Z"), "expireAt": ISODate("2023-07-30T08:00:00Z"), "author" : "George Orwell", "bucket": 1, "item" : "1984", "email" : "robert.wilkinson@someone.co.uk"})
 
 docker exec mongoclient mongo --host 172.18.0.2 --eval 'db = db.getSiblingDB(\'desk\'); db.runCommand({delete: "desk", deletes: [ { q: { }, limit: 0 } ], writeConcern: { w: "majority", wtimeout: 5000 }})'
 
@@ -168,7 +168,7 @@ book> db.book.find({})
     author: 'George Orwell',
     bucket: 1,
     item: '1984',
-    email: 'robert.wilkinson@raytheon.co.uk'
+    email: 'robert.wilkinson@someone.co.uk'
   }
 ]
 book>
@@ -196,7 +196,7 @@ book> db.book.find({})
     author: 'George Orwell',
     bucket: 1,
     item: '1984',
-    email: 'robert.wilkinson@raytheon.co.uk'
+    email: 'robert.wilkinson@someone.co.uk'
   }
 ]
 
@@ -224,7 +224,23 @@ book> db.book.find({})
     author: 'George Orwell',
     bucket: 1,
     item: '1984',
-    email: 'robert.wilkinson@raytheon.co.uk'
+    email: 'robert.wilkinson@someone.co.uk'
   }
 ]
 book>
+
+  {
+    _id: 'admin.reserver',
+    userId: new UUID("e722e473-8526-4904-9d0d-f319fd8b23f1"),
+    user: 'reserver',
+    db: 'admin',
+    roles: [
+      { role: 'dbOwner', db: 'book' },
+      { role: 'readWrite', db: 'book' },
+      { role: 'userAdminAnyDatabase', db: 'admin' },
+      { role: 'dbOwner', db: 'carpark' },
+      { role: 'dbOwner', db: 'desk' }
+    ],
+    mechanisms: [ 'SCRAM-SHA-1', 'SCRAM-SHA-256' ]
+  },
+
