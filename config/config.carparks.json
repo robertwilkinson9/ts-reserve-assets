@@ -5,23 +5,30 @@
   "ITEM_NAME": "bay",
   "ITEM_LABEL": "bay_label",
   "AUXILLIARY": [
-    {"id": "1", "label": "registration number", "dbname": "registration_number"},
-    {"id": "2", "label": "date of birth", "dbname": "notTHEre"}
+    {"id": "1", "label": "registration number", "dbname": "registration_number"}
   ],
   "BUCKET_NAME": "carpark",
   "BUCKETS":
   [
     {
-      "NAME": "lower carpark",
-      "PREFIX": "lc",
-      "IFIRST": 1,
-      "ILAST": 40
+      "NAME": "level 3",
+      "ITEMS": ["273", "274", "275", "276", "282", "283", "284", "299", "300", "301", "304", "305"]
     },
     {
-      "NAME": "upper carpark",
-      "PREFIX": "uc",
-      "IFIRST": 1,
-      "ILAST": 80
+      "NAME": "level 5",
+      "PREFIX": "",
+      "IFIRST": 581,
+      "ILAST": 588
+    },
+    {
+      "NAME": "level 6",
+      "PREFIX": "",
+      "IFIRST": 716,
+      "ILAST": 722
+    },
+    {
+      "NAME": "level 6a",
+      "ITEMS": ["723", "724", "725", "726", "727", "740", "741", "742", "743", "744", "757", "760", "761", "762", "763", "764", "765", "766", "767", "779", "780", "781"]
     }
   ],
   "SCHEMA": {
