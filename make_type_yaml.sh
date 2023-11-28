@@ -4,9 +4,10 @@ TYPE=$1
 API_IP=$(./backend_address.sh $TYPE)
 CONFIG_FILE=$(echo config/config.${TYPE}.json)
 API_PORT=$(cat $CONFIG_FILE | jq --raw-output '.APIPORT')
+VITE_TYPE=$(cat $CONFIG_FILE | jq --raw-output '.ITEM_NAME')
 JQSTRING=$(echo -n .config.${TYPE})
 PORT=$(cat package.json | jq -r ${JQSTRING})
-echo TYPE is $TYPE AND JQSTRING iS ${JQSTRING} AND PORT is $PORT AND API_IP is $API_IP and API_PORT is $API_PORT
+echo TYPE is $TYPE AND JQSTRING iS ${JQSTRING} AND PORT is $PORT AND API_IP is $API_IP and API_PORT is $API_PORT and VITE_TYPE is $VITE_TYPE
 
 cat <<EOF > compose.yaml.${TYPE}
 services:
@@ -20,7 +21,7 @@ services:
       SSL_KEY: "/certs/localhost.key"
       VITE_API_IP: "${API_IP}"
       VITE_API_PORT: "${API_PORT}"
-      VITE_TYPE: "${TYPE}"
+      VITE_TYPE: "${VITE_TYPE}"
 EOF
 
 cat <<EOF2 > Dockerfile
