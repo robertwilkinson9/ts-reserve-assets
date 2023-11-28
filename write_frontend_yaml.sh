@@ -14,6 +14,8 @@ END_POINT_IP=$(echo ${END_POINTS} | awk -F: '{print $1}')
 echo endpoint_ip is $END_POINT_IP
 END_POINT_PORT=$(echo ${END_POINTS} | awk -F: '{print $2}')
 echo endpoint_port is $END_POINT_PORT
+VITE_TYPE=$(jq '.ITEM_NAME' config/config.${TYPE}.json)
+echo vite_type is $VITE_TYPE
 
 cat << EOF > ${TYPE}-frontend.yaml
 ---
@@ -39,5 +41,5 @@ spec:
       - name: VITE_API_PORT
         value: "${END_POINT_PORT}"
       - name: VITE_TYPE
-        value: "${TYPE}"
+        value: "${VITE_TYPE}"
 EOF
