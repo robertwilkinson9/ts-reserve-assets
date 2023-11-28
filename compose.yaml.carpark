@@ -9,4 +9,4 @@ services:
       SSL_KEY: "/certs/localhost.key"
       VITE_API_IP: "172.18.0.3"
       VITE_API_PORT: "6182"
-      VITE_TYPE: "carpark"
+      VITE_TYPE: "bay"
