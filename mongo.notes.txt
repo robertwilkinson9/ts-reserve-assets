@@ -244,3 +244,70 @@ book>
     mechanisms: [ 'SCRAM-SHA-1', 'SCRAM-SHA-256' ]
   },
 
+> db.createUser(
+... { user: "book1", pwd: "1book", roles: [ { role: "dbOwner", db: "book" }, { role: "readWrite", db: "book" }]
+... }
+... )
+Successfully added user: {
+	"user" : "book1",
+	"roles" : [
+		{
+			"role" : "dbOwner",
+			"db" : "book"
+		},
+		{
+			"role" : "readWrite",
+			"db" : "book"
+		}
+	]
+}
+> show users
+{
+	"_id" : "book.book1",
+	"userId" : UUID("40844ed6-51be-4d12-ad74-1871cb3dd412"),
+	"user" : "book1",
+	"db" : "book",
+	"roles" : [
+		{
+			"role" : "dbOwner",
+			"db" : "book"
+		},
+		{
+			"role" : "readWrite",
+			"db" : "book"
+		}
+	],
+	"mechanisms" : [
+		"SCRAM-SHA-1",
+		"SCRAM-SHA-256"
+	]
+}
+> 
+bye
+
+
+└─$ mongo --username book1 --authenticationDatabase book
+MongoDB shell version v6.1.1
+Enter password: 
+connecting to: mongodb://127.0.0.1:27017/?authSource=book&compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("90b369a3-0c3c-47d9-b4b8-7cba02089dd1") }
+MongoDB server version: 7.0.4
+WARNING: shell and server versions do not match
+================
+Warning: the "mongo" shell has been superseded by "mongosh",
+which delivers improved usability and compatibility.The "mongo" shell has been deprecated and will be removed in
+an upcoming release.
+For installation instructions, see
+https://docs.mongodb.com/mongodb-shell/install/
+================
+---
+The server generated these startup warnings when booting: 
+        2023-12-13T21:42:03.855+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+        2023-12-13T21:42:05.200+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+        2023-12-13T21:42:05.201+00:00: vm.max_map_count is too low
+        2023-12-13T21:42:05.201+00:00:         currentValue: 65530
+        2023-12-13T21:42:05.201+00:00:         recommendedMinimum: 1677720
+        2023-12-13T21:42:05.201+00:00:         maxConns: 838860
+---
+> 
+bye

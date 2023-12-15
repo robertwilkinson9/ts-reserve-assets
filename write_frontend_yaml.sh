@@ -1,21 +1,31 @@
 #/bin/bash
 TYPE=$1
-PORT=$2
-#BACKEND_IP=$(kubectl describe service/${TYPE}-backend-service | grep ^IP: | awk '{print $NF}')
-#echo beip is $BACKEND_IP
-#BACKEND_PORT=$(kubectl describe service/${TYPE}-backend-service | grep TargetPort: | awk '{print $2}' | awk -F/ '{print $1}')
-#echo beport is $BACKEND_PORT
+
 SRC_DIR="../../typescript/ts-reserve-assets/"
 FE_PORT=$(cat ${SRC_DIR}/package.json | jq --raw-output .config.${TYPE})
 echo FE_PORT is $FE_PORT
-END_POINTS=$(kubectl describe service/${TYPE}-backend-service | grep ^Endpoints: | awk '{print $NF}')
-echo endpoints is $END_POINTS
-END_POINT_IP=$(echo ${END_POINTS} | awk -F: '{print $1}')
-echo endpoint_ip is $END_POINT_IP
-END_POINT_PORT=$(echo ${END_POINTS} | awk -F: '{print $2}')
-echo endpoint_port is $END_POINT_PORT
 VITE_TYPE=$(jq '.ITEM_NAME' config/config.${TYPE}.json)
 echo vite_type is $VITE_TYPE
+
+MK=$(which minikube) 
+if [ $MK ]; then
+  echo "HAVE minikube";
+  MKURL=$(minikube service ${TYPE}-backend-service --url)
+  echo MKURL is $MKURL
+  END_POINT=$(echo ${MKURL} | awk -F '//' '{print $2}')
+  echo endpoint is $END_POINT
+  END_POINT_IP=$(echo ${END_POINT} | awk -F: '{print $1}')
+  echo endpoint_ip is $END_POINT_IP
+  END_POINT_PORT=$(echo ${END_POINT} | awk -F: '{print $2}')
+  echo endpoint_port is $END_POINT_PORT
+else
+  END_POINTS=$(kubectl describe service/${TYPE}-backend-service | grep ^Endpoints: | awk '{print $NF}')
+  echo endpoints is $END_POINTS
+  END_POINT_IP=$(echo ${END_POINTS} | awk -F: '{print $1}')
+  echo endpoint_ip is $END_POINT_IP
+  END_POINT_PORT=$(echo ${END_POINTS} | awk -F: '{print $2}')
+  echo endpoint_port is $END_POINT_PORT
+fi
 
 cat << EOF > ${TYPE}-frontend.yaml
 ---

@@ -40,6 +40,9 @@ export const App = () => {
 
   const get_api_url = () : string => {
 
+    console.log("in get_api_uri and env is");
+    console.dir(import.meta.env);
+
     const service_prefix=item_name.toUpperCase( ) + '_BACKEND_SERVICE';
 
     const service_prefix_host_name = service_prefix + '_SERVICE_HOST';
@@ -59,11 +62,13 @@ export const App = () => {
     var vite_api_ip = "";
     if (import.meta.env.VITE_API_IP !== undefined) {
       vite_api_ip = import.meta.env.VITE_API_IP;
+      console.log(`vite_api_ip set to ${import.meta.env.VITE_API_IP}`);
     }
 
     var vite_api_port = "";
     if (import.meta.env.VITE_API_PORT !== undefined) {
       vite_api_port = import.meta.env.VITE_API_PORT;
+      console.log(`vite_api_port set to ${import.meta.env.VITE_API_PORT}`);
     }
 
     var config_api_ip = "";
