@@ -12,6 +12,7 @@ if [ $MK ]; then
   echo API_ip is $API_IP
   API_PORT=$(echo ${END_POINT} | awk -F: '{print $2}')
   echo API_port is $API_PORT
+  VITE_TYPE=${TYPE}
 else
   API_IP=$(./backend_address.sh $TYPE)
   CONFIG_FILE=$(echo config/config.${TYPE}.json)
