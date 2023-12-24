@@ -8,7 +8,7 @@ import { render } from '@testing-library/react';
 // import Form from 'react-bootstrap/Form';
 
 import {InputFormProps} from '../components/interfaces'
-import InputForm from '../components/form';
+import { InputForm, overlap } from '../components/form';
 
 const test_config = {
   "APIPORT": 1234,
@@ -19,16 +19,16 @@ const test_config = {
   "BUCKETS":
   [
     {
-      "name": "first",
-      "prefix": "f",
-      "ifirst": 1,
-      "ilast": 10
+      "NAME": "first",
+      "PREFIX": "f",
+      "IFIRST": 1,
+      "ILAST": 10
     },
     {
-      "name": "second",
-      "prefix": "s",
-      "ifirst": 11,
-      "ilast": 20
+      "NAME": "second",
+      "PREFIX": "s",
+      "IFIRST": 11,
+      "ILAST": 20
     }
   ]
 }
@@ -64,13 +64,50 @@ test('use jsdom in this test file', () => {
   expect(element).not.toBeNull()
 })
 
+describe('overlap function tests', () => {
+  it("no overlap should be false", async () => {
+    const adate = new Date("1999-12-31T00:00");
+    const bdate = new Date("1999-12-31T01:00");
+
+    const xdate = new Date("1999-12-31T02:00");
+    const ydate = new Date("1999-12-31T03:00");
+
+    const overlap_result = overlap(adate, bdate, xdate, ydate);
+    expect(overlap_result).toBe(false);
+  });
+
+  it("overlap should be true", async () => {
+    const adate = new Date("1999-12-31T00:00");
+    const bdate = new Date("1999-12-31T02:00");
+
+    const xdate = new Date("1999-12-31T01:00");
+    const ydate = new Date("1999-12-31T03:00");
+
+    const overlap_result = overlap(adate, bdate, xdate, ydate);
+    expect(overlap_result).toBe(true);
+  });
+
+  it("containment should be true", async () => {
+    const adate = new Date("1999-12-31T00:00");
+    const bdate = new Date("1999-12-31T03:00");
+
+    const xdate = new Date("1999-12-31T01:00");
+    const ydate = new Date("1999-12-31T02:00");
+
+    const overlap_result = overlap(adate, bdate, xdate, ydate);
+/*
+    console.log(overlap_result);
+    console.dir(overlap_result);
+*/
+    expect(overlap_result).toBe(true);
+  });
+})
+
 describe('it item contents', () => {
   it("should default to an blank item", async () => {
     const { findByTestId } = renderInputForm();
 
     const InputFormlabel = await findByTestId("emailaddress_label");
-//    console.log("LABEL");
-//    console.log(InputFormlabel);
 
     expect(InputFormlabel).toHaveTextContent('Email address');
 
@@ -82,9 +119,6 @@ describe('it item contents', () => {
 //grep testid form.html 
     const email = "email@domain.org";
     const itemprops = {email: email};
-
-    console.log("itemprops");
-    console.log(itemprops);
 
 //    const { findByTestId, queryAllByTestId } = renderInputForm(itemprops);
 

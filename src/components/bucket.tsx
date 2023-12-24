@@ -54,7 +54,7 @@ export const Bucket = ({config, bucket, set_bucket}: BucketProps) => {
     const matrix = [];
     if (config.BUCKETS) {
       for (let i = 0; i < config.BUCKETS.length; i++) {
-        const name = config.BUCKETS[i].name;
+        const name = config.BUCKETS[i].NAME;
         const uname = capitalizeFirstLetter(name);
         const vector = [ name, uname, i.toString()];
         matrix.push(vector);

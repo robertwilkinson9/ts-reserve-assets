@@ -5,7 +5,7 @@
 * the tables in the restaurant, the tables are the buckets, the bookable seats the items.
 
 * these items are presented to the author as pull down lists once the bucket radio button is selected
-* we filter the out those items currently booked at the time requested from those presented 
+* filter out those items currently booked at the time requested from those presented 
 */
 
 import React from 'react';
@@ -47,17 +47,15 @@ const listbuild = (istart:number | undefined, ilast:number | undefined, prefix: 
 *
 */
 
-const get_items_from_config = ({config, bucket}: BucketReadProps): string[] | undefined => {
+export const get_items_from_config = ({config, bucket}: BucketReadProps): string[] | undefined => {
   let items: string[] | undefined = [];
 
-  if (bucket !== null) {
-    let cbi : string[] | undefined = [];
-    cbi = config.BUCKETS[bucket].items;
-    if (cbi && cbi.length) {
-      items = cbi;
+  if ((bucket !== null) && config.BUCKETS !== undefined && config.BUCKETS.length && (config.BUCKETS[bucket] !== undefined)) {
+    if ('ITEMS' in config.BUCKETS[bucket]) {
+      items = config.BUCKETS[bucket].ITEMS;
     } else {
-      if (config.BUCKETS[bucket].ifirst && config.BUCKETS[bucket].ilast) {
-        items = listbuild(config.BUCKETS[bucket].ifirst, config.BUCKETS[bucket].ilast, config.BUCKETS[bucket].prefix, config.BUCKETS[bucket].suffix);
+      if (config.BUCKETS[bucket].IFIRST && config.BUCKETS[bucket].ILAST) {
+        items = listbuild(config.BUCKETS[bucket].IFIRST, config.BUCKETS[bucket].ILAST, config.BUCKETS[bucket].PREFIX, config.BUCKETS[bucket].SUFFIX);
       }
     }
   }
@@ -66,7 +64,7 @@ const get_items_from_config = ({config, bucket}: BucketReadProps): string[] | un
  
 /**
 *
-* we create a pulldown list for the selected bucket
+* create a pulldown list for the selected bucket
 *
 */
 
@@ -79,9 +77,13 @@ export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps
     if (allocated_items) {
       const bucket_items = allocated_items.filter(it => {return bucket == it.bucket});
       if (bucket_items) {
+
         const reserved_items = bucket_items.map(x => {return x[config.ITEM_NAME]});
+
         if (items) {
+
           items = items.filter(n => !reserved_items.includes(n)); // slow and simple set difference 
+
         }
       }
     }
@@ -89,6 +91,7 @@ export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps
 
   if (items) {
     const select_item_list: Select_type[] = items_select(items)
+
     const select_option_list = select_item_list.map((item, key) => { return (<React.Fragment key={key}><option value={item.value}>{item.label}</option></React.Fragment>) });
 
     const capitalizeFirstLetter = (name: string) => {if (name && name.length) {return name.charAt(0).toUpperCase() + name.slice(1);} else {return "X"} }

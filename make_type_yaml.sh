@@ -5,9 +5,29 @@ API_IP=$(./backend_address.sh $TYPE)
 CONFIG_DIR=../ts-ra-config
 CONFIG_FILE=$(echo ${CONFIG_DIR}/config.${TYPE}.json)
 API_PORT=$(cat $CONFIG_FILE | jq --raw-output '.APIPORT')
+
+MK=$(which minikube) 
+if [ $MK ]; then
+  echo "HAVE minikube";
+  MKURL=$(minikube service ${TYPE}-backend-service --url)
+  echo MKURL is $MKURL
+  END_POINT=$(echo ${MKURL} | awk -F '//' '{print $2}')
+  echo endpoint is $END_POINT
+  API_IP=$(echo ${END_POINT} | awk -F: '{print $1}')
+  echo API_ip is $API_IP
+  API_PORT=$(echo ${END_POINT} | awk -F: '{print $2}')
+  echo API_port is $API_PORT
+  VITE_TYPE=${TYPE}
+else
+  API_IP=$(./backend_address.sh $TYPE)
+  CONFIG_FILE=$(echo config/config.${TYPE}.json)
+  API_PORT=$(cat $CONFIG_FILE | jq --raw-output '.APIPORT')
+  VITE_TYPE=$(cat $CONFIG_FILE | jq --raw-output '.ITEM_NAME')
+fi
+
 JQSTRING=$(echo -n .config.${TYPE})
 PORT=$(cat package.json | jq -r ${JQSTRING})
-echo TYPE is $TYPE AND JQSTRING iS ${JQSTRING} AND PORT is $PORT AND API_IP is $API_IP and API_PORT is $API_PORT
+echo TYPE is $TYPE AND JQSTRING iS ${JQSTRING} AND PORT is $PORT AND API_IP is $API_IP and API_PORT is $API_PORT and VITE_TYPE is $VITE_TYPE
 
 cat <<EOF > compose.yaml.${TYPE}
 services:
@@ -21,7 +41,7 @@ services:
       SSL_KEY: "/certs/localhost.key"
       VITE_API_IP: "${API_IP}"
       VITE_API_PORT: "${API_PORT}"
-      VITE_TYPE: "${TYPE}"
+      VITE_TYPE: "${VITE_TYPE}"
 EOF
 
 cat <<EOF2 > Dockerfile

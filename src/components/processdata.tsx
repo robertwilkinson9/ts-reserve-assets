@@ -1,5 +1,5 @@
 /**
-* we process the form data, allow a confirmation or cancellation
+* process the form data, allow a confirmation or cancellation
 * then save the item to the backend data store on confirmation with expiration
 * of the record set for the day after the booking
 */
@@ -15,8 +15,7 @@ import { AuxConfigRecordType, AuxDataRecordType, AuxType, ItemData, MongoData, P
 import './processdata.css';
 
 export const tomorrow_from_day = (passed_date: Date): Date => {
-//  const tomorrow = new Date(passed_date);
-  const tomorrow = passed_date;
+  const tomorrow = new Date(passed_date);
   tomorrow.setDate(tomorrow.getDate() + 1);
   return tomorrow;
 }
@@ -32,8 +31,7 @@ const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
   console.log(`SENDING TO URL ${url}`);
 
   try {
-    const response: AxiosResponse<ItemData> = await axios.post<ItemData>(url, item_booking, {headers: [ {'Content-Type': 'application/json'}, {"Origin": url}, {'Access-Control-Allow-Origin': url}  ] } )
-//    const response: AxiosResponse<ItemData> = await axios.post<ItemData>(url, item_booking, {headers: {'Content-Type': 'application/json'}})
+    const response: AxiosResponse<ItemData> = await axios.post<ItemData>(url, item_booking, {headers: {'Content-Type': 'application/json'}})
     console.log("POST Response is ");
     console.log(response);
     console.log("POST Response DATA is ");
@@ -85,14 +83,15 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
     aux_merged.forEach((item, key) => {date_booking[key] = item; aux_string += `KEY is ${key} and ITEM is ${item}\n`; console.log(aux_string);});
    
     let name = "Anononymous";
-    if ((config.BUCKETS) && config.BUCKETS[bucket] && config.BUCKETS[bucket].name) {
-      name = config.BUCKETS[bucket].name; 
+    if ((config.BUCKETS) && config.BUCKETS[bucket] && config.BUCKETS[bucket].NAME) {
+      name = config.BUCKETS[bucket].NAME;
     }
     const item_booking = Object.assign(date_booking, { [config.BUCKET_NAME]: name });
 
     console.log(`BUCKET_NAME is ${config.BUCKET_NAME} and name is ${name} and ITEM is ${item} and ITEM NAME is ${config.ITEM_NAME} And ITEM LABEL is ${config.ITEM_LABEL}`);
 
     const confirm_action = () => {
+      console.log(`confirm_action given booking_start of ${booking_start}`);
       const ITEM_url: string = url + config.LCCOLLECTION + '/';
       console.log(`POST ITEM_url is ${ITEM_url}`);
       console.log("POST item_booking is ");
@@ -148,7 +147,7 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
       }
       let fstr = `No ${config.BUCKET_NAME}`;
       if ((typeof bucket === 'number') && Number.isInteger(bucket)) {
-        fstr = `${config.BUCKETS[bucket].name} ${config.BUCKET_NAME}`;
+        fstr = `${config.BUCKETS[bucket].NAME} ${config.BUCKET_NAME}`;
       }
 
       return (

@@ -96,6 +96,7 @@ export interface ProcessDataProps {
   set_needreset: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+/*
 interface bucketData {
   name: string;
   prefix?: string;
@@ -104,6 +105,7 @@ interface bucketData {
   ilast?: number;
   items?: string[];
 }
+*/
 
 export interface AuxIdType {
   id: string;

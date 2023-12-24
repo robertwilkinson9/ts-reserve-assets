@@ -47,6 +47,20 @@ const form_contents = ({config, booking_start, set_booking_start, booking_end, s
   );
 }
 
+export const overlap = (a: Date, b: Date, x: Date, y:Date) => {
+  // a to b is one date range, x to y is another date range
+  // we return true for overlap
+  const before = (d1: Date, d2: Date) => {return d1 <= d2;}
+  const after = (d1: Date, d2: Date) => {return d1 >= d2;}
+
+  return ((after(a, x) && before(a, y)) ||
+          (after(x, a) && before(y, a)) ||
+          (after(b, x) && before(b, y)) ||
+          (after(x, b) && before(y, b)) ||
+          (after(x, a) && before(y, b)) ||
+          (after(a, x) && before(b, y)));
+};
+
 export const InputForm = ({config, mongo_data, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, set_item, email, set_email, auxdata, set_auxdata, set_complete}: InputFormProps) => {
   const buttonText = `Reserve ${config.ITEM_NAME}`;
 
@@ -59,16 +73,6 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
         we want a list of all of the items which are already booked so we can filter these from the list we present
       */ }
 
-      const before = (d1: Date, d2: Date) => {return d1 <= d2;}
-      const after = (d1: Date, d2: Date) => {return d1 >= d2;}
-      const overlap = (a: Date, b: Date, x: Date, y:Date) => {
-        // a to b is one date range, x to y is another date range
-        // we return true for overlap
-        return ((after(a, x) && before(a, y)) ||
-                (after(b, x) && before(b, y)) ||
-                (after(x, a) && before(y, a)) ||
-                (after(x, b) && before(y, b)));
-      };
       const overlapv = mongo_data.filter((it) => {return overlap(booking_start, booking_end, new Date(it.booking_start), new Date(it.booking_end));});
 
       const ordinal = "One";

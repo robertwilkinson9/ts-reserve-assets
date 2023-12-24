@@ -1,6 +1,6 @@
 > use desk
 switched to db desk
-> db.desk.insertOne( {"booking_date" : ISODate("2023-05-25"), "expireAt" : ISODate("2023-05-26"), "floor" : 2, "desk" : "2f18", "email" : "robert.wilkinson@raytheon.co.uk"} )
+> db.desk.insertOne( {"booking_date" : ISODate("2023-05-25"), "expireAt" : ISODate("2023-05-26"), "floor" : 2, "desk" : "2f18", "email" : "robert.wilkinson@someone.co.uk"} )
 {
 	"acknowledged" : true,
 	"insertedId" : ObjectId("646c8b20dbb676511e4e1782")
@@ -9,8 +9,8 @@ switched to db desk
 > use desk
 switched to db desk
 > db.desk.find( {} )
-{ "_id" : ObjectId("646c8b20dbb676511e4e1782"), "booking_date" : ISODate("2023-05-25T00:00:00Z"), "expireAt" : ISODate("2023-05-26T00:00:00Z"), "floor" : 2, "desk" : "2f18", "email" : "robert.wilkinson@raytheon.co.uk" }
-> 
+{ "_id" : ObjectId("646c8b20dbb676511e4e1782"), "booking_date" : ISODate("2023-05-25T00:00:00Z"), "expireAt" : ISODate("2023-05-26T00:00:00Z"), "floor" : 2, "desk" : "2f18", "email" : "robert.wilkinson@someone.co.uk" }
+>
 
 > db.desk.createIndex({ "expireAt": 1 }, { expireAfterSeconds: 0 })
 {
@@ -19,34 +19,34 @@ switched to db desk
 	"numIndexesAfter" : 2,
 	"ok" : 1
 }
-> 
+>
 
 > db.runCommand({delete: "desk", deletes: [ { q: { }, limit: 0 } ], writeConcern: { w: "majority", wtimeout: 5000 }})
 { "n" : 2, "ok" : 1 }
 > db.desk.find({})
 >
-> db.desk.insertOne( {"booking_start": ISODate("2023-05-29T08:00:00Z"), "booking_end": ISODate("2023-05-29T17:00:00Z"), "expireAt": ISODate("2023-05-30T08:00:00Z"), "floor" : 2, "desk" : "2f18", "email" : "robert.wilkinson@raytheon.co.uk"})
+> db.desk.insertOne( {"booking_start": ISODate("2023-05-29T08:00:00Z"), "booking_end": ISODate("2023-05-29T17:00:00Z"), "expireAt": ISODate("2023-05-30T08:00:00Z"), "floor" : 2, "desk" : "2f18", "email" : "robert.wilkinson@someone.co.uk"})
 
 {
 	"acknowledged" : true,
 	"insertedId" : ObjectId("647085993236f00e8ece25aa")
 }
-> 
+>
 
 > use item
 switched to db item
-> db.item.insertOne( {"booking_start": ISODate("2023-06-29T08:00:00Z"), "booking_end": ISODate("2023-06-29T17:00:00Z"), "expireAt": ISODate("2023-06-30T08:00:00Z"), "bucket" : 2, "item" : "2f18", "email" : "robert.wilkinson@raytheon.co.uk"})
+> db.item.insertOne( {"booking_start": ISODate("2023-06-29T08:00:00Z"), "booking_end": ISODate("2023-06-29T17:00:00Z"), "expireAt": ISODate("2023-06-30T08:00:00Z"), "bucket" : 2, "item" : "2f18", "email" : "robert.wilkinson@someone.co.uk"})
 {
 	"acknowledged" : true,
 	"insertedId" : ObjectId("648314dfe64b58e46be7df5e")
 }
 > db.item.find()
-{ "_id" : ObjectId("648314dfe64b58e46be7df5e"), "booking_start" : ISODate("2023-06-29T08:00:00Z"), "booking_end" : ISODate("2023-06-29T17:00:00Z"), "expireAt" : ISODate("2023-06-30T08:00:00Z"), "bucket" : 2, "item" : "2f18", "email" : "robert.wilkinson@raytheon.co.uk" }
+{ "_id" : ObjectId("648314dfe64b58e46be7df5e"), "booking_start" : ISODate("2023-06-29T08:00:00Z"), "booking_end" : ISODate("2023-06-29T17:00:00Z"), "expireAt" : ISODate("2023-06-30T08:00:00Z"), "bucket" : 2, "item" : "2f18", "email" : "robert.wilkinson@someone.co.uk" }
 > db.runCommand({delete: "item", deletes: [ { q: { }, limit: 0 } ], writeConcern: { w: "majority", wtimeout: 5000 }})
 { "n" : 1, "ok" : 1 }
 > db.item.find()
 > db.item.createIndex({ "expireAt": 1 }, { expireAfterSeconds: 0 })
-> db.item.insertOne( {"booking_start": ISODate("2023-06-29T08:00:00Z"), "booking_end": ISODate("2023-06-29T17:00:00Z"), "expireAt": ISODate("2023-06-30T08:00:00Z"), "bucket" : 1, "item" : "1984", "email" : "robert.wilkinson@raytheon.co.uk"})
+> db.item.insertOne( {"booking_start": ISODate("2023-06-29T08:00:00Z"), "booking_end": ISODate("2023-06-29T17:00:00Z"), "expireAt": ISODate("2023-06-30T08:00:00Z"), "bucket" : 1, "item" : "1984", "email" : "robert.wilkinson@someone.co.uk"})
 
 > use book
 switched to db book
@@ -59,26 +59,255 @@ switched to db book
 	"ok" : 1
 }
 
-> db.book.insertOne( {"booking_start": ISODate("2023-07-29T08:00:00Z"), "booking_end": ISODate("2023-07-29T17:00:00Z"), "expireAt": ISODate("2023-07-30T08:00:00Z"), "author": "George Orwell", "title" : "1984", "email" : "robert.wilkinson@raytheon.co.uk"})
+> db.book.insertOne( {"booking_start": ISODate("2023-07-29T08:00:00Z"), "booking_end": ISODate("2023-07-29T17:00:00Z"), "expireAt": ISODate("2023-07-30T08:00:00Z"), "author": "George Orwell", "title" : "1984", "email" : "robert.wilkinson@someone.co.uk"})
 {
 	"acknowledged" : true,
 	"insertedId" : ObjectId("64a2cb2b372f597bf058fd7d")
 }
-> 
+>
 > use desk
 switched to db desk
 > db.desk.find()
 > db.desk.find({})
-> db.desk.insertOne( {"booking_start" : ISODate("2023-07-25T08:00:00Z"), "booking_end" : ISODate("2023-07-25T17:00:00Z"), "expireAt" : ISODate("2023-07-26"), "floor" : 2, "desk" : "2f18", "email" : "robert.wilkinson@raytheon.co.uk"} )
+> db.desk.insertOne( {"booking_start" : ISODate("2023-07-25T08:00:00Z"), "booking_end" : ISODate("2023-07-25T17:00:00Z"), "expireAt" : ISODate("2023-07-26"), "floor" : 2, "desk" : "2f18", "email" : "robert.wilkinson@someone.co.uk"} )
 {
 	"acknowledged" : true,
 	"insertedId" : ObjectId("64a2cca3372f597bf058fd7e")
 }
 > db.desk.find({})
-{ "_id" : ObjectId("64a2cca3372f597bf058fd7e"), "booking_start" : ISODate("2023-07-25T08:00:00Z"), "booking_end" : ISODate("2023-07-25T17:00:00Z"), "expireAt" : ISODate("2023-07-26T00:00:00Z"), "floor" : 2, "desk" : "2f18", "email" : "robert.wilkinson@raytheon.co.uk" }
-> 
-> db.book.insertOne( {"booking_start": ISODate("2023-07-29T08:00:00Z"), "booking_end": ISODate("2023-07-29T17:00:00Z"), "expireAt": ISODate("2023-07-30T08:00:00Z"), "author" : "George Orwell", "bucket": 1, "title" : "1984", "email" : "robert.wilkinson@raytheon.co.uk"})
-> db.desk.insertOne( {"booking_start" : ISODate("2023-07-25T08:00:00Z"), "booking_end" : ISODate("2023-07-25T17:00:00Z"), "expireAt" : ISODate("2023-07-26"), "floor" : "second", "bucket": 2, "desk" : "2f18", "email" : "robert.wilkinson@raytheon.co.uk"} )
+{ "_id" : ObjectId("64a2cca3372f597bf058fd7e"), "booking_start" : ISODate("2023-07-25T08:00:00Z"), "booking_end" : ISODate("2023-07-25T17:00:00Z"), "expireAt" : ISODate("2023-07-26T00:00:00Z"), "floor" : 2, "desk" : "2f18", "email" : "robert.wilkinson@someone.co.uk" }
+>
+> db.book.insertOne( {"booking_start": ISODate("2023-07-29T08:00:00Z"), "booking_end": ISODate("2023-07-29T17:00:00Z"), "expireAt": ISODate("2023-07-30T08:00:00Z"), "author" : "George Orwell", "bucket": 1, "title" : "1984", "email" : "robert.wilkinson@someone.co.uk"})
+> db.desk.insertOne( {"booking_start" : ISODate("2023-07-25T08:00:00Z"), "booking_end" : ISODate("2023-07-25T17:00:00Z"), "expireAt" : ISODate("2023-07-26"), "floor" : "second", "bucket": 2, "desk" : "2f18", "email" : "robert.wilkinson@someone.co.uk"} )
 
 > db.runCommand({delete: "book", deletes: [ { q: { }, limit: 0 } ], writeConcern: { w: "majority", wtimeout: 5000 }})
-> db.book.insertOne( {"booking_start": ISODate("2023-07-29T08:00:00Z"), "booking_end": ISODate("2023-07-29T17:00:00Z"), "expireAt": ISODate("2023-07-30T08:00:00Z"), "author" : "George Orwell", "bucket": 1, "item" : "1984", "email" : "robert.wilkinson@raytheon.co.uk"})
+> db.book.insertOne( {"booking_start": ISODate("2023-07-29T08:00:00Z"), "booking_end": ISODate("2023-07-29T17:00:00Z"), "expireAt": ISODate("2023-07-30T08:00:00Z"), "author" : "George Orwell", "bucket": 1, "item" : "1984", "email" : "robert.wilkinson@someone.co.uk"})
+
+docker exec mongoclient mongo --host 172.18.0.2 --eval 'db = db.getSiblingDB(\'desk\'); db.runCommand({delete: "desk", deletes: [ { q: { }, limit: 0 } ], writeConcern: { w: "majority", wtimeout: 5000 }})'
+
+or mongo --host 172.18.0.2
+
+> db.runCommand({delete: "desk", deletes: [ { q: { }, limit: 0 } ], writeConcern: { w: "majority", wtimeout: 5000 }})
+
+admin> db.createUser({ user: "admin", pwd: "w1bbl3", roles: [{ role: "userAdminAnyDatabase", db: "admin" }] })
+{ ok: 1 }
+admin> db.createUser({ user: "reserver", pwd: "A$$et$", roles: [{ role: "userAdminAnyDatabase", db: "admin" }] })
+{ ok: 1 }
+admin>
+admin> db.changeUserPassword("reserver", "assets")
+{ ok: 1 }
+admin> db.changeUserPassword('superAdmin', 'w1bbl3');
+{ ok: 1 }
+admin> use book
+switched to db book
+book> db.createUser({user: "reserver", pwd: "ass3ts", roles: [ "readWrite"]})
+{ ok: 1 }
+book>
+
+> db.createUser({user: 'admin',pwd: 'w1bbl3', roles: [{ role: "userAdminAnyDatabase", db: "admin" }, { role: "readWriteAnyDatabase", db: "admin" }]});
+Successfully added user: {
+	"user" : "admin",
+	"roles" : [
+		{
+			"role" : "userAdminAnyDatabase",
+			"db" : "admin"
+		},
+		{
+			"role" : "readWriteAnyDatabase",
+			"db" : "admin"
+		}
+	]
+}
+>
+
+> db.createUser({user: "reserver", pwd: "ass3ts", roles: [ "readWrite"]})
+Successfully added user: { "user" : "reserver", "roles" : [ "readWrite" ] }
+>
+test> use desk
+switched to db desk
+desk> db.createUser({user: "reserver", pwd: "ass3ts", roles: [ "readWrite"]})
+{ ok: 1 }
+desk> use carpark
+switched to db carpark
+carpark> db.createUser({user: "reserver", pwd: "ass3ts", roles: [ "readWrite"]})
+{ ok: 1 }
+carpark>
+
+bob@portugal:~/src/kubernetes/bitnami-mongodb$ kubectl exec pod/my-mongodb-client -it -- /bin/bash
+
+I have no name!@my-mongodb-client:/$ mongosh admin --host "my-mongodb" --authenticationDatabase admin -u admin -p w1bbl3
+Current Mongosh Log ID:	65575c81ae5c01495e117411
+Connecting to:		mongodb://<credentials>@my-mongodb:27017/admin?directConnection=true&authSource=admin&appName=mongosh+2.0.2
+Using MongoDB:		7.0.3
+Using Mongosh:		2.0.2
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+admin> use book 
+switched to db book
+book> db.book.find({})
+MongoServerError: not authorized on book to execute command { find: "book", filter: {}, lsid: { id: UUID("6aa48a00-71db-4c91-9d0e-899bbd7a5303") }, $db: "book" }
+book>
+I have no name!@my-mongodb-client:/$ mongosh admin --host "my-mongodb" --authenticationDatabase book -u reserver -p ass3ts
+Current Mongosh Log ID:	65575cb0e056651feec42c44
+Connecting to:		mongodb://<credentials>@my-mongodb:27017/admin?directConnection=true&authSource=book&appName=mongosh+2.0.2
+Using MongoDB:		7.0.3
+Using Mongosh:		2.0.2
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+admin> use book
+switched to db book
+book> db.book.find({})
+[
+  {
+    _id: ObjectId("65573f1ddff6ebe5c176949d"),
+    booking_start: ISODate("2023-07-29T08:00:00.000Z"),
+    booking_end: ISODate("2023-07-29T17:00:00.000Z"),
+    expireAt: ISODate("2023-07-30T08:00:00.000Z"),
+    author: 'George Orwell',
+    bucket: 1,
+    item: '1984',
+    email: 'robert.wilkinson@someone.co.uk'
+  }
+]
+book>
+
+I have no name!@my-mongodb-client:/$ mongosh admin --host "my-mongodb" --authenticationDatabase book -u reserver -p ass3ts
+Current Mongosh Log ID:	6557680709bc3c6dcc522c98
+Connecting to:		mongodb://<credentials>@my-mongodb:27017/admin?directConnection=true&authSource=book&appName=mongosh+2.0.2
+MongoNetworkError: connect ECONNREFUSED 10.96.96.70:27017
+^[[A^[[AI have no name!@my-mongodb-client:/$ mongosh admin --host "my-mongodb" --authenticationDatabase book -u reserver -p ass3ts^C
+I have no name!@my-mongodb-client:/$ mongosh "mongodb://reserver:ass3ts@my-mongodb.default.svc.cluster.local:27017/book"
+Current Mongosh Log ID:	655768139b3b651dd7a9bd64
+Connecting to:		mongodb://<credentials>@my-mongodb.default.svc.cluster.local:27017/book?directConnection=true&appName=mongosh+2.0.2
+Using MongoDB:		7.0.3
+Using Mongosh:		2.0.2
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+book> db.book.find({})
+[
+  {
+    _id: ObjectId("65573f1ddff6ebe5c176949d"),
+    booking_start: ISODate("2023-07-29T08:00:00.000Z"),
+    booking_end: ISODate("2023-07-29T17:00:00.000Z"),
+    expireAt: ISODate("2023-07-30T08:00:00.000Z"),
+    author: 'George Orwell',
+    bucket: 1,
+    item: '1984',
+    email: 'robert.wilkinson@someone.co.uk'
+  }
+]
+
+I have no name!@my-mongodb-client:/$ mongosh mongodb://my-mongodb.default.svc.cluster.local:27017  --authenticationDatabase book --username reserver 
+Enter password: ******
+Current Mongosh Log ID:	655b2ba962bda30e463e2358
+Connecting to:		mongodb://<credentials>@my-mongodb.default.svc.cluster.local:27017/?directConnection=true&authSource=book&appName=mongosh+2.0.2
+
+Using MongoDB:		7.0.3
+Using Mongosh:		2.0.2
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+test>
+
+test> use book
+switched to db book
+book> db.book.find({})
+[
+  {
+    _id: ObjectId("65573f1ddff6ebe5c176949d"),
+    booking_start: ISODate("2023-07-29T08:00:00.000Z"),
+    booking_end: ISODate("2023-07-29T17:00:00.000Z"),
+    expireAt: ISODate("2023-07-30T08:00:00.000Z"),
+    author: 'George Orwell',
+    bucket: 1,
+    item: '1984',
+    email: 'robert.wilkinson@someone.co.uk'
+  }
+]
+book>
+
+  {
+    _id: 'admin.reserver',
+    userId: new UUID("e722e473-8526-4904-9d0d-f319fd8b23f1"),
+    user: 'reserver',
+    db: 'admin',
+    roles: [
+      { role: 'dbOwner', db: 'book' },
+      { role: 'readWrite', db: 'book' },
+      { role: 'userAdminAnyDatabase', db: 'admin' },
+      { role: 'dbOwner', db: 'carpark' },
+      { role: 'dbOwner', db: 'desk' }
+    ],
+    mechanisms: [ 'SCRAM-SHA-1', 'SCRAM-SHA-256' ]
+  },
+
+> db.createUser(
+... { user: "book1", pwd: "1book", roles: [ { role: "dbOwner", db: "book" }, { role: "readWrite", db: "book" }]
+... }
+... )
+Successfully added user: {
+	"user" : "book1",
+	"roles" : [
+		{
+			"role" : "dbOwner",
+			"db" : "book"
+		},
+		{
+			"role" : "readWrite",
+			"db" : "book"
+		}
+	]
+}
+> show users
+{
+	"_id" : "book.book1",
+	"userId" : UUID("40844ed6-51be-4d12-ad74-1871cb3dd412"),
+	"user" : "book1",
+	"db" : "book",
+	"roles" : [
+		{
+			"role" : "dbOwner",
+			"db" : "book"
+		},
+		{
+			"role" : "readWrite",
+			"db" : "book"
+		}
+	],
+	"mechanisms" : [
+		"SCRAM-SHA-1",
+		"SCRAM-SHA-256"
+	]
+}
+> 
+bye
+
+
+└─$ mongo --username book1 --authenticationDatabase book
+MongoDB shell version v6.1.1
+Enter password: 
+connecting to: mongodb://127.0.0.1:27017/?authSource=book&compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("90b369a3-0c3c-47d9-b4b8-7cba02089dd1") }
+MongoDB server version: 7.0.4
+WARNING: shell and server versions do not match
+================
+Warning: the "mongo" shell has been superseded by "mongosh",
+which delivers improved usability and compatibility.The "mongo" shell has been deprecated and will be removed in
+an upcoming release.
+For installation instructions, see
+https://docs.mongodb.com/mongodb-shell/install/
+================
+---
+The server generated these startup warnings when booting: 
+        2023-12-13T21:42:03.855+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+        2023-12-13T21:42:05.200+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+        2023-12-13T21:42:05.201+00:00: vm.max_map_count is too low
+        2023-12-13T21:42:05.201+00:00:         currentValue: 65530
+        2023-12-13T21:42:05.201+00:00:         recommendedMinimum: 1677720
+        2023-12-13T21:42:05.201+00:00:         maxConns: 838860
+---
+> 
+bye
