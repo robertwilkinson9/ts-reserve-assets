@@ -2,7 +2,8 @@
 TYPE=$1
 
 API_IP=$(./backend_address.sh $TYPE)
-CONFIG_FILE=$(echo config/config.${TYPE}.json)
+CONFIG_DIR=../ts-ra-config
+CONFIG_FILE=$(echo ${CONFIG_DIR}/config.${TYPE}.json)
 API_PORT=$(cat $CONFIG_FILE | jq --raw-output '.APIPORT')
 JQSTRING=$(echo -n .config.${TYPE})
 PORT=$(cat package.json | jq -r ${JQSTRING})

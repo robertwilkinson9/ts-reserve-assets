@@ -1,5 +1,6 @@
 {
   "config": {
+    "directory": "../ts-ra-config",
     "desk": 5174,
     "carpark": 5175,
     "book": 5176
@@ -12,13 +13,13 @@
     "dev": "vite --https --host $(hostname -I | awk '{print $1}')",
     "build": "tsc && vite build",
     "book_backend": "npm --prefix ../ts-REST-api-for-mongodb run book",
-    "book": "cp config/config.library.author.book.json config/config.json && sleep 5 && vite --port $npm_package_config_book --host $(hostname -I | awk '{print $1}')",
+    "book": "cp $npm_package_config_directory/config.library.author.book.json config/config.json && sleep 5 && vite --port $npm_package_config_book --host $(hostname -I | awk '{print $1}')",
     "allbooks": "concurrently --names \"FRONTEND,BACKEND\" --prefix-colors \"bgGreen.bold,bgMagenta.bold\" \"npm run book\" \"npm run book_backend\"",
     "carpark_backend": "npm --prefix ../ts-REST-api-for-mongodb run carpark",
-    "carpark": "cp config/config.carparks.json config/config.json && sleep 5 && vite --port $npm_package_config_carpark --host $(hostname -I | awk '{print $1}')",
+    "carpark": "cp $npm_package_config_directory/config.carparks.json config/config.json && sleep 5 && vite --port $npm_package_config_carpark --host $(hostname -I | awk '{print $1}')",
     "allcarparks": "concurrently --names \"FRONTEND,BACKEND\" --prefix-colors \"bgGreen.bold,bgMagenta.bold\" \"npm run carpark\" \"npm run carpark_backend\"",
     "desk_backend": "npm --prefix ../ts-REST-api-for-mongodb run desk",
-    "desk": "cp config/config.work.floor.desk.json config/config.json && sleep 5 && vite --port $npm_package_config_desk --host $(hostname -I | awk '{print $1}')",
+    "desk": "cp $npm_package_config_directory/config.work.floor.desk.json config/config.json && sleep 5 && vite --port $npm_package_config_desk --host $(hostname -I | awk '{print $1}')",
     "alldesks": "concurrently --names \"FRONTEND,BACKEND\" --prefix-colors \"bgGreen.bold,bgMagenta.bold\" \"npm run desk\" \"npm run desk_backend\"",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "coverage": "npx type-coverage --detail",
