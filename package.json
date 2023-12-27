@@ -13,7 +13,7 @@
     "dev": "vite --https --host $(hostname -I | awk '{print $1}')",
     "build": "tsc && vite build",
     "book_backend": "npm --prefix ../ts-REST-api-for-mongodb run book",
-    "book": "mkdir -p config && cp $npm_package_config_directory/config.library.author.book.json config/config.json && sleep 5 && vite --port $npm_package_config_book --host $(hostname -I | awk '{print $1}')",
+    "book": "mkdir -p config && echo DIR is && echo $npm_package_config_directory && cp $npm_package_config_directory/config.library.author.book.json config/config.json && sleep 5 && vite --port $npm_package_config_book --host $(hostname -I | awk '{print $1}')",
     "allbooks": "concurrently --names \"FRONTEND,BACKEND\" --prefix-colors \"bgGreen.bold,bgMagenta.bold\" \"npm run book\" \"npm run book_backend\"",
     "carpark_backend": "npm --prefix ../ts-REST-api-for-mongodb run carpark",
     "carpark": "mkdir -p config && cp $npm_package_config_directory/config.carparks.json config/config.json && sleep 5 && vite --port $npm_package_config_carpark --host $(hostname -I | awk '{print $1}')",
