@@ -1,10 +1,11 @@
 #/bin/bash
 TYPE=$1
 
+CONFIG_DIR="../rs-ra-config"
 SRC_DIR="../../typescript/ts-reserve-assets/"
 FE_PORT=$(cat ${SRC_DIR}/package.json | jq --raw-output .config.${TYPE})
 echo FE_PORT is $FE_PORT
-VITE_TYPE=$(jq '.ITEM_NAME' config/config.${TYPE}.json)
+VITE_TYPE=$(jq '.ITEM_NAME' ${CONFIG_DIR}/config.${TYPE}.json)
 echo vite_type is $VITE_TYPE
 
 MK=$(which minikube) 

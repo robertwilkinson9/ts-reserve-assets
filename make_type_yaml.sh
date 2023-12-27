@@ -20,7 +20,7 @@ if [ $MK ]; then
   VITE_TYPE=${TYPE}
 else
   API_IP=$(./backend_address.sh $TYPE)
-  CONFIG_FILE=$(echo config/config.${TYPE}.json)
+  CONFIG_FILE=$(echo $CONFIG_DIR/config.${TYPE}.json)
   API_PORT=$(cat $CONFIG_FILE | jq --raw-output '.APIPORT')
   VITE_TYPE=$(cat $CONFIG_FILE | jq --raw-output '.ITEM_NAME')
 fi
