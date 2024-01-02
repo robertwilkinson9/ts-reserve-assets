@@ -11,7 +11,7 @@ echo vite_type is $VITE_TYPE
 MK=$(which minikube) 
 if [ $MK ]; then
   echo "HAVE minikube";
-  MKURL=$(minikube service ${TYPE}-backend-service --url)
+  MKURL=$(minikube service ra-${TYPE} --url)
   echo MKURL is $MKURL
   END_POINT=$(echo ${MKURL} | awk -F '//' '{print $2}')
   echo endpoint is $END_POINT
@@ -20,7 +20,7 @@ if [ $MK ]; then
   END_POINT_PORT=$(echo ${END_POINT} | awk -F: '{print $2}')
   echo endpoint_port is $END_POINT_PORT
 else
-  END_POINTS=$(kubectl describe service/${TYPE}-backend-service | grep ^Endpoints: | awk '{print $NF}')
+  END_POINTS=$(kubectl describe service/ra-${TYPE} | grep ^Endpoints: | awk '{print $NF}')
   echo endpoints is $END_POINTS
   END_POINT_IP=$(echo ${END_POINTS} | awk -F: '{print $1}')
   echo endpoint_ip is $END_POINT_IP

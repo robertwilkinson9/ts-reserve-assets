@@ -9,7 +9,7 @@ API_PORT=$(cat $CONFIG_FILE | jq --raw-output '.APIPORT')
 MK=$(which minikube) 
 if [ $MK ]; then
   echo "HAVE minikube";
-  MKURL=$(minikube service ${TYPE}-backend-service --url)
+  MKURL=$(minikube service ra-${TYPE} --url)
   echo MKURL is $MKURL
   END_POINT=$(echo ${MKURL} | awk -F '//' '{print $2}')
   echo endpoint is $END_POINT
