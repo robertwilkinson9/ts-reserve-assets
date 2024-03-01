@@ -2,8 +2,8 @@
  * @vitest-environment jsdom
  */
 
-import { render, toBe } from '@testing-library/react';
-// import { render, screen } from '@testing-library/react';
+import { render, screen, toBe } from '@testing-library/react';
+
 // import selectEvent from 'react-select-event'
 
 import { MongoData } from '../components/interfaces';
@@ -143,88 +143,19 @@ describe('items test', () => {
   });
 });
 
-//describe('items test', () => {
-//  it("Select list should have correct values via id selector", async () => {
-//    const { container, findByTestId } = renderItems();
-////    console.log("56");
-////    console.log(container);
-//    const itemPulldown = container.querySelector('#itemPulldown')
-//
-//
-////    console.log("itemPulldown");
-////    console.log(itemPulldown);
-////    console.log("itemPulldown.children");
-////    console.log(itemPulldown.children[0]);
-////    console.log(itemPulldown.children[0].memoizedProps);
-////    const bits  = itemPulldown.children[0].querySelector('[items_label=${items_label}]')
-//
-//    const ItemsDiv = await findByTestId("items_div");
-////    expect(ItemsDiv).toBeInTheDocument();
-//    expect(ItemsDiv).toContainElement(itemPulldown);
-//    expect(itemPulldown).toHaveTextContent("Select...");
-//    expect(itemPulldown).toHaveAttribute('placeholder', "Select...");
-//
-////    const items_label = await findByTestId("items_label");
-////   console.log("items_label");
-//
-////    expect(items_label).toHaveTextContent("f10");
-////    console.log(items_label.children);
-////    console.log(items_label);
-////    console.log(typeof(items_label));
-////    console.log("items_label keys");
-////    console.log(Object.keys(items_label));
-////    console.log("items_label values");
-////    console.log(Object.values(items_label));
-////    console.log("items_label second value");
-////    console.log(Object.values(items_label)[1]);
-////    console.log("items_label second value children");
-////    console.log(Object.values(items_label)[1].children);
-////
-////    console.log(items_labels[Object.keys(items_label)[1]]);
-////    expect(items_label).toHaveTextContent("f10");
-//
-////#'data-testid': 'items_label'
-////    for c in itemPulldown.children
-////      console.log(c);
-//    
-////    const placeholder = container.querySelector('[placeholder="Select..."]')
-////    console.log("55");
-////    console.log(placeholder);
-////    expect(combo_box).toHaveAttribute("value", test_date_string);
-//  });
-//});
-//
-//describe('items test', () => {
-//  const { getByLabelText, getByTestId } = renderItems(42);
-//
-//  it("Select list should have select element values", async () => {
-//    await selectEvent.select(getByLabelText('Test_items_name'), 'Chocolate')
-//    expect(getByTestId('form')).toHaveFormValues({food: 'chocolate',})
-//  });
-//});
-//
-////    renderItems();
-////
-////    const select = screen.getByRole('select');
-////    console.log("SLECT BOX");
-////    console.log(select);
-//  });
-////
-////  it("Select list should be accessible from div", async () => {
-////    const { findByTestId } = renderItems();
-////
-////    const ItemsDiv = await findByTestId("items_div");
-//////    console.log(ItemsDiv);
-//////    expect(ItemsDiv).toBeInTheDocument();
-////  });
-////
-////
-////  it("Select list should be accessible via query selector", async () => {
-////    const { container } =  renderItems();
-////    const dropdown = screen.getByTestId('items_div').querySelector('input')
-////    console.log(dropdown);
-////
-//////    const keyed_list = container.querySelector('[key="key__0"]')
-//////    expect(keyed_list).toBeInTheDocument();
-////  });
-////});
+describe('items test', () => {
+  it("Select list should have correct values via id selector", async () => {
+    const { container, findByTestId } = renderItems();
+//    screen.debug();
+    const select = container.querySelector(".chakra-select")
+    const list_items = select.children;
+    const so0 = "Select option";
+    const so1 = "f01";
+    const so9 = "f09";
+    expect(list_items[0]).toHaveTextContent(so0);
+    expect(list_items[0].value).toBe("");
+    expect(list_items[1]).toHaveTextContent(so1);
+    expect(list_items[1].value).toBe(so1);
+    expect(list_items[9]).toHaveTextContent(so9);
+    expect(list_items[9].value).toBe(so9);
+  });});
