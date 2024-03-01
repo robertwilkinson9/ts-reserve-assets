@@ -27,6 +27,12 @@
     "test": "SSL_CERT=${SSL_CERT:=/certs/localhost.crt} SSL_KEY=${SSL_KEY:=/certs/localhost.key} vitest"
   },
   "dependencies": {
+    "@babel/plugin-transform-async-generator-functions": "^7.23.9",
+    "@babel/plugin-transform-class-properties": "^7.23.3",
+    "@babel/plugin-transform-nullish-coalescing-operator": "^7.23.4",
+    "@babel/plugin-transform-object-rest-spread": "^7.23.4",
+    "@babel/plugin-transform-optional-catch-binding": "^7.23.4",
+    "@babel/plugin-transform-optional-chaining": "^7.23.4",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.14.5",
     "@mui/styled-engine": "^5.13.2",
