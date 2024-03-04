@@ -27,7 +27,7 @@ const test_numeric_config = {
       "NAME": "second",
       "PREFIX": "s",
       "IFIRST": 11,
-      "ILAST": 20
+      "ILAST": 15
     }
   ]
 }

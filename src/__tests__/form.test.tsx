@@ -5,8 +5,6 @@
 
 import { render, screen } from '@testing-library/react';
 
-// import Form from 'react-bootstrap/Form';
-
 import {InputFormProps} from '../components/interfaces'
 import { InputForm, overlap } from '../components/form';
 
@@ -28,7 +26,7 @@ const test_config = {
       "NAME": "second",
       "PREFIX": "s",
       "IFIRST": 11,
-      "ILAST": 20
+      "ILAST": 15
     }
   ]
 }
@@ -166,7 +164,21 @@ describe('it item contents', () => {
 
     const EmailFormlabel = screen.queryByTestId("emailaddress_label");
     expect(EmailFormlabel).toBeInTheDocument();
+  });
 
-//    screen.debug();
+  it("first bucket should contain 10 items", async () => {
+    const itemprops = {bucket: 0};
+    const { queryAllByTestId } = renderInputForm(itemprops);
+
+    const OptionsText = screen.queryAllByRole('option');
+    expect(OptionsText.length).toBe(11); // 10 options and one label
+  });
+
+  it("second bucket should contain 5 items", async () => {
+    const itemprops = {bucket: 1};
+    const { queryAllByTestId } = renderInputForm(itemprops);
+
+    const OptionsText = screen.queryAllByRole('option');
+    expect(OptionsText.length).toBe(6); // 5 options and one label
   });
 });

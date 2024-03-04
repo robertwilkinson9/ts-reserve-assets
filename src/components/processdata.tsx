@@ -169,7 +169,7 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
       );
     }
   } else {
-    console.log("INSUFFICIENT INPUT CONFIRMED!!");
+//    console.log("INSUFFICIENT INPUT CONFIRMED!!");
     return (
       <>
       <h4>Insufficient Input</h4>

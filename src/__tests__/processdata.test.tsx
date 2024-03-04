@@ -84,7 +84,6 @@ test('use jsdom in this test file', () => {
 
 test('expect ProcessData to render', () => {
   renderProcessData();
-  screen.debug();
 
   const iistring = 'Insufficient Input';
 
