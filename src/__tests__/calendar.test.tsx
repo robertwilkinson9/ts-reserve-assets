@@ -17,12 +17,12 @@ const null_setter = () => {};
 describe('header test', () => {
   it("should contain label and datepicker elements", async () => {
     const test_label = "element_test";
-    const { findByTestId } = renderCalendar({label: test_label, selected: null_date, date_setter: null_setter, date_setter2: null_setter});
+    const { queryByTestId } = renderCalendar({label: test_label, selected: null_date, date_setter: null_setter, date_setter2: null_setter});
 
-    const Label = await findByTestId("calendar_label");
+    const Label = screen.queryByTestId("calendar_label");
     expect(Label).toBeInTheDocument();
 
-    const DatePicker = await findByTestId("calendar_datepicker");
+    const DatePicker = screen.queryByTestId("calendar_datepicker");
     expect(DatePicker).toBeInTheDocument();
   });
 

@@ -101,21 +101,20 @@ describe('overlap function tests', () => {
 
 describe('it item contents', () => {
   it("should default to an blank item", async () => {
-    const { findByTestId } = renderInputForm();
+    const { queryByTestId } = renderInputForm();
 
-    const InputFormlabel = await findByTestId("emailaddress_label");
-
+    const InputFormlabel = screen.queryByTestId("emailaddress_label");
     expect(InputFormlabel).toHaveTextContent('Email address');
 
-   const InputForm = screen.queryByTestId("emailaddress");
-   expect(InputForm).toContainElement(InputFormlabel);
+    const InputForm = screen.queryByTestId("emailaddress");
+    expect(InputForm).toContainElement(InputFormlabel);
   });
 
   it("form should contain all parts", async () => {
     const email = "email@domain.org";
     const itemprops = {email: email};
 
-    const { findByTestId, queryAllByTestId } = renderInputForm(itemprops);
+    const { queryAllByTestId } = renderInputForm(itemprops);
 
     const calendar_label_0 = screen.queryAllByTestId("calendar_label")[0];
     expect(calendar_label_0).toBeInTheDocument();

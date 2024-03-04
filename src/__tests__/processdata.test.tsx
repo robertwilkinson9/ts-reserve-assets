@@ -8,6 +8,26 @@ import { render, screen } from '@testing-library/react';
 import {ProcessDataProps} from '../components/interfaces'
 import { ProcessData, auxdatamerge, tomorrow_from_day} from '../components/processdata';
 
+function renderProcessData(props: Partial<ProcessDataProps> = {}) {
+// export interface configData {
+//   APIPORT: number;
+//   LCCOLLECTION: string;
+//   ITEM_NAME: string;
+//   ITEM_LABEL: string;
+//   BUCKET_NAME: string;
+//   BUCKETS: bucketData[];
+//   AUXILLIARY?: AuxConfigRecordType[];
+// }
+
+  const defaultConfig = {
+    "APIPORT": 7345,
+    "LCCOLLECTION": "test",
+    "ITEM_NAME": "test_item",
+    "ITEM_LABEL": "test_label",
+    "BUCKET_NAME": "test_bucket",
+    "BUCKETS": [],
+  }
+
 // export interface ProcessDataProps {
 //   config: configData;
 //   mongo_data: MongoData[];
@@ -30,30 +50,6 @@ import { ProcessData, auxdatamerge, tomorrow_from_day} from '../components/proce
 //   set_confirmed: React.Dispatch<React.SetStateAction<boolean>>;
 //   set_needreset: React.Dispatch<React.SetStateAction<boolean>>;
 // }
-
-// export interface configData {
-//   APIPORT: string; // XXX should be a number?
-//   LCCOLLECTION: string;
-//   ITEM_NAME: string;
-//   ITEM_LABEL: string;
-//   BUCKET_NAME: string;
-//   BUCKETS: bucketData[];
-//   AUXILLIARY?: AuxConfigRecordType[];
-// } 
-
-
-// export const tomorrow_from_day = (startDateTime: Date): Date => {
-// export const auxdatamerge = (aux_config: AuxConfigRecordType[], aux_data: AuxDataRecordType[]): AuxType[] => {
-
-function renderProcessData(props: Partial<ProcessDataProps> = {}) {
-  const defaultConfig = {
-    "APIPORT": 7345,
-    "LCCOLLECTION": "test",
-    "ITEM_NAME": "test_item",
-    "ITEM_LABEL": "test_label",
-    "BUCKET_NAME": "test_bucket",
-    "BUCKETS": [],
-  }
 
   const defaultProps = {
     config: defaultConfig,
@@ -86,25 +82,15 @@ test('use jsdom in this test file', () => {
   expect(element).not.toBeNull()
 })
 
-/*
 test('expect ProcessData to render', () => {
-//  const {getAllByText} = renderProcessData();
   renderProcessData();
-//  screen.debug();
+  screen.debug();
 
-// const iistring = '<h4>Insufficient Input</h4>';
   const iistring = 'Insufficient Input';
 
   const iiElement = screen.getByText(iistring);
   expect(iiElement).toBeInTheDocument();
-
-//  const iic = "INSUFFICIENT INPUT CONFIRMED!!";
-//  const all_matches = element.getAllByText(iic);
-//  expect(all_matches.length).toBe(1);
-//  expect(all_matches).toBe("INSUFFICIENT INPUT CONFIRMED!!");
-//  expect(element).toHaveTextContent("INSUFFICIENT INPUT CONFIRMED!!");
 })
-*/
 
 // export const tomorrow_from_day = (startDateTime: Date): Date => {
 describe('tomorrow_from_day should work ', () => {
@@ -116,17 +102,6 @@ describe('tomorrow_from_day should work ', () => {
   });
 });
 
-// export interface AuxConfigRecordType  {
-//   id: string;
-//   label: string;
-//   dbname: string;
-// }
-// 
-// export interface AuxDataRecordType  {
-//   id: string;
-//   value: string;
-// }
-
 // export const auxdatamerge = (aux_config: AuxConfigRecordType[], aux_data: AuxDataRecordType[]): AuxType[] => {
 describe('auxdatamerge should work ', () => {
   it("should default to an blank item", async () => {
@@ -136,17 +111,13 @@ describe('auxdatamerge should work ', () => {
   });
 
   it("should add two single item arrays", async () => {
-    
-// export interface AuxConfigRecordType  {
-//   id: string;
-//   label: string;
-//   dbname: string;
     const acrt = [{"id": "42", "label": "unlimited", "dbname": "remote_id"}];
-
     const adrt = [{"id": "42", "value": "mystring"}];
     const adt = auxdatamerge(acrt, adrt);
-
     expect(adt.length).toBe(1);
+    const adt_hash = adt[0];
+    expect(adt_hash['label']).toBe("unlimited");
+    expect(adt_hash['value']).toBe("mystring");
   });
 
   it("should create a correctly merged item when adding two single items", async () => {

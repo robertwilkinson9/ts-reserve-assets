@@ -115,7 +115,6 @@ describe('buckets test', () => {
 
     const BucketButtonUncheckedLabel = screen.queryByTestId("bucket_button_unchecked_label");
     expect(BucketButtonUncheckedLabel).toHaveTextContent("First");
-
-    screen.debug()
+//    screen.debug()
   });
 });

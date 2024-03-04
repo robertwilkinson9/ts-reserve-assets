@@ -2,7 +2,7 @@
  * @vitest-environment jsdom
  */
 
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import { Header } from '../components/header.tsx';
 
@@ -12,9 +12,10 @@ const renderHeader = () => {
 
 describe('header test', () => {
   it("should contain a hr element", async () => {
-    const { findByTestId } = renderHeader();
+    const { queryByTestId } = renderHeader();
 
-    const Ruler = await findByTestId("header_ruler");
+    const Ruler = screen.queryByTestId("header_ruler");
+
     expect(Ruler).toBeInTheDocument();
   });
 });
