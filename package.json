@@ -55,8 +55,10 @@
   },
   "devDependencies": {
     "@chakra-ui/react": "^2.8.0",
+    "@testing-library/dom": "^9.3.4",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.5.2",
     "@types/react": "^18.0.28",
     "@types/react-datepicker": "^4.11.2",
     "@types/react-dom": "^18.0.11",
