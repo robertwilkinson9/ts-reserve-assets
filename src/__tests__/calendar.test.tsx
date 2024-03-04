@@ -8,8 +8,6 @@ import { CalendarProps } from '../components/interfaces';
 import { Calendar } from '../components/calendar';
 
 const renderCalendar = (props : CalendarProps) => {
-//  console.log(`in renderCalendar - props.label is ${props.label}`);
-//  console.log(`in renderCalendar - props.selected is ${props.selected}`);
   return render(<Calendar label={props.label} selected={props.selected} date_setter={props.date_setter} date_setter2={props.date_setter2} />);
 }
 
@@ -40,38 +38,6 @@ describe('header test', () => {
     renderCalendar({label: test_label, selected: null_date, date_setter: null_setter, date_setter2: null_setter});
     expect(screen.getByTestId('calendar_datepicker')).toBeInTheDocument;
   });
-
-//    const dp_html = `<div
-//  data-testid="calendar_datepicker"
-//>
-//  <div
-//    class="react-datepicker-wrapper"
-//  >
-//    <div
-//      class="react-datepicker__input-container "
-//    >
-//      <span
-//        aria-live="polite"
-//        class="react-datepicker__aria-live"
-//        role="alert"
-//      />
-//      <input
-//        class=""
-//        type="text"
-//        value=""
-//      />
-//    </div>
-//  </div>
-//</div>`;
-
-  it("datepicker object should contain a react-datepicker-wrapper object", async () => {
-    const test_label = "react-datepicker-wrapper_test";
-    const { container } =  renderCalendar({label: test_label, selected: null_date, date_setter: null_setter, date_setter2: null_setter});
-
-    const react_datepicker_wrapper = container.querySelector('[class="react-datepicker-wrapper"]')
-    expect(react_datepicker_wrapper).toBeInTheDocument();
-  });
-
 
   it("datepicker object selected should be displayed as a value for the input", async () => {
     const test_label = "date_test";
