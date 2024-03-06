@@ -14,6 +14,8 @@ import { Select } from '@chakra-ui/react'
 
 import { BucketReadProps, ItemsProps, Select_type} from './interfaces';
 
+import { capitalizeFirstLetter } from './bucket';
+
 const items_select = (items: string[]): Select_type[] => {
   return items.map((item) => {return {value: item, label: item};});
 }
@@ -50,7 +52,7 @@ const listbuild = (istart:number | undefined, ilast:number | undefined, prefix: 
 export const get_items_from_config = ({config, bucket}: BucketReadProps): string[] | undefined => {
   let items: string[] | undefined = [];
 
-  if ((bucket !== null) && config.BUCKETS !== undefined && config.BUCKETS.length && (config.BUCKETS[bucket] !== undefined)) {
+  if ((bucket !== null) && config !== undefined && config.BUCKETS !== undefined && config.BUCKETS.length && (config.BUCKETS[bucket] !== undefined)) {
     if ('ITEMS' in config.BUCKETS[bucket]) {
       items = config.BUCKETS[bucket].ITEMS;
     } else {
@@ -71,7 +73,7 @@ export const get_items_from_config = ({config, bucket}: BucketReadProps): string
 export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps) => {
   let items: string[] | undefined = [];
 
-  if (bucket !== null) {
+  if (config !== null && bucket !== undefined) {
     items = get_items_from_config({config, bucket});
 
     if (allocated_items) {
@@ -89,12 +91,10 @@ export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps
     }
   }
 
-  if (items) {
+  if (config && items) {
     const select_item_list: Select_type[] = items_select(items)
 
     const select_option_list = select_item_list.map((item, key) => { return (<React.Fragment key={key}><option value={item.value}>{item.label}</option></React.Fragment>) });
-
-    const capitalizeFirstLetter = (name: string) => {if (name && name.length) {return name.charAt(0).toUpperCase() + name.slice(1);} else {return "X"} }
 
     return (
       <>

@@ -9,10 +9,10 @@ import { Input, Text} from '@chakra-ui/react'
 
 import { AuxDataRecordType } from './interfaces';
 
-const onChangeFn = (evalue: string, id: string, auxdata: AuxDataRecordType[], set_auxdata: React.Dispatch<React.SetStateAction<AuxDataRecordType[]>>) => {
-  const exists = auxdata.filter((item) => {return id === item.id});
+export const aux_exists = (id: string, auxdata: AuxDataRecordType[]) => {return auxdata.find(o => o.id === id);};
 
-  if (exists.length) {
+export const onChangeFn = (evalue: string, id: string, auxdata: AuxDataRecordType[], set_auxdata: React.Dispatch<React.SetStateAction<AuxDataRecordType[]>>) => {
+  if (aux_exists.length) {
     set_auxdata(
       auxdata.map((auxdata) =>
         auxdata.id === id

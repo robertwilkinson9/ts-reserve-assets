@@ -168,7 +168,7 @@ describe('it item contents', () => {
 
   it("first bucket should contain 10 items", async () => {
     const itemprops = {bucket: 0};
-    const { queryAllByTestId } = renderInputForm(itemprops);
+    const { queryAllByRole } = renderInputForm(itemprops);
 
     const OptionsText = screen.queryAllByRole('option');
     expect(OptionsText.length).toBe(11); // 10 options and one label
@@ -176,9 +176,16 @@ describe('it item contents', () => {
 
   it("second bucket should contain 5 items", async () => {
     const itemprops = {bucket: 1};
-    const { queryAllByTestId } = renderInputForm(itemprops);
+    const { queryAllByTestId, queryAllByRole, queryByRole } = renderInputForm(itemprops);
 
+    const items_div = screen.queryByTestId("items_div");
+//    screen.debug(items_div);
+
+//    const x = screen.queryByLabelText('Test_items_name`');
+//    console.log("x");
+//    screen.debug(x);
     const OptionsText = screen.queryAllByRole('option');
+//    const OptionsText = screen.queryAllByRole('chakra-select');
     expect(OptionsText.length).toBe(6); // 5 options and one label
   });
 });

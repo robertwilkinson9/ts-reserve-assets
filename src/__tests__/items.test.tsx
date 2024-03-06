@@ -150,4 +150,83 @@ describe('items test', () => {
     expect(list_items[1].value).toBe(so1);
     expect(list_items[9]).toHaveTextContent(so9);
     expect(list_items[9].value).toBe(so9);
-  });});
+  });
+});
+
+describe('overlapping items test', () => {
+  const set_mongodata_item = (start, end, bucket, key, value) => {
+/*
+export type MongoData = {
+  booking_start: string;
+  booking_end: string;
+  bucket: number;
+  [key: string]: string | number | undefined; // 👈️ variable key
+};
+*/
+    const mditem: MongoData = {};
+    mditem.booking_start = start;
+    mditem.booking_end =  end;
+    mditem.bucket = bucket;
+    mditem[key] = value;
+
+    console.dir(mditem);
+
+    return mditem;
+  };
+  it("Overlapping items must be  from ", async () => {
+    const xdate = new Date("1999-12-31T01:00");
+    const ydate = new Date("1999-12-31T02:00");
+    const bucket = 0;
+    const key = "name";
+    const value = "tester";
+    const ov1 = set_mongodata_item(xdate, ydate, bucket, key, value);
+    const { container } = render(<Items />);
+    console.log("ov1");
+    console.dir(ov1);
+    expect(container).toHaveTextContent("No SELECT items");
+  });
+  it("Overlapping items must be removed from ", async () => {
+    const xdate1 = new Date("1999-12-31T01:00");
+    const ydate1 = new Date("1999-12-31T02:00");
+    const bucket1 = 0;
+    const key1 = "name";
+    const value1 = "tester1";
+    const ov1 = set_mongodata_item(xdate1, ydate1, bucket1, key1, value1);
+
+    const { container } = render(<Items allocated_items={ov1} />);
+    console.log("SET XDATE1");
+    screen.debug(container);
+
+/*
+    const xdate2 = new Date("1999-12-31T01:30");
+    const ydate2 = new Date("1999-12-31T02:30");
+    const bucket2 = 0;
+    const key2 = "name";
+    const value2 = "tester2";
+    const ov2 = set_mongodata_item(xdate2, ydate2, bucket2, key2, value2);
+
+//    const { container } = render(<Items allocated_items={ov2} />);
+    console.log("ov1");
+    console.dir(ov1);
+    screen.debug(ov1);
+*/
+    expect(container).toHaveTextContent("No SELECT items");
+  });
+});
+
+describe('no items test', () => {
+  it("Null Select list should show No SELECT items", async () => {
+    const { container } = render(<Items />);
+    expect(container).toHaveTextContent("No SELECT items");
+  });
+
+  it("Null Select list should return HTML warning", async () => {
+    const { container } = render(<Items />);
+    screen.debug();
+    const heading = screen.getByRole('heading', {level: 4});
+    screen.debug(heading);
+    expect(heading).toHaveTextContent("No SELECT items");
+  });
+});
+
+

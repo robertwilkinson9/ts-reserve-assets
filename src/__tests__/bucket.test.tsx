@@ -6,7 +6,7 @@ import { describe, it } from 'vitest';
 
 import { render, screen } from '@testing-library/react';
 
-import { Bucket } from '../components/bucket';
+import { capitalizeFirstLetter, Bucket } from '../components/bucket';
 
 const test_config = {
   "APIPORT": 1234,
@@ -57,6 +57,21 @@ describe('label test', () => {
 
     const BucketLabelLabel = screen.queryByTestId("bucket_label_label");
     expect(BucketLabelLabel).toHaveTextContent("Test_bucket");
+  });
+});
+
+describe('capitalise first letter test', () => {
+  it("should return undefined for no input", async () => {
+    const cfl_null = capitalizeFirstLetter();
+    expect(cfl_null).toBeUndefined;
+  });
+  it("should return Apple for input of apple", async () => {
+    const cfl_apple = capitalizeFirstLetter("apple");
+    expect(cfl_apple).toBe("Apple");
+  });
+  it("should return APPLE for input of APPLE", async () => {
+    const cfl_apple = capitalizeFirstLetter("APPLE");
+    expect(cfl_apple).toBe("APPLE");
   });
 });
 
@@ -115,6 +130,5 @@ describe('buckets test', () => {
 
     const BucketButtonUncheckedLabel = screen.queryByTestId("bucket_button_unchecked_label");
     expect(BucketButtonUncheckedLabel).toHaveTextContent("First");
-//    screen.debug()
   });
 });
