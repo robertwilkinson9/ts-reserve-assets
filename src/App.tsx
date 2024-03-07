@@ -28,16 +28,6 @@ export const App = () => {
   registerLocale('en-GB', enGB)
   setDefaultLocale('en-GB');
 
-  const item_name = import.meta.env.VITE_TYPE || configData.ITEM_NAME;
-
-  const build_mongo_data = (data: MongoReturnType): MongoData[] => {
-    if (data.data && data.data.length) {
-      return data.data.map((x: MongoRecordType) => {return {"booking_start": x.booking_start, "booking_end": x.booking_end, "bucket": x.bucket, [item_name]: x[item_name]}})
-    } else {
-      return [];
-    }
-  }
-
   const get_api_url = () : string => {
     let service_prefix_host = "";
     if (import.meta.env.service_prefix_host_name !== undefined) {
@@ -79,41 +69,50 @@ export const App = () => {
     return api_url
   }
 
-  const api_url = get_api_url();
-  const ITEMS_url = api_url + 'all_' + item_name + 's/';
-  console.log(`MAIN ITEMS_url is ${ITEMS_url}`);
-
-  const get_mongo_data = async () => {
-    try {
-      await axios.get<MongoReturnType>(ITEMS_url, {headers: {'Content-Type': 'application/json'}}).then(response => {
-          const mymongodata: MongoData[] = build_mongo_data(response.data);
-          setMongodata(mymongodata);
-        }
-      )
-    } catch (error: unknown | AxiosError) {
-      if (isAxiosError(error)) {
-        if (error.response) {
-          // The client was given an error response (5xx, 4xx)
-          // The request was made and the server responded with a status code
-          // that falls out of the range of 2xx
-          console.log('Axios Error Response');
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else {
-          // Anything else
-          console.log('Axios Error', error.message);
-        }
+  useEffect(() => {
+    const build_mongo_data = (data: MongoReturnType): MongoData[] => {
+      if (data.data && data.data.length) {
+        return data.data.map((x: MongoRecordType) => {return {"booking_start": x.booking_start, "booking_end": x.booking_end, "bucket": x.bucket, [item_name]: x[item_name]}})
       } else {
-        // Anything else
-        console.log('Non Axios Error');
-        console.log(error);
+        return [];
       }
     }
-  };
 
-  useEffect(() => {
+    const api_url = get_api_url();
+
+    const get_mongo_data = async () => {
+      try {
+        const item_name = import.meta.env.VITE_TYPE || configData.ITEM_NAME;
+
+        const ITEMS_url = api_url + 'all_' + item_name + 's/';
+        console.log(`MAIN ITEMS_url is ${ITEMS_url}`);
+
+        await axios.get<MongoReturnType>(ITEMS_url, {headers: {'Content-Type': 'application/json'}}).then(response => {
+            const mymongodata: MongoData[] = build_mongo_data(response.data);
+            setMongodata(mymongodata);
+          }
+        )
+      } catch (error: unknown | AxiosError) {
+        if (isAxiosError(error)) {
+          if (error.response) {
+            // The client was given an error response (5xx, 4xx)
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            console.log('Axios Error Response');
+            console.log(error.response.status);
+            console.log(error.response.headers);
+          } else {
+            // Anything else
+            console.log('Axios Error', error.message);
+          }
+        } else {
+          // Anything else
+          console.log('Non Axios Error');
+          console.log(error);
+        }
+      }
+    };
     get_mongo_data();
-// eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const reset = (): void =>
