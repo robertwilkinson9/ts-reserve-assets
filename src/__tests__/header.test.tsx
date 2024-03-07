@@ -12,7 +12,7 @@ const renderHeader = () => {
 
 describe('header test', () => {
   it("should contain a hr element", async () => {
-    const { queryByTestId } = renderHeader();
+    renderHeader();
 
     const Ruler = screen.queryByTestId("header_ruler");
 

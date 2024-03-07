@@ -12,12 +12,14 @@ const renderCalendar = (props : CalendarProps) => {
 }
 
 const null_date = null
+/* eslint-disable */
 const null_setter = () => {};
+/* eslint-enable */
 
 describe('header test', () => {
   it("should contain label and datepicker elements", async () => {
     const test_label = "element_test";
-    const { queryByTestId } = renderCalendar({label: test_label, selected: null_date, date_setter: null_setter, date_setter2: null_setter});
+    renderCalendar({label: test_label, selected: null_date, date_setter: null_setter, date_setter2: null_setter});
 
     const Label = screen.queryByTestId("calendar_label");
     expect(Label).toBeInTheDocument();

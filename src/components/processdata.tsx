@@ -4,26 +4,18 @@
 * of the record set for the day after the booking
 */
 
-import axios, { AxiosResponse, AxiosError, isAxiosError } from 'axios'
+import axios, { AxiosResponse, isAxiosError } from 'axios'
 
 import { Button, ChakraProvider } from '@chakra-ui/react'
 
 import InputForm from './form'
 
-import { AuxConfigRecordType, AuxDataRecordType, AuxType, ItemData, MongoData, ProcessDataProps } from './interfaces';
+//import { AuxConfigRecordType, AuxDataRecordType, AuxType, ItemData, MongoData, ProcessDataProps } from './interfaces';
+import { ItemData, MongoData, ProcessDataProps } from './interfaces';
 
+import { auxdatamerge } from './auxdatamerge';
+import { tomorrow_from_day } from './tomorrow_from_day';
 import './processdata.css';
-
-export const tomorrow_from_day = (passed_date: Date): Date => {
-  const tomorrow = new Date(passed_date);
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  return tomorrow;
-}
-
-export const auxdatamerge = (aux_config: AuxConfigRecordType[], aux_data: AuxDataRecordType[]): AuxType[] => {
-  const merged = aux_config.map((c) => {const data = aux_data.filter((d) => {return d.id == c.id}); return {id: c.id, label: c.label, dbname: c.dbname, value: data[0].value} });
-  return merged;
-};
 
 const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
   console.log("ADDING ITEM");
@@ -73,7 +65,7 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
       "email": email,
     };
 
-    let aux_merged = new Map<string, string>();
+    const aux_merged = new Map<string, string>();
     const ac = config.AUXILLIARY;
     if (ac) {
       const merged = auxdatamerge(ac,  auxdata);
@@ -100,7 +92,7 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
       const id = add_item_to_mongodb(ITEM_url, item_booking);
       id.then(() => {
         const new_record: MongoData = {"booking_start": booking_start.toISOString(), "booking_end": booking_end.toISOString(), "bucket": bucket, [config.BUCKET_NAME]: name, [config.ITEM_NAME]: item};
-        let tmp = mongo_data;
+        const tmp = mongo_data;
         tmp.push(new_record);
         console.log("SETTING MONGO DATA");
         set_mongodata(tmp);

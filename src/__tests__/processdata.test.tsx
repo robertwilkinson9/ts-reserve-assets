@@ -2,11 +2,12 @@
  * @vitest-environment jsdom
  */
 
-// import { render } from '@testing-library/react';
 import { render, screen } from '@testing-library/react';
 
 import {ProcessDataProps} from '../components/interfaces'
-import { ProcessData, auxdatamerge, tomorrow_from_day} from '../components/processdata';
+import { auxdatamerge } from '../components/auxdatamerge';
+import { tomorrow_from_day } from '../components/tomorrow_from_day';
+import { ProcessData } from '../components/processdata';
 
 function renderProcessData(props: Partial<ProcessDataProps> = {}) {
 // export interface configData {
@@ -51,27 +52,31 @@ function renderProcessData(props: Partial<ProcessDataProps> = {}) {
 //   set_needreset: React.Dispatch<React.SetStateAction<boolean>>;
 // }
 
+/* eslint-disable */
+const null_setter = () => {};
+/* eslint-enable */
+
   const defaultProps = {
     config: defaultConfig,
     mongo_data: [],
-    set_mongodata: () => {},
+    set_mongodata: null_setter,
     booking_start: null,
-    set_booking_start: () => {},
+    set_booking_start: null_setter,
     booking_end: null,
-    set_booking_end: () => {},
+    set_booking_end: null_setter,
     bucket: null,
-    set_bucket: () => {},
+    set_bucket: null_setter,
     item: null,
-    set_item: () => {},
+    set_item: null_setter,
     email: "",
-    set_email: () => {},
+    set_email: null_setter,
     auxdata: [],
-    set_auxdata: () => {},
-    set_complete: () => {},
+    set_auxdata: null_setter,
+    set_complete: null_setter,
     url: "",
     confirmed: false,
-    set_confirmed: () => {},
-    set_needreset: () => {},
+    set_confirmed: null_setter,
+    set_needreset: null_setter,
   };
 
   return render(<ProcessData {...defaultProps} {...props} />);

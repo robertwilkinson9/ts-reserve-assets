@@ -8,23 +8,7 @@
 import { Input, Text} from '@chakra-ui/react'
 
 import { AuxDataRecordType } from './interfaces';
-
-export const aux_exists = (id: string, auxdata: AuxDataRecordType[]) => {return auxdata.find(o => o.id === id);};
-
-export const onChangeFn = (evalue: string, id: string, auxdata: AuxDataRecordType[], set_auxdata: React.Dispatch<React.SetStateAction<AuxDataRecordType[]>>) => {
-  if (aux_exists.length) {
-    set_auxdata(
-      auxdata.map((auxdata) =>
-        auxdata.id === id
-        ? { ...auxdata, value: evalue }
-        : { ...auxdata }
-      )
-    );
-  } else {
-    const new_list = [ ...auxdata, {id: id, value: evalue }];
-    set_auxdata(new_list);
-  }
-};
+import { onChangeFn } from './onChangeFn';
 
 //  id: AuxIdType;
 interface inputProps {

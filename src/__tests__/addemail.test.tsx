@@ -3,17 +3,20 @@
  */
 
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event'
 
 import { FormControl } from '@chakra-ui/react'
 
 import {AddEmailProps} from '../components/interfaces'
 import AddEmail from '../components/addemail.tsx';
 
+/* eslint-disable */
+const null_setter = () => {};
+/* eslint-enable */
+
 function renderAddEmail(props: Partial<AddEmailProps> = {}) {
   const defaultProps = {
     email: "",
-    set_email: () => {},
+    set_email: null_setter,
   };
 
   return render(<FormControl id="emailForm"><AddEmail {...defaultProps} {...props} /></FormControl>);
@@ -26,7 +29,7 @@ test('use jsdom in this test file', () => {
 
 describe('it item contents', () => {
   it("should default to an blank item", async () => {
-    const { queryByTestId } = renderAddEmail();
+    renderAddEmail();
 
     const AddEmaillabel = screen.queryByTestId("emailaddress_label");
     expect(AddEmaillabel).toHaveTextContent('Email address');
@@ -36,13 +39,10 @@ describe('it item contents', () => {
   });
 
   it("should be able to set email", async () => {
-    const user = userEvent.setup()
     const email = "email@domain.org";
     const itemprops = {email: email};
 
-    const { queryByTestId } = renderAddEmail(itemprops);
-
-    const EmailAddressdiv = screen.queryByTestId("emailaddress");
+    renderAddEmail(itemprops);
 
     const EmailAddresslabel = screen.queryByTestId("emailaddress_label");
     expect(EmailAddresslabel).toHaveTextContent("Email address");

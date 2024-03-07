@@ -2,12 +2,11 @@
  * @vitest-environment jsdom
  */
 
-import { render, screen, toBe } from '@testing-library/react';
-
-// import selectEvent from 'react-select-event'
+import { render, screen } from '@testing-library/react';
 
 import { MongoData } from '../components/interfaces';
-import { get_items_from_config, Items } from '../components/items';
+import { get_items_from_config } from '../components/get_items_from_config';
+import { Items } from '../components/items';
 
 const test_numeric_config = {
   "APIPORT": 1234,
@@ -46,10 +45,12 @@ const test_list_config = {
   ]
 }
 
+/* eslint-disable */
 const null_setter = () => {};
+/* eslint-enable */
  
 // export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps
-const renderItems = (bucket: number = 0, allocated_items: MongoData[] = []) => {
+const renderItems = (bucket = 0, allocated_items: MongoData[] = []) => {
   const key = 'key__' + bucket;
 
   return render(<Items key={key} id={key} config={test_numeric_config} bucket={bucket} allocated_items={allocated_items} set_item={null_setter} />);
@@ -57,21 +58,21 @@ const renderItems = (bucket: number = 0, allocated_items: MongoData[] = []) => {
 
 describe('label test', () => {
   it("should render", async () => {
-    const { queryByTestId } = renderItems();
+    renderItems();
 
     const ItemsDiv = screen.queryByTestId("items_div");
     expect(ItemsDiv).toBeInTheDocument();
   });
 
   it("should contain a items label label element", async () => {
-    const { queryByTestId } = renderItems();
+    renderItems();
 
     const ItemsLabel = screen.queryByTestId("items_label");
     expect(ItemsLabel).toBeInTheDocument();
   });
 
   it("items label label element should have the correct value", async () => {
-    const { queryByTestId } = renderItems();
+    renderItems();
 
     const ItemsLabel = screen.queryByTestId("items_label");
     expect(ItemsLabel).toHaveTextContent("Test_items_name");
@@ -96,8 +97,7 @@ describe('get_items_from_config test', () => {
 
 describe('items test', () => {
   it("All items should be available if none allocated", async () => {
-    const test_data_0 = {"config": test_numeric_config, "bucket": 0, "allocated_items": [], "set_item": null_setter};
-    const { getAllByRole, getAllByText, queryByTestId } = renderItems(0, []);
+    renderItems(0, []);
 
     const ItemsLabel = screen.queryByTestId("items_label");
     expect(ItemsLabel).toBeInTheDocument();
@@ -120,7 +120,7 @@ describe('items test', () => {
     const allocated_items_1 = {"booking_start": start_test_date, "booking_end": end_test_date, "bucket": "0", "expireAt": expiry_test_date, "email": "me@there.com", "test_items_name": "f09"};
     const allocated_items = [ allocated_items_0, allocated_items_1 ]
 
-    const { getAllByRole, getAllByText, queryByTestId } = renderItems(0, allocated_items);
+    renderItems(0, allocated_items);
 
     const Itemslabel = screen.queryByTestId("items_label");
     expect(Itemslabel).toBeInTheDocument();
@@ -169,20 +169,10 @@ export type MongoData = {
     mditem.bucket = bucket;
     mditem[key] = value;
 
-    console.dir(mditem);
-
     return mditem;
   };
-  it("Overlapping items must be  from ", async () => {
-    const xdate = new Date("1999-12-31T01:00");
-    const ydate = new Date("1999-12-31T02:00");
-    const bucket = 0;
-    const key = "name";
-    const value = "tester";
-    const ov1 = set_mongodata_item(xdate, ydate, bucket, key, value);
+  it("no config no items", async () => {
     const { container } = render(<Items />);
-    console.log("ov1");
-    console.dir(ov1);
     expect(container).toHaveTextContent("No SELECT items");
   });
   it("Overlapping items must be removed from ", async () => {
@@ -194,23 +184,43 @@ export type MongoData = {
     const ov1 = set_mongodata_item(xdate1, ydate1, bucket1, key1, value1);
 
     const { container } = render(<Items allocated_items={ov1} />);
-    console.log("SET XDATE1");
-    screen.debug(container);
 
-/*
-    const xdate2 = new Date("1999-12-31T01:30");
-    const ydate2 = new Date("1999-12-31T02:30");
-    const bucket2 = 0;
-    const key2 = "name";
-    const value2 = "tester2";
-    const ov2 = set_mongodata_item(xdate2, ydate2, bucket2, key2, value2);
-
-//    const { container } = render(<Items allocated_items={ov2} />);
-    console.log("ov1");
-    console.dir(ov1);
-    screen.debug(ov1);
-*/
     expect(container).toHaveTextContent("No SELECT items");
+  });
+  it("Overlapping items must be  from ", async () => {
+    const { container } = render(<Items config={test_list_config} />);
+    expect(container).not.toHaveTextContent("No SELECT items");
+  });
+  it("Overlapping items must be removed from ", async () => {
+    const xdate1 = new Date("1999-12-31T01:00");
+    const ydate1 = new Date("1999-12-31T02:00");
+    const bucket1 = 0;
+    const key1 = "name";
+    const value1 = "tester1";
+    const ov1 = set_mongodata_item(xdate1, ydate1, bucket1, key1, value1);
+
+    const { container } = render(<Items config={test_list_config} allocated_items={ov1} />);
+
+    expect(container).not.toHaveTextContent("No SELECT items");
+  });
+});
+
+describe('listbuild test', () => {
+  it("check list for prefix show No SELECT items", async () => {
+    render(<Items />);
+//    screen.debug();
+//    screen.debug(container.children);
+//    expect(container[0]).toBe("f0");
+/*
+    const list = listbuild(2, 8, "pf_", "");
+    expect(list).toHaveTextContent("No SELECT items");
+*/
+  });
+
+  it("Null Select list should return HTML warning", async () => {
+    render(<Items />);
+    const heading = screen.getByRole('heading', {level: 4});
+    expect(heading).toHaveTextContent("No SELECT items");
   });
 });
 
@@ -221,10 +231,8 @@ describe('no items test', () => {
   });
 
   it("Null Select list should return HTML warning", async () => {
-    const { container } = render(<Items />);
-    screen.debug();
+    render(<Items />);
     const heading = screen.getByRole('heading', {level: 4});
-    screen.debug(heading);
     expect(heading).toHaveTextContent("No SELECT items");
   });
 });

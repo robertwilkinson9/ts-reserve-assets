@@ -6,7 +6,8 @@
 import { render, screen } from '@testing-library/react';
 
 import {InputFormProps} from '../components/interfaces'
-import { InputForm, overlap } from '../components/form';
+import { InputForm } from '../components/form';
+import { overlap } from '../components/overlap';
 
 const test_config = {
   "APIPORT": 1234,
@@ -32,7 +33,9 @@ const test_config = {
 }
 
 
+/* eslint-disable */
 const null_setter = () => {};
+/* eslint-enable */
 
 function renderInputForm(props: Partial<InputFormProps> = {}) {
   const defaultProps = {
@@ -99,7 +102,7 @@ describe('overlap function tests', () => {
 
 describe('it item contents', () => {
   it("should default to an blank item", async () => {
-    const { queryByTestId } = renderInputForm();
+    renderInputForm();
 
     const InputFormlabel = screen.queryByTestId("emailaddress_label");
     expect(InputFormlabel).toHaveTextContent('Email address');
@@ -112,7 +115,7 @@ describe('it item contents', () => {
     const email = "email@domain.org";
     const itemprops = {email: email};
 
-    const { queryAllByTestId } = renderInputForm(itemprops);
+    renderInputForm(itemprops);
 
     const calendar_label_0 = screen.queryAllByTestId("calendar_label")[0];
     expect(calendar_label_0).toBeInTheDocument();
@@ -168,7 +171,7 @@ describe('it item contents', () => {
 
   it("first bucket should contain 10 items", async () => {
     const itemprops = {bucket: 0};
-    const { queryAllByRole } = renderInputForm(itemprops);
+    renderInputForm(itemprops);
 
     const OptionsText = screen.queryAllByRole('option');
     expect(OptionsText.length).toBe(11); // 10 options and one label
@@ -176,16 +179,9 @@ describe('it item contents', () => {
 
   it("second bucket should contain 5 items", async () => {
     const itemprops = {bucket: 1};
-    const { queryAllByTestId, queryAllByRole, queryByRole } = renderInputForm(itemprops);
+    renderInputForm(itemprops);
 
-    const items_div = screen.queryByTestId("items_div");
-//    screen.debug(items_div);
-
-//    const x = screen.queryByLabelText('Test_items_name`');
-//    console.log("x");
-//    screen.debug(x);
     const OptionsText = screen.queryAllByRole('option');
-//    const OptionsText = screen.queryAllByRole('chakra-select');
     expect(OptionsText.length).toBe(6); // 5 options and one label
   });
 });

@@ -5,12 +5,15 @@
 import './bucket.css';
 
 import { BucketLabelProps, BucketProps, ButtonProps, configData } from './interfaces';
+import { capitalizeFirstLetter } from './capitalizeFirstLetter';
 
+/*
 export const capitalizeFirstLetter = (name: string) => {
   if (name && name.length) {
     return name.charAt(0).toUpperCase() + name.slice(1);
   }
 };
+*/
 
 const BucketLabel = ({label}: BucketLabelProps,) => {
   return (
