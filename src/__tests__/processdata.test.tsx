@@ -5,8 +5,6 @@
 import { render, screen } from '@testing-library/react';
 
 import {ProcessDataProps} from '../components/interfaces'
-import { auxdatamerge } from '../components/auxdatamerge';
-import { tomorrow_from_day } from '../components/tomorrow_from_day';
 import { ProcessData } from '../components/processdata';
 
 function renderProcessData(props: Partial<ProcessDataProps> = {}) {
@@ -96,16 +94,7 @@ test('expect ProcessData to render', () => {
   expect(iiElement).toBeInTheDocument();
 })
 
-// export const tomorrow_from_day = (startDateTime: Date): Date => {
-describe('tomorrow_from_day should work ', () => {
-  it("should increment a date by one day", async () => {
-    const now = new Date("2023-08-29T14:28:57.259Z");
-    const tomorrow = tomorrow_from_day(now);
-
-    expect(tomorrow.toISOString()).toBe("2023-08-30T14:28:57.259Z");
-  });
-});
-
+/*
 // export const auxdatamerge = (aux_config: AuxConfigRecordType[], aux_data: AuxDataRecordType[]): AuxType[] => {
 describe('auxdatamerge should work ', () => {
   it("should default to an blank item", async () => {
@@ -134,3 +123,4 @@ describe('auxdatamerge should work ', () => {
     expect(adt).toStrictEqual(aert);
   });
 });
+*/

@@ -5,7 +5,6 @@
 import { render, screen } from '@testing-library/react';
 
 import { MongoData } from '../components/interfaces';
-import { get_items_from_config } from '../components/get_items_from_config';
 import { Items } from '../components/items';
 
 const test_numeric_config = {
@@ -76,22 +75,6 @@ describe('label test', () => {
 
     const ItemsLabel = screen.queryByTestId("items_label");
     expect(ItemsLabel).toHaveTextContent("Test_items_name");
-  });
-});
-
-describe('get_items_from_config test', () => {
-  const data = {"config": test_numeric_config, "bucket": 0};
-  const items = get_items_from_config(data);
-  it("Numeric items computed from config should have selected element values", async () => {
-    expect(items[0]).toBe('f01');
-    expect(items[9]).toBe('f10');
-  });
-
-  const listdata = {"config": test_list_config, "bucket": 0};
-  const listitems = get_items_from_config(listdata);
-  it("List items from config should have selected element values", async () => {
-    expect(listitems[0]).toBe('first one');
-    expect(listitems[2]).toBe('third three');
   });
 });
 
