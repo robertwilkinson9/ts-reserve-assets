@@ -10,7 +10,6 @@ import { Button, ChakraProvider } from '@chakra-ui/react'
 
 import InputForm from './form'
 
-//import { AuxConfigRecordType, AuxDataRecordType, AuxType, ItemData, MongoData, ProcessDataProps } from './interfaces';
 import { ItemData, MongoData, ProcessDataProps } from './interfaces';
 
 import { auxdatamerge } from './auxdatamerge';

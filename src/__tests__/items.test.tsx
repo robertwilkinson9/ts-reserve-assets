@@ -188,25 +188,6 @@ export type MongoData = {
   });
 });
 
-describe('listbuild test', () => {
-  it("check list for prefix show No SELECT items", async () => {
-    render(<Items />);
-//    screen.debug();
-//    screen.debug(container.children);
-//    expect(container[0]).toBe("f0");
-/*
-    const list = listbuild(2, 8, "pf_", "");
-    expect(list).toHaveTextContent("No SELECT items");
-*/
-  });
-
-  it("Null Select list should return HTML warning", async () => {
-    render(<Items />);
-    const heading = screen.getByRole('heading', {level: 4});
-    expect(heading).toHaveTextContent("No SELECT items");
-  });
-});
-
 describe('no items test', () => {
   it("Null Select list should show No SELECT items", async () => {
     const { container } = render(<Items />);
