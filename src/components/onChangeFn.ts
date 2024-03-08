@@ -1,15 +1,9 @@
-/**
-*
-* This file handles update of any auxilliary input fields
-* if any auxilliary fields are defined in the config file
-*
-*/
-
 import { AuxDataRecordType } from './interfaces';
 import { aux_exists } from './aux_exists';
 
 export const onChangeFn = (evalue: string, id: string, auxdata: AuxDataRecordType[], set_auxdata: React.Dispatch<React.SetStateAction<AuxDataRecordType[]>>) => {
-  if (aux_exists.length) {
+  const matching_record = aux_exists(id, auxdata);
+  if (matching_record !== undefined) {
     set_auxdata(
       auxdata.map((auxdata) =>
         auxdata.id === id
@@ -17,10 +11,13 @@ export const onChangeFn = (evalue: string, id: string, auxdata: AuxDataRecordTyp
         : { ...auxdata }
       )
     );
+    return matching_record;
   } else {
     const new_list = [ ...auxdata, {id: id, value: evalue }];
     set_auxdata(new_list);
+    return {};
   }
+    return {};
 };
 
 export default onChangeFn;

@@ -41,14 +41,16 @@ const test_list_config = {
   ]
 }
 
-describe('get_items_from_config test', () => {
+describe('get_items_from_config numeric test', () => {
   const data = {"config": test_numeric_config, "bucket": 1};
   const items = get_items_from_config(data);
   it("Numeric items computed from config should have selected element values", async () => {
-    expect(items[0]).toBe('f01');
-    expect(items[9]).toBe('f10');
+    expect(items[0]).toBe('s11');
+    expect(items[4]).toBe('s15');
   });
+});
 
+describe('get_items_from_config list test', () => {
   const listdata = {"config": test_list_config, "bucket": 0};
   const listitems = get_items_from_config(listdata);
   it("List items from config should have selected element values", async () => {

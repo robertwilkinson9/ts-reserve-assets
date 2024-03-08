@@ -20,12 +20,6 @@ import { listbuild } from './listbuild';
 */
 
 export const get_items_from_config = ({config, bucket}: BucketReadProps): string[] | undefined => {
-
-  console.log("BUCKET is ");
-  console.log(bucket);
-  console.log("CONFIG IS ");
-  console.dir(config);
-
   let items: string[] | undefined = [];
 
   if ((bucket !== null) && config !== undefined && config.BUCKETS !== undefined && config.BUCKETS.length && (config.BUCKETS[bucket] !== undefined)) {

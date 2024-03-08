@@ -35,8 +35,10 @@ export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps
 
     if (allocated_items) {
       const bucket_items = allocated_items.filter(it => {return bucket == it.bucket});
+/*
       console.log("bucket_items");
       console.dir(bucket_items);
+*/
       if (bucket_items) {
 
         const reserved_items = bucket_items.map(x => {return x[config.ITEM_NAME]});
