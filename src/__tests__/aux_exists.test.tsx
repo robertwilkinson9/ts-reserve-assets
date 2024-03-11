@@ -21,4 +21,8 @@ describe('aux_exists test', () => {
   it("an item with a non matching id should return false", async () => {
     expect(aux_exists(non_matching_id_string, pres)).toBeFalsy;
   });
+
+  it("an item with an undefined list should return false", async () => {
+    expect(aux_exists(non_matching_id_string, undefined)).toBeFalsy;
+  });
 });

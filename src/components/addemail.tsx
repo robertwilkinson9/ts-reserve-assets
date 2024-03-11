@@ -14,6 +14,7 @@ export const AddEmail = ({email, set_email} : AddEmailProps) =>{
           <Input 
              id='email'
              type='email'
+             data-testid="emailaddressinput"
              placeholder='enter Email address'
              _placeholder={{ opacity: 1, color: 'gray.500' }}
              value={email}

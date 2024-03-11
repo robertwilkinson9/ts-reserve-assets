@@ -52,4 +52,15 @@ describe('it item contents', () => {
 
     expect(EmailAddressInputValue).toBe("email@domain.org");
   });
+
+  it("test with non-string email", async () => {
+    const email = 1234;
+    const itemprops = {email: email};
+
+    renderAddEmail(itemprops);
+
+    const AddEmailinput = screen.queryByTestId("emailaddressinput");
+    expect(AddEmailinput).not.toHaveTextContent();
+  });
+
 });

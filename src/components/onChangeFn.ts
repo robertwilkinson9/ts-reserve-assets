@@ -17,7 +17,6 @@ export const onChangeFn = (evalue: string, id: string, auxdata: AuxDataRecordTyp
     set_auxdata(new_list);
     return {};
   }
-    return {};
 };
 
 export default onChangeFn;
