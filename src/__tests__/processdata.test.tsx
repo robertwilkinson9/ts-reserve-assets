@@ -24,8 +24,11 @@ function renderProcessData(props: Partial<ProcessDataProps> = {}) {
     "ITEM_NAME": "test_item",
     "ITEM_LABEL": "test_label",
     "BUCKET_NAME": "test_bucket",
-    "BUCKETS": [],
-  }
+    "BUCKETS": [
+      {NAME: "first", ITEMS: ["alpha", "beta", "gamma"]},
+      {NAME: "last", ITEMS: ["chi", "psi", "omega"]}
+    ]
+  };
 
 // export interface ProcessDataProps {
 //   config: configData;
@@ -91,5 +94,54 @@ test('expect ProcessData to render', () => {
   const iistring = 'Insufficient Input';
 
   const iiElement = screen.getByText(iistring);
+  expect(iiElement).toBeInTheDocument();
+})
+
+test('expect ProcessData to render', () => {
+  const booking_start = new Date("2099-12-31T23:00");
+  const booking_end = new Date("2099-12-31T23:59");
+  const bucket = 0;
+  const item = "apple";
+  const email = "a@b.c";
+
+  renderProcessData({booking_start: booking_start, booking_end: booking_end, bucket: bucket, item: item, email: email});
+
+  const ftbstring = 'first test_bucket';
+
+  const iiElement = screen.getByText(ftbstring);
+  expect(iiElement).toBeInTheDocument();
+})
+
+test('expect ProcessData with auxilliary data to render', () => {
+  const booking_start = new Date("2099-12-31T23:00");
+  const booking_end = new Date("2099-12-31T23:59");
+  const bucket = 0;
+  const item = "apple";
+  const email = "a@b.c";
+  const auxilliaryConfig = {
+    "APIPORT": 7345,
+    "LCCOLLECTION": "test",
+    "ITEM_NAME": "test_item",
+    "ITEM_LABEL": "test_label",
+    "BUCKET_NAME": "test_bucket",
+    "BUCKETS": [
+      {NAME: "first", ITEMS: ["alpha", "beta", "gamma"]},
+      {NAME: "last", ITEMS: ["chi", "psi", "omega"]}
+    ],
+    "AUXILLIARY": [
+      {"id": "1", "label": "favourite_colour", "dbname": "fav_colour"},
+      {"id": "2", "label": "date_of_birth", "dbname": "notTHEre"}
+    ]
+  };
+
+  const auxilliary = [
+    {"id": "1", "value": "sausage"},
+    {"id": "2", "value": "pudding"}
+  ];
+
+  renderProcessData({config: auxilliaryConfig, booking_start: booking_start, booking_end: booking_end, bucket: bucket, item: item, email: email, auxdata: auxilliary});
+
+  const ftbstring = 'apple';
+  const iiElement = screen.getByText(ftbstring);
   expect(iiElement).toBeInTheDocument();
 })

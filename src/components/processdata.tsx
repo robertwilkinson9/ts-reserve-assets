@@ -8,15 +8,15 @@ import { Button, ChakraProvider } from '@chakra-ui/react'
 
 import InputForm from './form'
 
-import { ItemData, MongoData, ProcessDataProps } from './interfaces';
+import { ItemData, ProcessDataProps } from './interfaces';
 
-import { add_item_to_mongodb } from './add_item_to_mongodb';
 import { auxdatamerge } from './auxdatamerge';
 import { tomorrow_from_day } from './tomorrow_from_day';
+import { handleConfirm } from './handleConfirm';
+import { handleCancel } from './handleCancel';
 import './processdata.css';
 
-export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, item, set_item, email, set_email, auxdata, set_auxdata, set_complete, url, confirmed, set_confirmed, set_needreset} : ProcessDataProps) => {
- 
+export const ProcessData = ({ config, mongo_data, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, item, set_item, email, set_email, auxdata, set_auxdata, set_complete, url, confirmed, set_confirmed, set_needreset} : ProcessDataProps) => {
   if (booking_start && booking_end && bucket !== null && item && email) {
     const tomorrow = tomorrow_from_day(booking_start);
 
@@ -29,49 +29,28 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
       "email": email,
     };
 
+    // const ITEM_url: string = url + config.LCCOLLECTION + '/';
+
     const aux_merged = new Map<string, string>();
     const ac = config.AUXILLIARY;
+
     if (ac) {
-      const merged = auxdatamerge(ac,  auxdata);
+      const merged = auxdatamerge(ac, auxdata);
       merged.map((item) => {return aux_merged.set(item.dbname || item.label, item.value);})
     }
-    let aux_string = "";
-    aux_merged.forEach((item, key) => {date_booking[key] = item; aux_string += `KEY is ${key} and ITEM is ${item}\n`; console.log(aux_string);});
+//    let aux_string = "";
+//    aux_merged.forEach((item, key) => {date_booking[key] = item; aux_string += `KEY is ${key} and ITEM is ${item}\n`; console.log(aux_string);});
+    aux_merged.forEach((item, key) => {date_booking[key] = item;});
    
+/*
     let name = "Anononymous";
     if ((config.BUCKETS) && config.BUCKETS[bucket] && config.BUCKETS[bucket].NAME) {
       name = config.BUCKETS[bucket].NAME;
     }
+
     const item_booking = Object.assign(date_booking, { [config.BUCKET_NAME]: name });
-
     console.log(`BUCKET_NAME is ${config.BUCKET_NAME} and name is ${name} and ITEM is ${item} and ITEM NAME is ${config.ITEM_NAME} And ITEM LABEL is ${config.ITEM_LABEL}`);
-
-    const confirm_action = () => {
-      console.log(`confirm_action given booking_start of ${booking_start}`);
-      const ITEM_url: string = url + config.LCCOLLECTION + '/';
-      console.log(`POST ITEM_url is ${ITEM_url}`);
-      console.log("POST item_booking is ");
-      console.dir(item_booking);
-
-      const id = add_item_to_mongodb(ITEM_url, item_booking);
-      id.then(() => {
-        const new_record: MongoData = {"booking_start": booking_start.toISOString(), "booking_end": booking_end.toISOString(), "bucket": bucket, [config.BUCKET_NAME]: name, [config.ITEM_NAME]: item};
-        const tmp = mongo_data;
-        tmp.push(new_record);
-        console.log("SETTING MONGO DATA");
-        set_mongodata(tmp);
-        set_needreset(true);
-      });
-    }
-
-    const handleConfirm = () => {
-      confirm_action();
-      set_confirmed(true);
-    }
-
-    const handleCancel = () => {
-      set_needreset(true);
-    }
+*/
 
     if (confirmed) {
       const istring = `${config.ITEM_NAME} ${item} booked!`;
@@ -106,6 +85,11 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
         fstr = `${config.BUCKETS[bucket].NAME} ${config.BUCKET_NAME}`;
       }
 
+/*
+<!--            <p>{aux_string}</p> -->
+*/
+
+      const ITEM_url: string = url + config.LCCOLLECTION + '/';
       return (
         <>
           <div id="key1" key="key1">
@@ -116,16 +100,14 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
             <p>{fstr}</p>
             <p>{item}</p>
             <p>{email}</p>
-            <p>{aux_string}</p>
-            <Button onClick={handleConfirm}>Confirm?</Button>
-            <Button onClick={handleCancel}>Cancel?</Button>
+            <Button onClick={handleConfirm(ITEM_url, set_confirmed)}>Confirm?</Button>
+            <Button onClick={handleCancel(set_needreset)}>Cancel?</Button>
           </ChakraProvider>
         </div>
         </>
       );
     }
   } else {
-//    console.log("INSUFFICIENT INPUT CONFIRMED!!");
     return (
       <>
       <h4>Insufficient Input</h4>

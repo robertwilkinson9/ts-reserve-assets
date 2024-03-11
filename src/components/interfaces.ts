@@ -16,6 +16,14 @@ export interface BucketReadProps {
   bucket : number_or_null;
 }
 
+export interface handleCancelProps {
+  set_needreset: React.Dispatch<React.SetStateAction<string_or_null>>;
+}
+
+export interface handleConfirmProps {
+  set_confirmed: React.Dispatch<React.SetStateAction<string_or_null>>;
+}
+
 export interface BucketProps extends BucketReadProps {
   set_bucket: React.Dispatch<React.SetStateAction<number_or_null>>;
 }
@@ -76,6 +84,27 @@ export interface ItemsProps {
 export interface ProcessDataProps {
   config: configData;
   mongo_data: MongoData[];
+  booking_start: date_or_null;
+  set_booking_start: React.Dispatch<React.SetStateAction<date_or_null>>;
+  booking_end: date_or_null;
+  set_booking_end: React.Dispatch<React.SetStateAction<date_or_null>>;
+  bucket: number_or_null;
+  set_bucket: React.Dispatch<React.SetStateAction<number_or_null>>;
+  item: string_or_null;
+  set_item: React.Dispatch<React.SetStateAction<string_or_null>>;
+  email: string_or_null;
+  set_email: React.Dispatch<React.SetStateAction<string_or_null>>;
+  auxdata: AuxDataRecordType[];
+  set_auxdata: React.Dispatch<React.SetStateAction<AuxDataRecordType[]>>;
+  set_complete: React.Dispatch<React.SetStateAction<boolean>>;
+  url: string;
+  confirmed: boolean;
+}
+
+/*
+export interface ProcessDataProps {
+  config: configData;
+  mongo_data: MongoData[];
   set_mongodata: React.Dispatch<React.SetStateAction<MongoData[]>>;
   booking_start: date_or_null;
   set_booking_start: React.Dispatch<React.SetStateAction<date_or_null>>;
@@ -95,6 +124,7 @@ export interface ProcessDataProps {
   set_confirmed: React.Dispatch<React.SetStateAction<boolean>>;
   set_needreset: React.Dispatch<React.SetStateAction<boolean>>;
 }
+*/
 
 /*
 interface bucketData {
