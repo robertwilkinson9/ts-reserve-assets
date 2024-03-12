@@ -104,6 +104,7 @@ test('expect ProcessData to render', () => {
   const item = "apple";
   const email = "a@b.c";
 
+  console.log(`booking start is ${booking_start}`);
   renderProcessData({booking_start: booking_start, booking_end: booking_end, bucket: bucket, item: item, email: email});
 
   const ftbstring = 'first test_bucket';
@@ -139,9 +140,29 @@ test('expect ProcessData with auxilliary data to render', () => {
     {"id": "2", "value": "pudding"}
   ];
 
+  console.log(`booking start is ${booking_start}`);
   renderProcessData({config: auxilliaryConfig, booking_start: booking_start, booking_end: booking_end, bucket: bucket, item: item, email: email, auxdata: auxilliary});
 
   const ftbstring = 'apple';
   const iiElement = screen.getByText(ftbstring);
   expect(iiElement).toBeInTheDocument();
 })
+
+test('expect confirmed ProcessData to render', () => {
+  const booking_start = new Date("2099-12-31T23:00");
+  const booking_end = new Date("2099-12-31T23:59");
+  const bucket = 0;
+  const item = "apple";
+  const email = "a@b.c";
+  const confirmed = true;
+
+  console.log(`booking start is ${booking_start}`);
+  renderProcessData({booking_start: booking_start, booking_end: booking_end, bucket: bucket, item: item, email: email, confirmed: confirmed});
+
+//  screen.debug();
+  const il_string = "items_label";
+
+  const il_element = screen.getByTestId(il_string);
+  expect(il_element).toBeInTheDocument();
+})
+

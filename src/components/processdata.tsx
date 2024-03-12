@@ -16,7 +16,7 @@ import { handleConfirm } from './handleConfirm';
 import { handleCancel } from './handleCancel';
 import './processdata.css';
 
-export const ProcessData = ({ config, mongo_data, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, item, set_item, email, set_email, auxdata, set_auxdata, set_complete, url, confirmed, set_confirmed, set_needreset} : ProcessDataProps) => {
+export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, item, set_item, email, set_email, auxdata, set_auxdata, set_complete, url, confirmed, set_confirmed, set_needreset} : ProcessDataProps) => {
   if (booking_start && booking_end && bucket !== null && item && email) {
     const tomorrow = tomorrow_from_day(booking_start);
 
@@ -40,6 +40,7 @@ export const ProcessData = ({ config, mongo_data, booking_start, set_booking_sta
     }
 //    let aux_string = "";
 //    aux_merged.forEach((item, key) => {date_booking[key] = item; aux_string += `KEY is ${key} and ITEM is ${item}\n`; console.log(aux_string);});
+
     aux_merged.forEach((item, key) => {date_booking[key] = item;});
    
 /*
@@ -100,7 +101,7 @@ export const ProcessData = ({ config, mongo_data, booking_start, set_booking_sta
             <p>{fstr}</p>
             <p>{item}</p>
             <p>{email}</p>
-            <Button onClick={handleConfirm(ITEM_url, set_confirmed)}>Confirm?</Button>
+            <Button onClick={handleConfirm(ITEM_url, mongo_data, set_confirmed, item, booking_start, booking_end, bucket, config, set_mongodata, set_needreset)}>Confirm?</Button>
             <Button onClick={handleCancel(set_needreset)}>Cancel?</Button>
           </ChakraProvider>
         </div>

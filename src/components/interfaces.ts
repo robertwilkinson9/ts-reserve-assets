@@ -17,11 +17,20 @@ export interface BucketReadProps {
 }
 
 export interface handleCancelProps {
-  set_needreset: React.Dispatch<React.SetStateAction<string_or_null>>;
+  set_needreset: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface handleConfirmProps {
-  set_confirmed: React.Dispatch<React.SetStateAction<string_or_null>>;
+  url: string;
+  mongo_data: MongoData[];
+  set_confirmed: React.Dispatch<React.SetStateAction<boolean>>;
+  item_booking: ItemData
+  booking_start: date_or_null;
+  booking_end: date_or_null;
+  bucket : number_or_null;
+  config: configData;
+  set_mongodata: React.Dispatch<React.SetStateAction<MongoData[]>>;
+  set_needreset: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface BucketProps extends BucketReadProps {
@@ -84,6 +93,7 @@ export interface ItemsProps {
 export interface ProcessDataProps {
   config: configData;
   mongo_data: MongoData[];
+  set_mongodata: React.Dispatch<React.SetStateAction<MongoData[]>>;
   booking_start: date_or_null;
   set_booking_start: React.Dispatch<React.SetStateAction<date_or_null>>;
   booking_end: date_or_null;

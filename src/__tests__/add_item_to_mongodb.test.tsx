@@ -3,12 +3,12 @@
  */
 
 import { describe, test, expect, vi } from 'vitest'
-import axios, { AxiosResponse, isAxiosError } from 'axios';
+import axios, { } from 'axios';
 import { add_item_to_mongodb } from '../components/add_item_to_mongodb';
 
 function createFetchResponse(data) {
   return { json: () => new Promise((resolve) => resolve(data)) }
-};
+}
 
 const mockedImplementation = () => Promise.resolve({ 
   json() { 
@@ -17,19 +17,11 @@ const mockedImplementation = () => Promise.resolve({
 });
 
 describe ('postData', () => {
-  const url = "https://www.fourtheye.org";
-  const start_test_date = new Date("1999-12-31T00:00");
-  const end_test_date = new Date("1999-12-31T11:59");
-  const expiry_test_date = new Date("2000-01-01T00:00");
-  const test_item_data = {"booking_start": start_test_date, "booking_end": end_test_date, "bucket": "0", "expireAt": expiry_test_date, "email": "me@there.com", "test_items_name": "test_item"};
   const test_item_headers = {"headers": {"Content-Type": "application/json"}};
 
-  let originalPost;
   let originalAxiosPost;
 
   beforeAll(() => {
-    originalPost = global.post;
-    global.post = vi.fn(mockedImplementation);
     originalAxiosPost = axios.post;
     axios.post = vi.fn(mockedImplementation);
   });
@@ -53,7 +45,7 @@ describe ('postData', () => {
     const test_item_data = {"booking_start": start_test_date, "booking_end": end_test_date, "bucket": "0", "expireAt": expiry_test_date, "email": "me@there.com", "test_items_name": "test_item"};
     const test_item_mock = {data: {"id": "1234"}};
 
-    post.mockResolvedValue(createFetchResponse(test_item_mock));
+    axios.post.mockResolvedValue(createFetchResponse(test_item_mock));
 
     console.log("TEST ITEM DATA");
     console.dir(test_item_data);
@@ -68,7 +60,6 @@ describe ('postData', () => {
     expect(axios.post).toHaveBeenCalledWith(url, test_item_data, test_item_headers)
   })
   afterAll(() => {
-    global.post = originalPost;
     axios.post = originalAxiosPost;
   });
 });
