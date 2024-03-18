@@ -3,9 +3,17 @@
  */
 
 import { render, screen } from '@testing-library/react';
+import { describe, test, expect, vi } from 'vitest'
+import axios, { AxiosError, isAxiosError } from 'axios';
 
 import {ProcessDataProps} from '../components/interfaces'
 import { ProcessData } from '../components/processdata';
+
+const mockedImplementation = () => Promise.resolve({ 
+  json() {
+    return { data: {id: 'mocked id'}}
+  }
+});
 
 function renderProcessData(props: Partial<ProcessDataProps> = {}) {
 // export interface configData {
@@ -83,86 +91,95 @@ const null_setter = () => {};
   return render(<ProcessData {...defaultProps} {...props} />);
 }
 
-test('use jsdom in this test file', () => {
-  const element = document.createElement('div')
-  expect(element).not.toBeNull()
-})
+describe ('processData', () => {
+  let originalAxiosPost;
 
-test('expect ProcessData to render', () => {
-  renderProcessData();
+  beforeAll(() => {
+    originalAxiosPost = axios.post;
+    axios.post = vi.fn(mockedImplementation);
+  });
 
-  const iistring = 'Insufficient Input';
+  test('use jsdom in this test file', () => {
+    const element = document.createElement('div')
+    expect(element).not.toBeNull()
+  })
 
-  const iiElement = screen.getByText(iistring);
-  expect(iiElement).toBeInTheDocument();
-})
+  test('expect ProcessData to render', () => {
+    renderProcessData();
 
-test('expect ProcessData to render', () => {
-  const booking_start = new Date("2099-12-31T23:00");
-  const booking_end = new Date("2099-12-31T23:59");
-  const bucket = 0;
-  const item = "apple";
-  const email = "a@b.c";
+    const iistring = 'Insufficient Input';
 
-  console.log(`booking start is ${booking_start}`);
-  renderProcessData({booking_start: booking_start, booking_end: booking_end, bucket: bucket, item: item, email: email});
+    const iiElement = screen.getByText(iistring);
+    expect(iiElement).toBeInTheDocument();
+  })
 
-  const ftbstring = 'first test_bucket';
+  test('expect ProcessData to render', () => {
+    const booking_start = new Date("2099-12-31T23:00");
+    const booking_end = new Date("2099-12-31T23:59");
+    const bucket = 0;
+    const item = "apple1";
+    const email = "a@b.c";
 
-  const iiElement = screen.getByText(ftbstring);
-  expect(iiElement).toBeInTheDocument();
-})
+    renderProcessData({booking_start: booking_start, booking_end: booking_end, bucket: bucket, item: item, email: email});
 
-test('expect ProcessData with auxilliary data to render', () => {
-  const booking_start = new Date("2099-12-31T23:00");
-  const booking_end = new Date("2099-12-31T23:59");
-  const bucket = 0;
-  const item = "apple";
-  const email = "a@b.c";
-  const auxilliaryConfig = {
-    "APIPORT": 7345,
-    "LCCOLLECTION": "test",
-    "ITEM_NAME": "test_item",
-    "ITEM_LABEL": "test_label",
-    "BUCKET_NAME": "test_bucket",
-    "BUCKETS": [
-      {NAME: "first", ITEMS: ["alpha", "beta", "gamma"]},
-      {NAME: "last", ITEMS: ["chi", "psi", "omega"]}
-    ],
-    "AUXILLIARY": [
-      {"id": "1", "label": "favourite_colour", "dbname": "fav_colour"},
-      {"id": "2", "label": "date_of_birth", "dbname": "notTHEre"}
-    ]
-  };
+    const ftbstring = 'first test_bucket';
+    const iiElement = screen.getByText(ftbstring);
+    expect(iiElement).toBeInTheDocument();
+  })
 
-  const auxilliary = [
-    {"id": "1", "value": "sausage"},
-    {"id": "2", "value": "pudding"}
-  ];
+  test('expect ProcessData with auxilliary data to render', () => {
+    const booking_start = new Date("2099-12-31T23:00");
+    const booking_end = new Date("2099-12-31T23:59");
+    const bucket = 0;
+    const item = "apple2";
+    const email = "a@b.c";
+    const auxilliaryConfig = {
+      "APIPORT": 7345,
+      "LCCOLLECTION": "test",
+      "ITEM_NAME": "test_item",
+      "ITEM_LABEL": "test_label",
+      "BUCKET_NAME": "test_bucket",
+      "BUCKETS": [
+        {NAME: "first", ITEMS: ["alpha", "beta", "gamma"]},
+        {NAME: "last", ITEMS: ["chi", "psi", "omega"]}
+      ],
+      "AUXILLIARY": [
+        {"id": "1", "label": "favourite_colour", "dbname": "fav_colour"},
+        {"id": "2", "label": "date_of_birth", "dbname": "notTHEre"}
+      ]
+    };
 
-  console.log(`booking start is ${booking_start}`);
-  renderProcessData({config: auxilliaryConfig, booking_start: booking_start, booking_end: booking_end, bucket: bucket, item: item, email: email, auxdata: auxilliary});
+    const auxilliary = [
+      {"id": "1", "value": "sausage"},
+      {"id": "2", "value": "pudding"}
+    ];
 
-  const ftbstring = 'apple';
-  const iiElement = screen.getByText(ftbstring);
-  expect(iiElement).toBeInTheDocument();
-})
+    renderProcessData({config: auxilliaryConfig, booking_start: booking_start, booking_end: booking_end, bucket: bucket, item: item, email: email, auxdata: auxilliary});
 
-test('expect confirmed ProcessData to render', () => {
-  const booking_start = new Date("2099-12-31T23:00");
-  const booking_end = new Date("2099-12-31T23:59");
-  const bucket = 0;
-  const item = "apple";
-  const email = "a@b.c";
-  const confirmed = true;
+    const ftbstring = 'apple2';
+    const iiElement = screen.getByText(ftbstring);
+    expect(iiElement).toBeInTheDocument();
+  })
 
-  console.log(`booking start is ${booking_start}`);
-  renderProcessData({booking_start: booking_start, booking_end: booking_end, bucket: bucket, item: item, email: email, confirmed: confirmed});
+  test('expect confirmed ProcessData to render', () => {
+    const booking_start = new Date("2099-12-31T23:00");
+    const booking_end = new Date("2099-12-31T23:59");
+    const bucket = 0;
+    const item = "apple4";
+    const email = "a@b.c";
+    const confirmed = true;
 
-//  screen.debug();
-  const il_string = "items_label";
+    renderProcessData({booking_start: booking_start, booking_end: booking_end, bucket: bucket, item: item, email: email, confirmed: confirmed});
 
-  const il_element = screen.getByTestId(il_string);
-  expect(il_element).toBeInTheDocument();
+  //  screen.debug();
+    const il_string = "items_label";
+
+    const il_element = screen.getByTestId(il_string);
+    expect(il_element).toBeInTheDocument();
+  })
+
+  afterAll(() => {
+    axios.post = originalAxiosPost;
+  });
 })
 
