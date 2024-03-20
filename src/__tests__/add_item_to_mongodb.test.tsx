@@ -3,7 +3,7 @@
  */
 
 import { describe, test, expect, vi } from 'vitest'
-import axios, { AxiosError, isAxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
 import { add_item_to_mongodb } from '../components/add_item_to_mongodb';
 
 function createFetchResponse(data) {
@@ -62,7 +62,7 @@ describe ('postData', () => {
     const expiry_test_date = new Date("2000-01-01T00:00");
   
     const test_item_data = {"booking_start": start_test_date, "booking_end": end_test_date, "bucket": "0", "expireAt": expiry_test_date, "email": "me@there.com", "test_items_name": "test_item"};
-    const test_item_mock = {data: {"id": "1234"}};
+//    const test_item_mock = {data: {"id": "1234"}};
 
     axios.post.mockResolvedValue(createFetchResponse(test_item_data));
 //    axios.post.mockResolvedValue(createFetchResponse(test_item_mock));
@@ -81,7 +81,7 @@ describe ('postData', () => {
     const expiry_test_date = new Date("2000-01-01T00:00");
   
     const test_item_data = {"booking_start": start_test_date, "booking_end": end_test_date, "bucket": "0", "expireAt": expiry_test_date, "email": "me@there.com", "test_items_name": "test_item"};
-    const test_item_mock = {data: {"id": "1234"}};
+//    const test_item_mock = {data: {"id": "1234"}};
 
     axios.post.mockResolvedValue(createFetchResponse(test_item_data));
 //    axios.post.mockResolvedValue(createFetchResponse(test_item_mock));
@@ -94,7 +94,7 @@ describe ('postData', () => {
   })
 
   test('expect axios errors to be seen and logged', async () => {
-    const url = "https://www.fourtheye2.org";
+//    const url = "https://www.fourtheye2.org";
     const test_item_data = {bogus: "nothing"};
     axios.post.mockResolvedValue(createFetchErrorResponse(test_item_data));
 //    const new_test_item = await add_item_to_mongodb(url, test_item_data);

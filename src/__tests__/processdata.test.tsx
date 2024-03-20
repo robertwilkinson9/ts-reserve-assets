@@ -4,7 +4,7 @@
 
 import { render, screen } from '@testing-library/react';
 import { describe, test, expect, vi } from 'vitest'
-import axios, { AxiosError, isAxiosError } from 'axios';
+import axios, { } from 'axios';
 
 import {ProcessDataProps} from '../components/interfaces'
 import { ProcessData } from '../components/processdata';
