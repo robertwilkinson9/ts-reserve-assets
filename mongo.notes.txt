@@ -311,3 +311,12 @@ The server generated these startup warnings when booting:
 ---
 > 
 bye
+> db.book.find()
+> db.book.insertOne( {"booking_start": ISODate("2024-07-29T08:00:00Z"), "booking_end": ISODate("2024-07-29T17:00:00Z"), "expireAt": ISODate("2024-07-30T08:00:00Z"), "author" : "George Orwell", "bucket": 1, "book" : "Animal Farm", "email" : "robert.wilkinson@someone.co.uk"})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("65fc123b29fc9e87576c4dba")
+}
+> db.book.find()
+{ "_id" : ObjectId("65fc123b29fc9e87576c4dba"), "booking_start" : ISODate("2024-07-29T08:00:00Z"), "booking_end" : ISODate("2024-07-29T17:00:00Z"), "expireAt" : ISODate("2024-07-30T08:00:00Z"), "author" : "George Orwell", "bucket" : 1, "book" : "Animal Farm", "email" : "robert.wilkinson@someone.co.uk" }
+>
