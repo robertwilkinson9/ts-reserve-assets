@@ -69,6 +69,8 @@ export const App = () => {
     return api_url
   }
 
+const api_url = get_api_url();
+
   useEffect(() => {
     const build_mongo_data = (item_name: string, data: MongoReturnType): MongoData[] => {
       if (data.data && data.data.length) {
@@ -78,18 +80,18 @@ export const App = () => {
       }
     }
 
-    const api_url = get_api_url();
-
     const get_mongo_data = async () => {
       try {
         const item_name = import.meta.env.VITE_TYPE || configData.ITEM_NAME;
 
-        const ITEMS_url = api_url + 'all_' + item_name + 's/';
+        const ITEMS_url = get_api_url() + 'all_' + item_name + 's/';
         console.log(`MAIN ITEMS_url is ${ITEMS_url}`);
 
         await axios.get<MongoReturnType>(ITEMS_url, {headers: {'Content-Type': 'application/json'}}).then(response => {
             const mymongodata: MongoData[] = build_mongo_data(item_name, response.data);
             setMongodata(mymongodata);
+            console.log("MYMONGODATA");
+	    console.dir(mymongodata);
           }
         )
       } catch (error: unknown | AxiosError) {

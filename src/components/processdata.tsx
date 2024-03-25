@@ -18,6 +18,7 @@ import './processdata.css';
 
 export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, item, set_item, email, set_email, auxdata, set_auxdata, set_complete, url, confirmed, set_confirmed, set_needreset} : ProcessDataProps) => {
   if (booking_start && booking_end && bucket !== null && item && email) {
+	  console.log(`IN PD and booking start is ${booking_start}, BOOKING END IS ${booking_end}, BUCKET is ${bucket}, ITEM is ${item} and EMAIL is ${email}`);
     const tomorrow = tomorrow_from_day(booking_start);
 
     const date_booking : ItemData = {
@@ -83,7 +84,7 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
             <p>{fstr}</p>
             <p>{item}</p>
             <p>{email}</p>
-            <Button onClick={handleConfirm(ITEM_url, mongo_data, set_confirmed, item, booking_start, booking_end, bucket, config, set_mongodata, set_needreset)}>Confirm?</Button>
+            <Button onClick={handleConfirm(ITEM_url, mongo_data, set_confirmed, date_booking, booking_start, booking_end, bucket, config, set_mongodata, set_needreset)}>Confirm?</Button>
             <Button onClick={handleCancel(set_needreset)}>Cancel?</Button>
           </ChakraProvider>
         </div>
