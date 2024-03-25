@@ -13,9 +13,7 @@ const renderHeader = () => {
 describe('header test', () => {
   it("should contain a hr element", async () => {
     renderHeader();
-
     const Ruler = screen.queryByTestId("header_ruler");
-
     expect(Ruler).toBeInTheDocument();
   });
 });

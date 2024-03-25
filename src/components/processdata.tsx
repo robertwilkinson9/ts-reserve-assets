@@ -29,8 +29,6 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
       "email": email,
     };
 
-    // const ITEM_url: string = url + config.LCCOLLECTION + '/';
-
     const aux_merged = new Map<string, string>();
     const ac = config.AUXILLIARY;
 
@@ -38,21 +36,9 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
       const merged = auxdatamerge(ac, auxdata);
       merged.map((item) => {return aux_merged.set(item.dbname || item.label, item.value);})
     }
-//    let aux_string = "";
-//    aux_merged.forEach((item, key) => {date_booking[key] = item; aux_string += `KEY is ${key} and ITEM is ${item}\n`; console.log(aux_string);});
 
     aux_merged.forEach((item, key) => {date_booking[key] = item;});
    
-/*
-    let name = "Anononymous";
-    if ((config.BUCKETS) && config.BUCKETS[bucket] && config.BUCKETS[bucket].NAME) {
-      name = config.BUCKETS[bucket].NAME;
-    }
-
-    const item_booking = Object.assign(date_booking, { [config.BUCKET_NAME]: name });
-    console.log(`BUCKET_NAME is ${config.BUCKET_NAME} and name is ${name} and ITEM is ${item} and ITEM NAME is ${config.ITEM_NAME} And ITEM LABEL is ${config.ITEM_LABEL}`);
-*/
-
     if (confirmed) {
       const istring = `${config.ITEM_NAME} ${item} booked!`;
 
@@ -85,10 +71,6 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
       if ((typeof bucket === 'number') && Number.isInteger(bucket)) {
         fstr = `${config.BUCKETS[bucket].NAME} ${config.BUCKET_NAME}`;
       }
-
-/*
-<!--            <p>{aux_string}</p> -->
-*/
 
       const ITEM_url: string = url + config.LCCOLLECTION + '/';
       return (

@@ -1,5 +1,5 @@
-//import handleCancelProps from './interfaces';
-export const handleCancel = (set_needreset: React.Dispatch<React.SetStateAction<string_or_null>>) => {
+import { handleCancelProps } from './interfaces';
+export const handleCancel = (set_needreset : handleCancelProps) => {
   set_needreset(true);
 }
 

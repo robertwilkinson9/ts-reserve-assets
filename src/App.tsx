@@ -70,7 +70,7 @@ export const App = () => {
   }
 
   useEffect(() => {
-    const build_mongo_data = (data: MongoReturnType): MongoData[] => {
+    const build_mongo_data = (item_name: string, data: MongoReturnType): MongoData[] => {
       if (data.data && data.data.length) {
         return data.data.map((x: MongoRecordType) => {return {"booking_start": x.booking_start, "booking_end": x.booking_end, "bucket": x.bucket, [item_name]: x[item_name]}})
       } else {
@@ -88,7 +88,7 @@ export const App = () => {
         console.log(`MAIN ITEMS_url is ${ITEMS_url}`);
 
         await axios.get<MongoReturnType>(ITEMS_url, {headers: {'Content-Type': 'application/json'}}).then(response => {
-            const mymongodata: MongoData[] = build_mongo_data(response.data);
+            const mymongodata: MongoData[] = build_mongo_data(item_name, response.data);
             setMongodata(mymongodata);
           }
         )
