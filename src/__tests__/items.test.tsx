@@ -46,10 +46,13 @@ const test_list_config = {
   ]
 }
 
+
+/* eslint-disable */
 const null_setter = () => {};
+/* eslint-enable */
  
 // export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps
-const renderItems = (bucket: number = 0, allocated_items: MongoData[] = []) => {
+const renderItems = (bucket = 0, allocated_items: MongoData[] = []) => {
   const key = 'key__' + bucket;
 
   return render(<Items key={key} id={key} config={test_numeric_config} bucket={bucket} allocated_items={allocated_items} set_item={null_setter} />);

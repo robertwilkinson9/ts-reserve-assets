@@ -31,9 +31,11 @@ const test_config = {
   ]
 }
 
+/* eslint-disable */
 const null_setter = () => {};
+/* eslint-enable */
 
-const renderBucket = (bucket: number = 0) => {
+const renderBucket = (bucket = 0) => {
   return render(<Bucket config={test_config} bucket={bucket} set_bucket={null_setter} />);
 }
 

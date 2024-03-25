@@ -8,6 +8,10 @@ import { render, screen } from '@testing-library/react';
 import {ProcessDataProps} from '../components/interfaces'
 import { ProcessData, auxdatamerge, tomorrow_from_day} from '../components/processdata';
 
+/* eslint-disable */
+const null_setter = () => {};
+/* eslint-enable */
+
 // export interface ProcessDataProps {
 //   config: configData;
 //   mongo_data: MongoData[];
@@ -58,24 +62,24 @@ function renderProcessData(props: Partial<ProcessDataProps> = {}) {
   const defaultProps = {
     config: defaultConfig,
     mongo_data: [],
-    set_mongodata: () => {},
+    set_mongodata: null_setter,
     booking_start: null,
-    set_booking_start: () => {},
+    set_booking_start: null_setter,
     booking_end: null,
-    set_booking_end: () => {},
+    set_booking_end: null_setter,
     bucket: null,
-    set_bucket: () => {},
+    set_bucket: null_setter,
     item: null,
-    set_item: () => {},
+    set_item: null_setter,
     email: "",
-    set_email: () => {},
+    set_email: null_setter,
     auxdata: [],
-    set_auxdata: () => {},
-    set_complete: () => {},
+    set_auxdata: null_setter,
+    set_complete: null_setter,
     url: "",
     confirmed: false,
-    set_confirmed: () => {},
-    set_needreset: () => {},
+    set_confirmed: null_setter,
+    set_needreset: null_setter,
   };
 
   return render(<ProcessData {...defaultProps} {...props} />);

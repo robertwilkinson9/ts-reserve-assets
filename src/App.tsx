@@ -45,38 +45,38 @@ export const App = () => {
 
     const service_prefix=item_name.toUpperCase( ) + '_BACKEND_SERVICE';
 
-    const service_prefix_host_name = service_prefix + '_SERVICE_HOST';
+    // const service_prefix_host_name = service_prefix + '_SERVICE_HOST';
 
-    var service_prefix_host = "";
+    let service_prefix_host = "";
     if (import.meta.env.service_prefix_host_name !== undefined) {
       service_prefix_host = import.meta.env.service_prefix_host_name
     }
 
-    const service_prefix_port_name = service_prefix + '_SERVICE_PORT';
+    // const service_prefix_port_name = service_prefix + '_SERVICE_PORT';
 
-    var service_prefix_port = "";
+    let service_prefix_port = "";
     if (import.meta.env.service_prefix_port_name !== undefined) {
       service_prefix_port = import.meta.env.service_prefix_port_name;
     }
 
-    var vite_api_ip = "";
+    let vite_api_ip = "";
     if (import.meta.env.VITE_API_IP !== undefined) {
       vite_api_ip = import.meta.env.VITE_API_IP;
       console.log(`vite_api_ip set to ${import.meta.env.VITE_API_IP}`);
     }
 
-    var vite_api_port = "";
+    let vite_api_port = "";
     if (import.meta.env.VITE_API_PORT !== undefined) {
       vite_api_port = import.meta.env.VITE_API_PORT;
       console.log(`vite_api_port set to ${import.meta.env.VITE_API_PORT}`);
     }
 
-    var config_api_ip = "";
+    let config_api_ip = "";
     if (configData.API_IP !== undefined) {
       config_api_ip = configData.API_IP;
     }
 
-    var config_api_port = "";
+    let config_api_port = "";
     if (configData.APIPORT !== undefined) {
       config_api_port = configData.APIPORT;
     }

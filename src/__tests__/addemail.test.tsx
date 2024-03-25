@@ -11,10 +11,14 @@ import { FormControl } from '@chakra-ui/react'
 import {AddEmailProps} from '../components/interfaces'
 import AddEmail from '../components/addemail.tsx';
 
+/* eslint-disable */
+const null_setter = () => {};
+/* eslint-enable */
+
 function renderAddEmail(props: Partial<AddEmailProps> = {}) {
   const defaultProps = {
     email: "",
-    set_email: () => {},
+    set_email: null_setter
   };
 
   return render(<FormControl id="emailForm"><AddEmail {...defaultProps} {...props} /></FormControl>);

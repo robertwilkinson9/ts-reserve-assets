@@ -73,7 +73,7 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
       "email": email,
     };
 
-    let aux_merged = new Map<string, string>();
+    const aux_merged = new Map<string, string>();
     const ac = config.AUXILLIARY;
     if (ac) {
       const merged = auxdatamerge(ac,  auxdata);
@@ -100,7 +100,7 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
       const id = add_item_to_mongodb(ITEM_url, item_booking);
       id.then(() => {
         const new_record: MongoData = {"booking_start": booking_start.toISOString(), "booking_end": booking_end.toISOString(), "bucket": bucket, [config.BUCKET_NAME]: name, [config.ITEM_NAME]: item};
-        let tmp = mongo_data;
+        const tmp = mongo_data;
         tmp.push(new_record);
         console.log("SETTING MONGO DATA");
         set_mongodata(tmp);

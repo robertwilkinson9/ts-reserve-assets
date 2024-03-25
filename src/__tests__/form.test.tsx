@@ -33,8 +33,9 @@ const test_config = {
   ]
 }
 
-
+/* eslint-disable */
 const null_setter = () => {};
+/* eslint-enable */
 
 function renderInputForm(props: Partial<InputFormProps> = {}) {
   const defaultProps = {
