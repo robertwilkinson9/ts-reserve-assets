@@ -52,6 +52,18 @@ export interface CalendarProps {
   date_setter2?: React.Dispatch<React.SetStateAction<date_or_null>>;
 }
 
+export interface ConfirmActionProps {
+  url: string;
+  mongo_data: MongoData[];
+  item_booking: ItemData;
+  booking_start: Date;
+  booking_end: Date;
+  bucket: number;
+  config: configData;
+  set_mongodata: React.Dispatch<React.SetStateAction<MongoData[]>>;
+  set_needreset: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 export interface Ifp {
   config: configData;
   booking_start: date_or_null;
@@ -110,31 +122,6 @@ export interface ProcessDataProps {
   url: string;
   confirmed: boolean;
 }
-
-/*
-export interface ProcessDataProps {
-  config: configData;
-  mongo_data: MongoData[];
-  set_mongodata: React.Dispatch<React.SetStateAction<MongoData[]>>;
-  booking_start: date_or_null;
-  set_booking_start: React.Dispatch<React.SetStateAction<date_or_null>>;
-  booking_end: date_or_null;
-  set_booking_end: React.Dispatch<React.SetStateAction<date_or_null>>;
-  bucket: number_or_null;
-  set_bucket: React.Dispatch<React.SetStateAction<number_or_null>>;
-  item: string_or_null;
-  set_item: React.Dispatch<React.SetStateAction<string_or_null>>;
-  email: string_or_null;
-  set_email: React.Dispatch<React.SetStateAction<string_or_null>>;
-  auxdata: AuxDataRecordType[];
-  set_auxdata: React.Dispatch<React.SetStateAction<AuxDataRecordType[]>>;
-  set_complete: React.Dispatch<React.SetStateAction<boolean>>;
-  url: string;
-  confirmed: boolean;
-  set_confirmed: React.Dispatch<React.SetStateAction<boolean>>;
-  set_needreset: React.Dispatch<React.SetStateAction<boolean>>;
-}
-*/
 
 /*
 interface bucketData {
