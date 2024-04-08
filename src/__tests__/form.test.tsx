@@ -118,8 +118,8 @@ describe('it item contents', () => {
 
   it("form should contain all parts", async () => {
 //grep testid form.html 
-    const email = "email@domain.org";
-    const itemprops = {email: email};
+    //const email = "email@domain.org";
+    //const itemprops = {email: email};
 
 //    const { findByTestId, queryAllByTestId } = renderInputForm(itemprops);
 

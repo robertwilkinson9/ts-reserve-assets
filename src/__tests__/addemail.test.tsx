@@ -9,7 +9,7 @@ import { render } from '@testing-library/react';
 import { FormControl } from '@chakra-ui/react'
 
 import {AddEmailProps} from '../components/interfaces'
-import AddEmail from '../components/addemail.tsx';
+import AddEmail from '../components/addemail';
 
 /* eslint-disable */
 const null_setter = () => {};

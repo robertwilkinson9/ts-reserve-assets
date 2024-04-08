@@ -96,16 +96,14 @@ export interface ProcessDataProps {
   set_needreset: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-/*
 interface bucketData {
-  name: string;
-  prefix?: string;
-  suffix?: string;
-  ifirst?: number;
-  ilast?: number;
-  items?: string[];
+  NAME: string;
+  PREFIX?: string;
+  SUFFIX?: string;
+  IFIRST?: number;
+  ILAST?: number;
+  ITEMS?: string[];
 }
-*/
 
 export interface AuxIdType {
   id: string;
@@ -135,10 +133,10 @@ export interface configData {
 }
 
 export type MongoData = {
-  booking_start: string;
-  booking_end: string;
+  booking_start: Date;
+  booking_end: Date;
   bucket: number;
-  [key: string]: string | number | undefined; // 👈️ variable key
+  [key: string]: string | number | Date | undefined; // 👈️ variable key
 };
 
 export type MongoRecordType = MongoData & {

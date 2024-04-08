@@ -2,14 +2,15 @@
  * @vitest-environment jsdom
  */
 
-// import { render } from '@testing-library/react';
-import { render, screen } from '@testing-library/react';
+//import { render } from '@testing-library/react';
+//import { render, screen } from '@testing-library/react';
 
-import {ProcessDataProps} from '../components/interfaces'
-import { ProcessData, auxdatamerge, tomorrow_from_day} from '../components/processdata';
+// import {ProcessDataProps} from '../components/interfaces'
+// import { ProcessData, auxdatamerge, tomorrow_from_day} from '../components/processdata';
+import { auxdatamerge, tomorrow_from_day} from '../components/processdata';
 
 /* eslint-disable */
-const null_setter = () => {};
+// const null_setter = () => {};
 /* eslint-enable */
 
 // export interface ProcessDataProps {
@@ -49,6 +50,7 @@ const null_setter = () => {};
 // export const tomorrow_from_day = (startDateTime: Date): Date => {
 // export const auxdatamerge = (aux_config: AuxConfigRecordType[], aux_data: AuxDataRecordType[]): AuxType[] => {
 
+/*
 function renderProcessData(props: Partial<ProcessDataProps> = {}) {
   const defaultConfig = {
     "APIPORT": 7345,
@@ -84,6 +86,7 @@ function renderProcessData(props: Partial<ProcessDataProps> = {}) {
 
   return render(<ProcessData {...defaultProps} {...props} />);
 }
+*/
 
 test('use jsdom in this test file', () => {
   const element = document.createElement('div')
