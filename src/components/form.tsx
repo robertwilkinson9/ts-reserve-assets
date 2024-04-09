@@ -5,6 +5,7 @@ import { Bucket } from './bucket'
 import { MyInput } from './input'
 import { Items } from './items'
 import { AddEmail } from './addemail'
+import { overlap } from './overlap';
 
 import { MongoData, Ifp, InputFormProps } from './interfaces';
 
@@ -47,6 +48,7 @@ const form_contents = ({config, booking_start, set_booking_start, booking_end, s
   );
 }
 
+/*
 export const overlap = (a: Date, b: Date, x: Date, y:Date) => {
   // a to b is one date range, x to y is another date range
   // we return true for overlap
@@ -60,6 +62,7 @@ export const overlap = (a: Date, b: Date, x: Date, y:Date) => {
           (after(x, a) && before(y, b)) ||
           (after(a, x) && before(b, y)));
 };
+*/
 
 export const InputForm = ({config, mongo_data, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, set_item, email, set_email, auxdata, set_auxdata, set_complete}: InputFormProps) => {
   const buttonText = `Reserve ${config.ITEM_NAME}`;
