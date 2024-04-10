@@ -156,3 +156,11 @@ export type Select_type = {
   value: string;
   label: string;
 };
+
+//  id: AuxIdType;
+export interface inputProps {
+  label: string;
+  id: string;
+  auxdata: AuxDataRecordType[];
+  set_auxdata: React.Dispatch<React.SetStateAction<AuxDataRecordType[]>>;
+}

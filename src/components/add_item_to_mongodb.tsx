@@ -4,7 +4,7 @@
 * of the record set for the day after the booking
 */
 
-import axios, { AxiosResponse, AxiosError, isAxiosError } from 'axios'
+import axios, { AxiosResponse, isAxiosError } from 'axios'
 
 import { ItemData } from './interfaces';
 

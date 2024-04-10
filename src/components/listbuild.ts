@@ -2,7 +2,7 @@
 * listbuild can build a list from a start and last number and surround each with a prefix and suffix
 */
 
-export const listbuild = (istart:number | undefined, ilast:number | undefined, prefix: string | undefined, suffix?: string | undefined) => {
+export const listbuild = (istart:number | undefined, ilast:number | undefined, prefix?: string | undefined, suffix?: string | undefined) => {
   const items: string[] = [];
 
   if (istart != undefined && ilast != undefined) {

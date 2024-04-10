@@ -7,7 +7,7 @@
 
 import { Input, Text} from '@chakra-ui/react'
 
-import { AuxDataRecordType } from './interfaces';
+import { AuxDataRecordType, inputProps } from './interfaces';
 
 const onChangeFn = (evalue: string, id: string, auxdata: AuxDataRecordType[], set_auxdata: React.Dispatch<React.SetStateAction<AuxDataRecordType[]>>) => {
   const exists = auxdata.filter((item) => {return id === item.id});
@@ -25,14 +25,6 @@ const onChangeFn = (evalue: string, id: string, auxdata: AuxDataRecordType[], se
     set_auxdata(new_list);
   }
 };
-
-//  id: AuxIdType;
-interface inputProps {
-  label: string;
-  id: string;
-  auxdata: AuxDataRecordType[];
-  set_auxdata: React.Dispatch<React.SetStateAction<AuxDataRecordType[]>>;
-}
 
 export const MyInput = (props: inputProps) => {
   const labelfor = props.label;
