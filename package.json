@@ -24,7 +24,8 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "coverage": "SSL_CERT=${SSL_CERT:=/certs/localhost.crt} SSL_KEY=${SSL_KEY:=/certs/localhost.key} npx type-coverage --detail",
     "preview": "SSL_CERT=${SSL_CERT:=/certs/localhost.crt} SSL_KEY=${SSL_KEY:=/certs/localhost.key} vite preview",
-    "test": "SSL_CERT=${SSL_CERT:=/certs/localhost.crt} SSL_KEY=${SSL_KEY:=/certs/localhost.key} vitest"
+    "test": "SSL_CERT=${SSL_CERT:=/certs/localhost.crt} SSL_KEY=${SSL_KEY:=/certs/localhost.key} vitest",
+    "testc": "SSL_CERT=${SSL_CERT:=/certs/localhost.crt} SSL_KEY=${SSL_KEY:=/certs/localhost.key} vitest --coverage"
   },
   "dependencies": {
     "@emotion/styled": "^11.11.0",
