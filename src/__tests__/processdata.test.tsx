@@ -9,44 +9,6 @@
 // import { ProcessData, auxdatamerge, tomorrow_from_day} from '../components/processdata';
 import { auxdatamerge, tomorrow_from_day} from '../components/processdata';
 
-/* eslint-disable */
-// const null_setter = () => {};
-/* eslint-enable */
-
-// export interface ProcessDataProps {
-//   config: configData;
-//   mongo_data: MongoData[];
-//   set_mongodata: React.Dispatch<React.SetStateAction<MongoData[]>>;
-//   booking_start: date_or_null;
-//   set_booking_start: React.Dispatch<React.SetStateAction<date_or_null>>;
-//   booking_end: date_or_null;
-//   set_booking_end: React.Dispatch<React.SetStateAction<date_or_null>>;
-//   bucket: number_or_null;
-//   set_bucket: React.Dispatch<React.SetStateAction<number_or_null>>;
-//   item: string_or_null;
-//   set_item: React.Dispatch<React.SetStateAction<string_or_null>>;
-//   email: string_or_null;
-//   set_email: React.Dispatch<React.SetStateAction<string_or_null>>;
-//   auxdata: AuxDataRecordType[];
-//   set_auxdata: React.Dispatch<React.SetStateAction<AuxDataRecordType[]>>;
-//   set_complete: React.Dispatch<React.SetStateAction<boolean>>;
-//   url: string;
-//   confirmed: boolean;
-//   set_confirmed: React.Dispatch<React.SetStateAction<boolean>>;
-//   set_needreset: React.Dispatch<React.SetStateAction<boolean>>;
-// }
-
-// export interface configData {
-//   APIPORT: string; // XXX should be a number?
-//   LCCOLLECTION: string;
-//   ITEM_NAME: string;
-//   ITEM_LABEL: string;
-//   BUCKET_NAME: string;
-//   BUCKETS: bucketData[];
-//   AUXILLIARY?: AuxConfigRecordType[];
-// } 
-
-
 // export const tomorrow_from_day = (startDateTime: Date): Date => {
 // export const auxdatamerge = (aux_config: AuxConfigRecordType[], aux_data: AuxDataRecordType[]): AuxType[] => {
 

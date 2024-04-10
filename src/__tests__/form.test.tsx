@@ -5,7 +5,7 @@
 
 import { render, screen } from '@testing-library/react';
 
-import {InputFormProps} from '../components/interfaces'
+import { InputFormProps, MongoData } from '../components/interfaces'
 import { InputForm } from '../components/form';
 
 const test_config = {
@@ -225,7 +225,8 @@ describe('it item contents', () => {
 
   it("form with no booking_start should contain all parts", async () => {
     const email = "email@domain.org";
-    const itemprops = {email: email, booking_start: ""};
+    const null_booking_start = new Date();
+    const itemprops = {email: email, booking_start: null_booking_start};
 
     renderInputForm(itemprops);
 
