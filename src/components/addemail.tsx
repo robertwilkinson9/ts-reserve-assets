@@ -2,7 +2,7 @@ import { Box, FormControl, FormLabel, FormHelperText, Input} from '@chakra-ui/re
 
 import { AddEmailProps } from './interfaces';
 
-export const AddEmail = ({email, set_email} : AddEmailProps) =>{
+export const AddEmail = ({email, set_email} : AddEmailProps) => {
   if (typeof(email) !== "string") {email = "";}
 
   return (
@@ -14,6 +14,7 @@ export const AddEmail = ({email, set_email} : AddEmailProps) =>{
           <Input 
              id='email'
              type='email'
+             data-testid="emailaddressinput"
              placeholder='enter Email address'
              _placeholder={{ opacity: 1, color: 'gray.500' }}
              value={email}
