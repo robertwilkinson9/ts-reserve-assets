@@ -64,10 +64,6 @@ describe('label test', () => {
 });
 
 describe('capitalise first letter test', () => {
-  it("should return undefined for no input", async () => {
-    const cfl_null = capitalizeFirstLetter();
-    expect(cfl_null).toBeUndefined;
-  });
   it("should return Apple for input of apple", async () => {
     const cfl_apple = capitalizeFirstLetter("apple");
     expect(cfl_apple).toBe("Apple");

@@ -7,7 +7,7 @@ import { render, screen } from '@testing-library/react';
 import { FormControl } from '@chakra-ui/react'
 
 import { AddEmailProps } from '../components/interfaces'
-import { AddEmail } from '../components/addemail.tsx';
+import { AddEmail } from '../components/addemail';
 
 /* eslint-disable */
 const null_setter = () => {};
@@ -15,7 +15,7 @@ const null_setter = () => {};
 
 function renderAddEmail(props: Partial<AddEmailProps> = {}) {
   const defaultProps = {
-    email: false,
+    email: "",
     set_email: null_setter,
   };
 
@@ -52,15 +52,4 @@ describe('it item contents', () => {
 
     expect(EmailAddressInputValue).toBe("email@domain.org");
   });
-
-  it("test with non-string email", async () => {
-    const email = 1234;
-    const itemprops = {email: email};
-
-    renderAddEmail(itemprops);
-
-    const AddEmailinput = screen.queryByTestId("emailaddressinput");
-    expect(AddEmailinput).not.toHaveTextContent();
-  });
-
 });

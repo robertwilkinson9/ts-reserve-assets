@@ -4,7 +4,7 @@
 
 import { render, screen } from '@testing-library/react';
 
-import { Header } from '../components/header.tsx';
+import { Header } from '../components/header';
 
 const renderHeader = () => {
   return render(<Header />);

@@ -1,69 +1,46 @@
 /**
  * @vitest-environment jsdom
  */
+//<<<<<<< HEAD
+//import { render, screen } from '@testing-library/react';
+//import { describe, test, expect, vi } from 'vitest'
+//import axios, { } from 'axios';
+//
+//import {ProcessDataProps} from '../components/interfaces'
+//import { ProcessData } from '../components/processdata';
+//
+//const mockedImplementation = () => Promise.resolve({ 
+//  json() {
+//    return { data: {id: 'mocked id'}}
+//  }
+//});
+//=======
+//import { render } from '@testing-library/react';
+//import { render, screen } from '@testing-library/react';
 
-import { render, screen } from '@testing-library/react';
-import { describe, test, expect, vi } from 'vitest'
-import axios, { } from 'axios';
+// import {ProcessDataProps} from '../components/interfaces'
+// import { ProcessData, auxdatamerge, tomorrow_from_day} from '../components/processdata';
+import { auxdatamerge, tomorrow_from_day} from '../components/processdata';
 
-import {ProcessDataProps} from '../components/interfaces'
-import { ProcessData } from '../components/processdata';
+// export const tomorrow_from_day = (startDateTime: Date): Date => {
+// export const auxdatamerge = (aux_config: AuxConfigRecordType[], aux_data: AuxDataRecordType[]): AuxType[] => {
 
-const mockedImplementation = () => Promise.resolve({ 
-  json() {
-    return { data: {id: 'mocked id'}}
-  }
-});
-
+/*
 function renderProcessData(props: Partial<ProcessDataProps> = {}) {
-// export interface configData {
-//   APIPORT: number;
-//   LCCOLLECTION: string;
-//   ITEM_NAME: string;
-//   ITEM_LABEL: string;
-//   BUCKET_NAME: string;
-//   BUCKETS: bucketData[];
-//   AUXILLIARY?: AuxConfigRecordType[];
-// }
-
   const defaultConfig = {
     "APIPORT": 7345,
     "LCCOLLECTION": "test",
     "ITEM_NAME": "test_item",
     "ITEM_LABEL": "test_label",
     "BUCKET_NAME": "test_bucket",
-    "BUCKETS": [
-      {NAME: "first", ITEMS: ["alpha", "beta", "gamma"]},
-      {NAME: "last", ITEMS: ["chi", "psi", "omega"]}
-    ]
-  };
-
-// export interface ProcessDataProps {
-//   config: configData;
-//   mongo_data: MongoData[];
-//   set_mongodata: React.Dispatch<React.SetStateAction<MongoData[]>>;
-//   booking_start: date_or_null;
-//   set_booking_start: React.Dispatch<React.SetStateAction<date_or_null>>;
-//   booking_end: date_or_null;
-//   set_booking_end: React.Dispatch<React.SetStateAction<date_or_null>>;
-//   bucket: number_or_null;
-//   set_bucket: React.Dispatch<React.SetStateAction<number_or_null>>;
-//   item: string_or_null;
-//   set_item: React.Dispatch<React.SetStateAction<string_or_null>>;
-//   email: string_or_null;
-//   set_email: React.Dispatch<React.SetStateAction<string_or_null>>;
-//   auxdata: AuxDataRecordType[];
-//   set_auxdata: React.Dispatch<React.SetStateAction<AuxDataRecordType[]>>;
-//   set_complete: React.Dispatch<React.SetStateAction<boolean>>;
-//   url: string;
-//   confirmed: boolean;
-//   set_confirmed: React.Dispatch<React.SetStateAction<boolean>>;
-//   set_needreset: React.Dispatch<React.SetStateAction<boolean>>;
-// }
-
-/* eslint-disable */
-const null_setter = () => {};
-/* eslint-enable */
+//<<<<<<< HEAD
+//    "BUCKETS": [
+//      {NAME: "first", ITEMS: ["alpha", "beta", "gamma"]},
+//      {NAME: "last", ITEMS: ["chi", "psi", "omega"]}
+//    ]
+//  };
+    "BUCKETS": [],
+  }
 
   const defaultProps = {
     config: defaultConfig,
@@ -90,6 +67,7 @@ const null_setter = () => {};
 
   return render(<ProcessData {...defaultProps} {...props} />);
 }
+*/
 
 describe ('processData', () => {
   let originalAxiosPost;

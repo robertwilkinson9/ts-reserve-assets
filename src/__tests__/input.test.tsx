@@ -4,22 +4,29 @@
 
 import { render, screen } from '@testing-library/react';
 
+import { inputProps } from '../components/interfaces';
+
 import { MyInput } from '../components/input';
 
-const renderInput = () => {
-  return render(<MyInput />);
+/* eslint-disable */
+const null_setter = () => {};
+/* eslint-enable */
+
+const renderInput = (props: Partial<inputProps> = {}) => {
+  const defaultProps = {
+    label: "default",
+    id: "default",
+    auxdata: [],
+    set_auxdata: null_setter,
+  };
+
+  return render(<MyInput  {...defaultProps} {...props} />);
 }
 
 describe('myinput test', () => {
   it("should contain a label with testid input_label", async () => {
     renderInput();
-//    screen.debug();
-
     const input_label = screen.queryByTestId("input_label");
-//    console.log("input_label");
-//    screen.debug(input_label);
-
     expect(input_label).toBeInTheDocument();
   });
 });
-
