@@ -7,7 +7,8 @@
 
 // import {ProcessDataProps} from '../components/interfaces'
 // import { ProcessData, auxdatamerge, tomorrow_from_day} from '../components/processdata';
-import { auxdatamerge, tomorrow_from_day} from '../components/processdata';
+import { tomorrow_from_day } from '../components/tomorrow_from_day';
+import { auxdatamerge } from '../components/auxdatamerge';
 
 // export const tomorrow_from_day = (startDateTime: Date): Date => {
 // export const auxdatamerge = (aux_config: AuxConfigRecordType[], aux_data: AuxDataRecordType[]): AuxType[] => {

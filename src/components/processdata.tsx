@@ -9,21 +9,12 @@ import axios, { AxiosResponse, AxiosError, isAxiosError } from 'axios'
 import { Button, ChakraProvider } from '@chakra-ui/react'
 
 import InputForm from './form'
+import auxdatamerge from './auxdatamerge'
+import tomorrow_from_day from './tomorrow_from_day'
 
-import { AuxConfigRecordType, AuxDataRecordType, AuxType, ItemData, MongoData, ProcessDataProps } from './interfaces';
+import { ItemData, MongoData, ProcessDataProps } from './interfaces';
 
 import './processdata.css';
-
-export const tomorrow_from_day = (passed_date: Date): Date => {
-  const tomorrow = new Date(passed_date);
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  return tomorrow;
-}
-
-export const auxdatamerge = (aux_config: AuxConfigRecordType[], aux_data: AuxDataRecordType[]): AuxType[] => {
-  const merged = aux_config.map((c) => {const data = aux_data.filter((d) => {return d.id == c.id}); return {id: c.id, label: c.label, dbname: c.dbname, value: data[0].value} });
-  return merged;
-};
 
 const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
   console.log("ADDING ITEM");

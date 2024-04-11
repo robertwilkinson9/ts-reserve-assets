@@ -6,6 +6,8 @@ import './bucket.css';
 
 import { BucketLabelProps, BucketProps, ButtonProps, configData } from './interfaces';
 
+import { capitalizeFirstLetter } from './capitalizeFirstLetter';
+
 const BucketLabel = ({label}: BucketLabelProps,) => {
   return (
     <>
@@ -46,9 +48,6 @@ const BucketButton = ({cb, lcf, ucf, bucketst, checked} : ButtonProps) => {
 
 export const Bucket = ({config, bucket, set_bucket}: BucketProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {set_bucket(parseInt(e.target.value, 10));}
-
-  const capitalizeFirstLetter = (name: string) => {if (name && name.length) { return name.charAt(0).toUpperCase() + name.slice(1) }
-                                                   else {return "X";}}
 
   const build_config_matrix = (config: configData)  => {
     const matrix = [];
