@@ -8,7 +8,8 @@ import { render } from '@testing-library/react';
 // import selectEvent from 'react-select-event'
 
 import { MongoData } from '../components/interfaces';
-import { get_items_from_config, Items } from '../components/items';
+import { Items } from '../components/items';
+import { get_items_from_config } from '../components/get_items_from_config';
 
 const test_numeric_config = {
   "APIPORT": 1234,

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import axios, { isAxiosError } from 'axios'
+import axios, { AxiosError, isAxiosError } from 'axios'
 
 import { registerLocale, setDefaultLocale } from  "react-datepicker";
 import enGB from 'date-fns/locale/en-GB';

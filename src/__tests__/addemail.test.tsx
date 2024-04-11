@@ -2,14 +2,12 @@
  * @vitest-environment jsdom
  */
 
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
-//import Form from 'react-bootstrap/Form';
-// import { Button, ChakraProvider, FormControl, FormLabel, FormHelperText } from '@chakra-ui/react'
 import { FormControl } from '@chakra-ui/react'
 
-import {AddEmailProps} from '../components/interfaces'
-import AddEmail from '../components/addemail';
+import { AddEmailProps } from '../components/interfaces'
+import { AddEmail } from '../components/addemail';
 
 /* eslint-disable */
 const null_setter = () => {};
@@ -18,7 +16,7 @@ const null_setter = () => {};
 function renderAddEmail(props: Partial<AddEmailProps> = {}) {
   const defaultProps = {
     email: "",
-    set_email: null_setter
+    set_email: null_setter,
   };
 
   return render(<FormControl id="emailForm"><AddEmail {...defaultProps} {...props} /></FormControl>);
@@ -31,28 +29,27 @@ test('use jsdom in this test file', () => {
 
 describe('it item contents', () => {
   it("should default to an blank item", async () => {
-    const { findByTestId } = renderAddEmail();
+    renderAddEmail();
 
-    const AddEmaillabel = await findByTestId("emailaddress_label");
+    const AddEmaillabel = screen.queryByTestId("emailaddress_label");
     expect(AddEmaillabel).toHaveTextContent('Email address');
 
-   const AddEmail = await findByTestId("emailaddress");
-   expect(AddEmail).toContainElement(AddEmaillabel);
+    const AddEmail = screen.queryByTestId("emailaddress");
+    expect(AddEmail).toContainElement(AddEmaillabel);
   });
 
-//  it("should be able to set email", async () => {
-//    const email = "email@domain.org";
-//    const itemprops = {email: email};
-//
-//    const { findByTestId } = renderAddEmail(itemprops);
-//
-//    const AddEmail = await findByTestId("emailaddress_control");
-//    expect(AddEmail).toHaveTextContent("Q1");
-//
-//    const AddEmaillabel = await findByTestId("addemail_label");
-//    expect(AddEmaillabel).toHaveTextContent("label7");
-//
-//    const AddEmailcontrol = await findByTestId("addemail_control");
-//    expect(AddEmailcontrol).toHaveTextContent("control1");
-//  });
+  it("should be able to set email", async () => {
+    const email = "email@domain.org";
+    const itemprops = {email: email};
+
+    renderAddEmail(itemprops);
+
+    const EmailAddresslabel = screen.queryByTestId("emailaddress_label");
+    expect(EmailAddresslabel).toHaveTextContent("Email address");
+
+    const EmailAddressInput = screen.getByLabelText("Email address");
+    const EmailAddressInputValue = EmailAddressInput.getAttribute("value");
+
+    expect(EmailAddressInputValue).toBe("email@domain.org");
+  });
 });
