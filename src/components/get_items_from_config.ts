@@ -1,22 +1,10 @@
-/** 
-* semantics - a bucket is a collection or container for items
-* e.g. a room containing desks, the desks being the items
-* the books by an author, the author is the bucket and the books the items
-* the tables in the restaurant, the tables are the buckets, the bookable seats the items.
-
-* these items are presented to the author as pull down lists once the bucket radio button is selected
-* filter out those items currently booked at the time requested from those presented 
-*/
-
 import { BucketReadProps } from './interfaces';
 
 import { listbuild } from './listbuild';
 
 /**
-*
 * items are either listed in the config files as strings
 * or else numeric, with the first and last in the config file, and the items computed
-*
 */
 
 export const get_items_from_config = ({config, bucket}: BucketReadProps): string[] | undefined => {

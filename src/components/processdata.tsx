@@ -4,51 +4,17 @@
 * of the record set for the day after the booking
 */
 
-import axios, { AxiosResponse, AxiosError, isAxiosError } from 'axios'
-
 import { Button, ChakraProvider } from '@chakra-ui/react'
 
 import InputForm from './form'
+
+import add_item_to_mongodb from './add_item_to_mongodb'
 import auxdatamerge from './auxdatamerge'
 import tomorrow_from_day from './tomorrow_from_day'
 
 import { ItemData, MongoData, ProcessDataProps } from './interfaces';
 
 import './processdata.css';
-
-const add_item_to_mongodb = async (url: string, item_booking: ItemData) => {
-  console.log("ADDING ITEM");
-  console.dir(item_booking);
-  console.log(`SENDING TO URL ${url}`);
-
-  try {
-    const response: AxiosResponse<ItemData> = await axios.post<ItemData>(url, item_booking, {headers: {'Content-Type': 'application/json'}})
-    console.log("POST Response is ");
-    console.log(response);
-    console.log("POST Response DATA is ");
-    console.log(response.data);
-    console.log(`RDI is ${response.data.id}`);
-    return response.data.id;
-  } catch (error: unknown | AxiosError) {
-    if (isAxiosError(error)) {
-      if (error.response) {
-        // The client was given an error response (5xx, 4xx)
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        console.log(error.response.status);
-        console.log(error.response.headers);
-      } else {
-        // Anything else
-        console.log('Axios Error', error.message);
-      }
-    } else {
-      // Any non-axios error
-      console.log('Non-Axios Error');
-      console.log(error);
-    }
-  }
-
-};
 
 export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, item, set_item, email, set_email, auxdata, set_auxdata, set_complete, url, confirmed, set_confirmed, set_needreset} : ProcessDataProps) => {
  
@@ -90,7 +56,6 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
 
       const id = add_item_to_mongodb(ITEM_url, item_booking);
       id.then(() => {
-//        const new_record: MongoData = {"booking_start": booking_start.toISOString(), "booking_end": booking_end.toISOString(), "bucket": bucket, [config.BUCKET_NAME]: name, [config.ITEM_NAME]: item};
         const new_record: MongoData = {"booking_start": booking_start, "booking_end": booking_end, "bucket": bucket, [config.BUCKET_NAME]: name, [config.ITEM_NAME]: item};
         const tmp = mongo_data;
         tmp.push(new_record);
