@@ -40,7 +40,7 @@ const form_contents = ({config, booking_start, set_booking_start, booking_end, s
             }
             <AddEmail email={email} set_email={set_email} />
             {config.AUXILLIARY?.map( (x) => <MyInput label={x.label} key={x.id} id={x.id} auxdata={auxdata} set_auxdata={set_auxdata} /> )}
-            <Button onClick={() => {handleBRClick(set_complete);}} >{buttonText} </Button>
+            <Button data-testid="form_submit_button" onClick={() => {handleBRClick(set_complete);}} >{buttonText} </Button>
           </Stack>
         </FormControl>
       </ChakraProvider>

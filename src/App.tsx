@@ -40,8 +40,10 @@ export const App = () => {
 
   const get_api_url = () : string => {
 
+/*
     console.log("in get_api_uri and env is");
     console.dir(import.meta.env);
+*/
 
     // const service_prefix=item_name.toUpperCase( ) + '_BACKEND_SERVICE';
 

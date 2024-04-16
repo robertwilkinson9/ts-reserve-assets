@@ -12,6 +12,7 @@ export const AddEmail = ({email, set_email} : AddEmailProps) =>{
         <FormControl>
           <FormLabel data-testid='emailaddress_label' htmlFor='email' >Email address</FormLabel>
           <Input 
+             data-testid='email_input'
              id='email'
              type='email'
              placeholder='enter Email address'

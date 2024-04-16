@@ -62,6 +62,7 @@ export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps
       <div data-testid="items_div" id="itemPulldown">
         <label data-testid="items_label" className="mb-0 font-weight-bold">{capitalizeFirstLetter(config.ITEM_NAME)}</label>
           <Select
+            data-testid="items_select"
             onChange={(event) => set_item(event.target.value)}
             placeholder='Select option'
           >

@@ -109,7 +109,7 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
 
       return (
         <>
-          <div id="key1" key="key1">
+          <div test-id="confirmation_page" id="key1" key="key1">
           <ChakraProvider resetCSS={false}>
             <h4>ProcessData</h4>
             <p>{sdstr}</p>
@@ -118,8 +118,8 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
             <p>{item}</p>
             <p>{email}</p>
             <p>{aux_string}</p>
-            <Button onClick={handleConfirm}>Confirm?</Button>
-            <Button onClick={handleCancel}>Cancel?</Button>
+            <Button test-id="confirm_button" onClick={handleConfirm}>Confirm?</Button>
+            <Button test-id="cancel_button" onClick={handleCancel}>Cancel?</Button>
           </ChakraProvider>
         </div>
         </>
