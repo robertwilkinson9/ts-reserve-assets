@@ -26,9 +26,6 @@ describe('rabook backend test', () => {
     cy.get('@books').then((response) => {
       const emma_info = response.body['data'][0];
 
-//      const ed = JSON.stringify(emma_info);
-//      cy.log(ed);
-
       const em_email = emma_info['email'];
       expect(em_email).to.equal('a@a.a');
 
