@@ -3,11 +3,13 @@
 // https://on.cypress.io/introduction-to-cypress
 
 describe('rabook app', () => {
+/*
   beforeEach(() => {
-    cy.visit('https://10.0.2.15:5176/');
   })
+*/
 
   it('set end calendar datepickers to an hour hence', () => {
+    cy.visit('https://10.0.2.15:5176/');
     const start_datetime = new Date(); // our first datepicker initialised to now
     const end_datetime = start_datetime;
     const current_hours = end_datetime.getHours();
