@@ -1,13 +1,10 @@
 import { useState, useEffect } from "react";
 
-// import axios, { AxiosError, isAxiosError } from 'axios'
-
 import { registerLocale, setDefaultLocale } from  "react-datepicker";
 import enGB from 'date-fns/locale/en-GB';
 
 import configData from "../config/config.json";
 
-//import { string_or_null, date_or_null, AuxDataRecordType, MongoReturnType, MongoRecordType, MongoData} from './components/interfaces'
 import { string_or_null, date_or_null, AuxDataRecordType, MongoData} from './components/interfaces'
 import { get_api_url } from './components/get_api_url'
 import { get_mongo_data } from './components/get_mongo_data'
@@ -32,54 +29,10 @@ export const App = () => {
   setDefaultLocale('en-GB');
 
   const item_name = import.meta.env.VITE_TYPE || configData.ITEM_NAME;
-
-/*
-  const build_mongo_data = (data: MongoReturnType): MongoData[] => {
-    if (data.data && data.data.length) {
-      return data.data.map((x: MongoRecordType) => {return {"booking_start": x.booking_start, "booking_end": x.booking_end, "bucket": x.bucket, [item_name]: x[item_name]}})
-    } else {
-      return [];
-    }
-  }
-*/
-
   const api_url = get_api_url(configData);
-/*
-  const ITEMS_url = api_url + 'all_' + item_name + 's/';
-  console.log(`MAIN ITEMS_url is ${ITEMS_url}`);
-
-  const get_mongo_data = async () => {
-    try {
-      await axios.get<MongoReturnType>(ITEMS_url, {headers: {'Content-Type': 'application/json'}}).then(response => {
-          const mymongodata: MongoData[] = build_mongo_data(response.data);
-          setMongodata(mymongodata);
-        }
-      )
-    } catch (error: unknown | AxiosError) {
-      if (isAxiosError(error)) {
-        if (error.response) {
-          // The client was given an error response (5xx, 4xx)
-          // The request was made and the server responded with a status code
-          // that falls out of the range of 2xx
-          console.log('Axios Error Response');
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else {
-          // Anything else
-          console.log('Axios Error', error.message);
-        }
-      } else {
-        // Anything else
-        console.log('Non Axios Error');
-        console.log(error);
-      }
-    }
-  };
-*/
 
   useEffect(() => {
     get_mongo_data(api_url, item_name, setMongodata);
-//export const get_mongo_data = async (api_url: string, item_name: string, setMongodata: React.Dispatch<React.SetStateAction<MongoData[]>>)
   }, []);
 
   const reset = (): void =>
