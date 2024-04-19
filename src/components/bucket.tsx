@@ -51,31 +51,33 @@ export const Bucket = ({config, bucket, set_bucket}: BucketProps) => {
 
   const build_config_matrix = (config: configData)  => {
     const matrix = [];
-    if (config.BUCKETS) {
-      for (let i = 0; i < config.BUCKETS.length; i++) {
-        const name = config.BUCKETS[i].NAME;
-        const uname = capitalizeFirstLetter(name);
-        const vector = [ name, uname, i.toString()];
-        matrix.push(vector);
-     }
-   }
-   return matrix;
- }
+    for (let i = 0; i < config.BUCKETS.length; i++) {
+      const name = config.BUCKETS[i].NAME;
+      const uname = capitalizeFirstLetter(name);
+      const vector = [ name, uname, i.toString()];
+      matrix.push(vector);
+    }
+    return matrix;
+  }
 
-  const build_checked_vector = (config: configData, bucket: number | null)  => {
+  const build_checked_vector = (bucket_length: number, bucket: number | null)  => {
     const checked = []
-    if (config.BUCKETS) {
-      for (let i = 0; i < config.BUCKETS.length; i++) {
-        const set = i == bucket;
-        checked.push(set);
-     }
-   }
-   return checked;
- }
+    for (let i = 0; i < bucket_length; i++) {
+      const set = i == bucket;
+      checked.push(set);
+    }
+    return checked;
+  }
 
-  const matrix = build_config_matrix(config);
-  const checked = build_checked_vector(config, bucket);
+  const matrix = config.BUCKETS ? build_config_matrix(config) : [];
+  const checked = config.BUCKETS ?  build_checked_vector(config.BUCKETS.length, bucket) : [];
 
+/*
+  console.log("CHECKED");
+  console.dir(checked);
+  console.log("MATRIX");
+  console.dir(matrix);
+*/
   return(
     <>
       <BucketLabel label={capitalizeFirstLetter(config.BUCKET_NAME)} />
