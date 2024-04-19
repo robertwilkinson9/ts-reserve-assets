@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 
-import axios, { AxiosError, isAxiosError } from 'axios'
+// import axios, { AxiosError, isAxiosError } from 'axios'
 
 import { registerLocale, setDefaultLocale } from  "react-datepicker";
 import enGB from 'date-fns/locale/en-GB';
 
 import configData from "../config/config.json";
 
-import { string_or_null, date_or_null, AuxDataRecordType, MongoReturnType, MongoRecordType, MongoData} from './components/interfaces'
+//import { string_or_null, date_or_null, AuxDataRecordType, MongoReturnType, MongoRecordType, MongoData} from './components/interfaces'
+import { string_or_null, date_or_null, AuxDataRecordType, MongoData} from './components/interfaces'
 import { get_api_url } from './components/get_api_url'
+import { get_mongo_data } from './components/get_mongo_data'
 import { Header } from './components/header'
 import { InputForm } from './components/form'
 import { ProcessData } from './components/processdata'
@@ -31,6 +33,7 @@ export const App = () => {
 
   const item_name = import.meta.env.VITE_TYPE || configData.ITEM_NAME;
 
+/*
   const build_mongo_data = (data: MongoReturnType): MongoData[] => {
     if (data.data && data.data.length) {
       return data.data.map((x: MongoRecordType) => {return {"booking_start": x.booking_start, "booking_end": x.booking_end, "bucket": x.bucket, [item_name]: x[item_name]}})
@@ -38,8 +41,10 @@ export const App = () => {
       return [];
     }
   }
+*/
 
   const api_url = get_api_url(configData);
+/*
   const ITEMS_url = api_url + 'all_' + item_name + 's/';
   console.log(`MAIN ITEMS_url is ${ITEMS_url}`);
 
@@ -70,9 +75,11 @@ export const App = () => {
       }
     }
   };
+*/
 
   useEffect(() => {
-    get_mongo_data();
+    get_mongo_data(api_url, item_name, setMongodata);
+//export const get_mongo_data = async (api_url: string, item_name: string, setMongodata: React.Dispatch<React.SetStateAction<MongoData[]>>)
   }, []);
 
   const reset = (): void =>
