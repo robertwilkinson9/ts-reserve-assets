@@ -31,14 +31,18 @@ export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps
   let items: string[] | undefined = [];
 
   if (config !== null && bucket !== undefined) {
-    items = get_items_from_config({config, bucket});
+    items = get_items_from_config({config, bucket}) || [];
+    console.log(`IN Items and itms.length is ${items.length}`);
 
     if (allocated_items) {
       const bucket_items = allocated_items.filter(it => {return bucket == it.bucket});
-/*
+
       console.log("bucket_items");
       console.dir(bucket_items);
-*/
+      console.log(`AND BUCKET ITSM LENGTH is ${bucket_items.length}`);
+      const all_reserved = items.length === bucket_items.length
+      console.log(`ALL_RESERVED IS ${all_reserved}`);
+
       if (bucket_items) {
 
         const reserved_items = bucket_items.map(x => {return x[config.ITEM_NAME]});
