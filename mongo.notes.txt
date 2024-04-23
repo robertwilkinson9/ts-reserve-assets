@@ -311,3 +311,5 @@ The server generated these startup warnings when booting:
 ---
 > 
 bye
+
+{ user: "test1", pwd: "1test", roles: [ { role: "dbOwner", db: "test" }, { role: "readWrite", db: "test" }]}
