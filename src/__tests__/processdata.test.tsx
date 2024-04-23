@@ -17,7 +17,7 @@ import { auxdatamerge } from '../components/auxdatamerge';
 function renderProcessData(props: Partial<ProcessDataProps> = {}) {
   const defaultConfig = {
     "APIPORT": 7345,
-    "LCCOLLECTION": "test",
+    "COLLECTION": "test",
     "ITEM_NAME": "test_item",
     "ITEM_LABEL": "test_label",
     "BUCKET_NAME": "test_bucket",

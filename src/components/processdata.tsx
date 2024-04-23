@@ -49,7 +49,7 @@ export const ProcessData = ({ config, mongo_data, set_mongodata, booking_start, 
 
     const confirm_action = () => {
       console.log(`confirm_action given booking_start of ${booking_start}`);
-      const ITEM_url: string = url + config.LCCOLLECTION + '/';
+      const ITEM_url: string = url + config.COLLECTION + '/';
       console.log(`POST ITEM_url is ${ITEM_url}`);
       console.log("POST item_booking is ");
       console.dir(item_booking);

@@ -34,7 +34,6 @@ export const App = () => {
   useEffect(() => {
     get_mongo_data(api_url, item_name, setMongodata);
   }, [api_url, item_name]);
-//  }, []);
 
   const reset = (): void =>
   {

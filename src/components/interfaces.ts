@@ -125,7 +125,7 @@ export interface AuxType extends AuxConfigRecordType {
 
 export interface configData {
   APIPORT: number;
-  LCCOLLECTION: string;
+  COLLECTION: string;
   ITEM_NAME: string;
   ITEM_LABEL: string;
   BUCKET_NAME: string;

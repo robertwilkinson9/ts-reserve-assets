@@ -13,7 +13,7 @@ import { get_items_from_config } from '../components/get_items_from_config';
 
 const test_numeric_config = {
   "APIPORT": 1234,
-  "LCCOLLECTION": "test",
+  "COLLECTION": "test",
   "ITEM_NAME": "test_items_name",
   "ITEM_LABEL": "test_items_label",
   "BUCKET_NAME": "test_items",
@@ -36,7 +36,7 @@ const test_numeric_config = {
 
 const test_list_config = {
   "APIPORT": 1235,
-  "LCCOLLECTION": "listtest",
+  "COLLECTION": "listtest",
   "ITEM_NAME": "listtest_items_name",
   "ITEM_LABEL": "listtest_items_label",
   "BUCKET_NAME": "listtest_items",
