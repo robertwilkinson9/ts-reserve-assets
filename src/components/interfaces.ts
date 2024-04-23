@@ -18,6 +18,7 @@ export interface BucketReadProps {
 
 export interface BucketProps extends BucketReadProps {
   set_bucket: React.Dispatch<React.SetStateAction<number_or_null>>;
+  items_available: boolean[];
 }
 
 export interface ButtonProps {

@@ -22,6 +22,7 @@ const BucketLabel = ({label}: BucketLabelProps,) => {
 
 const BucketButton = ({cb, lcf, ucf, bucketst, checked} : ButtonProps) => {
   if (checked) {
+    console.log(`checked is ${checked}, bucketst is ${bucketst}, ucf is ${ucf}`);
     return(
       <>
       <div data-testid="bucket_button_checked" className="row" id="bucket_radios">
@@ -33,6 +34,7 @@ const BucketButton = ({cb, lcf, ucf, bucketst, checked} : ButtonProps) => {
      </>
    );
   } else {
+    console.log(`CHECKED IS ${checked}, BUCKETST IS ${bucketst}, UCF IS ${ucf}`);
     return(
       <>
       <div data-testid="bucket_button_unchecked" className="row" id="bucket_radios">
@@ -46,45 +48,56 @@ const BucketButton = ({cb, lcf, ucf, bucketst, checked} : ButtonProps) => {
   }
 }
 
-export const Bucket = ({config, bucket, set_bucket}: BucketProps) => {
+export const Bucket = ({config, bucket, set_bucket, items_available}: BucketProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {set_bucket(parseInt(e.target.value, 10));}
+
+  console.log("Bucket sees items_available of");
+  console.dir(items_available);
 
   const build_config_matrix = (config: configData)  => {
     const matrix = [];
     for (let i = 0; i < config.BUCKETS.length; i++) {
-      const name = config.BUCKETS[i].NAME;
-      const uname = capitalizeFirstLetter(name);
-      const vector = [ name, uname, i.toString()];
-      matrix.push(vector);
+      if (items_available[i]) {
+        const name = config.BUCKETS[i].NAME;
+        const uname = capitalizeFirstLetter(name);
+        const vector = [ name, uname, i.toString()];
+        matrix.push(vector);
+      } else {
+        matrix.push([ "","", ""]);
+      }
     }
+    console.log("MATRIX is ");
+    console.dir(matrix);
     return matrix;
   }
 
   const build_checked_vector = (bucket_length: number, bucket: number | null)  => {
     const checked = []
     for (let i = 0; i < bucket_length; i++) {
-      const set = i == bucket;
-      checked.push(set);
+      if (items_available[i]) {
+        const set = i == bucket;
+        checked.push(set);
+      } else {
+        checked.push(false);
+      }
     }
+    console.log("CHECKED VECTOR is ");
+    console.dir(checked);
     return checked;
   }
 
   const matrix = config.BUCKETS ? build_config_matrix(config) : [];
   const checked = config.BUCKETS ?  build_checked_vector(config.BUCKETS.length, bucket) : [];
 
-/*
-  console.log("CHECKED");
-  console.dir(checked);
-  console.log("MATRIX");
-  console.dir(matrix);
-*/
   return(
     <>
       <BucketLabel label={capitalizeFirstLetter(config.BUCKET_NAME)} />
       <div data-testid="bucket_div" className="container">
       {
         matrix.map((row, index) => (
-          <BucketButton cb={handleChange} lcf={row[0]} ucf={row[1]} bucketst={row[2]} checked={checked[index]} key={index} />
+          row[0].length
+          ?  <BucketButton cb={handleChange} lcf={row[0]} ucf={row[1]} bucketst={row[2]} checked={checked[index]} key={index} />
+          : null
         ))
       }
       </div>

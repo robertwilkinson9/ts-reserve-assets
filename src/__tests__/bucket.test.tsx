@@ -35,8 +35,9 @@ const test_config = {
 const null_setter = () => {};
 /* eslint-enable */
 
+const items_available = [true, true];
 const renderBucket = (bucket = 0) => {
-  return render(<Bucket config={test_config} bucket={bucket} set_bucket={null_setter} />);
+  return render(<Bucket config={test_config} bucket={bucket} set_bucket={null_setter} items_available={items_available}/>);
 }
 
 describe('label test', () => {
