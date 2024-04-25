@@ -18,8 +18,12 @@ describe('ratesting app', () => {
     const end_datetime = new Date(); // our first datepicker is initialised to now
     const current_hours = end_datetime.getHours();
     end_datetime.setHours(current_hours + 1);
+    const end_datetime_string = end_datetime.toISOString();
+    const end_datetime_enter = end_datetime_string.concat('{enter}');
+    console.log(`end_datetime_enter is ${end_datetime_enter}`);
 
-    cy.get('[data-testid="calendar_datepicker"]').last().type(end_datetime.toISOString()); // set the end calendar to an hour hence
+    cy.get('[data-testid="calendar_datepicker"]').last().type(end_datetime_enter); // set the end calendar to an hour hence
+
     cy.get('[data-testid="form_submit_button"]').click({force: true});
     cy.get('[test-id="confirmation_page"]').should('be.visible');
     cy.get('[test-id="confirm_button"]').should('be.visible');
