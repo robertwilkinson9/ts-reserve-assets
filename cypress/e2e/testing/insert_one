@@ -1,0 +1,1 @@
+db.testing.insertOne( {"booking_start": ISODate("2023-05-29T08:00:00Z"), "booking_end": ISODate("2023-05-29T17:00:00Z"), "expireAt": ISODate("2023-05-30T08:00:00Z"), "floor" : 2, "testing" : "2f18", "email" : "robert.wilkinson@someone.co.uk"})
