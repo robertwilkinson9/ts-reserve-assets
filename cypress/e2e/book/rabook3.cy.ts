@@ -1,39 +1,65 @@
 /// <reference types="cypress" />
 
-describe('rabook backend test', () => {
-/*
+// https://on.cypress.io/introduction-to-cypress
+
+describe('rabook app', () => {
   beforeEach(() => {
-  })
-*/
+    cy.visit('https://10.0.2.15:5176/');
 
-  it('check index hello world page', () => {
-    cy.request({ url: "https://localhost:6180/", method: 'GET', failOnStatusCode: false}).as('hello');
-    cy.get('@hello').its('status').should('eq', 200);
-    cy.get('@hello').then((response) => {
-      const rb = JSON.stringify(response.body);
-      expect(rb).to.equal('"Hello World!"');
-    })
-  })
+    const end_datetime = new Date();
+    const current_hours = end_datetime.getHours();
+    end_datetime.setHours(current_hours + 1);
 
-  it('check books api is available', () => {
-    cy.request({ url: 'https://localhost:6180/api/all_books', method: 'GET', failOnStatusCode: false}).as('books');
-    cy.get('@books').its('status').should('eq', 200);
+    cy.get('[data-testid="calendar_datepicker"]').should('have.length', 2);
+    cy.get('[data-testid="calendar_datepicker"]').last().type(end_datetime.toISOString()); // set the end calendar to an hour hence
+
   })
 
-  it('check details about Emma are correct', () => {
-    cy.request({ url: 'https://localhost:6180/api/all_books', method: 'GET', failOnStatusCode: false}).as('books');
-    cy.get('@books').its('status').should('eq', 200);
-    cy.get('@books').then((response) => {
-      const emma_info = response.body['data'][0];
+  it('Reserve "Northanger Abbey"', () => {
+    cy.get('[data-testid="item"]').should('have.length', 4);
+    cy.get('[data-testid="item"]').first().should('have.text', 'Northanger Abbey');
+    cy.get('[data-testid="items_select"]').select('Northanger Abbey', {force: true});
+    cy.get('[data-testid="email_input"]').type('c@c.c');
 
-      const em_email = emma_info['email'];
-      expect(em_email).to.equal('a@a.a');
-
-      const em_book = emma_info['book'];
-      expect(em_book).to.equal('Emma');
-
-      const em_author = emma_info['author'];
-      expect(em_author).to.equal('Jane Austen');
-    })
+    cy.get('[data-testid="form_submit_button"]').click({force: true});
+    cy.get('[test-id="confirmation_page"]').should('be.visible');
+    cy.get('[test-id="confirm_button"]').should('be.visible');
+    cy.get('[test-id="confirm_button"]').click();
   })
-});
+
+  it('Reserve "Persuasion"', () => {
+    cy.get('[data-testid="item"]').should('have.length', 3);
+    cy.get('[data-testid="item"]').first().should('have.text', 'Persuasion');
+    cy.get('[data-testid="items_select"]').select('Persuasion', {force: true});
+    cy.get('[data-testid="email_input"]').type('d@d.d');
+
+    cy.get('[data-testid="form_submit_button"]').click({force: true});
+    cy.get('[test-id="confirmation_page"]').should('be.visible');
+    cy.get('[test-id="confirm_button"]').should('be.visible');
+    cy.get('[test-id="confirm_button"]').click();
+  })
+
+  it('Reserve "Pride and Prejudice"', () => {
+    cy.get('[data-testid="item"]').should('have.length', 2);
+    cy.get('[data-testid="item"]').first().should('have.text', 'Pride and Prejudice');
+    cy.get('[data-testid="items_select"]').select('Pride and Prejudice', {force: true});
+    cy.get('[data-testid="email_input"]').type('e@e.e');
+
+    cy.get('[data-testid="form_submit_button"]').click({force: true});
+    cy.get('[test-id="confirmation_page"]').should('be.visible');
+    cy.get('[test-id="confirm_button"]').should('be.visible');
+    cy.get('[test-id="confirm_button"]').click();
+  })
+
+  it('Reserve "Sense and Sensibility"', () => {
+    cy.get('[data-testid="item"]').should('have.length', 1);
+    cy.get('[data-testid="item"]').first().should('have.text', 'Sense and Sensibility');
+    cy.get('[data-testid="items_select"]').select('Sense and Sensibility', {force: true});
+    cy.get('[data-testid="email_input"]').type('f@f.f');
+
+    cy.get('[data-testid="form_submit_button"]').click({force: true});
+    cy.get('[test-id="confirmation_page"]').should('be.visible');
+    cy.get('[test-id="confirm_button"]').should('be.visible');
+    cy.get('[test-id="confirm_button"]').click();
+  })
+})
