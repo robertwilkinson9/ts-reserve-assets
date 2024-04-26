@@ -1,10 +1,11 @@
 #!/bin/bash
 TYPE=$1
 
-API_IP=$(./backend_address.sh $TYPE)
+
 CONFIG_DIR=../ts-ra-config
 CONFIG_FILE=$(echo ${CONFIG_DIR}/config.${TYPE}.json)
 API_PORT=$(cat $CONFIG_FILE | jq --raw-output '.APIPORT')
+COLLECTION=$(cat $CONFIG_FILE | jq --raw-output '.COLLECTION')
 
 MK=$(which minikube) 
 if [ $MK ]; then
@@ -19,7 +20,7 @@ if [ $MK ]; then
   echo API_port is $API_PORT
   VITE_TYPE=${TYPE}
 else
-  API_IP=$(./backend_address.sh $TYPE)
+  API_IP=$(./backend_address.sh ${COLLECTION})
   CONFIG_FILE=$(echo $CONFIG_DIR/config.${TYPE}.json)
   API_PORT=$(cat $CONFIG_FILE | jq --raw-output '.APIPORT')
   VITE_TYPE=$(cat $CONFIG_FILE | jq --raw-output '.ITEM_NAME')
