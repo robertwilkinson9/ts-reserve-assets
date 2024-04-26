@@ -25,7 +25,7 @@ describe('ratesting app', () => {
     cy.get('[data-testid="calendar_datepicker"]').last().type(end_datetime_enter); // set the end calendar to an hour hence
 
     cy.get('[data-testid="bucket_label_label"]').should('be.visible').and('contain', 'Testing_bucket');
-    cy.get('[data-testid="bucket_button_checked_label"]').should('be.visible').and('contain', 'First');
+    cy.get('[data-testid="bucket_button_checked_label"]').should('be.visible').and('contain', 'Second');
   })
 
   it('has a select pulldown label "Testing_item_name"', () => {
