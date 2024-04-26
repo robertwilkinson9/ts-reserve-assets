@@ -34,58 +34,81 @@ const get_non_empty_bucket = (bucket: number, items_available: boolean []) => {
 };
 
 const form_contents = ({config, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, set_item, email, set_email, auxdata, set_auxdata, set_complete, overlapv, buttonText, ordinal, label}: Frp) => {
-  const num_buckets = config.BUCKETS.length;
+  console.log("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFORM");
   const items_available = [];
-  for (let i = 0; i < num_buckets; i++) {
-    const has_items0 = 'ITEMS' in config.BUCKETS[i];
-    console.log(`has_items0 is ${has_items0}`);
-    if ((config.BUCKETS[i]) && ('ITEMS' in config.BUCKETS[i]) && (config.BUCKETS[i].ITEMS)) {
-      const items = config.BUCKETS[i].ITEMS || [];
-      const num_items = items.length;
+  for (let i = 0; i < config.BUCKETS.length; i++) {
+    if (config.BUCKETS[i]) {
       const bucket_reserved = overlapv.filter((it) => {return it.bucket === i;})
-
+      let num_items;
+      if (('ITEMS' in config.BUCKETS[i]) && (config.BUCKETS[i].ITEMS)) {
+        console.log(`ITEMS BUCKET at ${i}`);
+        const items = config.BUCKETS[i].ITEMS || [];
+        num_items = items.length;
+      } else if (('IFIRST' in config.BUCKETS[i]) && config.BUCKETS[i].IFIRST && ('ILAST' in config.BUCKETS[i]) && config.BUCKETS[i].ILAST) {
+        const first = config.BUCKETS[i].IFIRST || 1;
+        const last = config.BUCKETS[i].ILAST || 0;
+        num_items = last - first + 1;
+        console.log(`I is ${i}, IFIRST is ${first}, LAST is ${last}, NUM_ITEMS=${num_items}`);
+      } else {
+        num_items = 0;
+        console.log(`BAD BUCKET at ${i}`);
+      }
+      console.log(`NUM ITEMS is ${num_items} and BUCKET_RERSERVED_LENGTH is ${bucket_reserved.length}`);
       const bucket_items_available = num_items !== bucket_reserved.length
       console.log(`ITEMS_AVAILABLE IS ${bucket_items_available}`);
       items_available.push(bucket_items_available);
-    } else {
-      items_available.push(true);
     }
   }
-  console.log(`ITEMS_TO_RESERVE is`);
+  console.log(`ITEMS_AVAILABLE is`);
   console.dir(items_available);
 
   let items_in_bucket = false;
-  let has_items = false;
   if (bucket != null) {
     items_in_bucket = items_available[bucket];
     console.log(`items_in_bucket is ${items_in_bucket} and bucket is ${bucket}`);
-
-    has_items = 'ITEMS' in config.BUCKETS[bucket];
-    console.log(`has_items is ${has_items}`);
   }
 
   let bucket_items_available = false;
-  if ((bucket != null) && (has_items)) {
+  if (bucket != null) {
+    console.log(`BUCKET STARTS SET TO ${bucket}`);
     if (!items_in_bucket) {
       const new_bucket = get_non_empty_bucket(bucket, items_available);
       if (new_bucket != null) {
         console.log(`NEW_BUCKET is ${new_bucket}`);
-//        set_bucket(new_bucket);
+        set_bucket(new_bucket);
         bucket = new_bucket;
         console.log(`in form and bucket is NEWLY set to ${bucket}`);
       }
     }
 
-    if ((config.BUCKETS[bucket]) && ('ITEMS' in config.BUCKETS[bucket]) && (config.BUCKETS[bucket].ITEMS)) {
-      const new_items = config.BUCKETS[bucket].ITEMS || [];
-      const num_items = new_items.length;
-//      const num_items = config.BUCKETS[bucket].ITEMS.length;
-      const bucket_reserved = overlapv.filter((it) => {return it.bucket === bucket;})
-      bucket_items_available = (num_items !== bucket_reserved.length);
+   console.log(`BUCKET SET TO ${bucket}`);
+
+    if (config.BUCKETS[bucket]) {
+      console.log(`BUCKET SET FOR ${bucket}`);
+      if (('ITEMS' in config.BUCKETS[bucket]) && (config.BUCKETS[bucket].ITEMS)) {
+        const new_items = config.BUCKETS[bucket].ITEMS || [];
+        const num_items = new_items.length;
+        console.log(`+++ ITEMS is ${num_items}`);
+        const bucket_reserved = overlapv.filter((it) => {return it.bucket === bucket;})
+        bucket_items_available = (num_items !== bucket_reserved.length);
+      } else if (('IFIRST' in config.BUCKETS[bucket]) && config.BUCKETS[bucket].IFIRST && ('ILAST' in config.BUCKETS[bucket]) && config.BUCKETS[bucket].ILAST) {
+        console.log(`+++ BUCKET is ${bucket}`);
+//      items_available.push(true);
+        const first = config.BUCKETS[bucket].IFIRST || 1;
+        const last = config.BUCKETS[bucket].ILAST || 0;
+        const num_items = last - first + 1;
+        console.log(`+++ BUCKET is ${bucket}, IFIRST is ${first}, LAST is ${last}, NUM_ITEMS=${num_items}`);
+        const bucket_reserved = overlapv.filter((it) => {return it.bucket === bucket;})
+        bucket_items_available = (num_items !== bucket_reserved.length);
+      } else {
+        console.log(`+++ BROKEN is ${bucket}`);
+        bucket_items_available = true;
+      }
     }
-  } else {
-    bucket_items_available = true;
   }
+
+  console.log(`BUCKET_ITEMS_AVAILABLE is`);
+  console.dir(bucket_items_available);
 
   console.log(`in form and bucket is set to ${bucket}`);
   return (
@@ -101,7 +124,7 @@ const form_contents = ({config, booking_start, set_booking_start, booking_end, s
               : <Calendar label="Start DateTime" selected={booking_start} date_setter={set_booking_start} date_setter2={set_booking_end} />
             }
             <Calendar label="End DateTime" selected={booking_end} date_setter={set_booking_end} />
-            <Bucket config={config} bucket={bucket} set_bucket={set_bucket} items_available={items_available} />
+            <Bucket config={config} set_bucket={set_bucket} items_available={items_available} />
             {
               bucket_items_available && overlapv.length
               ? <Items config={config} bucket={bucket} allocated_items={overlapv} set_item={set_item} />

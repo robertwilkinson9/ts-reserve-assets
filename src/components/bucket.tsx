@@ -27,7 +27,7 @@ const BucketButton = ({cb, lcf, ucf, bucketst, checked} : ButtonProps) => {
       <>
       <div data-testid="bucket_button_checked" className="row" id="bucket_radios">
         <div className="col">
-          <input data-testid="bucket_button_checked_input" type="radio" value={bucketst} id={lcf} onChange={cb} name="bucket" defaultChecked />
+          <input data-testid="bucket_button_checked_input" type="radio" value={bucketst} id={lcf} onChange={cb} name="bucket" checked={checked} />
           <label data-testid="bucket_button_checked_label" htmlFor={lcf}>{ucf}</label>
        </div>
      </div>
@@ -39,7 +39,7 @@ const BucketButton = ({cb, lcf, ucf, bucketst, checked} : ButtonProps) => {
       <>
       <div data-testid="bucket_button_unchecked" className="row" id="bucket_radios">
         <div className="col">
-          <input data-testid="bucket_button_unchecked_input" type="radio" value={bucketst} id={lcf} onChange={cb} name="bucket"/>
+          <input data-testid="bucket_button_unchecked_input" type="radio" value={bucketst} id={lcf} onChange={cb} name="bucket" checked={checked} />
           <label data-testid="bucket_button_unchecked_label" htmlFor={lcf}>{ucf}</label>
        </div>
      </div>
@@ -48,7 +48,7 @@ const BucketButton = ({cb, lcf, ucf, bucketst, checked} : ButtonProps) => {
   }
 }
 
-export const Bucket = ({config, bucket, set_bucket, items_available}: BucketProps) => {
+export const Bucket = ({config, set_bucket, items_available}: BucketProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {set_bucket(parseInt(e.target.value, 10));}
 
   console.log("Bucket sees items_available of");
@@ -71,12 +71,14 @@ export const Bucket = ({config, bucket, set_bucket, items_available}: BucketProp
     return matrix;
   }
 
-  const build_checked_vector = (bucket_length: number, bucket: number | null)  => {
-    const checked = []
+  const build_checked_vector = (bucket_length: number)  => {
+//  set the checked button to be the first bucket with available items
+    const checked = [];
+    let checked_set = false;
     for (let i = 0; i < bucket_length; i++) {
-      if (items_available[i]) {
-        const set = i == bucket;
-        checked.push(set);
+      if ((!checked_set) && (items_available[i])) {
+        checked_set = true;
+        checked.push(true);
       } else {
         checked.push(false);
       }
@@ -87,7 +89,7 @@ export const Bucket = ({config, bucket, set_bucket, items_available}: BucketProp
   }
 
   const matrix = config.BUCKETS ? build_config_matrix(config) : [];
-  const checked = config.BUCKETS ?  build_checked_vector(config.BUCKETS.length, bucket) : [];
+  const checked = config.BUCKETS ? build_checked_vector(config.BUCKETS.length) : [];
 
   return(
     <>

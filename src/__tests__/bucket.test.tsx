@@ -35,9 +35,8 @@ const test_config = {
 const null_setter = () => {};
 /* eslint-enable */
 
-const items_available = [true, true];
-const renderBucket = (bucket = 0) => {
-  return render(<Bucket config={test_config} bucket={bucket} set_bucket={null_setter} items_available={items_available}/>);
+const renderBucket = (items_available: boolean[] = [true, true]) => {
+  return render(<Bucket config={test_config} set_bucket={null_setter} items_available={items_available} />);
 }
 
 describe('label test', () => {
@@ -72,7 +71,7 @@ describe('buckets test', () => {
   });
 
   it("should contain a checked button label", async () => {
-    renderBucket(1);
+    renderBucket();
 
     const BucketButtonChecked = screen.queryByTestId("bucket_button_checked_label");
     expect(BucketButtonChecked).toBeInTheDocument();
@@ -86,21 +85,22 @@ describe('buckets test', () => {
   });
 
   it("checked button label should be correct value", async () => {
-    renderBucket(1);
+    const items_available = [false, true];
+    renderBucket(items_available);
 
     const BucketButtonCheckedLabel = screen.queryByTestId("bucket_button_checked_label");
     expect(BucketButtonCheckedLabel).toHaveTextContent("Second");
   });
 
   it("should contain an unchecked button", async () => {
-    renderBucket(1);
+    renderBucket();
 
     const BucketButtonUnchecked = screen.queryByTestId("bucket_button_unchecked");
     expect(BucketButtonUnchecked).toBeInTheDocument();
   });
 
   it("should contain an unchecked button label", async () => {
-    renderBucket(1);
+    renderBucket();
 
     const BucketButtonUncheckedLabel = screen.queryByTestId("bucket_button_unchecked_label");
     expect(BucketButtonUncheckedLabel).toBeInTheDocument();
@@ -111,12 +111,5 @@ describe('buckets test', () => {
 
     const BucketButtonUncheckedLabel = screen.queryByTestId("bucket_button_unchecked_label");
     expect(BucketButtonUncheckedLabel).toHaveTextContent("Second");
-  });
-
-  it("unchecked button label should be correct value", async () => {
-    renderBucket(1);
-
-    const BucketButtonUncheckedLabel = screen.queryByTestId("bucket_button_unchecked_label");
-    expect(BucketButtonUncheckedLabel).toHaveTextContent("First");
   });
 });
