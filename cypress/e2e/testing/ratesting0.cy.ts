@@ -35,7 +35,7 @@ describe('ratesting app', () => {
     cy.get('[data-testid="email_input"]').should('be.visible');
   })
 
-  it('has a submit button labelled "Reserve dtesting"', () => {
+  it('has a submit button labelled "Reserve testing_collection"', () => {
     cy.get('[data-testid="form_submit_button"]').should('be.visible');
     cy.get('[data-testid="form_submit_button"]').should('be.visible').and('contain', 'Reserve testing_item_name');
   })
