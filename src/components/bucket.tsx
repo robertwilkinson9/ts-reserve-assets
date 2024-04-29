@@ -4,7 +4,7 @@
 
 import './bucket.css';
 
-import { BucketLabelProps, BucketProps, ButtonProps, configData } from './interfaces';
+import { number_or_null, BucketLabelProps, BucketProps, ButtonProps, configData } from './interfaces';
 
 import { capitalizeFirstLetter } from './capitalizeFirstLetter';
 
