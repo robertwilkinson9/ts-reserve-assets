@@ -80,7 +80,7 @@ export const Bucket = ({config, bucket, set_bucket, items_available}: BucketProp
       checked.push(false);
     }
 
-    if (items_available[bucket]) {
+    if (bucket && items_available[bucket]) {
       checked[bucket] = true;
     } else {
 //  set the checked button to be the first bucket with available items
