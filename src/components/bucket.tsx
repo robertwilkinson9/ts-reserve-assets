@@ -48,8 +48,11 @@ const BucketButton = ({cb, lcf, ucf, bucketst, checked} : ButtonProps) => {
   }
 }
 
-export const Bucket = ({config, set_bucket, items_available}: BucketProps) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {set_bucket(parseInt(e.target.value, 10));}
+export const Bucket = ({config, bucket, set_bucket, items_available}: BucketProps) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(`STTEING BUUCKET TO ${e.target.value}`);
+    set_bucket(parseInt(e.target.value, 10));
+  }
 
   console.log("Bucket sees items_available of");
   console.dir(items_available);
@@ -71,16 +74,23 @@ export const Bucket = ({config, set_bucket, items_available}: BucketProps) => {
     return matrix;
   }
 
-  const build_checked_vector = (bucket_length: number)  => {
+  const build_checked_vector = (bucket_length: number, bucket: number_or_null, set_bucket : React.Dispatch<React.SetStateAction<number_or_null>>)  => {
+    const checked: boolean[] = [];
+    for (let i = 0; i < bucket_length; ++i) {
+      checked.push(false);
+    }
+
+    if (items_available[bucket]) {
+      checked[bucket] = true;
+    } else {
 //  set the checked button to be the first bucket with available items
-    const checked = [];
-    let checked_set = false;
-    for (let i = 0; i < bucket_length; i++) {
-      if ((!checked_set) && (items_available[i])) {
-        checked_set = true;
-        checked.push(true);
-      } else {
-        checked.push(false);
+      let checked_set = false;
+      for (let i = 0; i < bucket_length; i++) {
+        if ((!checked_set) && (items_available[i])) {
+          checked_set = true;
+          checked[i] = true;
+          set_bucket(i);
+        }
       }
     }
     console.log("CHECKED VECTOR is ");
@@ -89,7 +99,7 @@ export const Bucket = ({config, set_bucket, items_available}: BucketProps) => {
   }
 
   const matrix = config.BUCKETS ? build_config_matrix(config) : [];
-  const checked = config.BUCKETS ? build_checked_vector(config.BUCKETS.length) : [];
+  const checked = config.BUCKETS ? build_checked_vector(config.BUCKETS.length, bucket, set_bucket) : [];
 
   return(
     <>

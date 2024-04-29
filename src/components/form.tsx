@@ -124,7 +124,7 @@ const form_contents = ({config, booking_start, set_booking_start, booking_end, s
               : <Calendar label="Start DateTime" selected={booking_start} date_setter={set_booking_start} date_setter2={set_booking_end} />
             }
             <Calendar label="End DateTime" selected={booking_end} date_setter={set_booking_end} />
-            <Bucket config={config} set_bucket={set_bucket} items_available={items_available} />
+            <Bucket config={config} bucket={bucket} set_bucket={set_bucket} items_available={items_available} />
             {
               bucket_items_available && overlapv.length
               ? <Items config={config} bucket={bucket} allocated_items={overlapv} set_item={set_item} />
