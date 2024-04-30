@@ -56,7 +56,7 @@ export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps
     }
   }
 
-  if (config && items) {
+  if (config && items.length) {
     const select_item_list: Select_type[] = items_select(items)
 
     const select_option_list = select_item_list.map((item, key) => { return (<React.Fragment key={key}><option data-testid="item" value={item.value}>{item.label}</option></React.Fragment>) });

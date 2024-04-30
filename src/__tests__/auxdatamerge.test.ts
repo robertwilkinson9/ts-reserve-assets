@@ -31,4 +31,14 @@ describe('auxdatamerge should work ', () => {
 
     expect(adt).toStrictEqual(aert);
   });
+
+  it("should create a mismatched merged item when adding two single items", async () => {
+    const acrt = [{"id": "42", "label": "unlimited", "dbname": "remote_id"}];
+    const adrt = [{"id": "43", "value": "mystring"}];
+    const aert = [{"id": "42", "label": "unlimited", "dbname": "remote_id", "value": ""}];
+
+    const adt = auxdatamerge(acrt, adrt);
+
+    expect(adt).toStrictEqual(aert);
+  });
 });

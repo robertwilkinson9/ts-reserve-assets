@@ -7,7 +7,6 @@ export const auxdatamerge = (aux_config: AuxConfigRecordType[], aux_data: AuxDat
       };
     });
     if (data && data[0] && data[0].value) {
-      console.log(`HAVE data[0].value of ${data[0].value}`);
       return {id: c.id, label: c.label, dbname: c.dbname, value: data[0].value};
     } else {
       return {id: c.id, label: c.label, dbname: c.dbname, value: ""};
