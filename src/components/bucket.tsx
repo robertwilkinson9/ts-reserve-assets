@@ -22,7 +22,6 @@ const BucketLabel = ({label}: BucketLabelProps,) => {
 
 const BucketButton = ({cb, lcf, ucf, bucketst, checked} : ButtonProps) => {
   if (checked) {
-    console.log(`checked is ${checked}, bucketst is ${bucketst}, ucf is ${ucf}`);
     return(
       <>
       <div data-testid="bucket_button_checked" className="row" id="bucket_radios">
@@ -34,7 +33,6 @@ const BucketButton = ({cb, lcf, ucf, bucketst, checked} : ButtonProps) => {
      </>
    );
   } else {
-    console.log(`CHECKED IS ${checked}, BUCKETST IS ${bucketst}, UCF IS ${ucf}`);
     return(
       <>
       <div data-testid="bucket_button_unchecked" className="row" id="bucket_radios">
@@ -50,12 +48,8 @@ const BucketButton = ({cb, lcf, ucf, bucketst, checked} : ButtonProps) => {
 
 export const Bucket = ({config, bucket, set_bucket, items_available}: BucketProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(`STTEING BUUCKET TO ${e.target.value}`);
     set_bucket(parseInt(e.target.value, 10));
   }
-
-  console.log("Bucket sees items_available of");
-  console.dir(items_available);
 
   const build_config_matrix = (config: configData)  => {
     const matrix = [];
@@ -69,8 +63,6 @@ export const Bucket = ({config, bucket, set_bucket, items_available}: BucketProp
         matrix.push([ "","", ""]);
       }
     }
-    console.log("MATRIX is ");
-    console.dir(matrix);
     return matrix;
   }
 
@@ -93,8 +85,6 @@ export const Bucket = ({config, bucket, set_bucket, items_available}: BucketProp
         }
       }
     }
-    console.log("CHECKED VECTOR is ");
-    console.dir(checked);
     return checked;
   }
 

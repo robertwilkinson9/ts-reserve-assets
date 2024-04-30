@@ -1,8 +1,5 @@
 export const get_non_empty_bucket = (bucket: number, items_available: boolean []) => {
-  if (items_available[bucket]) {
-    console.log(`in get_non_empty_bucket and bucket is ${bucket}`);
-    return bucket;
-  }
+  if (items_available[bucket]) {return bucket;}
 
 //      const next = (bucket + 1) % items_available.length;
 // or just start at 0 and return the first available ...

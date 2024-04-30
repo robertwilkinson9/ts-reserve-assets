@@ -19,70 +19,50 @@ interface Frp extends Ifp {
 }
 
 export const form_contents = ({config, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, set_item, email, set_email, auxdata, set_auxdata, set_complete, overlapv, buttonText, ordinal, label}: Frp) => {
-  console.log("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFORM");
   const items_available = [];
   for (let i = 0; i < config.BUCKETS.length; i++) {
     if (config.BUCKETS[i]) {
       const bucket_reserved = overlapv.filter((it) => {return it.bucket === i;})
       let num_items;
       if (('ITEMS' in config.BUCKETS[i]) && (config.BUCKETS[i].ITEMS)) {
-        console.log(`ITEMS BUCKET at ${i}`);
         const items = config.BUCKETS[i].ITEMS || [];
         num_items = items.length;
       } else if (('IFIRST' in config.BUCKETS[i]) && config.BUCKETS[i].IFIRST && ('ILAST' in config.BUCKETS[i]) && config.BUCKETS[i].ILAST) {
         const first = config.BUCKETS[i].IFIRST || 1;
         const last = config.BUCKETS[i].ILAST || 0;
         num_items = last - first + 1;
-        console.log(`I is ${i}, IFIRST is ${first}, LAST is ${last}, NUM_ITEMS=${num_items}`);
       } else {
         num_items = 0;
         console.log(`BAD BUCKET at ${i}`);
       }
-      console.log(`NUM ITEMS is ${num_items} and BUCKET_RERSERVED_LENGTH is ${bucket_reserved.length}`);
       const bucket_items_available = num_items !== bucket_reserved.length
-      console.log(`ITEMS_AVAILABLE IS ${bucket_items_available}`);
       items_available.push(bucket_items_available);
     }
   }
-  console.log(`ITEMS_AVAILABLE is`);
-  console.dir(items_available);
 
   let items_in_bucket = false;
-  if (bucket != null) {
-    items_in_bucket = items_available[bucket];
-    console.log(`items_in_bucket is ${items_in_bucket} and bucket is ${bucket}`);
-  }
+  if (bucket != null) {items_in_bucket = items_available[bucket]; }
 
   let bucket_items_available = false;
   if (bucket != null) {
-    console.log(`BUCKET STARTS SET TO ${bucket}`);
     if (!items_in_bucket) {
       const new_bucket = get_non_empty_bucket(bucket, items_available);
       if (new_bucket != null) {
-        console.log(`NEW_BUCKET is ${new_bucket}`);
         set_bucket(new_bucket);
         bucket = new_bucket;
-        console.log(`in form and bucket is NEWLY set to ${bucket}`);
       }
     }
 
-   console.log(`BUCKET SET TO ${bucket}`);
-
     if (config.BUCKETS[bucket]) {
-      console.log(`BUCKET SET FOR ${bucket}`);
       if (('ITEMS' in config.BUCKETS[bucket]) && (config.BUCKETS[bucket].ITEMS)) {
         const new_items = config.BUCKETS[bucket].ITEMS || [];
         const num_items = new_items.length;
-        console.log(`+++ ITEMS is ${num_items}`);
         const bucket_reserved = overlapv.filter((it) => {return it.bucket === bucket;})
         bucket_items_available = (num_items !== bucket_reserved.length);
       } else if (('IFIRST' in config.BUCKETS[bucket]) && config.BUCKETS[bucket].IFIRST && ('ILAST' in config.BUCKETS[bucket]) && config.BUCKETS[bucket].ILAST) {
-        console.log(`+++ BUCKET is ${bucket}`);
-//      items_available.push(true);
         const first = config.BUCKETS[bucket].IFIRST || 1;
         const last = config.BUCKETS[bucket].ILAST || 0;
         const num_items = last - first + 1;
-        console.log(`+++ BUCKET is ${bucket}, IFIRST is ${first}, LAST is ${last}, NUM_ITEMS=${num_items}`);
         const bucket_reserved = overlapv.filter((it) => {return it.bucket === bucket;})
         bucket_items_available = (num_items !== bucket_reserved.length);
       } else {
@@ -92,10 +72,6 @@ export const form_contents = ({config, booking_start, set_booking_start, booking
     }
   }
 
-  console.log(`BUCKET_ITEMS_AVAILABLE is`);
-  console.dir(bucket_items_available);
-
-  console.log(`in form and bucket is set to ${bucket}`);
   return (
     <>
       <ChakraProvider resetCSS={false}>
