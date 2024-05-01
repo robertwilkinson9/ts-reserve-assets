@@ -22,6 +22,8 @@ describe('ratesting app', () => {
     cy.get('[data-testid="item"]').first().should('have.text', 'f3');
     cy.get('[data-testid="items_select"]').select('f3', {force: true});
     cy.get('[data-testid="email_input"]').type('c@c.c');
+    cy.get('[data-testid="auxilliary used in db_input"]').type('and this is used in db');
+    cy.get('[data-testid="auxilliary not used in db_input"]').type('and this is not used in db');
 
     cy.get('[data-testid="form_submit_button"]').click({force: true});
     cy.get('[test-id="confirmation_page"]').should('be.visible');

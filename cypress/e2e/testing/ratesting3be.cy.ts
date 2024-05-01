@@ -34,6 +34,9 @@ describe('ratesting backend test', () => {
 
       const em_ftesting = f1_info['testing_bucket'];
       expect(em_ftesting).to.equal('first');
+
+      const em_aux_used = f1_info['aux_used'];
+      expect(em_aux_used).to.equal('this is used in db');
     })
   })
 
@@ -51,6 +54,9 @@ describe('ratesting backend test', () => {
 
       const em_ftesting = f2_info['testing_bucket'];
       expect(em_ftesting).to.equal('first');
+
+      const em_aux_used = f2_info['aux_used'];
+      expect(em_aux_used).to.equal('this is also used in db');
     })
   })
 
@@ -68,6 +74,9 @@ describe('ratesting backend test', () => {
 
       const em_ftesting = f3_info['testing_bucket'];
       expect(em_ftesting).to.equal('first');
+
+      const em_aux_used = f3_info['aux_used'];
+      expect(em_aux_used).to.equal('and this is used in db');
     })
   })
 });

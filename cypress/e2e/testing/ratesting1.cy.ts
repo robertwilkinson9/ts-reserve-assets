@@ -14,6 +14,8 @@ describe('ratesting app', () => {
     cy.get('[data-testid="items_select"]').select('f1')
 
     cy.get('[data-testid="email_input"]').type('a@a.a');
+    cy.get('[data-testid="auxilliary used in db_input"]').type('this is used in db');
+    cy.get('[data-testid="auxilliary not used in db_input"]').type('this is not used in db');
 
     const end_datetime = new Date(); // our first datepicker is initialised to now
     const current_hours = end_datetime.getHours();
