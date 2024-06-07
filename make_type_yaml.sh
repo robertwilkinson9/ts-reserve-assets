@@ -10,7 +10,7 @@ COLLECTION=$(cat $CONFIG_FILE | jq --raw-output '.COLLECTION')
 MK=$(which minikube) 
 if [ $MK ]; then
   echo "HAVE minikube";
-  MKURL=$(minikube service ra-${TYPE} --url)
+  MKURL=$(minikube service ${TYPE}-backend-service --url)
   echo MKURL is $MKURL
   END_POINT=$(echo ${MKURL} | awk -F '//' '{print $2}')
   echo endpoint is $END_POINT
@@ -64,17 +64,10 @@ RUN apt install -y git npm
 RUN mkdir /certs
 ADD ./certs/ /certs
 RUN mkdir /src 
+RUN git clone https://github.com/robertwilkinson9/ts-ra-config.git /src/ts-ra-config
 RUN git clone https://github.com/robertwilkinson9/ts-reserve-assets.git /src/ts-reserve-assets
 WORKDIR /src/ts-reserve-assets
 RUN npm install
-
-#ENV NODE_VERSION 15.8.0
-#RUN apt update\
-#    && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash\
-#    && . $HOME/.nvm/nvm.sh\
-#    && nvm install $NODE_VERSION
-#ENV NODE_PATH /root/.nvm/v$NODE_VERSION/lib/node_modules
-#ENV PATH /root/.nvm/versions/node/v$NODE_VERSION/bin:$PATH
 
 CMD [ "npm", "run", ${TYPE} ]
 EOF2
