@@ -17,9 +17,11 @@ ENV TYPE \${TYPE}
 
 RUN apt update 
 RUN apt install -y git
+RUN apt install -y npm
 RUN mkdir /certs
 ADD ./certs/ /certs
 RUN mkdir /src 
+RUN git clone https://github.com/robertwilkinson9/ts-ra-config.git /src/ts-ra-config
 RUN git clone https://github.com/robertwilkinson9/ts-reserve-assets.git /src/ts-reserve-assets
 WORKDIR /src/ts-reserve-assets
 RUN npm install
