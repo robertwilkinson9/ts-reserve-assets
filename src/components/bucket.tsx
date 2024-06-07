@@ -4,7 +4,7 @@
 
 import './bucket.css';
 
-import { BucketLabelProps, BucketProps, ButtonProps, configData } from './interfaces';
+import { number_or_null, BucketLabelProps, BucketProps, ButtonProps, configData } from './interfaces';
 
 import { capitalizeFirstLetter } from './capitalizeFirstLetter';
 
@@ -22,7 +22,6 @@ const BucketLabel = ({label}: BucketLabelProps,) => {
 
 const BucketButton = ({cb, lcf, ucf, bucketst, checked} : ButtonProps) => {
   if (checked) {
-    console.log(`checked is ${checked}, bucketst is ${bucketst}, ucf is ${ucf}`);
     return(
       <>
       <div data-testid="bucket_button_checked" className="row" id="bucket_radios">
@@ -34,7 +33,6 @@ const BucketButton = ({cb, lcf, ucf, bucketst, checked} : ButtonProps) => {
      </>
    );
   } else {
-    console.log(`CHECKED IS ${checked}, BUCKETST IS ${bucketst}, UCF IS ${ucf}`);
     return(
       <>
       <div data-testid="bucket_button_unchecked" className="row" id="bucket_radios">
@@ -48,11 +46,10 @@ const BucketButton = ({cb, lcf, ucf, bucketst, checked} : ButtonProps) => {
   }
 }
 
-export const Bucket = ({config, set_bucket, items_available}: BucketProps) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {set_bucket(parseInt(e.target.value, 10));}
-
-  console.log("Bucket sees items_available of");
-  console.dir(items_available);
+export const Bucket = ({config, bucket, set_bucket, items_available}: BucketProps) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    set_bucket(parseInt(e.target.value, 10));
+  }
 
   const build_config_matrix = (config: configData)  => {
     const matrix = [];
@@ -66,30 +63,33 @@ export const Bucket = ({config, set_bucket, items_available}: BucketProps) => {
         matrix.push([ "","", ""]);
       }
     }
-    console.log("MATRIX is ");
-    console.dir(matrix);
     return matrix;
   }
 
-  const build_checked_vector = (bucket_length: number)  => {
+  const build_checked_vector = (bucket_length: number, bucket: number_or_null, set_bucket : React.Dispatch<React.SetStateAction<number_or_null>>)  => {
+    const checked: boolean[] = [];
+    for (let i = 0; i < bucket_length; ++i) {
+      checked.push(false);
+    }
+
+    if (bucket && items_available[bucket]) {
+      checked[bucket] = true;
+    } else {
 //  set the checked button to be the first bucket with available items
-    const checked = [];
-    let checked_set = false;
-    for (let i = 0; i < bucket_length; i++) {
-      if ((!checked_set) && (items_available[i])) {
-        checked_set = true;
-        checked.push(true);
-      } else {
-        checked.push(false);
+      let checked_set = false;
+      for (let i = 0; i < bucket_length; i++) {
+        if ((!checked_set) && (items_available[i])) {
+          checked_set = true;
+          checked[i] = true;
+          set_bucket(i);
+        }
       }
     }
-    console.log("CHECKED VECTOR is ");
-    console.dir(checked);
     return checked;
   }
 
   const matrix = config.BUCKETS ? build_config_matrix(config) : [];
-  const checked = config.BUCKETS ? build_checked_vector(config.BUCKETS.length) : [];
+  const checked = config.BUCKETS ? build_checked_vector(config.BUCKETS.length, bucket, set_bucket) : [];
 
   return(
     <>

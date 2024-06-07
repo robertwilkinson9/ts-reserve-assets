@@ -35,6 +35,9 @@ describe('ratesting backend test', () => {
 
       const em_floor = f1_info['testing_bucket'];
       expect(em_floor).to.equal('first');
+
+      const em_aux_used = f1_info['aux_used'];
+      expect(em_aux_used).to.equal('this is used in db');
     })
   })
 });

@@ -18,6 +18,7 @@ export interface BucketReadProps {
 
 export interface BucketProps {
   config: configData;
+  bucket : number_or_null;
   set_bucket: React.Dispatch<React.SetStateAction<number_or_null>>;
   items_available: boolean[];
 }

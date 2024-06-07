@@ -49,12 +49,19 @@ const test_list_config = {
   ]
 }
 
+const test_null_config = {
+  "APIPORT": 1,
+  "COLLECTION": "l",
+  "ITEM_NAME": "l_items_name",
+  "ITEM_LABEL": "l_items_label",
+  "BUCKET_NAME": "l_items",
+  "BUCKETS": []
+};
 
 /* eslint-disable */
 const null_setter = () => {};
 /* eslint-enable */
  
-// export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps
 const renderItems = (bucket = 0, allocated_items: MongoData[] = []) => {
   const key = 'key__' + bucket;
 
@@ -62,6 +69,16 @@ const renderItems = (bucket = 0, allocated_items: MongoData[] = []) => {
 }
 
 describe('label test', () => {
+  it("null config should render no items page", async () => {
+    const bucket = null;
+    const key = 'key__';
+    const allocated_items: MongoData[] = [];
+    const output = await render(<Items key={key} id={key} config={test_null_config} bucket={bucket} allocated_items={allocated_items} set_item={null_setter} />);
+
+    expect(output.baseElement).toHaveTextContent('No SELECT items');
+//    expect(output.baseElement).toBe('No SELECT items');
+  });
+
   it("should render", async () => {
     const { findAllByTestId } = renderItems();
 
@@ -154,89 +171,3 @@ describe('items test', () => {
     expect(options_values).toStrictEqual(expected);
   });
 });
-
-//describe('items test', () => {
-//  it("Select list should have correct values via id selector", async () => {
-//    const { container, findByTestId } = renderItems();
-////    console.log("56");
-////    console.log(container);
-//    const itemPulldown = container.querySelector('#itemPulldown')
-//
-//
-////    console.log("itemPulldown");
-////    console.log(itemPulldown);
-////    console.log("itemPulldown.children");
-////    console.log(itemPulldown.children[0]);
-////    console.log(itemPulldown.children[0].memoizedProps);
-////    const bits  = itemPulldown.children[0].querySelector('[items_label=${items_label}]')
-//
-//    const ItemsDiv = await findByTestId("items_div");
-////    expect(ItemsDiv).toBeInTheDocument();
-//    expect(ItemsDiv).toContainElement(itemPulldown);
-//    expect(itemPulldown).toHaveTextContent("Select...");
-//    expect(itemPulldown).toHaveAttribute('placeholder', "Select...");
-//
-////    const items_label = await findByTestId("items_label");
-////   console.log("items_label");
-//
-////    expect(items_label).toHaveTextContent("f10");
-////    console.log(items_label.children);
-////    console.log(items_label);
-////    console.log(typeof(items_label));
-////    console.log("items_label keys");
-////    console.log(Object.keys(items_label));
-////    console.log("items_label values");
-////    console.log(Object.values(items_label));
-////    console.log("items_label second value");
-////    console.log(Object.values(items_label)[1]);
-////    console.log("items_label second value children");
-////    console.log(Object.values(items_label)[1].children);
-////
-////    console.log(items_labels[Object.keys(items_label)[1]]);
-////    expect(items_label).toHaveTextContent("f10");
-//
-////#'data-testid': 'items_label'
-////    for c in itemPulldown.children
-////      console.log(c);
-//    
-////    const placeholder = container.querySelector('[placeholder="Select..."]')
-////    console.log("55");
-////    console.log(placeholder);
-////    expect(combo_box).toHaveAttribute("value", test_date_string);
-//  });
-//});
-//
-//describe('items test', () => {
-//  const { getByLabelText, getByTestId } = renderItems(42);
-//
-//  it("Select list should have select element values", async () => {
-//    await selectEvent.select(getByLabelText('Test_items_name'), 'Chocolate')
-//    expect(getByTestId('form')).toHaveFormValues({food: 'chocolate',})
-//  });
-//});
-//
-////    renderItems();
-////
-////    const select = screen.getByRole('select');
-////    console.log("SLECT BOX");
-////    console.log(select);
-//  });
-////
-////  it("Select list should be accessible from div", async () => {
-////    const { findByTestId } = renderItems();
-////
-////    const ItemsDiv = await findByTestId("items_div");
-//////    console.log(ItemsDiv);
-//////    expect(ItemsDiv).toBeInTheDocument();
-////  });
-////
-////
-////  it("Select list should be accessible via query selector", async () => {
-////    const { container } =  renderItems();
-////    const dropdown = screen.getByTestId('items_div').querySelector('input')
-////    console.log(dropdown);
-////
-//////    const keyed_list = container.querySelector('[key="key__0"]')
-//////    expect(keyed_list).toBeInTheDocument();
-////  });
-////});

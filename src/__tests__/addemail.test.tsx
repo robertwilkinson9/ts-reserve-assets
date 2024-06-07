@@ -38,6 +38,28 @@ describe('it item contents', () => {
     expect(AddEmail).toContainElement(AddEmaillabel);
   });
 
+/* 
+typescript will not permit me to set a numeric (or non-string email address), so the test can not run
+
+  it("should be able to set email if email supplied as non-string", async () => {
+    const email = 42;
+
+    const numberProps = {
+      email: email,
+      set_email: null_setter,
+    };
+
+    renderAddEmail(numberProps);
+//    render(<FormControl id="emailForm"><AddEmail {...numberProps} /></FormControl>);
+
+    const AddEmaillabel = screen.queryByTestId("emailaddress_label");
+    expect(AddEmaillabel).toHaveTextContent('Email address');
+
+    const AddEmail = screen.queryByTestId("emailaddress");
+    expect(AddEmail).toContainElement(AddEmaillabel);
+  });
+*/
+
   it("should be able to set email", async () => {
     const email = "email@domain.org";
     const itemprops = {email: email};

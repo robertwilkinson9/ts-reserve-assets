@@ -3,6 +3,7 @@
 * e.g. a room containing desks, the desks being the items
 * the books by an author, the author is the bucket and the books the items
 * the tables in the restaurant, the tables are the buckets, the bookable seats the items.
+* was called collection until mongodb objected to the variable name ... AWS ...
 
 * these items are presented to the author as pull down lists once the bucket radio button is selected
 * filter out those items currently booked at the time requested from those presented 
@@ -32,16 +33,9 @@ export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps
 
   if (config !== null && bucket !== undefined) {
     items = get_items_from_config({config, bucket}) || [];
-    console.log(`IN Items and itms.length is ${items.length}`);
 
     if (allocated_items) {
       const bucket_items = allocated_items.filter(it => {return bucket == it.bucket});
-
-      console.log("bucket_items");
-      console.dir(bucket_items);
-      console.log(`AND BUCKET ITSM LENGTH is ${bucket_items.length}`);
-      const all_reserved = items.length === bucket_items.length
-      console.log(`ALL_RESERVED IS ${all_reserved}`);
 
       if (bucket_items) {
 
@@ -56,7 +50,7 @@ export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps
     }
   }
 
-  if (config && items) {
+  if (config && items.length) {
     const select_item_list: Select_type[] = items_select(items)
 
     const select_option_list = select_item_list.map((item, key) => { return (<React.Fragment key={key}><option data-testid="item" value={item.value}>{item.label}</option></React.Fragment>) });

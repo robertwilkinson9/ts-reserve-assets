@@ -17,17 +17,16 @@ export const add_item_to_mongodb = async (url: string, item_booking: ItemData) =
     const response: AxiosResponse<ItemData> = await axios.post<ItemData>(url, item_booking, {headers: {'Content-Type': 'application/json'}})
     if (response !== undefined) {
       console.log("POST Response is ");
-      console.log(response);
+      console.dir(response);
       if (response.data !== undefined) {
         console.log("POST Response DATA is ");
-        console.log(response.data);
+        console.dir(response.data);
         if (response.data.id !== undefined) {
           console.log(`RDI is ${response.data.id}`);
           return response.data.id;
         }
       }
     }
-    console.log("LEAVING response try block");
   } catch (error: unknown | AxiosError) {
     if (isAxiosError(error)) {
       console.log("CODE - isAxiosError");
@@ -40,12 +39,11 @@ export const add_item_to_mongodb = async (url: string, item_booking: ItemData) =
         console.log(error.response.headers);
       } else {
         // Anything else
-        console.log('Axios Error', error.message);
+        console.log(`Axios Error: ${error.message}`);
       }
     } else {
       // Any non-axios error
-      console.log('Non-Axios Error');
-      console.log(error);
+      console.log(`Non-Axios Error ${error}`);
     }
   }
 };

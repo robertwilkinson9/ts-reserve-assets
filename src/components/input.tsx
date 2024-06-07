@@ -20,11 +20,13 @@ interface inputProps {
 
 export const MyInput = (props: inputProps) => {
   const labelfor = props.label;
+  const testid = `${labelfor}_input`;
+  console.log(`TestId is ${testid}`);
   return (
     <div className="MyInput">
       <label data-testid="input_label" htmlFor={labelfor}>{labelfor}</label>
       <Text id="outlined-basic" />
-      <Input onChange={(e) => onChangeFn(e.target.value, props.id, props.auxdata, props.set_auxdata)} />
+      <Input data-testid={testid} onChange={(e) => onChangeFn(e.target.value, props.id, props.auxdata, props.set_auxdata)} />
     </div>
   )
 }

@@ -2,9 +2,9 @@
  * @vitest-environment jsdom
  */
 
-import { aux_exists } from '../components/aux_exists';
+import { get_matching_aux_record } from '../components/get_matching_aux_record';
 
-describe('aux_exists test', () => {
+describe('get_matching_aux_record test', () => {
   const jc_pres = {id: "1234", value: "Jimmy Carter"};
   const pres = [
     {id: "1234", value: "Jimmy Carter"},
@@ -13,16 +13,16 @@ describe('aux_exists test', () => {
   ] ;
 
   const matching_id_string = "1234";
-  it("aux_exists: an item with a matching id should return true", async () => {
-    expect(aux_exists(matching_id_string, pres)).toStrictEqual(jc_pres);
+  it("get_matching_aux_record: an item with a matching id should return true", async () => {
+    expect(get_matching_aux_record(matching_id_string, pres)).toStrictEqual(jc_pres);
   });
 
   const non_matching_id_string = "234";
   it("an item with a non matching id should return false", async () => {
-    expect(aux_exists(non_matching_id_string, pres)).toBeFalsy;
+    expect(get_matching_aux_record(non_matching_id_string, pres)).toBeFalsy;
   });
 
   it("an item with an undefined list should return false", async () => {
-    expect(aux_exists(non_matching_id_string, [])).toBeFalsy;
+    expect(get_matching_aux_record(non_matching_id_string, [])).toBeFalsy;
   });
 });

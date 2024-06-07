@@ -1,9 +1,6 @@
 import axios, { AxiosError, isAxiosError } from 'axios'
 
-//import configData from "../config/config.json";
-
 import { MongoReturnType, MongoRecordType, MongoData} from './interfaces'
-
 
 const build_mongo_data = (item_name: string, data: MongoReturnType): MongoData[] => {
   if (data.data && data.data.length) {
@@ -15,8 +12,6 @@ const build_mongo_data = (item_name: string, data: MongoReturnType): MongoData[]
 
 export const get_mongo_data = async (api_url: string, item_name: string, setMongodata: React.Dispatch<React.SetStateAction<MongoData[]>>) => {
   const ITEMS_url = api_url + 'all_' + item_name + 's/';
-  console.log(`MAIN ITEMS_url is ${ITEMS_url}`);
-
   try {
     await axios.get<MongoReturnType>(ITEMS_url, {headers: {'Content-Type': 'application/json'}}).then(response => {
         const mymongodata: MongoData[] = build_mongo_data(item_name, response.data);
@@ -29,17 +24,15 @@ export const get_mongo_data = async (api_url: string, item_name: string, setMong
         // The client was given an error response (5xx, 4xx)
         // The request was made and the server responded with a status code
         // that falls out of the range of 2xx
-        console.log('Axios Error Response');
-        console.log(error.response.status);
-        console.log(error.response.headers);
+        console.log(`Axios Error Response - status - ${error.response.status}`);
+        console.log(`Axios Error Response - headers - ${error.response.headers}`);
       } else {
         // Anything else
-        console.log('Axios Error', error.message);
+        console.log(`Axios Error - ${error.message}`);
       }
     } else {
       // Anything else
-      console.log('Non Axios Error');
-      console.log(error);
+      console.log(`Non Axios Error ${error}`);
     }
   }
 };

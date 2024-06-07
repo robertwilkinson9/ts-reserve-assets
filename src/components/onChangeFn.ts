@@ -1,9 +1,13 @@
 import { AuxDataRecordType } from './interfaces';
-import { aux_exists } from './aux_exists';
+import { get_matching_aux_record } from './get_matching_aux_record';
 
 export const onChangeFn = (evalue: string, id: string, auxdata: AuxDataRecordType[], set_auxdata: React.Dispatch<React.SetStateAction<AuxDataRecordType[]>>) => {
-  const matching_record = aux_exists(id, auxdata);
-  if (matching_record !== undefined) {
+  const matching_record = get_matching_aux_record(id, auxdata);
+  if (matching_record === undefined) {
+    const new_list = [ ...auxdata, {id: id, value: evalue }];
+    set_auxdata(new_list);
+    return {};
+  } else {
     set_auxdata(
       auxdata.map((auxdata) =>
         auxdata.id === id
@@ -12,10 +16,6 @@ export const onChangeFn = (evalue: string, id: string, auxdata: AuxDataRecordTyp
       )
     );
     return matching_record;
-  } else {
-    const new_list = [ ...auxdata, {id: id, value: evalue }];
-    set_auxdata(new_list);
-    return {};
   }
 };
 

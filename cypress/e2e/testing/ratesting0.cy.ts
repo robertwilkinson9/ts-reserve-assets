@@ -29,13 +29,20 @@ describe('ratesting app', () => {
     cy.get('[data-testid="item"]').last().should('have.text', 'f3')
   })
 
+  it('has 2 input boxes', () => {
+    cy.get('[data-testid="input_label"]').should('be.visible');
+    cy.get('[data-testid="input_label"]').should('have.length', 2);
+    cy.get('[data-testid="input_label"]').first().should('have.text', 'auxilliary used in db')
+    cy.get('[data-testid="input_label"]').last().should('have.text', 'auxilliary not used in db')
+  })
+
   it('has an email input box', () => {
     cy.get('[data-testid="emailaddress_label"]').should('be.visible');
     cy.get('[data-testid="emailaddress_label"]').should('be.visible').and ('contain', 'Email address');
     cy.get('[data-testid="email_input"]').should('be.visible');
   })
 
-  it('has a submit button labelled "Reserve dtesting"', () => {
+  it('has a submit button labelled "Reserve testing_collection"', () => {
     cy.get('[data-testid="form_submit_button"]').should('be.visible');
     cy.get('[data-testid="form_submit_button"]').should('be.visible').and('contain', 'Reserve testing_item_name');
   })
