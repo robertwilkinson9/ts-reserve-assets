@@ -1,0 +1,9 @@
+{ 
+  "booking_start": "2023-09-05T11:17:37.881Z",
+  "booking_end": "2023-09-05T12:00:00.504Z",
+  "expireAt": "2023-09-06T11:17:37.881Z",
+  "bucket": 0,
+  "book": "Northanger Abbey",
+  "email": "person@example.org",
+  "author": "Jane Austen"
+}

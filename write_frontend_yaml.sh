@@ -1,7 +1,7 @@
 #/bin/bash
 TYPE=$1
 
-CONFIG_DIR="../rs-ra-config"
+CONFIG_DIR="../ts-ra-config"
 SRC_DIR="../../typescript/ts-reserve-assets/"
 FE_PORT=$(cat ${SRC_DIR}/package.json | jq --raw-output .config.${TYPE})
 echo FE_PORT is $FE_PORT
@@ -11,7 +11,7 @@ echo vite_type is $VITE_TYPE
 MK=$(which minikube) 
 if [ $MK ]; then
   echo "HAVE minikube";
-  MKURL=$(minikube service ra-${TYPE} --url)
+  MKURL=$(minikube service ${TYPE}-backend --url)
   echo MKURL is $MKURL
   END_POINT=$(echo ${MKURL} | awk -F '//' '{print $2}')
   echo endpoint is $END_POINT
@@ -20,9 +20,11 @@ if [ $MK ]; then
   END_POINT_PORT=$(echo ${END_POINT} | awk -F: '{print $2}')
   echo endpoint_port is $END_POINT_PORT
 else
-  END_POINTS=$(kubectl describe service/ra-${TYPE} | grep ^Endpoints: | awk '{print $NF}')
+  INGRESS=$(kubectl describe service/book-backend | grep ^LoadBa | awk '{print $NF}')
+  END_POINTS=$(kubectl describe service/${TYPE}-backend | grep ^Endpoints: | awk '{print $NF}')
   echo endpoints is $END_POINTS
-  END_POINT_IP=$(echo ${END_POINTS} | awk -F: '{print $1}')
+  END_POINT_IP=$INGRESS
+#  END_POINT_IP=$(echo ${END_POINTS} | awk -F: '{print $1}')
   echo endpoint_ip is $END_POINT_IP
   END_POINT_PORT=$(echo ${END_POINTS} | awk -F: '{print $2}')
   echo endpoint_port is $END_POINT_PORT
@@ -52,5 +54,5 @@ spec:
       - name: VITE_API_PORT
         value: "${END_POINT_PORT}"
       - name: VITE_TYPE
-        value: "${VITE_TYPE}"
+        value: ${VITE_TYPE}
 EOF
