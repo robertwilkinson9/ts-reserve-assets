@@ -17,7 +17,7 @@
     "book": "mkdir -p config && cp $npm_package_config_directory/config.book.json config/config.json && sleep 5 && vite --port $npm_package_config_book --host $(hostname -I | awk '{print $1}')",
     "allbooks": "concurrently --names \"FRONTEND,BACKEND\" --prefix-colors \"bgGreen.bold,bgMagenta.bold\" \"npm run book\" \"npm run book_backend\"",
     "carpark_backend": "npm --prefix ../ts-REST-api-for-mongodb run carpark",
-    "carpark": "mkdir -p config && cp $npm_package_config_directory/config.carparks.json config/config.json && sleep 5 && vite --port $npm_package_config_carpark --host $(hostname -I | awk '{print $1}')",
+    "carpark": "mkdir -p config && cp $npm_package_config_directory/config.carpark.json config/config.json && sleep 5 && vite --port $npm_package_config_carpark --host $(hostname -I | awk '{print $1}')",
     "allcarparks": "concurrently --names \"FRONTEND,BACKEND\" --prefix-colors \"bgGreen.bold,bgMagenta.bold\" \"npm run carpark\" \"npm run carpark_backend\"",
     "desk_backend": "npm --prefix ../ts-REST-api-for-mongodb run desk",
     "desk": "mkdir -p config && cp $npm_package_config_directory/config.desk.json config/config.json && sleep 5 && vite --port $npm_package_config_desk --host $(hostname -I | awk '{print $1}')",
