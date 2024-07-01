@@ -60,7 +60,7 @@ ARG TYPE
 ENV TYPE ${TYPE}
 
 RUN apt update
-RUN apt install -y git npm
+RUN apt install -y git npm jq
 RUN mkdir /certs
 ADD ./certs/ /certs
 RUN mkdir /src 
@@ -69,5 +69,5 @@ RUN git clone https://github.com/robertwilkinson9/ts-reserve-assets.git /src/ts-
 WORKDIR /src/ts-reserve-assets
 RUN npm install
 
-CMD [ "npm", "run", ${TYPE} ]
+CMD [ "npm", "run", generic, ${TYPE} ]
 EOF2
