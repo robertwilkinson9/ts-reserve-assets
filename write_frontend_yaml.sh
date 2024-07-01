@@ -20,7 +20,7 @@ if [ $MK ]; then
   END_POINT_PORT=$(echo ${END_POINT} | awk -F: '{print $2}')
   echo endpoint_port is $END_POINT_PORT
 else
-  INGRESS=$(kubectl describe service/book-backend | grep ^LoadBa | awk '{print $NF}')
+  INGRESS=$(kubectl describe service/${TYPE}-backend | grep ^LoadBa | awk '{print $NF}')
   END_POINTS=$(kubectl describe service/${TYPE}-backend | grep ^Endpoints: | awk '{print $NF}')
   echo endpoints is $END_POINTS
   END_POINT_IP=$INGRESS
