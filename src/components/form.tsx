@@ -19,18 +19,21 @@ export const InputForm = ({config, mongo_data, booking_start, set_booking_start,
 
       const ordinal = "One";
       const label = "formlabel_1";
-      return form_contents({config, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, set_item, email, set_email, auxdata, set_auxdata, set_complete, overlapv, buttonText, ordinal, label});
+      const form_type = 0;
+      return form_contents({config, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, set_item, email, set_email, auxdata, set_auxdata, set_complete, overlapv, buttonText, ordinal, label, form_type});
     } else {
       const overlapv: MongoData[] = [];
       const ordinal = "Two";
       const label = "formlabel_2";
-      return form_contents({config, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, set_item, email, set_email, auxdata, set_auxdata, set_complete, overlapv, buttonText, ordinal, label});
+      const form_type = 1;
+      return form_contents({config, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, set_item, email, set_email, auxdata, set_auxdata, set_complete, overlapv, buttonText, ordinal, label, form_type});
     }
   } else {
     const overlapv: MongoData[] = [];
     const ordinal = "Three";
     const label = "formlabel_3";
-    return form_contents({config, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, set_item, email, set_email, auxdata, set_auxdata, set_complete, overlapv, buttonText, ordinal, label});
+    const form_type = 2;
+    return form_contents({config, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, set_item, email, set_email, auxdata, set_auxdata, set_complete, overlapv, buttonText, ordinal, label, form_type});
   }
 }
 

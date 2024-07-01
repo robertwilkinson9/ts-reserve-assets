@@ -16,9 +16,10 @@ interface Frp extends Ifp {
   buttonText: string;
   ordinal: string;
   label: string;
+  form_type: number;
 }
 
-export const form_contents = ({config, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, set_item, email, set_email, auxdata, set_auxdata, set_complete, overlapv, buttonText, ordinal, label}: Frp) => {
+export const form_contents = ({config, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, set_item, email, set_email, auxdata, set_auxdata, set_complete, overlapv, buttonText, ordinal, label, form_type}: Frp) => {
   const items_available = [];
   for (let i = 0; i < config.BUCKETS.length; i++) {
     if (config.BUCKETS[i]) {
@@ -72,6 +73,12 @@ export const form_contents = ({config, booking_start, set_booking_start, booking
     }
   }
 
+  if (config.FORM_DATA) {
+    console.log("have FORM_DATA");
+    console.log("form_type ");
+    console.log(form_type);
+    console.dir(config.FORM_DATA);
+  }
   return (
     <>
       <ChakraProvider resetCSS={false}>
