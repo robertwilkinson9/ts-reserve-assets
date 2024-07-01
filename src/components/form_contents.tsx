@@ -14,12 +14,10 @@ const handleBRClick = (set_complete: React.Dispatch<React.SetStateAction<boolean
 interface Frp extends Ifp {
   overlapv: MongoData[];
   buttonText: string;
-  ordinal: string;
-  label: string;
   form_type: number;
 }
 
-export const form_contents = ({config, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, set_item, email, set_email, auxdata, set_auxdata, set_complete, overlapv, buttonText, ordinal, label, form_type}: Frp) => {
+export const form_contents = ({config, booking_start, set_booking_start, booking_end, set_booking_end, bucket, set_bucket, set_item, email, set_email, auxdata, set_auxdata, set_complete, overlapv, buttonText, form_type}: Frp) => {
   const items_available = [];
   for (let i = 0; i < config.BUCKETS.length; i++) {
     if (config.BUCKETS[i]) {
@@ -79,12 +77,23 @@ export const form_contents = ({config, booking_start, set_booking_start, booking
     console.log(form_type);
     console.dir(config.FORM_DATA);
   }
+  const flabel = config.FORM_DATA[form_type].label || "";
+  const test_id = config.FORM_DATA[form_type].test_id || "";
+  const helper_text = config.FORM_DATA[form_type].helper_text || "";
+
+  console.log("flabel is ");
+  console.log(flabel);
+  console.log("test_id is ");
+  console.log(test_id);
+  console.log("helper_text is ");
+  console.log(helper_text);
   return (
+
     <>
       <ChakraProvider resetCSS={false}>
         <FormControl>
-        <FormLabel data-testid={label} >interesting Form {ordinal}</FormLabel>
-        <FormHelperText>We'll never share your Form {ordinal} data.</FormHelperText>
+        <FormLabel data-testid={test_id} >{flabel}</FormLabel>
+        <FormHelperText>{helper_text}</FormHelperText>
           <Stack spacing="20px" direction="column">
             {
               booking_end
