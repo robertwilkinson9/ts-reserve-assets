@@ -78,7 +78,7 @@ export const form_contents = ({config, booking_start, set_booking_start, booking
     console.dir(config.FORM_DATA);
   }
   const flabel = config.FORM_DATA[form_type].label || "";
-  const test_id = config.FORM_DATA[form_type].test_id || "";
+  const test_id = "formlabel_" + form_type;
   const helper_text = config.FORM_DATA[form_type].helper_text || "";
   const email_helper_text = config.FORM_DATA[form_type].email_helper_text || "";
 
