@@ -17,6 +17,7 @@ function renderAddEmail(props: Partial<AddEmailProps> = {}) {
   const defaultProps = {
     email: "",
     set_email: null_setter,
+    helper_text: "default helper text",
   };
 
   return render(<FormControl id="emailForm"><AddEmail {...defaultProps} {...props} /></FormControl>);

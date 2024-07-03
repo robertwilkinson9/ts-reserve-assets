@@ -126,6 +126,12 @@ export interface AuxType extends AuxConfigRecordType {
   value: string;
 }
 
+interface FormData {
+  label: string;
+  helper_text: string;
+  email_helper_text: string;
+}
+
 export interface configData {
   APIPORT: number;
   COLLECTION: string;
@@ -134,6 +140,7 @@ export interface configData {
   BUCKET_NAME: string;
   BUCKETS: bucketData[];
   AUXILLIARY?: AuxConfigRecordType[];
+  FORM_DATA: FormData[];
 }
 
 export type MongoData = {

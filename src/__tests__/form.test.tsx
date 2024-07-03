@@ -33,19 +33,16 @@ const test_numeric_config = {
   [
     {
       "label": "interesting Numeric ZERO",
-      "test_id": "formlabel_0",
       "helper_text": "We'll never share your Numeric ZERO data.",
       "email_helper_text": "We'll never share your Numeric ZERO email."
     },
     {
       "label": "interesting Numeric ONE",
-      "test_id": "formlabel_1",
       "helper_text": "We'll never share your Numeric ONE data.",
       "email_helper_text": "We'll never share your Numeric ONE email."
     },
     {
       "label": "interesting Numeric TWO",
-      "test_id": "formlabel_2",
       "helper_text": "We'll never share your Numeric TWO data.",
       "email_helper_text": "We'll never share your Numeric TWO email."
     }
@@ -77,19 +74,16 @@ const aux_test_numeric_config = {
   [
     {
       "label": "interesting Numeric ZERO",
-      "test_id": "formlabel_0",
       "helper_text": "We'll never share your Numeric ZERO data.",
       "email_helper_text": "We'll never share your Numeric ZERO email."
     },
     {
       "label": "interesting Numeric ONE",
-      "test_id": "formlabel_1",
       "helper_text": "We'll never share your Numeric ONE data.",
       "email_helper_text": "We'll never share your Numeric ONE email."
     },
     {
       "label": "interesting Numeric TWO",
-      "test_id": "formlabel_2",
       "helper_text": "We'll never share your Numeric TWO data.",
       "email_helper_text": "We'll never share your Numeric TWO email."
     }
@@ -121,19 +115,16 @@ const test_list_config = {
   [
     {
       "label": "interesting Numeric ZERO",
-      "test_id": "formlabel_0",
       "helper_text": "We'll never share your Numeric ZERO data.",
       "email_helper_text": "We'll never share your Numeric ZERO email."
     },
     {
       "label": "interesting Numeric ONE",
-      "test_id": "formlabel_1",
       "helper_text": "We'll never share your Numeric ONE data.",
       "email_helper_text": "We'll never share your Numeric ONE email."
     },
     {
       "label": "interesting Numeric TWO",
-      "test_id": "formlabel_2",
       "helper_text": "We'll never share your Numeric TWO data.",
       "email_helper_text": "We'll never share your Numeric TWO email."
     }
@@ -151,19 +142,16 @@ const test_null_config = {
   [
     {
       "label": "interesting Numeric ZERO",
-      "test_id": "formlabel_0",
       "helper_text": "We'll never share your Numeric ZERO data.",
       "email_helper_text": "We'll never share your Numeric ZERO email."
     },
     {
       "label": "interesting Numeric ONE",
-      "test_id": "formlabel_1",
       "helper_text": "We'll never share your Numeric ONE data.",
       "email_helper_text": "We'll never share your Numeric ONE email."
     },
     {
       "label": "interesting Numeric TWO",
-      "test_id": "formlabel_2",
       "helper_text": "We'll never share your Numeric TWO data.",
       "email_helper_text": "We'll never share your Numeric TWO email."
     }
@@ -185,19 +173,16 @@ const test_null_config_with_one_bucket = {
   [
     {
       "label": "interesting Numeric ZERO",
-      "test_id": "formlabel_0",
       "helper_text": "We'll never share your Numeric ZERO data.",
       "email_helper_text": "We'll never share your Numeric ZERO email."
     },
     {
       "label": "interesting Numeric ONE",
-      "test_id": "formlabel_1",
       "helper_text": "We'll never share your Numeric ONE data.",
       "email_helper_text": "We'll never share your Numeric ONE email."
     },
     {
       "label": "interesting Numeric TWO",
-      "test_id": "formlabel_2",
       "helper_text": "We'll never share your Numeric TWO data.",
       "email_helper_text": "We'll never share your Numeric TWO email."
     }

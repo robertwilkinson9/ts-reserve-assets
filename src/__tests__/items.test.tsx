@@ -31,6 +31,24 @@ const test_numeric_config = {
       "IFIRST": 11,
       "ILAST": 20
     }
+  ],
+  "FORM_DATA":
+  [
+    {
+      "label": "interesting Test ZERO",
+      "helper_text": "We'll never share your Test ZERO data.",
+      "email_helper_text": "We'll never share your Test ZERO email."
+    },
+    {
+      "label": "interesting Test ONE",
+      "helper_text": "We'll never share your Test ONE data.",
+      "email_helper_text": "We'll never share your Test ONE email."
+    },
+    {
+      "label": "interesting Test TWO",
+      "helper_text": "We'll never share your Test TWO data.",
+      "email_helper_text": "We'll never share your Test TWO email."
+    }
   ]
 }
 
@@ -46,6 +64,24 @@ const test_list_config = {
       "NAME": "singleton",
       "ITEMS": ["first one", "second two", "third three"]
     }
+  ],
+  "FORM_DATA":
+  [
+    {
+      "label": "interesting Test ZERO",
+      "helper_text": "We'll never share your Test ZERO data.",
+      "email_helper_text": "We'll never share your Test ZERO email."
+    },
+    {
+      "label": "interesting Test ONE",
+      "helper_text": "We'll never share your Test ONE data.",
+      "email_helper_text": "We'll never share your Test ONE email."
+    },
+    {
+      "label": "interesting Test TWO",
+      "helper_text": "We'll never share your Test TWO data.",
+      "email_helper_text": "We'll never share your Test TWO email."
+    }
   ]
 }
 
@@ -55,7 +91,25 @@ const test_null_config = {
   "ITEM_NAME": "l_items_name",
   "ITEM_LABEL": "l_items_label",
   "BUCKET_NAME": "l_items",
-  "BUCKETS": []
+  "BUCKETS": [],
+  "FORM_DATA":
+  [
+    {
+      "label": "interesting Test ZERO",
+      "helper_text": "We'll never share your Test ZERO data.",
+      "email_helper_text": "We'll never share your Test ZERO email."
+    },
+    {
+      "label": "interesting Test ONE",
+      "helper_text": "We'll never share your Test ONE data.",
+      "email_helper_text": "We'll never share your Test ONE email."
+    },
+    {
+      "label": "interesting Test TWO",
+      "helper_text": "We'll never share your Test TWO data.",
+      "email_helper_text": "We'll never share your Test TWO email."
+    }
+  ]
 };
 
 /* eslint-disable */
