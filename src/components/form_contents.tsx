@@ -71,25 +71,10 @@ export const form_contents = ({config, booking_start, set_booking_start, booking
     }
   }
 
-  if (config.FORM_DATA) {
-    console.log("have FORM_DATA");
-    console.log("form_type ");
-    console.log(form_type);
-    console.dir(config.FORM_DATA);
-  }
   const flabel = config.FORM_DATA[form_type].label || "";
   const test_id = "formlabel_" + form_type;
   const helper_text = config.FORM_DATA[form_type].helper_text || "";
   const email_helper_text = config.FORM_DATA[form_type].email_helper_text || "";
-
-  console.log("flabel is ");
-  console.log(flabel);
-  console.log("test_id is ");
-  console.log(test_id);
-  console.log("helper_text is ");
-  console.log(helper_text);
-  console.log("email_helper_text is ");
-  console.log(email_helper_text);
 
   return (
     <>
