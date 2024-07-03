@@ -1,7 +1,6 @@
 #!/bin/bash
 TYPE=$1
 
-
 CONFIG_DIR=../ts-ra-config
 CONFIG_FILE=$(echo ${CONFIG_DIR}/config.${TYPE}.json)
 API_PORT=$(cat $CONFIG_FILE | jq --raw-output '.APIPORT')
@@ -69,5 +68,5 @@ RUN git clone https://github.com/robertwilkinson9/ts-reserve-assets.git /src/ts-
 WORKDIR /src/ts-reserve-assets
 RUN npm install
 
-CMD [ "npm", "run", generic, ${TYPE} ]
+CMD [ "bash", "-c", "generic() { /usr/bin/mkdir -p ./config && /usr/bin/cp -f $npm_package_config_directory/config.\"$1\".json config/config.json; && vite --port $(cat config/config.json | /usr/bin/jq --raw-output '.APIPORT') --host $(hostname -I | awk '{print $1}') }; npm run generic ${TYPE} ]
 EOF2
