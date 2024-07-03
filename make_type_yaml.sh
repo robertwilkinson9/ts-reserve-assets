@@ -68,5 +68,5 @@ RUN git clone https://github.com/robertwilkinson9/ts-reserve-assets.git /src/ts-
 WORKDIR /src/ts-reserve-assets
 RUN npm install
 
-CMD [ "bash", "-c", "generic() { /usr/bin/mkdir -p ./config && /usr/bin/cp -f $npm_package_config_directory/config.\"$1\".json config/config.json; && sleep 5 && vite --port ${API_PORT} --host $(hostname -I | awk '{print $1}') }; npm run generic ${TYPE} ]
+CMD [ "npm", "run", "generic", ${TYPE} ]
 EOF2
