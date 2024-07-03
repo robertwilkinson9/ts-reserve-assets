@@ -59,7 +59,7 @@ ARG TYPE
 ENV TYPE ${TYPE}
 
 RUN apt update
-RUN apt install -y git npm jq
+RUN apt install -y git npm
 RUN mkdir /certs
 ADD ./certs/ /certs
 RUN mkdir /src 
