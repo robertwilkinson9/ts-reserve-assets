@@ -28,6 +28,27 @@ const test_numeric_config = {
       "IFIRST": 11,
       "ILAST": 15
     }
+  ],
+  "FORM_DATA":
+  [
+    {
+      "label": "interesting Numeric ZERO",
+      "test_id": "formlabel_0",
+      "helper_text": "We'll never share your Numeric ZERO data.",
+      "email_helper_text": "We'll never share your Numeric ZERO email."
+    },
+    {
+      "label": "interesting Numeric ONE",
+      "test_id": "formlabel_1",
+      "helper_text": "We'll never share your Numeric ONE data.",
+      "email_helper_text": "We'll never share your Numeric ONE email."
+    },
+    {
+      "label": "interesting Numeric TWO",
+      "test_id": "formlabel_2",
+      "helper_text": "We'll never share your Numeric TWO data.",
+      "email_helper_text": "We'll never share your Numeric TWO email."
+    }
   ]
 }
 
@@ -52,7 +73,28 @@ const aux_test_numeric_config = {
       "ILAST": 15
     }
   ],
-    "AUXILLIARY": [
+  "FORM_DATA":
+  [
+    {
+      "label": "interesting Numeric ZERO",
+      "test_id": "formlabel_0",
+      "helper_text": "We'll never share your Numeric ZERO data.",
+      "email_helper_text": "We'll never share your Numeric ZERO email."
+    },
+    {
+      "label": "interesting Numeric ONE",
+      "test_id": "formlabel_1",
+      "helper_text": "We'll never share your Numeric ONE data.",
+      "email_helper_text": "We'll never share your Numeric ONE email."
+    },
+    {
+      "label": "interesting Numeric TWO",
+      "test_id": "formlabel_2",
+      "helper_text": "We'll never share your Numeric TWO data.",
+      "email_helper_text": "We'll never share your Numeric TWO email."
+    }
+  ],
+  "AUXILLIARY": [
     {"id": "1", "label": "favourite_colour", "dbname": "fav_colour"},
     {"id": "2", "label": "date_of_birth", "dbname": "notTHEre"}
   ]
@@ -74,6 +116,27 @@ const test_list_config = {
       "NAME": "doubleton",
       "ITEMS": ["first double", "second double", "third double"]
     }
+  ],
+  "FORM_DATA":
+  [
+    {
+      "label": "interesting Numeric ZERO",
+      "test_id": "formlabel_0",
+      "helper_text": "We'll never share your Numeric ZERO data.",
+      "email_helper_text": "We'll never share your Numeric ZERO email."
+    },
+    {
+      "label": "interesting Numeric ONE",
+      "test_id": "formlabel_1",
+      "helper_text": "We'll never share your Numeric ONE data.",
+      "email_helper_text": "We'll never share your Numeric ONE email."
+    },
+    {
+      "label": "interesting Numeric TWO",
+      "test_id": "formlabel_2",
+      "helper_text": "We'll never share your Numeric TWO data.",
+      "email_helper_text": "We'll never share your Numeric TWO email."
+    }
   ]
 }
 
@@ -83,7 +146,28 @@ const test_null_config = {
   "ITEM_NAME": "l_items_name",
   "ITEM_LABEL": "l_items_label",
   "BUCKET_NAME": "l_items",
-  "BUCKETS": []
+  "BUCKETS": [],
+  "FORM_DATA":
+  [
+    {
+      "label": "interesting Numeric ZERO",
+      "test_id": "formlabel_0",
+      "helper_text": "We'll never share your Numeric ZERO data.",
+      "email_helper_text": "We'll never share your Numeric ZERO email."
+    },
+    {
+      "label": "interesting Numeric ONE",
+      "test_id": "formlabel_1",
+      "helper_text": "We'll never share your Numeric ONE data.",
+      "email_helper_text": "We'll never share your Numeric ONE email."
+    },
+    {
+      "label": "interesting Numeric TWO",
+      "test_id": "formlabel_2",
+      "helper_text": "We'll never share your Numeric TWO data.",
+      "email_helper_text": "We'll never share your Numeric TWO email."
+    }
+  ]
 };
 
 const test_null_config_with_one_bucket = {
@@ -95,6 +179,27 @@ const test_null_config_with_one_bucket = {
   "BUCKETS": [
     {
       "NAME": "singleton"
+    }
+  ],
+  "FORM_DATA":
+  [
+    {
+      "label": "interesting Numeric ZERO",
+      "test_id": "formlabel_0",
+      "helper_text": "We'll never share your Numeric ZERO data.",
+      "email_helper_text": "We'll never share your Numeric ZERO email."
+    },
+    {
+      "label": "interesting Numeric ONE",
+      "test_id": "formlabel_1",
+      "helper_text": "We'll never share your Numeric ONE data.",
+      "email_helper_text": "We'll never share your Numeric ONE email."
+    },
+    {
+      "label": "interesting Numeric TWO",
+      "test_id": "formlabel_2",
+      "helper_text": "We'll never share your Numeric TWO data.",
+      "email_helper_text": "We'll never share your Numeric TWO email."
     }
   ]
 };

@@ -2,7 +2,7 @@ import { Box, FormControl, FormLabel, FormHelperText, Input} from '@chakra-ui/re
 
 import { AddEmailProps } from './interfaces';
 
-export const AddEmail = ({email, set_email} : AddEmailProps) =>{
+export const AddEmail = ({email, set_email, helper_text} : AddEmailProps) =>{
   if (typeof(email) !== "string") {email = "";}
 
   return (
@@ -19,7 +19,7 @@ export const AddEmail = ({email, set_email} : AddEmailProps) =>{
              _placeholder={{ opacity: 1, color: 'gray.500' }}
              value={email}
              onChange={(event) => set_email(event.target.value)} />
-          <FormHelperText>We'll never share your email.</FormHelperText>
+          <FormHelperText>{helper_text}</FormHelperText>
         </FormControl>
       </div>
       </Box>
