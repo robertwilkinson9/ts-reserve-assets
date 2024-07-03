@@ -1,0 +1,61 @@
+{
+  "APIPORT": 6175,
+  "FEPORT": 5175,
+  "COLLECTION": "carpark",
+  "ITEM_NAME": "bay",
+  "ITEM_LABEL": "bay_label",
+  "AUXILLIARY": [
+    {"id": "1", "label": "registration number", "dbname": "registration_number"},
+    {"id": "2", "label": "date of birth", "dbname": "notTHEre"}
+  ],
+  "BUCKET_NAME": "carpark",
+  "BUCKETS":
+  [
+    {
+      "NAME": "lower carpark",
+      "PREFIX": "lc",
+      "IFIRST": 1,
+      "ILAST": 40
+    },
+    {
+      "NAME": "upper carpark",
+      "PREFIX": "uc",
+      "IFIRST": 1,
+      "ILAST": 80
+    }
+  ],
+  "FORM_DATA":
+  [
+    {
+      "label": "interesting Form ZERO",
+      "test_id": "formlabel_0",
+      "helper_text": "We'll never share your Form ZERO data."
+    },
+    {
+      "label": "interesting Form ONE",
+      "test_id": "formlabel_1",
+      "helper_text": "We'll never share your Form ONE data."
+    },
+    {
+      "label": "interesting Form TWO",
+      "test_id": "formlabel_2",
+      "helper_text": "We'll never share your Form TWO data."
+    }
+  ],
+  "SCHEMA": {
+      "booking_start": {"type": "Date"},
+      "booking_end": {"type": "Date"},
+      "expireAt": {"type": "Date"},
+      "bucket": {"type": "Number"},
+      "bay": {"type": "String"},
+      "registration_number": {"type": "String"},
+      "email": {"type": "String"}
+  },
+  "SHOW_ALL": true,
+  "EXPORTS": [
+    "booking_start",
+    "booking_end",
+    "bucket",
+    "bay"
+  ]
+}
