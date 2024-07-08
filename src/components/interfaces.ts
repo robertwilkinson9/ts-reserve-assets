@@ -131,6 +131,7 @@ interface FormData {
   label: string;
   helper_text: string;
   email_helper_text: string;
+  email_placeholder: string;
 }
 
 export interface configData {
