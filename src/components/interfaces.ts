@@ -6,6 +6,7 @@ export interface AddEmailProps {
   email: string_or_null;
   set_email: React.Dispatch<React.SetStateAction<string_or_null>>;
   helper_text: string_or_null;
+  placeholder_text: string_or_null;
 }
 
 export interface BucketLabelProps {

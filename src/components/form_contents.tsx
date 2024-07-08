@@ -75,6 +75,7 @@ export const form_contents = ({config, booking_start, set_booking_start, booking
   const test_id = "formlabel_" + form_type;
   const helper_text = config.FORM_DATA[form_type].helper_text || "";
   const email_helper_text = config.FORM_DATA[form_type].email_helper_text || "";
+  const email_placeholder = config.FORM_DATA[form_type].email_placeholder || "";
 
   return (
     <>
@@ -97,7 +98,7 @@ export const form_contents = ({config, booking_start, set_booking_start, booking
               ? <Items config={config} bucket={bucket} set_item={set_item} />
               : null
             }
-            <AddEmail email={email} set_email={set_email} helper_text={email_helper_text} />
+            <AddEmail email={email} set_email={set_email} helper_text={email_helper_text} placeholder={email_placeholder} />
             {config.AUXILLIARY?.map( (x) => <MyInput label={x.label} key={x.id} id={x.id} auxdata={auxdata} set_auxdata={set_auxdata} /> )}
             <Button data-testid="form_submit_button" onClick={() => {handleBRClick(set_complete);}} >{buttonText} </Button>
           </Stack>
