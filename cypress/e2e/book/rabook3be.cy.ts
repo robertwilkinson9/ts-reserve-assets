@@ -2,11 +2,11 @@
 
 describe('rabook backend test', () => {
   beforeEach(() => {
-    cy.request({ url: 'https://localhost:6180/api/all_books', method: 'GET', failOnStatusCode: false}).as('books');
+    cy.request({ url: 'https://localhost:6176/api/all_books', method: 'GET', failOnStatusCode: false}).as('books');
   })
 
   it('check index hello world page', () => {
-    cy.request({ url: "https://localhost:6180/", method: 'GET', failOnStatusCode: false}).as('hello');
+    cy.request({ url: "https://localhost:6176/", method: 'GET', failOnStatusCode: false}).as('hello');
     cy.get('@hello').its('status').should('eq', 200);
     cy.get('@hello').then((response) => {
       const rb = JSON.stringify(response.body);
