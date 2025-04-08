@@ -9,19 +9,11 @@
 * filter out those items currently booked at the time requested from those presented 
 */
 
-//import React from 'react';
-//import { Select } from '@chakra-ui/react'
-//import { ItemsProps, Select_type} from './interfaces';
-
 import { ItemsProps } from './interfaces';
 
 import { capitalizeFirstLetter } from './capitalizeFirstLetter';
 import { get_items_from_config } from './get_items_from_config';
 import { PullDown } from './pulldown';
-
-// const items_select = (items: string[]): Select_type[] => {
-//  return items.map((item) => {return {value: item, label: item};});
-// }
 
 /**
 *
@@ -31,31 +23,21 @@ import { PullDown } from './pulldown';
 
 export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps) => {
   let items: string[] | undefined = [];
-
   if (config !== null && bucket !== undefined) {
     items = get_items_from_config({config, bucket}) || [];
 
     if (allocated_items) {
       const bucket_items = allocated_items.filter(it => {return bucket == it.bucket});
-
       if (bucket_items) {
-
         const reserved_items = bucket_items.map(x => {return x[config.ITEM_NAME]});
-
         if (items) {
-
           items = items.filter(n => !reserved_items.includes(n)); // slow and simple set difference 
-
         }
       }
     }
   }
 
   if (config && items.length) {
-//    const select_item_list: Select_type[] = items_select(items)
-
-//    const select_option_list = select_item_list.map((item, key) => { return (<React.Fragment key={key}><option data-testid="item" value={item.value}>{item.label}</option></React.Fragment>) });
-
     return (
       <>
       <PullDown string_list={items} label={capitalizeFirstLetter(config.ITEM_NAME)} set_item={set_item} />
