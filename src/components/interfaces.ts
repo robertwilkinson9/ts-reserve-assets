@@ -69,6 +69,12 @@ export interface ItemData {
   [key: string]: string | number; // 👈️ variable key
 }
 
+export interface PullDownProps {
+  string_list: string[];
+  label: string;
+  set_item: React.Dispatch<React.SetStateAction<string_or_null>>;
+}
+
 export interface ItemsProps {
   id?: string;
   key?: string;

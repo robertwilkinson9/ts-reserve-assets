@@ -9,18 +9,19 @@
 * filter out those items currently booked at the time requested from those presented 
 */
 
-import React from 'react';
+//import React from 'react';
+//import { Select } from '@chakra-ui/react'
+//import { ItemsProps, Select_type} from './interfaces';
 
-import { Select } from '@chakra-ui/react'
-
-import { ItemsProps, Select_type} from './interfaces';
+import { ItemsProps } from './interfaces';
 
 import { capitalizeFirstLetter } from './capitalizeFirstLetter';
 import { get_items_from_config } from './get_items_from_config';
+import { PullDown } from './pulldown';
 
-const items_select = (items: string[]): Select_type[] => {
-  return items.map((item) => {return {value: item, label: item};});
-}
+// const items_select = (items: string[]): Select_type[] => {
+//  return items.map((item) => {return {value: item, label: item};});
+// }
 
 /**
 *
@@ -51,22 +52,13 @@ export const Items = ({ config, bucket, allocated_items, set_item } : ItemsProps
   }
 
   if (config && items.length) {
-    const select_item_list: Select_type[] = items_select(items)
+//    const select_item_list: Select_type[] = items_select(items)
 
-    const select_option_list = select_item_list.map((item, key) => { return (<React.Fragment key={key}><option data-testid="item" value={item.value}>{item.label}</option></React.Fragment>) });
+//    const select_option_list = select_item_list.map((item, key) => { return (<React.Fragment key={key}><option data-testid="item" value={item.value}>{item.label}</option></React.Fragment>) });
 
     return (
       <>
-      <div data-testid="items_div" id="itemPulldown">
-        <label data-testid="items_label" className="mb-0 font-weight-bold">{capitalizeFirstLetter(config.ITEM_NAME)}</label>
-          <Select
-            data-testid="items_select"
-            onChange={(event) => set_item(event.target.value)}
-            placeholder='Select option'
-          >
-            {select_option_list}
-          </Select>
-      </div>
+      <PullDown string_list={items} label={capitalizeFirstLetter(config.ITEM_NAME)} set_item={set_item} />
       </>
     );
   } else {
